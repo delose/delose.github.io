@@ -4,4 +4,4 @@ title: "Personal Blog"
 date: 2018-04-23
 ---
 
-<a href="www.delose.wordpress.com">Wordpress</a>
+<a href="https://delose.wordpress.com">Wordpress</a>
