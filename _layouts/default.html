@@ -1,171 +1,130 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>{{ page.title }}</title>
-		<!-- <link rel="stylesheet" type="text/css" href="/css/main.css"> -->
-		<link rel="stylesheet" href="css/reveal/reveal.css">
-		<link rel="stylesheet" href="css/reveal/theme/sky.css">
-		<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
-		
-		<script type="text/javascript"> //<![CDATA[ 
-			var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");
-			document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
-		//]]>
-		</script>
-		
-	</head>
-	<body>
-			<div class="reveal">
-				<div class="slides">
-					<!-- Slide 1 - Greetings!-->
-					<!-- <section class="present" data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-video-loop data-background-video-muted> -->
-					<section class="present" data-transition="convex">
-							<!-- <nav>
-							    <ul>
-								<li><a href="/">Home</a></li>
-								<li><a href="/about">About</a></li>
-								<li><a href="/cv">CV</a></li>
-								<li><a href="/blog">Blog</a></li>
-							    </ul>
-							</nav> -->
-							<div class="container"> 
-							    <div>
-								<h2>Greetings, I'm Gio!</h2>
-								<p>Software Developer / Engineer / Positivist / Lifetime learner</p>
-							    </div>
-							</div>
-							<footer>
-								<a href="mailto:edsa@edsa.tech"><img class="icons" src="svg/gmail.svg"/></a>
-								<a href="https://github.com/delose" class="roll"><img class="icons" src="svg/github-circle.svg"/></a>
-								<a href="https://www.linkedin.com/in/delose/" class="roll"><img class="icons" src="svg/linkedin-box.svg"/></a>
-								<a href="https://twitter.com/eugenesergio" class="roll"><img class="icons" src="svg/twitter.svg"/></a>
-								<a href="https://www.youracclaim.com/user/eugene-de-los-santos" class="roll"><img class="icons" src="svg/trophy-award.svg"/></a>
-								<a href="https://www.quora.com/profile/Eugene-Sergio-De-Los-Santos" class="roll"><img class="icons" src="svg/quicktime.svg"/></a>
-								<a href="https://www.instagram.com/gioiggioig/" class="roll"><img class="icons" src="svg/camera.svg"/></a>
-							</footer>
-					</section>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="css/reveal/reveal.css">
+    <link rel="stylesheet" href="css/reveal/theme/sky.css">
+    <script src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+    <script>
+        var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");
+        document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
 
-					<!-- Slide 2 - Elevator slides!-->
-					<section data-transition="convex">
-						<section>
-							<p>
-								<h3>About</h3>
-								<footer>
-									<ul>
-									   <li><a href="https://www.youracclaim.com/badges/70e8fed9-691d-4c48-ae37-ae55bcd71d0a" class="roll">Oracle Certified Associate, Java SE 8 Programmer</a></li>
-									   <li>9 years of experience in development of web, mobile and big data applications</li>
-									   <li>1.5 years of experience in B2B systems integration</li>
-									   <li>Focuses on Spring framework, Cloud, DevOps, Containerization, Serverless, and other backend technologies!</li>
-									</ul>
-								</footer>
-							</p>
-						</section>
-						<section>
-						   <p>
-						       <h3>Tools</h3>
-							   <div>most recent: Java, Spring, AWS, Angular, Docker, Kubernetes, Python</div>
-						       <div>recent: JavaScript, JQuery, Bootstrap, SQL, Android, Spark, Scala, Unix</div>
-						       <div>former: TCL/TK, Cadence SKILL, PERL, PostScript</div>
-						   </p>
-						</section>
-					    <section>
-							<p>
-								<h3>Founded Projects</h3>
-								<footer>
-									<ul>
-									   <li><a href="https://www.dailynewsound.com/" class="roll">Dailynewsound</a>, a free News Reader</li>
-									</ul>
-									<h6>
-										<h6><a href="mailto:edsa@edsa.tech">Email</a> me if you want to become a cofounder!</h6>
-									</h6>
-								</footer>
-							</p>
-						</section>
-					    <section>
-							<p>
-								<h3>Hackathons</h3>
-								<footer>
-									<ul>
-									   <li><a href="https://devpost.com/software/placeholder-ugibxf" class="roll">Debrazio</a> waste classifier</li>
-									</ul>
-									<h6>Check out my <a href="https://devpost.com/delossantos-eugene" class="roll">Devpost</a> page from my other entries!</h6>
-								</footer>
-							</p>
-						</section>
-					    <section>
-						    <p>
-						    	<div>
-						    		{{ content }}
-						    	</div>
-						    </p>
-					    </section>
-					    <!-- <section>
-						<p>
-							<h3>Profile</h3>
-							<div>For more info:</div>
-						</p>
-						<p>
-							<div class="LI-profile-badge"  data-version="v1" data-size="medium" data-locale="en_US" data-type="horizontal" data-theme="dark" data-vanity="delose"><a class="LI-simple-link" href='https://ph.linkedin.com/in/delose?trk=profile-badge'>Eugene De Los Santos</a></div>                    	
-						</p>                    
-					    </section>-->
-					</section>
+            <!-- Slide 1 - Introduction -->
+            <section class="present" data-transition="convex">
+                <div class="container">
+                    <div>
+                        <h2>Greetings, I'm Eugene Santos!</h2>
+                        <p>Software Developer | Engineer | Positivist | Lifetime Learner</p>
+                    </div>
+                </div>
+                <footer>
+                    <a href="mailto:delossantos.eugene@gmail.com"><img class="icons" src="svg/gmail.svg" alt="Gmail"/></a>
+                    <a href="https://github.com/delose" class="roll"><img class="icons" src="svg/github-circle.svg" alt="GitHub"/></a>
+                    <a href="https://www.linkedin.com/in/delose/" class="roll"><img class="icons" src="svg/linkedin-box.svg" alt="LinkedIn"/></a>
+                    <a href="https://twitter.com/eugenesergio" class="roll"><img class="icons" src="svg/twitter.svg" alt="Twitter"/></a>
+                    <a href="https://www.youracclaim.com/user/eugene-de-los-santos" class="roll"><img class="icons" src="svg/trophy-award.svg" alt="Acclaim"/></a>
+                    <a href="https://www.quora.com/profile/Eugene-Sergio-De-Los-Santos" class="roll"><img class="icons" src="svg/quicktime.svg" alt="Quora"/></a>
+                    <a href="https://www.instagram.com/gioiggioig/" class="roll"><img class="icons" src="svg/camera.svg" alt="Instagram"/></a>
+                </footer>
+            </section>
 
-					<!-- Slide  3 - Countdown Timer for 2019 -->
-					<section data-transition="convex">
-						<p>
-							<h3>2024 timer says:</h3>
-						<p>
-						<!-- Display the countdown timer in an element -->
-						<p id="timer"></p>
-						<!--forked from https://www.w3schools.com/howto/howto_js_countdown.asp -->
-						<script>
-							// Set the date we're counting down to
-							var countDownDate = new Date("Jan 01, 2025 00:00:00").getTime();
+            <!-- Slide 2 - About -->
+            <section data-transition="convex">
+                <h3>About Me</h3>
+                <p>
+                    I am an Oracle Certified Associate, Java SE 8 Programmer with 11 years of experience in developing web, mobile, and big data applications. My expertise includes Spring framework, Cloud, DevOps, Containerization, and Serverless technologies.
+                </p>
+                <ul>
+                    <li>1.5 years of experience in B2B systems integration.</li>
+                    <li>Proficient in Java, Spring, AWS, Angular, Docker, Kubernetes, and Python.</li>
+                    <li>Experienced in JavaScript, JQuery, Bootstrap, SQL, Android, Spark, Scala, and Unix.</li>
+                    <li>Familiar with TCL/TK, Cadence SKILL, PERL, and PostScript.</li>
+                </ul>
+            </section>
 
-							// Update the count down every 1 second
-							var x = setInterval(function() {
+            <!-- Slide 3 - Founded Projects -->
+            <section data-transition="convex">
+                <h3>Founded Projects</h3>
+                <p>
+                    <ul>
+                        <li><a href="https://www.dailynewsound.com/" class="roll">Dailynewsound</a> - A free News Reader app that I developed and launched.</li>
+                    </ul>
+                </p>
+                <p>If you are interested in becoming a co-founder, feel free to <a href="mailto:delossantos.eugene@gmail.com">email me</a>!</p>
+            </section>
 
-							  // Get todays date and time
-							  var now = new Date().getTime();
+            <!-- Slide 4 - Hackathons -->
+            <section data-transition="convex">
+                <h3>Hackathons</h3>
+                <p>
+                    <ul>
+                        <li><a href="https://devpost.com/software/placeholder-ugibxf" class="roll">Debrazio</a> - A waste classifier project developed during a hackathon.</li>
+                    </ul>
+                </p>
+                <p>Check out my other projects on <a href="https://devpost.com/delossantos-eugene" class="roll">Devpost</a>!</p>
+            </section>
 
-							  // Find the distance between now an the count down date
-							  var distance = countDownDate - now;
+            <!-- Slide 5 - Contact & Social Links -->
+            <section data-transition="convex">
+                <h3>Connect with Me</h3>
+                <p>
+                    <footer>
+                        <a href="mailto:edsa@edsa.tech"><img class="icons" src="svg/gmail.svg" alt="Gmail"/></a>
+                        <a href="https://github.com/delose" class="roll"><img class="icons" src="svg/github-circle.svg" alt="GitHub"/></a>
+                        <a href="https://www.linkedin.com/in/delose/" class="roll"><img class="icons" src="svg/linkedin-box.svg" alt="LinkedIn"/></a>
+                        <a href="https://twitter.com/eugenesergio" class="roll"><img class="icons" src="svg/twitter.svg" alt="Twitter"/></a>
+                        <a href="https://www.youracclaim.com/user/eugene-de-los-santos" class="roll"><img class="icons" src="svg/trophy-award.svg" alt="Acclaim"/></a>
+                    </footer>
+                </p>
+            </section>
 
-							  // Time calculations for days, hours, minutes and seconds
-							  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-							  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-							  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-							  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            <!-- Slide 6 - Countdown Timer for 2024 -->
+            <section data-transition="convex">
+                <h3>2024 Countdown Timer</h3>
+                <p id="timer"></p>
+                <script>
+                    var countDownDate = new Date("Jan 01, 2025 00:00:00").getTime();
+                    var x = setInterval(function() {
+                        var now = new Date().getTime();
+                        var distance = countDownDate - now;
+                        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                        document.getElementById("timer").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+                        if (distance < 0) {
+                            clearInterval(x);
+                            document.getElementById("timer").innerHTML = "EXPIRED";
+                        }
+                    }, 1000);
+                </script>
+                <p>Time is short, so better get back to the grind!</p>
+            </section>
 
-							  // Display the result in the element with id="timer"
-							  document.getElementById("timer").innerHTML = days + "d " + hours + "h "
-							  + minutes + "m " + seconds + "s ";
+            <!-- Slide 7 - Navigation Tips -->
+            <section data-transition="convex">
+                <h3>Navigation Tips</h3>
+                <p>If you're on a desktop, press ESC to navigate. If you're on a phone, pinch the screen to zoom out.</p>
+            </section>
 
-							  // If the count down is finished, write some text 
-							  if (distance < 0) {
-							    clearInterval(x);
-							    document.getElementById("timer").innerHTML = "EXPIRED";
-							  }
-							}, 1000);
-						</script>
-						<h5>Time is short so better get back to the grind!</h5>
-					</section>
-					<!-- Slide  4 - Esc feature -->
-					<section data-transition="convex">
-						<h3>You may navigate around the site:</h3>
-						<h6>If you're on desktop, press ESC!</h6>
-						<h6>If you're on phone, pinch the screen!</h6>
-					</section>
-					<!-- Slide 5 -->
-					<section data-transition="convex">
-						<h3>Thanks for dropping by!</h3>
-						<h6><a href="mailto:edsa@edsa.tech">Email</a> me if you want to discuss further!</h6>
-					</section>
-				</div> <!-- slides -->
-			</div> <!-- reveal -->
-		<script src="js/reveal/reveal.js"></script>
-		<script>
-		   Reveal.initialize();
-		</script>
-	</body>
+            <!-- Slide 8 - Thank You -->
+            <section data-transition="convex">
+                <h3>Thanks for Dropping By!</h3>
+                <p><a href="mailto:edsa@edsa.tech">Email</a> me if you'd like to discuss further or have any questions!</p>
+            </section>
+
+        </div> <!-- slides -->
+    </div> <!-- reveal -->
+    <script src="js/reveal/reveal.js"></script>
+    <script>
+        Reveal.initialize();
+    </script>
+</body>
 </html>
