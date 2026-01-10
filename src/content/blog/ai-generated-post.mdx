@@ -4,68 +4,68 @@ description: 'Learn how to architect and develop robust microservices using Java
 pubDate: 'Jan 10 2026'
 heroImage: 'https://img.freepik.com/free-photo/businessmen-hands-white-table-with-documents-drafts_176420-362.jpg?t=st=1767717726~exp=1767721326~hmac=e7cbb8afdda4dbdac5f82af22b7e94ef3ea4727043c3b7d5d2e7d80c00aa3c36'
 ---
- ### Introduction                                                                                                                                                                                      │
-                                                                                                                                                                                                      │
-In the world of software development, microservices have become a key architectural pattern for building scalable, maintainable, and resilient applications. As a developer looking to level up your  │
-skills, understanding and mastering microservices is an essential step in becoming a more proficient engineer.                                                                                        │
-                                                                                                                                                                                                      │
-### The Deep Dive: A Java/Spring Boot Example                                                                                                                                                         │
-                                                                                                                                                                                                      │
-To illustrate the concept of microservices, let's take a look at a simple example from a hypothetical personal finance management system (PFMS). This example will be based on code snippets that     │
-you can find in real-world projects or through various online resources.                                                                                                                              │
-                                                                                                                                                                                                      │
-#### Microservice Architecture Overview                                                                                                                                                               │
-                                                                                                                                                                                                      │
-A typical PFMS might consist of several microservices:                                                                                                                                                │
-                                                                                                                                                                                                      │
-1. **User Service**: Manages user registration, authentication, and profile information.                                                                                                              │
-2. **Account Service**: Handles account creation, transactions, and balance inquiries.                                                                                                                │
-3. **Transaction Service**: Records and processes financial transactions.                                                                                                                             │
-4. **Report Service**: Generates various financial reports based on user data.                                                                                                                        │
-                                                                                                                                                                                                      │
-#### Example Code Snippets                                                                                                                                                                            │
-                                                                                                                                                                                                      │
-Let's dive into the code for one of these microservices. Here’s an example from the User Service:                                                                                                     │
-                                                                                                                                                                                                      │
-```java                                                                                                                                                                                               │
-package com.personalfinance.user.service;                                                                                                                                                             │
-                                                                                                                                                                                                      │
-import org.springframework.beans.factory.annotation.Autowired;                                                                                                                                        │
-import org.springframework.stereotype.Service;                                                                                                                                                        │
-import com.personalfinance.user.model.User;                                                                                                                                                           │
-import com.personalfinance.user.repository.UserRepository;                                                                                                                                            │
-                                                                                                                                                                                                      │
-@Service                                                                                                                                                                                              │
-public class UserService {                                                                                                                                                                            │
-                                                                                                                                                                                                      │
-    @Autowired                                                                                                                                                                                        │
-    private UserRepository userRepository;                                                                                                                                                            │
-                                                                                                                                                                                                      │
-    public User createUser(User user) {                                                                                                                                                               │
-        return userRepository.save(user);                                                                                                                                                             │
-    }                                                                                                                                                                                                 │
-                                                                                                                                                                                                      │
-    public User getUserById(Long id) {                                                                                                                                                                │
-        return userRepository.findById(id).orElse(null);                                                                                                                                              │
-    }                                                                                                                                                                                                 │
-}                                                                                                                                                                                                     │
-```                                                                                                                                                                                                   │
-                                                                                                                                                                                                      │
-In this example, we have a simple `UserService` that interacts with a `UserRepository` to perform CRUD operations on user data. This service is just one part of the overall microservice             │
-architecture.                                                                                                                                                                                         │
-                                                                                                                                                                                                      │
-### The Pro-Tip                                                                                                                                                                                       │
-                                                                                                                                                                                                      │
-As you delve deeper into microservices development, there are several best practices and tips that can help you write cleaner, more maintainable code:                                                │
-                                                                                                                                                                                                      │
-- **Always use DTOs**: Data Transfer Objects (DTOs) help decouple your domain model from your API layer, making it easier to manage changes and improve performance.                                  │
-- **Implement Circuit Breakers**: Use tools like Resilience4j or Hystrix to protect your microservices from failures by isolating failing services and providing fallback mechanisms.                 │
-- **Enable Continuous Integration/Continuous Deployment (CI/CD)**: Automate your build, test, and deployment processes to ensure that your microservices are always in a deployable state.            │
-                                                                                                                                                                                                      │
-### Conclusion                                                                                                                                                                                        │
-                                                                                                                                                                                                      │
-Mastering Java microservices is a journey of continuous learning and growth. By following the best practices outlined above and understanding how microservices work in real-world applications,      │
-you’ll be well on your way to becoming an expert developer.                                                                                                                                           │
-                                                                                                                                                                                                      │
-We hope this blog post has provided you with a solid foundation for understanding microservices architecture using Java and Spring Boot. Remember, the key to success is practice and                 │
-experimentation. Happy coding!        
+ ### Introduction                                                                                                                                                                                    
+
+In the world of software development, microservices have become a key architectural pattern for building scalable, maintainable, and resilient applications. As a developer looking to level up your
+skills, understanding and mastering microservices is an essential step in becoming a more proficient engineer.                                                                                      
+
+### The Deep Dive: A Java/Spring Boot Example                                                                                                                                                       
+
+To illustrate the concept of microservices, let's take a look at a simple example from a hypothetical personal finance management system (PFMS). This example will be based on code snippets that   
+you can find in real-world projects or through various online resources.                                                                                                                            
+
+#### Microservice Architecture Overview                                                                                                                                                             
+
+A typical PFMS might consist of several microservices:                                                                                                                                              
+
+1. **User Service**: Manages user registration, authentication, and profile information.                                                                                                            
+2. **Account Service**: Handles account creation, transactions, and balance inquiries.                                                                                                              
+3. **Transaction Service**: Records and processes financial transactions.                                                                                                                           
+4. **Report Service**: Generates various financial reports based on user data.                                                                                                                      
+
+#### Example Code Snippets                                                                                                                                                                          
+
+Let's dive into the code for one of these microservices. Here’s an example from the User Service:                                                                                                   
+
+```java                                                                                                                                                                                             
+package com.personalfinance.user.service;                                                                                                                                                           
+
+import org.springframework.beans.factory.annotation.Autowired;                                                                                                                                      
+import org.springframework.stereotype.Service;                                                                                                                                                      
+import com.personalfinance.user.model.User;                                                                                                                                                         
+import com.personalfinance.user.repository.UserRepository;                                                                                                                                          
+
+@Service                                                                                                                                                                                            
+public class UserService {                                                                                                                                                                          
+
+    @Autowired                                                                                                                                                                                      
+    private UserRepository userRepository;                                                                                                                                                          
+
+    public User createUser(User user) {                                                                                                                                                             
+        return userRepository.save(user);                                                                                                                                                           
+    }                                                                                                                                                                                               
+
+    public User getUserById(Long id) {                                                                                                                                                              
+        return userRepository.findById(id).orElse(null);                                                                                                                                            
+    }                                                                                                                                                                                               
+}                                                                                                                                                                                                   
+```                                                                                                                                                                                                 
+
+In this example, we have a simple `UserService` that interacts with a `UserRepository` to perform CRUD operations on user data. This service is just one part of the overall microservice           
+architecture.                                                                                                                                                                                       
+
+### The Pro-Tip                                                                                                                                                                                     
+
+As you delve deeper into microservices development, there are several best practices and tips that can help you write cleaner, more maintainable code:                                              
+
+- **Always use DTOs**: Data Transfer Objects (DTOs) help decouple your domain model from your API layer, making it easier to manage changes and improve performance.                                
+- **Implement Circuit Breakers**: Use tools like Resilience4j or Hystrix to protect your microservices from failures by isolating failing services and providing fallback mechanisms.               
+- **Enable Continuous Integration/Continuous Deployment (CI/CD)**: Automate your build, test, and deployment processes to ensure that your microservices are always in a deployable state.          
+
+### Conclusion                                                                                                                                                                                      
+
+Mastering Java microservices is a journey of continuous learning and growth. By following the best practices outlined above and understanding how microservices work in real-world applications,    
+you’ll be well on your way to becoming an expert developer.                                                                                                                                         
+
+We hope this blog post has provided you with a solid foundation for understanding microservices architecture using Java and Spring Boot. Remember, the key to success is practice and               
+experimentation. Happy coding!
