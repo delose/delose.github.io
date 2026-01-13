@@ -1,0 +1,123 @@
+---
+title: "Spring Boot Budget Service"
+description: 'Managing budgets in a distributed environment requires careful planning and implementation to ensure reliability and performance. This blog post will guide you through building a resilient microservice using Spring Boot, Kafka for event-driven architecture, and performance optimization techniques like caching and MapStruct.'
+pubDate: 'Jan 14 2026'
+heroImage: '../../assets/PFMS-budget-service-hero.jpg'
+---
+## Introduction: Managing Budgets in a Distributed Environment
+
+In a distributed system, managing budgets efficiently involves ensuring data consistency, reliability, and performance. The Budget Service showcases a reliability-first design through its integration with Kafka for asynchronous event messaging. This ensures that messages are only dispatched to the Notification Service after successful database commits, thereby maintaining data consistency and integrity.
+
+## Performance: Deep Dive into MapStruct and Spring Cache Lookups
+
+### 2.1 Event-Driven Architecture with Kafka
+
+Kafka is used as the message broker to facilitate asynchronous communication between services. In this setup, the Budget Service acts as the producer of events, and the Notification Service serves as the consumer. Here’s how it works:
+
+1. **Event Publisher**: When a budget update occurs (e.g., creating or updating a budget), the Budget Service publishes an event to Kafka on the `notification_requests_topic`.
+2. **Transactional Outbox Pattern**: The Budget Service uses the Transactional Outbox pattern to ensure that events are only committed to Kafka after successful database commits. This is achieved by:
+   - Storing outgoing messages in a special outbox table within the same transaction.
+   - When the database commit succeeds, the service reads and deletes the message from the outbox table, then publishes it to Kafka.
+3. **Transactional Message Producer**: The Budget Service uses Spring Kafka’s `KafkaTemplate` with transactional support to send events reliably.
+
+Here is a simplified code snippet demonstrating this pattern:
+
+```java
+@Service
+public class BudgetService {
+
+    @Autowired
+    private BudgetRepository budgetRepository;
+
+    @Autowired
+    private KafkaTemplate<String, NotificationRequest> kafkaTemplate;
+
+    @Transactional
+    public void updateBudget(Budget budget) {
+        // Update the budget in the database
+        budgetRepository.save(budget);
+
+        // Publish event to Kafka only if the database commit is successful
+        NotificationRequest notification = new NotificationRequest(budget.getId(), "Budget updated");
+        kafkaTemplate.send("notification_requests_topic", notification);
+    }
+}
+```
+
+### 2.2 Performance Benefits of MapStruct/Caching
+
+1. **MapStruct for Clean Entity-to-DTO Conversions**:
+   - **Code Generation**: MapStruct generates type-safe, compile-time Java code that performs the mapping between entities and DTOs.
+   - **Performance**: This approach eliminates the need for reflection-based mapping frameworks, resulting in faster execution times.
+
+2. **Spring Cache for Caching High-Traffic Data**:
+   - **Read Through Caching**: When a budget lookup is requested by ID, the Budget Service checks if the budget data is already cached.
+   - **Cache Hit**: If available, it returns the cached data, reducing the need to hit the database.
+   - **Cache Miss**: If not available, it fetches the data from the database, stores it in cache for future requests, and then returns it.
+
+Here is a simplified example of using Spring Cache:
+
+```java
+@Service
+@EnableCaching
+public class BudgetService {
+
+    @Autowired
+    private BudgetRepository budgetRepository;
+
+    @Cacheable("budgets")
+    public Budget getBudgetById(Long id) {
+        return budgetRepository.findById(id).orElseThrow(() -> new RuntimeException("Budget not found"));
+    }
+}
+```
+
+## Reliability: The Kafka Producer and Post-Commit Event Handling
+
+### 2.3 Integration with Discovery Server (Eureka)
+
+The Budget Service integrates with the Eureka Discovery Server to register itself and discover other services dynamically:
+
+1. **Service Registration**: The Budget Service registers its metadata (e.g., service name, IP address, port) with the Eureka server.
+2. **Service Discovery**: When another service needs to communicate with the Budget Service, it queries the Eureka server to find out where the Budget Service is located.
+3. **Dynamic Scaling and Load Balancing**: Eureka facilitates dynamic scaling by enabling multiple instances of a service to be registered, and load balancing across these instances.
+
+Here is a simplified example of service registration in a Spring Boot application:
+
+```yaml
+# application.yml
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+```
+
+## Observability: Using Custom Actuator Endpoints for System Maintenance
+
+Custom Actuator endpoints are crucial for monitoring and maintaining the health of your microservices in production. The Budget Service includes a custom Actuator endpoint to provide insights into its operation.
+
+```java
+@RestController
+@Endpoint(id = "budget-service")
+public class BudgetServiceMetrics {
+
+    @Autowired
+    private BudgetService budgetService;
+
+    @ReadOperation
+    public Metrics getBudgetMetrics() {
+        // Gather metrics from the service
+        Metrics metrics = new Metrics();
+        metrics.setNumberOfBudets(budgetService.getAllBudgets().size());
+        return metrics;
+    }
+}
+```
+
+## Summary
+
+- **Reliability-First Design**: The Budget Service ensures that messages are only sent to Kafka after successful database commits using the Transactional Outbox pattern.
+- **Performance Optimization**: MapStruct provides fast and type-safe entity-to-DTO mappings, while Spring Cache reduces the need for repeated database queries through read-through caching.
+- **Service Discovery with Eureka**: The service registers itself with the Eureka server and dynamically discovers other services to facilitate communication.
+
+This architecture ensures that the Budget Service is highly reliable, performant, and scalable. By following these practices, you can build microservices that meet the demands of modern distributed systems.
