@@ -1,0 +1,149 @@
+---
+title: "Account Service Microservice with NestJS"
+description: 'A Deep Dive into Event-Driven Design'
+pubDate: 'Jan 1310 2026'
+heroImage: 'https://img.freepik.com/free-photo/businessmen-hands-white-table-with-documents-drafts_176420-362.jpg?t=st=1767717726~exp=1767721326~hmac=e7cbb8afdda4dbdac5f82af22b7e94ef3ea4727043c3b7d5d2e7d80c00aa3c36'
+---
+
+## Concept: Event-Driven Design
+
+Event-driven design (EDD) is an architectural style where the flow of data and control is based on events, which are signals that something has occurred. In a microservices architecture like the one described, EDD plays a crucial role in enabling loose coupling between services and facilitating asynchronous communication.
+
+The main components involved in EDD within our Account Service microservice include:
+
+1. **Event Sources**: These are the systems or services that generate events. In our case, the `TransactionService` generates 'account create' events when new accounts are created.
+2. **Message Brokers**: Services like RabbitMQ act as intermediaries that receive events from event sources and forward them to subscribing services. This ensures that the event-driven communication is decoupled from the service-to-service interaction.
+3. **Event Consumers**: These are services that listen for and handle incoming events. The `AccountService` consumes 'account create' events from RabbitMQ, processes the data, and persists it in PostgreSQL.
+
+## Deep Dive: Code Snippets
+
+### 1. AccountController
+
+The `AccountController` handles incoming HTTP requests related to account management. It uses a service (`AccountService`) to perform business logic operations and communicates with the database through a repository (`AccountRepository`).
+
+```typescript
+// account.controller.ts
+import { Controller, Post, Body } from '@nestjs/common';
+import { AccountDto } from './account.dto';
+import { AccountService } from './account.service';
+
+@Controller('accounts')
+export class AccountController {
+  constructor(private readonly accountService: AccountService) {}
+
+  @Post()
+  createAccount(@Body() accountDto: AccountDto) {
+    return this.accountService.create(accountDto);
+  }
+}
+```
+
+### 2. AccountService
+
+The `AccountService` contains the business logic for creating and managing accounts. It uses RabbitMQ to publish events and the PostgreSQL repository to persist data.
+
+```typescript
+// account.service.ts
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { AccountDto } from './account.dto';
+import { AccountEntity } from './account.entity';
+import { RabbitMQService } from '../rabbitmq/rabbitmq.service';
+
+@Injectable()
+export class AccountService {
+  constructor(
+    @InjectRepository(AccountEntity)
+    private readonly accountRepository: Repository<AccountEntity>,
+    private readonly rabbitMqService: RabbitMQService,
+  ) {}
+
+  async create(accountDto: AccountDto) {
+    const newAccount = this.accountRepository.create(accountDto);
+    await this.accountRepository.save(newAccount);
+
+    // Publish 'account create' event to RabbitMQ
+    this.rabbitMqService.publish('account created', { account: newAccount });
+
+    return newAccount;
+  }
+}
+```
+
+### 3. RabbitMQService
+
+The `RabbitMQService` handles communication with RabbitMQ, including publishing events and consuming messages.
+
+```typescript
+// rabbitmq.service.ts
+import { Injectable } from '@nestjs/common';
+import * as amqp from 'amqplib';
+
+@Injectable()
+export class RabbitMQService {
+  private channel: amqp.Channel;
+  private connection: amqp.Connection;
+
+  async connect() {
+    this.connection = await amqp.connect('amqp://localhost');
+    this.channel = await this.connection.createChannel();
+    await this.channel.assertQueue('account_created_queue');
+  }
+
+  publish(eventType: string, data: any) {
+    this.channel.publish('account_created_queue', eventType, Buffer.from(JSON.stringify(data)));
+  }
+}
+```
+
+## Deployment: Docker/Consul
+
+### 3.1. Backend Services (Microservices)
+
+The microservices are containerized using Docker and can be managed with Docker Compose. Each service is built using Spring Boot and can be deployed independently or together.
+
+##### Running the Services with Docker Compose
+
+```bash
+docker-compose up
+```
+
+This command will start all the services, including the API Gateway, User Service, Budget Service, and more.
+
+### 3.2. Front-End Deployment
+
+The React UI can be served using Nginx or another web server, and it can be integrated into the Docker Compose setup or deployed separately on platforms like Netlify or Vercel.
+
+#### Running the React UI
+
+1. **Development Mode**
+
+```bash
+cd pfms-ui
+npm start
+```
+
+This will start the development server at http://localhost:3000.
+
+### 4. Health Check for the API Gateway
+
+To verify that the API Gateway is running correctly, you can perform a health check using `curl`.
+
+```bash
+curl http://localhost:8080/actuator/health
+```
+
+The expected output is:
+
+```json
+{"status":"UP"}
+```
+
+### 5. Reactive Microservices Architecture with Messaging
+
+In our microservices architecture, RabbitMQ acts as the message broker, facilitating asynchronous communication between services. The Account Service listens for 'account create' events from the Transaction Service and processes them accordingly.
+
+By leveraging event-driven design and containerized deployment, our Account Service is designed to be scalable, resilient, and easy to maintain.
+
+I hope this comprehensive guide helps you understand how to implement a robust and efficient Account Service microservice using NestJS. If you have any questions or need further assistance, feel free to ask!
