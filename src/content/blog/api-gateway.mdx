@@ -1,0 +1,143 @@
+---
+title: "Spring Boot API Gateway"
+description: 'Securing and managing API access is crucial. The Spring Boot API Gateway serves as the central security coordinator for a distributed architecture, handling routing, load balancing, and securing requests through JWT-based authentication and authorization.'
+pubDate: 'Jan 13 2026'
+heroImage: '../../assets/PFMS-apigw-hero.png'
+---
+## Concept: Event-Driven Design
+
+In today's microservices landscape, securing and managing API access is crucial. The Spring Boot API Gateway serves as the central security coordinator for a distributed architecture, handling routing, load balancing, and securing requests through JWT-based authentication and authorization.
+
+## Security Core
+
+### Deep Dive into JWT, /login, /signup, and Exception Handler
+
+#### JSON Web Token (JWT)
+
+JWT is used to secure the `/login` and `/signup` endpoints. When a user logs in or signs up, the gateway generates a JWT that contains user claims, such as username and roles.
+
+```java
+@PostMapping("/login")
+public ResponseEntity<String> login(@RequestBody UserCredentials credentials) {
+    Authentication authentication = authenticate(credentials);
+    String token = generateToken(authentication);
+    return ResponseEntity.ok(token);
+}
+
+private Authentication authenticate(UserCredentials credentials) throws Exception {
+    try {
+        authManager.authenticate(new UsernamePasswordAuthenticationToken(credentials.getUsername(), credentials.getPassword()));
+    } catch (DisabledException e) {
+        throw new Exception("USER_DISABLED", e);
+    } catch (BadCredentialsException e) {
+        throw new Exception("INVALID_CREDENTIALS", e);
+    }
+}
+
+private String generateToken(Authentication authentication) throws Exception {
+    Map<String, Object> claims = new HashMap<>();
+    UserDetails userDetails = ((UserDetails) authentication.getPrincipal());
+    claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
+    claims.put(CLAIM_KEY_AUTHORITIES, userDetails.getAuthorities().stream()
+        .map(GrantedAuthority::getAuthority)
+        .collect(Collectors.toList()));
+    return Jwts.builder()
+        .setClaims(claims)
+        .setIssuedAt(new Date(System.currentTimeMillis()))
+        .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
+        .signWith(SignatureAlgorithm.HS512, SECRET_KEY).compact();
+}
+```
+
+#### /login and /signup Endpoints
+
+The `/login` endpoint authenticates the user and returns a JWT. The `/signup` endpoint registers a new user.
+
+```java
+@PostMapping("/signup")
+public ResponseEntity<String> signup(@RequestBody User user) {
+    userService.save(user);
+    return ResponseEntity.ok("User registered successfully");
+}
+```
+
+#### Exception Handler
+
+A centralized Global Exception Handler manages security-specific scenarios like token expiration and invalid signatures.
+
+```java
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<String> handleAuthenticationException(AuthenticationException e) {
+        return new ResponseEntity<>("Unauthorized: " + e.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
+
+    // Other exception handlers...
+}
+```
+
+## Infrastructure
+
+### Config Server Link and application.properties
+
+The API Gateway registers with Eureka on port 8761, making it available for service discovery.
+
+```yaml
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8080
+```
+
+It exposes itself to clients on port 8080:
+
+```yaml
+server:
+  port: 8080
+```
+
+### Thymeleaf Dashboard for JVM Metrics
+
+The gateway features an embedded Thymeleaf dashboard for real-time monitoring of JVM memory and CPU metrics. It uses Spring Boot Actuator to expose health and metrics endpoints, which are then accessible via a custom Thymeleaf template.
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>API Gateway Metrics</title>
+</head>
+<body>
+    <h1>API Gateway Metrics</h1>
+    <div th:with="metrics=${@metricRepository.metrics}">
+        Memory Usage: <span th:text="${metrics['jvm.memory.used'] / 1024 / 1024} MB"></span><br/>
+        CPU Load: <span th:text="${metrics['system.cpu.usage']}"></span>
+    </div>
+</body>
+</html>
+```
+
+## Bonus
+
+### Highlight the embedded Thymeleaf dashboard for JVM monitoring
+
+The gateway provides a powerful way to monitor its performance through an embedded Thymeleaf dashboard. This dashboard displays critical metrics like memory usage and CPU load, making it easier to maintain and optimize the API Gateway.
+
+```java
+@Configuration
+public class ActuatorConfig {
+
+    @Bean
+    public EndpointWebExtensionEndpointHandlerMapping endpointWebExtensionEndpointHandlerMapping(
+            Collection<AbstractEndpoint<?>> endpoints) {
+        return new EndpointWebExtensionEndpointHandlerMapping(endpoints);
+    }
+}
+```
+
+### Conclusion
+
+The Spring Boot API Gateway is a robust solution for managing security and monitoring in a microservices architecture. By following the concepts covered in this post, you can build a secure and efficient gateway that enhances the reliability of your system.
