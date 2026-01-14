@@ -1,18 +1,9 @@
-```mdx
 ---
 title: 'Zero Restarts: Implementing a Git-Backed Config Server'
 description: "Master the heart of your microservices architecture with Spring Cloud Config Server, ensuring dynamic reconfiguration without service restarts."
 pubDate: 'Jun 14 2026'
 heroImage: '../../assets/PFMS-config-server-hero.jpg'
 ---
----
-title: Zero Restarts: Implementing a Git-Backed Config Server
-date: 2023-10-05T00:00:00Z
-author: DevOps Evangelist & Technical Writer
----
-
-# Zero Restarts: Implementing a Git-Backed Config Server
-
 ## Introduction
 
 In modern microservice architectures, managing environment-specific configurations efficiently and securely is crucial. Traditional methods of using hardcoded environment variables are no longer adequate for dynamic environments. Enter Spring Cloud Config Server—a powerful tool that provides a centralized 'single source of truth' for configuration properties across all microservices.
@@ -86,5 +77,4 @@ graph TD;
     A[Budget Service] --> E{Config Server Available?};
     E -- Yes --> F[Fetch and Apply Config];
     E -- No --> G[Fail to Start];
-```
 ```
