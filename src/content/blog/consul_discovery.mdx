@@ -1,0 +1,105 @@
+---
+title: 'The Polyglot Edge: Unified Discovery with Consul'
+description: "Learn how to integrate NestJS and Spring Boot using HashiCorp Consul for a seamless polyglot architecture."
+pubDate: 'Jun 15 2026'
+heroImage: '../../assets/PFMS-consul-server-hero.jpg'
+---
+## Introduction: Why Polyglot Architectures are the Future
+
+In today's rapidly evolving technology landscape, developers are increasingly adopting polyglot architectures. These architectures allow teams to use multiple programming languages and frameworks in a single project. HashiCorp Consul is a robust tool that facilitates this by providing a unified service map for services written in different languages. Polyglot architectures offer several benefits, including:
+
+- **Flexibility**: Teams can leverage the strengths of each language and framework.
+- **Scalability**: Different components can be scaled independently based on their needs.
+- **Maintainability**: Different teams can work on different parts of the application without interfering with others.
+
+However, integrating services written in different languages can be challenging. This is where Consul comes in.
+
+## Setup: Configuring Consul in Docker for High Availability
+
+To get started, let's configure a high-availability Consul server using Docker. We'll use a single-server configuration for simplicity. Here’s how you can set it up:
+
+```bash
+docker run -d --name consul-server \
+  -p 8500:8500 \
+  -e 'CONSUL_LOCAL_CONFIG={"server": true, "bootstrap_expect": 1, "ui": true}'
+```
+
+- `--name consul-server`: Names the Docker container.
+- `-p 8500:8500`: Maps port 8500 on the host to port 8500 on the container, allowing access to the Consul UI and API.
+- `-e 'CONSUL_LOCAL_CONFIG={"server": true, "bootstrap_expect": 1, "ui": true}'`: Sets environment variables to configure the Consul Server:
+  - `"server": true`: Specifies that this instance is a server node.
+  - `"bootstrap_expect": 1`: Expects only one server in the cluster for simplicity (this should be adjusted based on production requirements).
+  - `"ui": true`: Enables the Consul UI for real-time monitoring.
+
+Once the Consul server is up and running, you can access it via your web browser at `http://localhost:8500`.
+
+## Integration: Mixing NestJS and Spring Boot in a Single Service Map
+
+Let's look at how to integrate a NestJS service (`transaction-service`) with a Spring Boot service (`goal-service`) using Consul.
+
+### Spring Boot Service Registering to Consul
+
+A Spring Boot service can register itself with Consul by adding the necessary dependencies and configuration. For example:
+
+```yaml
+spring:
+  application:
+    name: goal-service
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+```
+
+When the `goal-service` starts, it sends a request to the Consul Server, providing its service details.
+
+### NestJS Service Finding Spring Boot Service through Consul
+
+The `transaction-service`, written in NestJS, can find other services by querying the Consul registry. For example:
+
+```typescript
+import { Injectable } from '@nestjs/common';
+import * as axios from 'axios';
+
+@Injectable()
+export class GoalServiceClient {
+  private readonly goalServiceUrl: string;
+
+  constructor() {
+    this.goalServiceUrl = 'http://consul-server/goal-service';
+  }
+
+  async getGoals(): Promise<any> {
+    const response = await axios.get(this.goalServiceUrl);
+    return response.data;
+  }
+}
+```
+
+In this example, the `GoalServiceClient` in the `transaction-service` makes a request to the Consul Server's service map endpoint. Consul returns the IP address and port of the `goal-service`, allowing the `transaction-service` to communicate with it.
+
+## Monitoring: Using the Consul UI and V1 API for Health Visibility
+
+Consul provides both a web-based UI and an HTTP API that you can use to monitor the health and status of your services.
+
+### Accessing the Consul UI
+
+You can access the Consul UI by navigating to `http://localhost:8500` in your web browser. Here, you can see all registered services, their health statuses, and other details.
+
+### Health Check for V1 Status API
+
+A V1 health check ensures that the leader availability is maintained. This is crucial for maintaining a resilient discovery layer.
+
+To perform a health check, you can use the following command:
+
+```bash
+curl http://localhost:8500/v1/status/leader
+```
+
+The expected output should indicate whether a leader node is available or not. If no leader is available, Consul will attempt to elect one based on the configuration.
+
+## Conclusion
+
+HashiCorp Consul enables seamless communication between services with different language stacks by providing a unified service map. It allows services like `transaction-service` (NestJS) and `goal-service` (Spring Boot) to discover and communicate with each other through the Consul registry. The server-mode flags ensure leader availability, while health checks maintain the resilience of the discovery layer. This architecture demonstrates how diverse tech stacks can be integrated into a single, cohesive, and scalable production ecosystem.
+
+By leveraging Consul, you can build robust polyglot architectures that are easier to manage and scale. Whether you’re working with NestJS, Spring Boot, or any other combination of technologies, Consul is your go-to tool for service discovery.
