@@ -1,0 +1,55 @@
+---
+title: 'Dynamic Scaling: Implementing Netflix Eureka'
+description: "Master the art of service discovery with Netflix Eureka in a cloud-native environment, ensuring dynamic scaling and real-time health monitoring."
+pubDate: 'Jun 15 2026'
+heroImage: '../../assets/PFMS-discovery-server-hero.jpg'
+---
+## Introduction: Moving beyond static IPs with Service Discovery
+
+In a cloud-native environment, resilience and scalability are crucial for maintaining high availability. The Personal Finance Management System (PFMS) employs Netflix Eureka as its service registry to manage service registration and discovery dynamically. This architecture ensures that client requests are efficiently routed to available service instances in a constantly evolving production environment.
+
+## Configuration: Setting up Eureka with a Config Server dependency
+
+The Config Server acts as the central configuration management tool, storing properties files for each microservice. This allows dynamic reconfiguration of services without needing to restart them. The Config Server is crucial for providing necessary configurations to the Discovery Server at startup.
+
+## Ecosystem: How the Gateway, Budget, and Goal services register themselves
+
+The Discovery Server (`discovery-server`) manages the service registry using Eureka. It registers itself as a service in the Eureka server and updates its status periodically to indicate whether it is up or down. Other services, such as the API Gateway, Goal Service, and Expense Service, register with the Discovery Server.
+
+## Resilience: Real-time health monitoring and load balancing
+
+Eureka continuously monitors the health of registered services. If a service goes down, Eureka marks it as unavailable and removes it from the routing table. This ensures that client requests are only routed to healthy instances, thereby improving system reliability and performance.
+
+## Dynamic Scaling
+
+As traffic increases or decreases, the Discovery Server can dynamically scale by registering new instances of microservices. Eureka automatically detects new instances and updates its service registry, ensuring that client requests are evenly distributed across all available instances.
+
+## Example Code Snippet
+
+```java
+@Configuration
+@EnableDiscoveryClient
+public class DiscoveryServerConfig {
+
+    @Value("${spring.application.name:discovery-server}")
+    private String applicationName;
+
+    @Bean
+    public EurekaInstanceConfigBean eurekaInstanceConfig(InetUtils inetUtils) {
+        EurekaInstanceConfigBean config = new EurekaInstanceConfigBean(inetUtils);
+        config.setInstanceId(applicationName + "-" + InetAddress.getLocalHost().getHostName());
+        return config;
+    }
+
+    @Bean
+    public EurekaClientConfigBean eurekaClient() {
+        EurekaClientConfigBean config = new EurekaClientConfigBean();
+        config.setRegisterWithEureka(true);
+        config.setFetchRegistry(true);
+        config.getServiceUrl().put("defaultZone", "http://localhost:8761/eureka/");
+        return config;
+    }
+}
+```
+
+The hierarchical startup sequence where the Discovery Server depends on the Config Server at port 8888 ensures that services are properly configured before they start. Eureka facilitates dynamic load balancing by managing service registration and discovery, real-time health monitoring, and dynamic scaling. This architecture is essential for building resilient and scalable cloud-native systems like the Personal Finance Management System (PFMS)
