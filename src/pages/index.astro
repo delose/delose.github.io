@@ -4,7 +4,7 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
-const metaDescription = "Learn microservices architecture and AI agent integration through a real-world Personal Finance Management System. Practical guides on DDD, event-driven architecture, and service mesh.";
+const metaDescription = "Learn microservices architecture and AI agent integration through a real-world Personal Finance Management System. Practical guides on Domain-Driven Design, event-driven architecture, service mesh, and AI-ready microservices for FinTech and SaaS applications.";
 ---
 
 <!doctype html>
@@ -12,23 +12,32 @@ const metaDescription = "Learn microservices architecture and AI agent integrati
 	<head>
 		<BaseHead title={SITE_TITLE} description={metaDescription} />
 		<meta name="keywords" content="microservices architecture, AI agents, domain-driven design, Spring Boot, NestJS, Kafka" />
-		<link rel="canonical" href="https://edsa.tech/" />
+		<link rel="canonical" href="edsa.tech" />
 	</head>
 	<body>
 		<Header />
 		<main>
 			<article>
-				<header>
-					<h1>Build Production-Ready Microservices & AI-Powered Systems</h1>
-					<p>
-						Learn through a real-world <strong>Personal Finance Management System</strong> built with 10+ microservices, event-driven architecture, and AI-ready design patterns.
-					</p>
-				</header>
+				<!-- Hero Section & Image Placeholder -->
+				<section class="hero-section">
+					<div class="hero-text">
+						<h1>Build Production-Ready Microservices & AI-Powered Systems 🚀</h1>
+						<p class="subtitle">
+							Learn through a real-world <strong>Personal Finance Management System</strong> built with 10+ microservices, event-driven architecture, and AI-ready design patterns.
+						</p>
+					</div>
+					<!-- Placeholder for your Hero Image -->
+					<div class="hero-image-placeholder">
+						<!-- You can replace this div with a proper <img> tag once you choose an image URL -->
+						<!-- Example: <img src="/images/microservice-architecture-hero.png" alt="Illustration of a cloud-native microservice architecture" /> -->
+						<p><em>[Insert your architecture hero image here]</em></p>
+					</div>
+				</section>
 
 				<hr />
 
 				<section>
-					<h2>From FinTech Engineer to Your Learning Companion</h2>
+					<h2>From FinTech Engineer to Your Learning Companion 🤝</h2>
 					<p>
 						I've recently joined the FinTech industry and I'm sharing everything I've learned about building scalable, resilient microservices. This isn't theory—it's battle-tested architecture patterns from a production-grade personal finance system.
 					</p>
@@ -47,9 +56,9 @@ const metaDescription = "Learn microservices architecture and AI agent integrati
 				</section>
 
 				<section>
-					<h2>What You'll Master Here</h2>
+					<h2>What You'll Master Here 💡</h2>
 					
-					<h3>For Developers Leveling Up</h3>
+					<h3>For Developers Leveling Up 📈</h3>
 					<ul>
 						<li><strong>Domain-Driven Design (DDD):</strong> Mapping bounded contexts to financial microservices.</li>
 						<li><strong>Event-driven patterns:</strong> Kafka integration and async processing after DB commits.</li>
@@ -57,7 +66,7 @@ const metaDescription = "Learn microservices architecture and AI agent integrati
 						<li><strong>API Gateway patterns:</strong> Routing, load balancing, and JWT security.</li>
 					</ul>
 					
-					<h3>AI-Ready Architecture (Coming Soon)</h3>
+					<h3>AI-Ready Architecture (Coming Soon) 🤖</h3>
 					<ul>
 						<li><strong>AI agent integration patterns</strong> for financial workflows.</li>
 						<li><strong>Microservices as AI interfaces:</strong> Exposing services for LLM consumption.</li>
@@ -66,7 +75,7 @@ const metaDescription = "Learn microservices architecture and AI agent integrati
 				</section>
 
 				<section>
-					<h2>Microservices Architecture: The Foundation</h2>
+					<h2>Microservices Architecture: The Foundation 🏗️</h2>
 					<p>
 						Instead of a "monolith," microservices break applications into independent services that communicate through APIs and events. This enables:
 					</p>
@@ -79,11 +88,7 @@ const metaDescription = "Learn microservices architecture and AI agent integrati
 				</section>
 
 				<section>
-					<h2>Start Learning from Real Code</h2>
-					<p>
-						Explore the blog for deep-dives, or dive straight into the 
-						<a href="https://github.com/delose/personal-finance-management-system" target="_blank">PFMS GitHub repository</a>.
-					</p>
+					<h2>Start Learning from Real Code 👇</h2>
 					<p>
 						<a href="/blog"><strong>[ Read the Blog ]</strong></a> &nbsp; 
 						<a href="https://github.com/delose/personal-finance-management-system" target="_blank"><strong>[ Explore the Code ]</strong></a>
@@ -91,30 +96,63 @@ const metaDescription = "Learn microservices architecture and AI agent integrati
 				</section>
 
 				<footer>
-					<p><em>Written by a FinTech engineer focused on scalable microservices and AI value. Connect on <a href="https://linkedin.com/in/delose/" target="_blank">LinkedIn</a>.</em></p>
+					<p><em>Written by a FinTech engineer focused on scalable microservices and AI value. Connect on <a href="https://www.linkedin.com/in/delose/" target="_blank">LinkedIn</a>.</em></p>
 				</footer>
 			</article>
 		</main>
 		<Footer />
+
+		<style>
+			main {
+				width: 100%;
+				max-width: 900px; /* Slightly wider main content area */
+				margin: auto;
+				padding: 1em;
+				color: rgb(var(--gray-dark));
+			}
+			h1, h2, h3 {
+				color: rgb(var(--black));
+			}
+			section {
+				margin-bottom: 3rem;
+			}
+			hr {
+				border-top: 1px solid #ddd;
+				margin: 2rem 0;
+			}
+			.hero-section {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: 2rem;
+				margin-bottom: 3rem;
+			}
+			.hero-text {
+				flex: 1;
+			}
+			.hero-image-placeholder {
+				flex: 1;
+				background-color: #f0f4f8;
+				padding: 2rem;
+				border-radius: 8px;
+				text-align: center;
+				min-height: 200px; /* Ensure space for the image */
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border: 1px dashed #ccc;
+			}
+
+			/* Basic responsiveness for mobile */
+			@media (max-width: 768px) {
+				.hero-section {
+					flex-direction: column;
+					text-align: center;
+				}
+				.hero-image-placeholder {
+					width: 100%;
+				}
+			}
+		</style>
 	</body>
 </html>
-
-<style>
-	main {
-		width: 100%;
-		max-width: 800px;
-		margin: auto;
-		padding: 1em;
-		color: rgb(var(--gray-dark));
-	}
-	h1, h2, h3 {
-		color: rgb(var(--black));
-	}
-	section {
-		margin-bottom: 3rem;
-	}
-	hr {
-		border-top: 1px solid #ddd;
-		margin: 2rem 0;
-	}
-</style>
