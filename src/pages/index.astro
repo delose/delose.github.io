@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import heroImage from '../assets/PFMS-architectural-diagram.png';
 
 const metaDescription = "Learn microservices architecture and AI agent integration through a real-world Personal Finance Management System. Practical guides on Domain-Driven Design, event-driven architecture, service mesh, and AI-ready microservices for FinTech and SaaS applications.";
 ---
@@ -30,7 +31,7 @@ const metaDescription = "Learn microservices architecture and AI agent integrati
 					<div class="hero-image-placeholder">
 						<!-- You can replace this div with a proper <img> tag once you choose an image URL -->
 						<!-- <p><em>[Insert your architecture hero image here]</em></p> -->
-						<img src="../assets/PFMS-architectural-diagram.png" alt="Illustration of a cloud-native microservice architecture" />
+						<img src={heroImage.src} alt="Illustration of a cloud-native microservice architecture" />
 					</div>
 				</section>
 
