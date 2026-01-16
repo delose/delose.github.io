@@ -1,0 +1,282 @@
+---
+title: "Domain-Driven Design and Resilience Patterns in Goal Service"
+description: 'Deep dive into the DDD architecture and Resilience4j circuit breaker implementation in the Goal Service microservice.'
+pubDate: 'Jan 16 2026'
+heroImage: '../../assets/PFMS-goal-service-hero.jpg'
+tags: ['DDD', 'Resilience4j', 'Microservices', 'Spring Boot', 'Circuit Breaker']
+---
+
+## Introduction
+
+In modern microservices architecture, maintaining system resilience while preserving clear domain boundaries is crucial. The Goal Service demonstrates a sophisticated implementation of Domain-Driven Design (DDD) combined with Resilience4j patterns for handling external service dependencies.
+
+## Domain-Driven Design Architecture
+
+The Goal Service follows a clean DDD architecture with distinct layers:
+
+### Domain Entity
+
+The core domain entity represents financial goals:
+
+```java
+@Entity
+@Table(name = "goals")
+public class Goal {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+    private String description;
+    private boolean completed;
+    private LocalDateTime createdAt;
+
+    // Getters and setters...
+}
+```
+
+### Repository Layer
+
+The repository provides data access abstraction:
+
+```java
+@Repository
+public interface GoalRepository extends JpaRepository<Goal, Long> {
+}
+```
+
+### Service Layer
+
+The service interface defines the domain contract:
+
+```java
+public interface GoalService {
+    Goal createGoal(Goal goal);
+    Goal getGoalById(Long id);
+    List<Goal> getAllGoals();
+    Goal updateGoal(Long id, Goal goal);
+    void deleteGoal(Long id);
+}
+```
+
+### Controller Layer
+
+The REST controller exposes the API endpoints:
+
+```java
+@RestController
+@RequestMapping("/api/goals")
+public class GoalController {
+    // CRUD operations...
+}
+```
+
+## Resilience4j Circuit Breaker Implementation
+
+The Goal Service integrates with the Budget Service using Resilience4j patterns to handle potential failures gracefully.
+
+### Feign Client with Circuit Breaker
+
+The `BudgetServiceClient` uses Feign with Resilience4j annotations:
+
+```java
+@FeignClient(name = "budget-service", url = "${external.budget-service.url}", fallback = BudgetServiceClientFallback.class)
+public interface BudgetServiceClient {
+
+    @GetMapping("/api/budgets/{id}")
+    @CircuitBreaker(name = "budgetService", fallbackMethod = "fallbackGetBudgetById")
+    @Retry(name = "budgetService", fallbackMethod = "fallbackGetBudgetById")
+    BudgetResponse getBudgetById(@PathVariable("id") Long id);
+}
+```
+
+### Fallback Implementation with Redis Caching
+
+The fallback service provides graceful degradation:
+
+```java
+@Component
+public class BudgetServiceClientFallback implements BudgetServiceClient {
+
+    @Autowired(required = false)
+    private RedisTemplate<String, Object> redisTemplate;
+
+    public BudgetResponse fallbackGetBudgetById(Long id, Throwable t) {
+        logger.warn("Fallback triggered for getBudgetById, id: {}, error: {}", id, t.getMessage());
+
+        // Try to get from Redis cache
+        if (redisTemplate != null) {
+            try {
+                BudgetResponse cached = (BudgetResponse) redisTemplate.opsForValue().get("budget:" + id);
+                if (cached != null) {
+                    logger.info("Returning cached budget from Redis for id: {}", id);
+                    return cached;
+                }
+            } catch (Exception e) {
+                logger.error("Error accessing Redis cache: {}", e.getMessage());
+            }
+        }
+
+        // Return a sensible default
+        BudgetResponse defaultBudget = new BudgetResponse();
+        defaultBudget.setId(id);
+        defaultBudget.setAmount(0.0);
+        defaultBudget.setCategory("DEFAULT");
+        return defaultBudget;
+    }
+}
+```
+
+### Circuit Breaker Configuration
+
+The circuit breaker configuration in `application.yml`:
+
+```yaml
+resilience4j:
+  circuitbreaker:
+    instances:
+      budgetService:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+  retry:
+    instances:
+      budgetService:
+        maxAttempts: 3
+        waitDuration: 1s
+        enableExponentialBackoff: true
+        exponentialBackoffMultiplier: 2
+        retryExceptions:
+          - org.springframework.web.client.HttpServerErrorException
+          - java.util.concurrent.TimeoutException
+```
+
+## Circuit Breaker Logic Explained
+
+The circuit breaker pattern prevents cascading failures by monitoring external service calls:
+
+### Circuit States
+
+1. **Closed**: Normal operation - requests pass through to the budget service
+2. **Open**: Circuit is open - requests are immediately rejected with fallback
+3. **Half-Open**: Testing if the external service has recovered
+
+### Failure Detection
+
+The circuit breaker tracks:
+- **Failure Rate Threshold**: 50% of calls failing triggers circuit opening
+- **Sliding Window**: Last 10 calls are considered
+- **Minimum Calls**: At least 5 calls before evaluating failure rate
+
+### Recovery Mechanism
+
+After `waitDurationInOpenState` (5 seconds), the circuit transitions to Half-Open state:
+- Allows `permittedNumberOfCallsInHalfOpenState` (3 calls) to test recovery
+- If successful, transitions back to Closed
+- If failures persist, returns to Open state
+
+### Retry Logic
+
+The retry mechanism provides additional resilience:
+- **Max Attempts**: 3 attempts total
+- **Wait Duration**: 1 second between attempts
+- **Exponential Backoff**: Wait time increases exponentially (1s, 2s, 4s)
+- **Retry Exceptions**: Only retries on HTTP server errors and timeouts
+
+## Integration Testing
+
+The service includes comprehensive integration tests:
+
+```java
+@SpringBootTest
+@AutoConfigureWireMock(port = 0)
+@ActiveProfiles("test")
+class BudgetServiceClientIntegrationTest {
+
+    @Test
+    void getBudgetById_ShouldTriggerFallback_WhenExternalServiceIsDown() {
+        // Arrange
+        Long budgetId = 1L;
+
+        stubFor(get(urlEqualTo("/api/budgets/1"))
+                .willReturn(aResponse()
+                        .withStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())));
+
+        // Act
+        BudgetResponse response = budgetServiceWrapper.getBudgetById(budgetId);
+
+        // Assert
+        assertNotNull(response);
+        assertEquals(budgetId, response.getId());
+        assertEquals(0.0, response.getAmount());
+        assertEquals("DEFAULT", response.getCategory());
+    }
+}
+```
+
+## Transactional Outbox Pattern (Future Implementation)
+
+While not currently implemented, the architecture is prepared for the Transactional Outbox pattern:
+
+### Current State
+The service uses direct synchronous calls with circuit breaker protection.
+
+### Future Enhancement
+For event-driven communication, we could implement:
+
+```java
+@Entity
+@Table(name = "outbox_events")
+public class OutboxEvent {
+    private String eventType;
+    private String payload;
+    private LocalDateTime createdAt;
+    private boolean processed;
+}
+```
+
+### Benefits of Transactional Outbox
+1. **Atomicity**: Database changes and event publishing happen in the same transaction
+2. **Reliability**: Events are guaranteed to be published
+3. **Idempotency**: Consumers can safely process duplicate events
+4. **Decoupling**: Services remain loosely coupled
+
+## Monitoring and Observability
+
+The service exposes metrics for monitoring circuit breaker state:
+
+```yaml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,circuitbreakers
+  metrics:
+    tags:
+      application: goal-service
+  health:
+    circuitbreakers:
+      enabled: true
+```
+
+## Best Practices Demonstrated
+
+1. **Separation of Concerns**: Clear DDD layers with distinct responsibilities
+2. **Graceful Degradation**: Fallback mechanisms when external services fail
+3. **Circuit Breaker Pattern**: Prevents cascading failures
+4. **Retry with Backoff**: Intelligent retry logic with exponential backoff
+5. **Caching Strategy**: Redis caching for fallback data
+6. **Comprehensive Testing**: Integration tests with WireMock
+7. **Configuration Management**: Externalized configuration for different environments
+
+## Conclusion
+
+The Goal Service demonstrates a production-ready implementation of DDD and resilience patterns. The circuit breaker pattern ensures system stability even when external dependencies fail, while the DDD architecture maintains clean domain boundaries and testability.
+
+This approach provides a solid foundation for building robust microservices that can handle real-world failure scenarios while maintaining clear domain logic separation.
