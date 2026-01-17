@@ -1,0 +1,158 @@
+---
+title: "Building a Resilient Microservice Backbone with Kafka and Spring Boot"
+description: "Learn how to transition from synchronous REST calls to an event-driven architecture using Apache Kafka within a Spring Boot microservices ecosystem."
+pubDate: 'Jan 17 2026'
+tags: ["microservices", "kafka", "spring-boot", "event-driven", "docker"]
+heroImage: '../../assets/PFMS-kafka-hero.jpg'
+---
+
+## Introduction: From Synchronous Chains to Event-Driven Decoupling
+
+In traditional microservice architectures, services often communicate via synchronous REST calls. While straightforward, this creates tight coupling: if the `notification-service` is down, the `budget-service` might fail to save a budget, or at least hang waiting for a response.
+
+To build a truly resilient Personal Finance Management System (PFMS), we transitioned to an **event-driven architecture** using Apache Kafka. This allows services to publish events without knowing who consumes them, enabling asynchronous processing and fault tolerance.
+
+## Docker Setup: Orchestrating the Backbone
+
+We use Docker Compose to spin up our Kafka cluster and monitoring tools. The configuration below defines three services: `kafka` (the broker), `kafka-ui` (a web interface), and `portainer` (container management).
+
+A critical aspect of this setup is the network configuration. All services join the `pfms-network`, allowing them to communicate via service names (e.g., `global-service-kafka`) rather than IP addresses.
+
+### Key Environment Variables
+
+- **`KAFKA_ADVERTISED_LISTENERS`**: This is the most crucial setting. It tells Kafka how clients (our Spring Boot apps) should connect.
+  - `INTERNAL://global-service-kafka:29092`: Used by services running inside the Docker network.
+  - `EXTERNAL://localhost:9092`: Used by tools running on your host machine (like Kafka UI or your IDE).
+- **`KAFKA_LISTENERS`**: Binds Kafka to accept connections on all interfaces (`0.0.0.0`) inside the container.
+
+### `docker-compose.yml`
+
+```yaml
+services:
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: global-service-kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT'
+      KAFKA_ADVERTISED_LISTENERS: 'INTERNAL://global-service-kafka:29092,EXTERNAL://localhost:9092'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'INTERNAL'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_PROCESS_ROLES: 'broker,controller'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@global-service-kafka:29093'
+      KAFKA_LISTENERS: 'INTERNAL://0.0.0.0:29092,EXTERNAL://0.0.0.0:9092,CONTROLLER://0.0.0.0:29093'
+      CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
+    networks:
+      - pfms-network
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    ports:
+      - "9094:8080"
+    depends_on:
+      - kafka
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local-cluster
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: global-service-kafka:29092
+      DYNAMIC_CONFIG_ENABLED: 'true'
+    networks:
+      - pfms-network
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: always
+    ports:
+      - "9443:9443"
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - pfms-network
+networks:
+  pfms-network:
+    name: pfms-network # This forces the name to be exactly 'pfms-network'
+
+volumes:
+  portainer_data:
+```
+
+## Use Case 1: Saving a Budget (Producer & Consumer Flow)
+
+When a user creates a budget, the `budget-service` saves it to the database and publishes an event. The `notification-service` listens for this event and sends an SMS or email asynchronously.
+
+### 1. The Producer: `budget-service`
+
+The `BudgetNotificationProducer` uses Spring's `KafkaTemplate` to send a message to the `notification-topic`.
+
+```java
+@Service
+public class BudgetNotificationProducer {
+    private final KafkaTemplate<String, BudgetNotification> kafkaTemplate;
+
+    public BudgetNotificationProducer(KafkaTemplate<String, BudgetNotification> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
+
+    @Async
+    public void sendBudgetRequest(BudgetNotification request) {
+        // Send to the 'notification-topic'
+        kafkaTemplate.send("notification-topic", request.getUserId(), request);
+    }
+}
+```
+
+### 2. The Consumer: `notification-service`
+
+The `NotificationService` acts as a listener. The `@KafkaListener` annotation automatically polls the topic and processes incoming messages.
+
+```java
+@Service
+public class NotificationService {
+    private static final Logger logger = LoggerFactory.getLogger(NotificationService.class);
+
+    @KafkaListener(topics = "notification-topic", groupId = "notification-group")
+    public void consume(NotificationRequest request) {
+        logger.info("Received notification request: {}", request);
+        
+        // Logic to send email/SMS
+        sendNotificationAsync(request);
+    }
+
+    @Async
+    public void sendNotificationAsync(NotificationRequest request) {
+        // Actual sending logic (e.g., via Twilio or SendGrid)
+        logger.info("Sending notification via {} for user {}", request.getChannel(), request.getUserId());
+    }
+}
+```
+
+## Future Roadmap Use Cases
+
+The event-driven backbone opens doors for numerous scalable features:
+
+### 1. Real-time Transaction Auditing
+**Scenario:** Detect suspicious spending patterns immediately.
+**Flow:**
+1.  `transaction-service` publishes a `TransactionCreatedEvent` to a `transactions-topic`.
+2.  A new `audit-service` consumes these events.
+3.  It runs complex rules (e.g., "5 transactions in 1 minute from different locations") in real-time.
+4.  If a rule is triggered, it publishes a `FraudAlertEvent` to an `alerts-topic`, which the `notification-service` consumes to alert the user.
+
+### 2. Asynchronous Reporting Generation
+**Scenario:** Generate monthly PDF reports without blocking the user interface.
+**Flow:**
+1.  User requests a report via the UI.
+2.  `reporting-service` publishes a `ReportGenerationRequest` to a `reports-topic`.
+3.  A dedicated `report-worker` service (or a separate thread pool) consumes the request.
+4.  It aggregates data from multiple services (Budgets, Transactions, Goals), generates the PDF, and uploads it to S3.
+5.  Finally, it publishes a `ReportReadyEvent` containing the S3 URL, which the UI polls or receives via WebSocket.
+
+## Conclusion
+
+By leveraging Apache Kafka and Docker, the PFMS architecture achieves high scalability and resilience. Services are decoupled; failures in the `notification-service` no longer block the `budget-service`. The `pfms-network` ensures seamless internal communication, while the event-driven pattern lays the foundation for complex, real-time features like fraud detection and automated reporting.
