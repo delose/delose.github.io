@@ -3,155 +3,752 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import heroImage from '../assets/PFMS-architectural-diagram.jpg';
 
-const metaDescription = "Learn microservices architecture and AI agent integration through a real-world Personal Finance Management System. Practical guides on Domain-Driven Design, event-driven architecture, service mesh, and AI-ready microservices for FinTech and SaaS applications.";
+const metaDescription = "Learn microservices architecture and AI agent integration through a real-world Personal Finance Management System. Free guides on Domain-Driven Design, event-driven architecture, and production-ready FinTech patterns.";
+const metaImage = "../assets/PFMS-architectural-diagram.jpg"; // You'll want to create this
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={metaDescription} />
-		<meta name="keywords" content="microservices architecture, AI agents, domain-driven design, Spring Boot, NestJS, Kafka" />
-		<link rel="canonical" href="edsa.tech" />
+		<meta name="keywords" content="microservices architecture, AI agents, fintech engineering, domain-driven design, Spring Boot, NestJS, event-driven architecture, n8n automation" />
+		<link rel="canonical" href="https://edsa.tech" />
+
+		<!-- Enhanced Social Sharing -->
+		<meta property="og:title" content="Build Production-Ready Microservices & AI Systems" />
+		<meta property="og:description" content={metaDescription} />
+		<meta property="og:image" content={metaImage} />
+		<meta property="og:url" content="https://edsa.tech" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Build Production-Ready Microservices & AI Systems" />
+		<meta name="twitter:description" content={metaDescription} />
+		<meta name="twitter:image" content={metaImage} />
 	</head>
 	<body>
 		<Header />
 		<main>
 			<article>
-				<!-- Hero Section & Image Placeholder -->
+				<!-- Hero Section -->
 				<section class="hero-section">
 					<div class="hero-text">
-						<h1>Build Production-Ready Microservices & AI-Powered Systems 🚀</h1>
+						<h1>Build Production-Ready<br/>Microservices & AI Systems 🚀</h1>
 						<p class="subtitle">
-							Learn through a real-world <strong>Personal Finance Management System</strong> built with 10+ microservices, event-driven architecture, and AI-ready design patterns.
+							Free, open-source learning through a real-world <strong>FinTech system</strong> with 10+ microservices,
+							event-driven architecture, and AI-ready patterns.
 						</p>
+						<div class="cta-buttons">
+							<a href="https://github.com/delose/personal-finance-management-system" target="_blank" class="btn btn-primary">
+								<svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+									<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+								</svg>
+								View on GitHub
+							</a>
+							<a href="/blog" class="btn btn-secondary">Read the Blog →</a>
+						</div>
 					</div>
-					<!-- Placeholder for your Hero Image -->
-					<div class="hero-image-placeholder">
-						<!-- You can replace this div with a proper <img> tag once you choose an image URL -->
-						<!-- <p><em>[Insert your architecture hero image here]</em></p> -->
-						<img src={heroImage.src} alt="Illustration of a cloud-native microservice architecture" />
+					<div class="hero-image">
+						<img src="{metaImage}" alt="PFMS microservices architecture diagram" />
+						<p class="image-caption">Real-world polyglot microservices architecture</p>
 					</div>
 				</section>
 
 				<hr />
 
-				<!-- <section>
-					<h2>From FinTech Engineer to Your Learning Companion 🤝</h2>
+				<!-- Value Proposition -->
+				<section class="value-prop">
+					<h2>What You'll Learn Here 💡</h2>
+					<div class="three-col-grid">
+						<div class="card">
+							<div class="card-icon">🏗️</div>
+							<h3>FinTech Microservices</h3>
+							<p>Production patterns from real financial systems: budgets, transactions, goals, analytics.</p>
+							<ul>
+								<li>Event-driven architecture</li>
+								<li>Domain-Driven Design</li>
+								<li>Polyglot persistence</li>
+								<li>Service mesh ready</li>
+							</ul>
+						</div>
+						<div class="card">
+							<div class="card-icon">🤖</div>
+							<h3>AI Agent Integration</h3>
+							<p>Build intelligent automation with modern AI tools and frameworks.</p>
+							<ul>
+								<li>n8n workflow automation</li>
+								<li>CrewAI multi-agent systems</li>
+								<li>LLM-powered microservices</li>
+								<li>MCP server patterns</li>
+							</ul>
+						</div>
+						<div class="card">
+							<div class="card-icon">📈</div>
+							<h3>Ship Real Products</h3>
+							<p>From localhost to production with battle-tested patterns.</p>
+							<ul>
+								<li>Docker & Kubernetes</li>
+								<li>Observability & monitoring</li>
+								<li>Security best practices</li>
+								<li>Free-tier deployments</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+
+				<!-- The PFMS Project -->
+				<section>
+					<h2>The PFMS Project: Your Learning Playground 🛰️</h2>
 					<p>
-						I've recently joined the FinTech industry and I'm sharing everything I've learned about building scalable, resilient microservices. This isn't theory—it's battle-tested architecture patterns from a production-grade personal finance system.
+						<strong>Personal Finance Management System</strong> is a complete, production-grade reference architecture
+						demonstrating enterprise patterns across a polyglot stack. Run the entire system with one command.
 					</p>
-				</section> -->
 
-				<section>
-					<h2>The PFMS Project: Your Microservices Playground 🛰️</h2>
-					<p>The <strong>Personal Finance Management System (PFMS)</strong> demonstrates enterprise-grade patterns across a polyglot stack:</p>
-					
-					<ul>
-						<li><strong>Multi-Language Ecosystem:</strong> Spring Boot, NestJS, Go, Python, and React.</li>
-						<li><strong>Event-Driven Architecture:</strong> Kafka for async communication and RabbitMQ for message brokering.</li>
-						<li><strong>Service Discovery & Config:</strong> Eureka and Consul registry with a Git-backed Config Server.</li>
-						<li><strong>Security & Observability:</strong> JWT authentication, custom actuators, and health monitoring.</li>
-					</ul>
+					<div class="tech-stack">
+						<div class="tech-category">
+							<h4>Backend Services</h4>
+							<div class="tech-badges">
+								<span class="badge">Spring Boot</span>
+								<span class="badge">NestJS</span>
+								<span class="badge">Go</span>
+								<span class="badge">Python</span>
+								<span class="badge">PHP</span>
+							</div>
+						</div>
+						<div class="tech-category">
+							<h4>Messaging & Events</h4>
+							<div class="tech-badges">
+								<span class="badge">Kafka</span>
+								<span class="badge">RabbitMQ</span>
+							</div>
+						</div>
+						<div class="tech-category">
+							<h4>Infrastructure</h4>
+							<div class="tech-badges">
+								<span class="badge">Docker</span>
+								<span class="badge">Eureka</span>
+								<span class="badge">Consul</span>
+								<span class="badge">PostgreSQL</span>
+							</div>
+						</div>
+					</div>
+
+					<details class="faq-accordion">
+						<summary>🎯 What makes PFMS different from other learning projects?</summary>
+						<p>
+							Most microservices tutorials are toy examples. PFMS is a <strong>real system</strong> you could deploy to production:
+						</p>
+						<ul>
+							<li>✅ Complete authentication & authorization</li>
+							<li>✅ Event-driven with Kafka + RabbitMQ</li>
+							<li>✅ Multiple service discovery patterns</li>
+							<li>✅ Production observability setup</li>
+							<li>✅ Database-per-service pattern</li>
+							<li>✅ Containerized and orchestration-ready</li>
+						</ul>
+					</details>
+
+					<details class="faq-accordion">
+						<summary>🚀 How do I get started?</summary>
+						<div class="code-block">
+							<pre><code>git clone https://github.com/delose/pfms.git
+cd pfms
+./run-pfms.sh
+
+# Open http://localhost:3000
+# Demo credentials: demo@pfms.dev / demo123</code></pre>
+						</div>
+						<p>That's it! All 10+ microservices start automatically with pre-loaded demo data.</p>
+					</details>
+
+					<details class="faq-accordion">
+						<summary>📚 What can I learn from the codebase?</summary>
+						<ul>
+							<li><strong>API Gateway patterns:</strong> JWT auth, routing, load balancing</li>
+							<li><strong>Event sourcing:</strong> Budget changes trigger Kafka events → notifications</li>
+							<li><strong>Saga patterns:</strong> Distributed transactions across services</li>
+							<li><strong>CQRS:</strong> Separate read/write models for analytics</li>
+							<li><strong>Service mesh preparation:</strong> Ready for Istio/Envoy integration</li>
+							<li><strong>AI integration:</strong> LLM-powered financial advisor service</li>
+						</ul>
+					</details>
 				</section>
 
-				<section>
-					<h2>What You'll Master Here 💡</h2>
-					
-					<h3>For Developers Leveling Up 📈</h3>
-					<ul>
-						<li><strong>Domain-Driven Design (DDD):</strong> Mapping bounded contexts to financial microservices.</li>
-						<li><strong>Event-driven patterns:</strong> Kafka integration and async processing after DB commits.</li>
-						<li><strong>Polyglot persistence:</strong> PostgreSQL, MySQL, and database-per-service design.</li>
-						<li><strong>API Gateway patterns:</strong> Routing, load balancing, and JWT security.</li>
-					</ul>
-					
-					<h3>AI-Ready Architecture (Coming Soon) 🤖</h3>
-					<ul>
-						<li><strong>AI agent integration patterns</strong> for financial workflows.</li>
-						<li><strong>Microservices as AI interfaces:</strong> Exposing services for LLM consumption.</li>
-						<li><strong>RAG systems for financial data:</strong> Vector stores and context-aware AI.</li>
-					</ul>
-				</section>
+				<hr />
 
+				<!-- AI Agents Section -->
 				<section>
-					<h2>Microservices Architecture: The Foundation 🏗️</h2>
+					<h2>AI Agents & Automation 🤖</h2>
 					<p>
-						Instead of a "monolith," microservices break applications into independent services that communicate through APIs and events. This enables:
+						Building intelligent systems that combine microservices with AI-powered automation.
+						Practical guides on integrating LLMs, workflow automation, and multi-agent systems.
 					</p>
-					<ul>
-						<li><strong>Independent Deployment:</strong> Update the Budget Service without touching others.</li>
-						<li><strong>Selective Scaling:</strong> Scale only the services under heavy load.</li>
-						<li><strong>Technology Flexibility:</strong> Use the best tool (Java, Node, Go) for each specific job.</li>
-						<li><strong>AI Integration Ready:</strong> Add LLM capabilities to individual services independently.</li>
-					</ul>
+
+					<div class="two-col-grid">
+						<div class="highlight-box">
+							<h3>🔧 n8n Workflow Automation</h3>
+							<p>Build no-code/low-code automation that integrates with your microservices:</p>
+							<ul>
+								<li>Automated financial reports</li>
+								<li>Budget alert workflows</li>
+								<li>Multi-service orchestration</li>
+								<li>Webhook-driven processes</li>
+							</ul>
+						</div>
+						<div class="highlight-box">
+							<h3>🧠 CrewAI Multi-Agent Systems</h3>
+							<p>Coordinate multiple AI agents for complex tasks:</p>
+							<ul>
+								<li>Financial analysis crew</li>
+								<li>Content generation pipeline</li>
+								<li>Code review automation</li>
+								<li>Documentation agents</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="coming-soon">
+						<p>
+							<strong>Coming Soon:</strong> Dedicated tutorials on building profitable AI automation products,
+							integrating Spring AI with microservices, and MCP server patterns for LLM tools.
+						</p>
+					</div>
 				</section>
 
+				<hr />
+
+				<!-- Why This Matters -->
 				<section>
-					<h2>Start Learning from Real Code 👇</h2>
+					<h2>Why Microservices + AI? 🎯</h2>
 					<p>
-						<a href="/blog"><strong>[ Read the Blog ]</strong></a> &nbsp; 
-						<a href="https://github.com/delose/personal-finance-management-system" target="_blank"><strong>[ Explore the Code ]</strong></a>
+						The future of software is <strong>modular intelligence</strong>. Microservices provide the architectural
+						foundation, while AI agents add the intelligence layer. This combination enables:
+					</p>
+
+					<div class="benefits-grid">
+						<div class="benefit">
+							<strong>🔌 Composable AI</strong>
+							<p>Each microservice becomes an AI tool/function that LLMs can orchestrate</p>
+						</div>
+						<div class="benefit">
+							<strong>⚡ Selective Intelligence</strong>
+							<p>Add AI to specific services (analytics, recommendations) without rewriting everything</p>
+						</div>
+						<div class="benefit">
+							<strong>📊 Context-Aware</strong>
+							<p>AI agents access domain-specific data through well-defined service boundaries</p>
+						</div>
+						<div class="benefit">
+							<strong>💰 Revenue Ready</strong>
+							<p>Ship AI-powered features as independent services with clear value props</p>
+						</div>
+					</div>
+				</section>
+
+				<hr />
+
+				<!-- Content Categories -->
+				<section>
+					<h2>Explore by Category 📖</h2>
+					<div class="category-cards">
+						<a href="/blog/fintech" class="category-card">
+							<div class="category-icon">💰</div>
+							<h3>FinTech Engineering</h3>
+							<p>Payment systems, budgeting, transactions, security patterns</p>
+							<span class="category-count">12 articles →</span>
+						</a>
+						<a href="/blog/microservices" class="category-card">
+							<div class="category-icon">🏗️</div>
+							<h3>Microservices</h3>
+							<p>Service discovery, messaging, DDD, API gateways</p>
+							<span class="category-count">18 articles →</span>
+						</a>
+						<a href="/blog/ai-agents" class="category-card">
+							<div class="category-icon">🤖</div>
+							<h3>AI Agents</h3>
+							<p>n8n, CrewAI, LLM integration, automation workflows</p>
+							<span class="category-count">6 articles →</span>
+						</a>
+					</div>
+				</section>
+
+				<hr />
+
+				<!-- Social Proof / Stats -->
+				<section class="stats-section">
+					<h2>Open Source Impact 📊</h2>
+					<div class="stats-grid">
+						<div class="stat">
+							<div class="stat-number">10+</div>
+							<div class="stat-label">Microservices</div>
+						</div>
+						<div class="stat">
+							<div class="stat-number">5</div>
+							<div class="stat-label">Languages</div>
+						</div>
+						<div class="stat">
+							<div class="stat-number">100%</div>
+							<div class="stat-label">Free & Open</div>
+						</div>
+						<div class="stat">
+							<div class="stat-number">1 cmd</div>
+							<div class="stat-label">To Run</div>
+						</div>
+					</div>
+					<p class="stats-description">
+						Join developers learning production-grade microservices through real code.
+						Star the project on <a href="https://github.com/delose/personal-finance-management-system" target="_blank">GitHub</a> ⭐
 					</p>
 				</section>
 
-				<footer>
-					<p><em>Written by a FinTech engineer focused on scalable microservices and AI value. Connect on <a href="https://www.linkedin.com/in/delose/" target="_blank">LinkedIn</a>.</em></p>
+				<hr />
+
+				<!-- CTA Section -->
+				<section class="final-cta">
+					<h2>Start Learning Today 🚀</h2>
+					<p>
+						Everything here is free and open source. Clone the code, read the guides, build something amazing.
+					</p>
+					<div class="cta-buttons">
+						<a href="/blog" class="btn btn-primary">Browse All Articles</a>
+						<a href="https://github.com/delose/personal-finance-management-system" target="_blank" class="btn btn-secondary">
+							<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+								<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+							</svg>
+							Clone PFMS
+						</a>
+						<a href="/about" class="btn btn-tertiary">About Me</a>
+					</div>
+				</section>
+
+				<footer class="content-footer">
+					<p>
+						<em>
+							Built by Eugene De Los Santos, a FinTech engineer focused on scalable microservices and AI integration.
+							Connect on <a href="https://www.linkedin.com/in/delose/" target="_blank">LinkedIn</a> or
+							<a href="https://github.com/delose" target="_blank">GitHub</a>.
+						</em>
+					</p>
 				</footer>
 			</article>
 		</main>
 		<Footer />
 
 		<style>
+			/* Base Styles */
 			main {
 				width: 100%;
-				max-width: 900px; /* Slightly wider main content area */
+				max-width: 1000px;
 				margin: auto;
-				padding: 1em;
+				padding: 2rem 1rem;
 				color: rgb(var(--gray-dark));
 			}
-			h1, h2, h3 {
+
+			h1, h2, h3, h4 {
 				color: rgb(var(--black));
-			}
-			section {
-				margin-bottom: 3rem;
-			}
-			hr {
-				border-top: 1px solid #ddd;
-				margin: 2rem 0;
-			}
-			.hero-section {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				gap: 2rem;
-				margin-bottom: 3rem;
-			}
-			.hero-text {
-				flex: 1;
-			}
-			.hero-image-placeholder {
-				flex: 1;
-				background-color: #f0f4f8;
-				padding: 2rem;
-				border-radius: 8px;
-				text-align: center;
-				min-height: 200px; /* Ensure space for the image */
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				border: 1px dashed #ccc;
+				font-weight: 700;
 			}
 
-			/* Basic responsiveness for mobile */
+			h1 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 1rem; }
+			h2 { font-size: 2rem; margin-bottom: 1.5rem; margin-top: 3rem; }
+			h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+
+			section {
+				margin-bottom: 4rem;
+			}
+
+			hr {
+				border: none;
+				border-top: 2px solid #e5e7eb;
+				margin: 4rem 0;
+			}
+
+			/* Hero Section */
+			.hero-section {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 3rem;
+				align-items: center;
+				margin-bottom: 4rem;
+			}
+
+			.hero-text {
+				/* No extra flex needed */
+			}
+
+			.subtitle {
+				font-size: 1.25rem;
+				line-height: 1.6;
+				color: #4b5563;
+				margin-bottom: 2rem;
+			}
+
+			.hero-image {
+				text-align: center;
+			}
+
+			.hero-image img {
+				max-width: 100%;
+				height: auto;
+				border-radius: 12px;
+				box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+			}
+
+			.image-caption {
+				font-size: 0.875rem;
+				color: #6b7280;
+				margin-top: 0.5rem;
+				font-style: italic;
+			}
+
+			/* Buttons */
+			.cta-buttons {
+				display: flex;
+				gap: 1rem;
+				flex-wrap: wrap;
+			}
+
+			.btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				padding: 0.75rem 1.5rem;
+				border-radius: 8px;
+				font-weight: 600;
+				text-decoration: none;
+				transition: all 0.2s;
+			}
+
+			.btn-primary {
+				background: #2563eb;
+				color: white;
+			}
+
+			.btn-primary:hover {
+				background: #1d4ed8;
+				transform: translateY(-2px);
+				box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+			}
+
+			.btn-secondary {
+				background: white;
+				color: #2563eb;
+				border: 2px solid #2563eb;
+			}
+
+			.btn-secondary:hover {
+				background: #eff6ff;
+			}
+
+			.btn-tertiary {
+				background: #f3f4f6;
+				color: #374151;
+			}
+
+			.btn-tertiary:hover {
+				background: #e5e7eb;
+			}
+
+			/* Cards & Grids */
+			.three-col-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+				gap: 2rem;
+				margin-top: 2rem;
+			}
+
+			.two-col-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 2rem;
+				margin-top: 2rem;
+			}
+
+			.card {
+				background: #f9fafb;
+				padding: 2rem;
+				border-radius: 12px;
+				border: 1px solid #e5e7eb;
+			}
+
+			.card-icon {
+				font-size: 3rem;
+				margin-bottom: 1rem;
+			}
+
+			.card h3 {
+				margin-top: 0;
+				margin-bottom: 0.5rem;
+			}
+
+			.card ul {
+				margin-top: 1rem;
+				padding-left: 1.25rem;
+			}
+
+			.card li {
+				margin-bottom: 0.5rem;
+				color: #4b5563;
+			}
+
+			/* Tech Stack */
+			.tech-stack {
+				display: grid;
+				gap: 1.5rem;
+				margin: 2rem 0;
+			}
+
+			.tech-category h4 {
+				font-size: 1rem;
+				color: #6b7280;
+				margin-bottom: 0.75rem;
+			}
+
+			.tech-badges {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+			}
+
+			.badge {
+				display: inline-block;
+				padding: 0.5rem 1rem;
+				background: #eff6ff;
+				color: #1e40af;
+				border-radius: 6px;
+				font-size: 0.875rem;
+				font-weight: 500;
+			}
+
+			/* Accordions */
+			.faq-accordion {
+				background: #f9fafb;
+				border: 1px solid #e5e7eb;
+				border-radius: 8px;
+				padding: 1.5rem;
+				margin-bottom: 1rem;
+			}
+
+			.faq-accordion summary {
+				cursor: pointer;
+				font-weight: 600;
+				color: #1f2937;
+				font-size: 1.125rem;
+			}
+
+			.faq-accordion summary:hover {
+				color: #2563eb;
+			}
+
+			.faq-accordion[open] summary {
+				margin-bottom: 1rem;
+			}
+
+			.code-block {
+				background: #1f2937;
+				color: #f3f4f6;
+				padding: 1rem;
+				border-radius: 6px;
+				overflow-x: auto;
+				margin: 1rem 0;
+			}
+
+			.code-block code {
+				font-family: 'Courier New', monospace;
+				font-size: 0.875rem;
+			}
+
+			/* Highlight Boxes */
+			.highlight-box {
+				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+				color: white;
+				padding: 2rem;
+				border-radius: 12px;
+			}
+
+			.highlight-box h3 {
+				color: white;
+				margin-top: 0;
+			}
+
+			.highlight-box ul {
+				margin-top: 1rem;
+			}
+
+			.highlight-box li {
+				margin-bottom: 0.5rem;
+			}
+
+			.coming-soon {
+				background: #fef3c7;
+				border: 2px solid #fbbf24;
+				padding: 1.5rem;
+				border-radius: 8px;
+				margin-top: 2rem;
+			}
+
+			.coming-soon strong {
+				color: #92400e;
+			}
+
+			/* Benefits Grid */
+			.benefits-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+				gap: 1.5rem;
+				margin-top: 2rem;
+			}
+
+			.benefit {
+				padding: 1.5rem;
+				background: white;
+				border: 2px solid #e5e7eb;
+				border-radius: 8px;
+			}
+
+			.benefit strong {
+				display: block;
+				font-size: 1.125rem;
+				margin-bottom: 0.5rem;
+				color: #1f2937;
+			}
+
+			.benefit p {
+				color: #6b7280;
+				margin: 0;
+			}
+
+			/* Category Cards */
+			.category-cards {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+				gap: 2rem;
+				margin-top: 2rem;
+			}
+
+			.category-card {
+				display: block;
+				padding: 2rem;
+				background: white;
+				border: 2px solid #e5e7eb;
+				border-radius: 12px;
+				text-decoration: none;
+				color: inherit;
+				transition: all 0.3s;
+			}
+
+			.category-card:hover {
+				border-color: #2563eb;
+				transform: translateY(-4px);
+				box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+			}
+
+			.category-icon {
+				font-size: 3rem;
+				margin-bottom: 1rem;
+			}
+
+			.category-card h3 {
+				margin-top: 0;
+				margin-bottom: 0.5rem;
+			}
+
+			.category-count {
+				display: inline-block;
+				margin-top: 1rem;
+				color: #2563eb;
+				font-weight: 600;
+			}
+
+			/* Stats Section */
+			.stats-section {
+				text-align: center;
+				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+				color: white;
+				padding: 3rem 2rem;
+				border-radius: 16px;
+			}
+
+			.stats-section h2 {
+				color: white;
+				margin-top: 0;
+			}
+
+			.stats-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+				gap: 2rem;
+				margin: 2rem 0;
+			}
+
+			.stat-number {
+				font-size: 3rem;
+				font-weight: 700;
+			}
+
+			.stat-label {
+				font-size: 1rem;
+				opacity: 0.9;
+				margin-top: 0.5rem;
+			}
+
+			.stats-description {
+				margin-top: 2rem;
+				font-size: 1.125rem;
+			}
+
+			.stats-description a {
+				color: white;
+				text-decoration: underline;
+			}
+
+			/* Final CTA */
+			.final-cta {
+				text-align: center;
+				padding: 3rem 2rem;
+				background: #f9fafb;
+				border-radius: 16px;
+			}
+
+			.final-cta h2 {
+				margin-top: 0;
+			}
+
+			.final-cta .cta-buttons {
+				justify-content: center;
+				margin-top: 2rem;
+			}
+
+			/* Footer */
+			.content-footer {
+				text-align: center;
+				padding-top: 2rem;
+				border-top: 1px solid #e5e7eb;
+			}
+
+			/* Responsive */
 			@media (max-width: 768px) {
+				h1 { font-size: 2rem; }
+				h2 { font-size: 1.5rem; }
+
 				.hero-section {
-					flex-direction: column;
-					text-align: center;
+					grid-template-columns: 1fr;
+					gap: 2rem;
 				}
-				.hero-image-placeholder {
+
+				.three-col-grid,
+				.two-col-grid,
+				.benefits-grid,
+				.category-cards {
+					grid-template-columns: 1fr;
+				}
+
+				.cta-buttons {
+					flex-direction: column;
+				}
+
+				.btn {
 					width: 100%;
+					justify-content: center;
 				}
 			}
 		</style>
