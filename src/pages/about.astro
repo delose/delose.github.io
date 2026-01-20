@@ -1,31 +1,61 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
 import Layout from '../layouts/BlogPost.astro';
+import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
 ---
 
 <Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
+    title="About Eugene"
+    description="FinTech engineer focused on microservices and AI automation"
+    pubDate={new Date()}
+    heroImage="../assets/ABOUT-hero.jpeg"
 >
-	<p>
-		🧑‍🚀 Hello, I'm Eugene
-	</p>
+    <h2>🧑‍🚀 Hello, I'm Eugene</h2>
 
-	<p>
-		I've been building scalable backend systems and shipping independent products. 14+ years across microservices, cloud, and product-driven engineering.
-	</p>
+    <p>
+        I build scalable backend systems and ship real products. Currently in FinTech at <strong>Maya Philippines</strong>,
+        focused on microservices architecture and AI-powered automation.
+    </p>
 
-	<p>
-		📚 Java, SQL, Angular, Docker, UNIX shell scripting, and AWS
-	</p>
+    <h3>What I Do</h3>
+    <ul>
+        <li><strong>FinTech Engineering:</strong> Payment systems, budgeting platforms, transaction processing</li>
+        <li><strong>Microservices Architecture:</strong> Event-driven design, service mesh, polyglot systems</li>
+        <li><strong>AI Integration:</strong> n8n workflows, CrewAI agents, LLM-powered services</li>
+    </ul>
 
-	<p>
-		📧 delossantos.eugene@gmail.com
-	</p>
+    <h3>Experience</h3>
+    <p>14+ years building backend systems across:</p>
+    <ul>
+        <li><strong>Maya (2026-present):</strong> FinTech microservices</li>
+        <li><strong>Manulife Singapore:</strong> Financial services platforms</li>
+        <li><strong>American Express:</strong> Payment infrastructure</li>
+    </ul>
 
-	<p>
-		📞 (+63) 9958104791
-	</p>
+    <h3>Tech Stack</h3>
+    <p>
+        <strong>Languages:</strong> Java, JavaScript/TypeScript, Go, Python, SQL<br/>
+        <strong>Frameworks:</strong> Spring Boot, NestJS, Flask, React<br/>
+        <strong>Infrastructure:</strong> Docker, Kubernetes, AWS, Kafka, RabbitMQ<br/>
+        <strong>AI Tools:</strong> n8n, CrewAI, Anthropic Claude, Aider
+    </p>
+
+    <h3>The "edsa" Story</h3>
+    <p>
+        The domain <strong>edsa.tech</strong> is a nod to EDSA (Epifanio de los Santos Avenue),
+        the longest highway in the Philippines and a monicker of my uncle Epifanio.
+        As someone whose name also starts with E (Eugene De Los Santos), I chose it to represent
+        my journey—a continuous highway of learning and building.
+    </p>
+
+    <h3>Let's Connect</h3>
+    <p>
+        📧 <a href="mailto:delossantos.eugene@gmail.com">delossantos.eugene@gmail.com</a><br/>
+        💼 <a href="https://www.linkedin.com/in/delose/" target="_blank">LinkedIn</a><br/>
+        🐙 <a href="https://github.com/delose" target="_blank">GitHub</a><br/>
+        📞 (+63) 9958104791
+    </p>
+
+    <hr/>
+
+    <p><em>Open to consulting on microservices architecture and AI automation for FinTech startups.</em></p>
 </Layout>
