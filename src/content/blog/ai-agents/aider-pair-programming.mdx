@@ -1,0 +1,384 @@
+---
+title: "Pair Programming with Aider: AI-Powered Code Development"
+description: 'How I use Aider as an AI pair programmer to develop this blog site'
+pubDate: 'Jan 21 2026'
+heroImage: '../../assets/PFMS-architectural-diagram.png'
+tags: ['ai-agents', 'aider', 'pair-programming', 'development', 'productivity']
+---
+
+## Introduction
+
+While CrewAI handles the high-level orchestration of blog content, **Aider** is my go-to tool for the actual code development. Aider is an AI pair programmer that works directly in your terminal, helping you write, refactor, and debug code. In this post, I'll share how I use Aider to develop this blog site.
+
+## What is Aider?
+
+Aider is a command-line tool that integrates with large language models (LLMs) to provide AI-assisted coding. Unlike other AI coding tools, Aider:
+- Works directly with your local codebase
+- Understands your project structure
+- Can make multi-file changes
+- Integrates with git for easy review and undo
+
+## Setting Up Aider for This Blog
+
+### Installation and Configuration
+
+```bash
+# Install Aider
+pip install aider
+
+# Configure for this project
+cd edsa.tech
+aider --model anthropic/claude-3.5-sonnet
+```
+
+### Project-Specific Configuration
+
+I created a `.aider.conf.yml` file in the project root:
+
+```yaml
+# .aider.conf.yml
+model: anthropic/claude-3.5-sonnet
+auto_lint: true
+auto_test: false
+git_commit: true
+git_dry_run: false
+map_tokens: 1024
+verbose: true
+
+# Include these files in context
+include:
+  - src/content.config.ts
+  - src/pages/blog/index.astro
+  - src/pages/blog/[...slug].astro
+  - src/layouts/BlogPost.astro
+  - src/components/BaseHead.astro
+  - src/styles/global.css
+
+# Exclude from context
+exclude:
+  - node_modules/
+  - dist/
+  - .astro/
+```
+
+## Daily Development Workflow
+
+### 1. Starting a Session
+
+```bash
+# Start Aider with the blog files in context
+aider src/pages/blog/index.astro src/content.config.ts
+
+# Aider will:
+# 1. Read the files
+# 2. Understand the project structure
+# 3. Be ready to make changes
+```
+
+### 2. Creating New Blog Posts
+
+When I want to create a new blog post, I use Aider like this:
+
+```bash
+# In the Aider chat
+> Create a new blog post about microservices patterns. 
+  The post should be in src/content/blog/microservices-patterns.mdx
+  and include appropriate frontmatter with tags.
+
+# Aider will:
+# 1. Create the MDX file
+# 2. Add frontmatter (title, description, pubDate, tags)
+# 3. Write the content
+# 4. Update the blog index if needed
+```
+
+### 3. Refactoring Components
+
+When I need to refactor the blog index to support categories:
+
+```bash
+> Refactor src/pages/blog/index.astro to group posts by category.
+  Create three sections: FinTech, AI Agents, and Microservices.
+  Each section should have its own header and description.
+
+# Aider will:
+# 1. Read the current implementation
+# 2. Understand the content collection structure
+# 3. Implement the category grouping logic
+# 4. Update the UI to show three sections
+# 5. Add appropriate styling
+```
+
+## Real Examples from This Blog
+
+### Example 1: Adding Tags to Content Schema
+
+I needed to add tags to the blog post schema. Here's how I used Aider:
+
+```bash
+> Update src/content.config.ts to include a tags field in the blog schema.
+  The tags should be an optional array of strings.
+
+# Aider's response:
+# 1. Read the current schema
+# 2. Add the tags field
+# 3. Update the zod schema
+# 4. Show the diff
+```
+
+The resulting change:
+
+```typescript
+// Before
+schema: ({ image }) =>
+  z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    heroImage: image().optional(),
+  }),
+
+// After
+schema: ({ image }) =>
+  z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    heroImage: image().optional(),
+    tags: z.array(z.string()).optional(),
+  }),
+```
+
+### Example 2: Creating the Category-Based Blog Index
+
+When I wanted to reorganize the blog index into categories, I used Aider:
+
+```bash
+> Modify src/pages/blog/index.astro to show posts in three categories:
+  1. FinTech (posts about payment systems, budgets, transactions)
+  2. AI Agents (posts about LLMs, automation, CrewAI)
+  3. Microservices (posts about Spring Boot, NestJS, architecture)
+  
+  Each category should have its own section with a header and description.
+  Posts should be automatically categorized based on their tags.
+
+# Aider implemented:
+# 1. Category definition with keywords
+# 2. Post categorization function
+# 3. Three separate sections in the UI
+# 4. Empty state messages for categories with no posts
+# 5. Updated styling for the new layout
+```
+
+### Example 3: Fixing a Bug in the Blog Layout
+
+When I noticed the blog post layout wasn't responsive on mobile:
+
+```bash
+> Fix the responsive design in src/layouts/BlogPost.astro.
+  The main content should be full width on mobile, and the hero image
+  should scale properly.
+
+# Aider:
+# 1. Identified the CSS issues
+# 2. Added media queries
+# 3. Fixed the image scaling
+# 4. Tested the changes
+```
+
+## Advanced Aider Features
+
+### 1. Multi-File Refactoring
+
+Aider excels at making coordinated changes across multiple files:
+
+```bash
+> I want to add a new field to blog posts: "updatedDate".
+  Update:
+  1. src/content.config.ts to include the field
+  2. src/pages/blog/index.astro to display it
+  3. src/layouts/BlogPost.astro to show it when present
+  4. Update all existing blog posts to include this field
+
+# Aider will:
+# 1. Update the schema
+# 2. Modify the index page
+# 3. Update the blog post layout
+# 4. Add the field to existing posts
+# 5. Commit all changes with a single message
+```
+
+### 2. Code Review and Refactoring
+
+When reviewing code quality:
+
+```bash
+> Review src/pages/blog/index.astro for:
+  1. Performance issues
+  2. Code duplication
+  3. Best practices
+  4. Accessibility concerns
+
+# Aider will analyze and suggest improvements
+```
+
+### 3. Documentation Generation
+
+Aider can generate documentation for the codebase:
+
+```bash
+> Generate documentation for the blog system architecture.
+  Include:
+  - File structure
+  - Data flow
+  - Component relationships
+  - How to add new blog posts
+
+# Aider creates comprehensive documentation
+```
+
+## Integration with CrewAI
+
+I use both tools together for maximum productivity:
+
+### Workflow: CrewAI → Aider
+
+1. **CrewAI** drafts the blog post content and creates the MDX file
+2. **Aider** refines the code, adds custom components, and fixes any issues
+3. **CrewAI** reviews the final implementation
+4. **Aider** makes any final adjustments based on review feedback
+
+```bash
+# Example workflow
+$ python crewai_draft_post.py --topic "Aider"
+# Creates: src/content/blog/aider-post.mdx
+
+$ aider src/content/blog/aider-post.mdx
+# Refine the code examples and formatting
+
+$ python crewai_review.py --file src/content/blog/aider-post.mdx
+# Get review feedback
+
+$ aider src/content/blog/aider-post.mdx
+# Implement review feedback
+```
+
+## Tips for Using Aider Effectively
+
+### 1. **Be Specific in Your Requests**
+```bash
+# Good
+> Update src/pages/blog/index.astro to add a search bar at the top
+
+# Better
+> Add a search bar to src/pages/blog/index.astro that filters posts by title and description in real-time. Use a simple input field with JavaScript filtering.
+```
+
+### 2. **Provide Context**
+```bash
+> I'm building a blog with Astro. Update the blog index to show posts in three categories: FinTech, AI Agents, and Microservices. Here's the current implementation: [paste code]
+```
+
+### 3. **Use Git Integration**
+```bash
+# Aider automatically commits changes
+# You can review and undo if needed
+git log --oneline  # See Aider's commits
+git reset HEAD~1   # Undo last commit if needed
+```
+
+### 4. **Iterate in Small Steps**
+```bash
+# Instead of one big request
+> Make the blog perfect
+
+# Do multiple focused requests
+> Add a search bar
+> Improve mobile responsiveness
+> Add category icons
+```
+
+## Challenges and Solutions
+
+### Challenge 1: Context Window Limits
+**Problem**: Aider can't see all files at once
+**Solution**: Use `.aider.conf.yml` to include important files, or explicitly mention files in your requests
+
+### Challenge 2: Code Quality
+**Problem**: Sometimes Aider generates suboptimal code
+**Solution**: 
+- Use `aider --auto-lint` to catch issues
+- Review changes before committing
+- Use Aider for refactoring existing code
+
+### Challenge 3: Cost Management
+**Problem**: Multiple API calls can be expensive
+**Solution**:
+- Use smaller models for simple tasks
+- Batch requests when possible
+- Use Aider's `--map-tokens` to reduce context
+
+## Performance Improvements
+
+Aider has helped me optimize this blog in several ways:
+
+### 1. **Bundle Size Reduction**
+```bash
+> Analyze and reduce the JavaScript bundle size for the blog
+
+# Aider identified:
+# - Unused CSS classes
+# - Redundant imports
+# - Opportunities for code splitting
+```
+
+### 2. **SEO Optimization**
+```bash
+> Improve SEO for the blog index page
+
+# Aider added:
+# - Proper meta tags
+# - Structured data
+# - Better heading hierarchy
+```
+
+### 3. **Accessibility Improvements**
+```bash
+> Make the blog more accessible
+
+# Aider implemented:
+# - ARIA labels
+# - Keyboard navigation
+# - Screen reader support
+```
+
+## Comparison with Other Tools
+
+| Feature | Aider | GitHub Copilot | Cursor |
+|---------|-------|----------------|--------|
+| **Local Codebase** | ✅ Full access | ❌ Limited | ✅ Full access |
+| **Multi-file Changes** | ✅ Excellent | ❌ Single file | ✅ Good |
+| **Git Integration** | ✅ Built-in | ❌ Manual | ✅ Built-in |
+| **Terminal Workflow** | ✅ Native | ❌ IDE only | ❌ GUI only |
+| **Cost** | Pay-per-use | Subscription | Subscription |
+
+## Future Plans
+
+I'm exploring these Aider enhancements:
+
+1. **Custom Tools**: Create Aider tools specific to Astro development
+2. **Automated Testing**: Integrate with Vitest for automated testing
+3. **Performance Monitoring**: Add Aider scripts to monitor and optimize performance
+4. **Content Generation**: Use Aider to generate blog post drafts from outlines
+
+## Conclusion
+
+Aider has become an indispensable part of my development workflow for this blog. It's like having a senior developer pair programming with me 24/7. The ability to make multi-file changes, understand the entire codebase, and integrate with git makes it perfect for content-heavy sites like this blog.
+
+For developers building similar projects, I highly recommend giving Aider a try. The learning curve is minimal, and the productivity gains are substantial.
+
+---
+
+**Pro Tip**: Combine Aider with CrewAI for the ultimate AI-powered development workflow. Use CrewAI for high-level planning and content creation, and Aider for the detailed implementation.
