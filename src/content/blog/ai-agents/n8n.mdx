@@ -1,0 +1,224 @@
+---
+title: "n8n: Workflow Automation for Personal Finance"
+description: 'n8n is a powerful workflow automation tool that helps you connect different services and automate tasks without writing complex code. For personal finance management, n8n can streamline processes like transaction categorization, budget alerts, and financial reporting.'
+pubDate: 'Jan 27 2026'
+heroImage: '../../../assets/n8n-hero.jpg'
+---
+
+## Concept: Workflow Automation
+
+In the world of personal finance management, automating repetitive tasks can save time and reduce errors. n8n is a low-code workflow automation tool that allows you to connect various services and automate tasks using a visual interface. It's like having a digital assistant that handles routine financial tasks for you.
+
+## Core Features
+
+### Visual Workflow Builder
+
+n8n provides a drag-and-drop interface to create workflows. You can connect different nodes (tasks) to build a sequence of actions. For example, you can create a workflow that:
+
+1. Fetches transactions from your bank.
+2. Categorizes them based on predefined rules.
+3. Sends a summary report to your email.
+
+```json
+{
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "getTransactions",
+        "accountId": "12345"
+      },
+      "name": "FetchTransactions",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "{{ $node["FetchTransactions"].json["description"] }}",
+              "operation": "contains",
+              "value2": "Groceries"
+            }
+          ]
+        }
+      },
+      "name": "CategorizeTransactions",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "subject": "Weekly Financial Report",
+        "text": "Here is your weekly financial summary: {{ $node["FetchTransactions"].json }}",
+        "to": "user@example.com"
+      },
+      "name": "SendEmail",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [650, 300]
+    }
+  ],
+  "connections": {
+    "FetchTransactions": {
+      "main": [
+        [
+          {
+            "node": "CategorizeTransactions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CategorizeTransactions": {
+      "main": [
+        [
+          {
+            "node": "SendEmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
+```
+
+### Pre-built Nodes
+
+n8n comes with a variety of pre-built nodes for popular services like email, HTTP requests, databases, and more. This means you don't have to write custom code to integrate with these services. For personal finance, you can use nodes to connect to your bank's API, send emails, or update a spreadsheet.
+
+### Custom JavaScript
+
+For more advanced use cases, n8n allows you to write custom JavaScript code within nodes. This is useful when you need to perform complex data transformations or implement custom logic.
+
+```javascript
+// Example of custom JavaScript in a Function node
+const transactions = $input.all();
+const categorized = transactions.map(transaction => {
+  if (transaction.description.includes("Groceries")) {
+    transaction.category = "Food";
+  } else if (transaction.description.includes("Amazon")) {
+    transaction.category = "Shopping";
+  } else {
+    transaction.category = "Other";
+  }
+  return transaction;
+});
+
+return categorized;
+```
+
+## Infrastructure
+
+### Docker Setup
+
+n8n can be easily deployed using Docker, which makes it simple to run in any environment. Here's a basic `docker-compose.yml` file to get you started:
+
+```yaml
+version: '3.8'
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    restart: always
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - NODE_ENV=production
+    volumes:
+      - n8n_data:/home/node/.n8n
+
+volumes:
+  n8n_data:
+    external: false
+```
+
+### Persistent Storage
+
+n8n uses volumes to store workflows and configurations persistently. This ensures that your workflows are not lost when the container is restarted.
+
+## Bonus
+
+### Highlight: Real-time Financial Alerts
+
+One of the powerful features of n8n is its ability to set up real-time alerts. For example, you can create a workflow that monitors your bank transactions and sends an alert when a transaction exceeds a certain amount. This can help you stay on top of your finances and detect any unusual activity.
+
+```json
+{
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "getTransactions",
+        "accountId": "12345"
+      },
+      "name": "FetchTransactions",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "{{ $node["FetchTransactions"].json["amount"] }}",
+              "operation": "greater",
+              "value2": 1000
+            }
+          ]
+        }
+      },
+      "name": "CheckAmount",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "subject": "High Value Transaction Alert",
+        "text": "A transaction of {{ $node["FetchTransactions"].json["amount"] }} was detected.",
+        "to": "user@example.com"
+      },
+      "name": "SendAlert",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [650, 300]
+    }
+  ],
+  "connections": {
+    "FetchTransactions": {
+      "main": [
+        [
+          {
+            "node": "CheckAmount",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CheckAmount": {
+      "main": [
+        [
+          {
+            "node": "SendAlert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
+```
+
+### Conclusion
+
+n8n is a versatile tool that can significantly enhance your personal finance management by automating routine tasks and setting up real-time alerts. By leveraging its visual workflow builder and pre-built nodes, you can create powerful automations without extensive coding knowledge. Whether you're categorizing transactions, sending financial reports, or monitoring for unusual activity, n8n can help you manage your finances more efficiently.
