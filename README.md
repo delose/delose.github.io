@@ -62,4 +62,4 @@ Check out [our documentation](https://docs.astro.build) or jump into our [Discor
 This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
 
 ## View traffic - visible to owner ONLY
-[link](https://github.com/delose/delose.github.io/graphs/traffic)
+[GH](https://github.com/delose/delose.github.io/graphs/traffic), [GA](https://analytics.google.com/analytics/web/#/a382128010p521752320/reports/intelligenthome)
