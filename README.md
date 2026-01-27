@@ -61,5 +61,5 @@ Check out [our documentation](https://docs.astro.build) or jump into our [Discor
 
 This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
 
-## TODO
-1. List of blog topics
+## View traffic - visible to owner ONLY
+[link](https://github.com/delose/delose.github.io/graphs/traffic)
