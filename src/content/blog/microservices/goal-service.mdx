@@ -1,7 +1,7 @@
 ---
 title: "Domain-Driven Design and Resilience Patterns in Goal Service"
 description: 'Deep dive into the DDD architecture and Resilience4j circuit breaker implementation in the Goal Service microservice.'
-pubDate: 'Jan 16 2026'
+pubDate: 'Feb 10 2026'
 heroImage: '../../../assets/PFMS-goal-service-hero.jpg'
 tags: ['DDD', 'Resilience4j', 'Microservices', 'Spring Boot', 'Circuit Breaker']
 ---
@@ -81,31 +81,42 @@ The Goal Service integrates with the Budget Service using Resilience4j patterns 
 The `BudgetServiceClient` uses Feign with Resilience4j annotations:
 
 ```java
+// goal-service/.../client/BudgetServiceClient.java
 @FeignClient(name = "budget-service", url = "${external.budget-service.url}", fallback = BudgetServiceClientFallback.class)
 public interface BudgetServiceClient {
 
     @GetMapping("/api/budgets/{id}")
-    @CircuitBreaker(name = "budgetService", fallbackMethod = "fallbackGetBudgetById")
-    @Retry(name = "budgetService", fallbackMethod = "fallbackGetBudgetById")
+    @CircuitBreaker(name = "budgetService")
+    @Retry(name = "budgetService")
     BudgetResponse getBudgetById(@PathVariable("id") Long id);
 }
 ```
+
+Notice the fallback is declared at the `@FeignClient` level (`fallback = BudgetServiceClientFallback.class`), not on each method. This keeps the interface clean — every method in the client automatically delegates to the corresponding method in the fallback class when the circuit opens.
 
 ### Fallback Implementation with Redis Caching
 
 The fallback service provides graceful degradation:
 
 ```java
+// goal-service/.../client/BudgetServiceClientFallback.java
 @Component
 public class BudgetServiceClientFallback implements BudgetServiceClient {
 
-    @Autowired(required = false)
+    @Autowired(required = false)  // Redis is optional — graceful when absent
     private RedisTemplate<String, Object> redisTemplate;
+
+    @Override
+    public BudgetResponse getBudgetById(Long id) {
+        // FeignClient fallback requires implementing the interface method directly.
+        // Delegates to the internal fallback logic.
+        return fallbackGetBudgetById(id, new RuntimeException("Feign fallback triggered"));
+    }
 
     public BudgetResponse fallbackGetBudgetById(Long id, Throwable t) {
         logger.warn("Fallback triggered for getBudgetById, id: {}, error: {}", id, t.getMessage());
 
-        // Try to get from Redis cache
+        // Try Redis cache first
         if (redisTemplate != null) {
             try {
                 BudgetResponse cached = (BudgetResponse) redisTemplate.opsForValue().get("budget:" + id);
@@ -119,6 +130,7 @@ public class BudgetServiceClientFallback implements BudgetServiceClient {
         }
 
         // Return a sensible default
+        logger.info("Returning default budget for id: {}", id);
         BudgetResponse defaultBudget = new BudgetResponse();
         defaultBudget.setId(id);
         defaultBudget.setAmount(0.0);
@@ -127,6 +139,8 @@ public class BudgetServiceClientFallback implements BudgetServiceClient {
     }
 }
 ```
+
+The `@Autowired(required = false)` on `RedisTemplate` is a deliberate choice: Redis is an optional dependency. If Redis isn't running, the fallback still works — it just skips the cache and returns a default response. This avoids a hard dependency on Redis for the circuit breaker to function.
 
 ### Circuit Breaker Configuration
 
@@ -219,33 +233,6 @@ class BudgetServiceClientIntegrationTest {
     }
 }
 ```
-
-## Transactional Outbox Pattern (Future Implementation)
-
-While not currently implemented, the architecture is prepared for the Transactional Outbox pattern:
-
-### Current State
-The service uses direct synchronous calls with circuit breaker protection.
-
-### Future Enhancement
-For event-driven communication, we could implement:
-
-```java
-@Entity
-@Table(name = "outbox_events")
-public class OutboxEvent {
-    private String eventType;
-    private String payload;
-    private LocalDateTime createdAt;
-    private boolean processed;
-}
-```
-
-### Benefits of Transactional Outbox
-1. **Atomicity**: Database changes and event publishing happen in the same transaction
-2. **Reliability**: Events are guaranteed to be published
-3. **Idempotency**: Consumers can safely process duplicate events
-4. **Decoupling**: Services remain loosely coupled
 
 ## Monitoring and Observability
 
