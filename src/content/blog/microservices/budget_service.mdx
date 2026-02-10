@@ -1,123 +1,181 @@
 ---
 title: "Spring Boot Budget Service"
-description: 'Managing budgets in a distributed environment requires careful planning and implementation to ensure reliability and performance. This blog post will guide you through building a resilient microservice using Spring Boot, Kafka for event-driven architecture, and performance optimization techniques like caching and MapStruct.'
-pubDate: 'Jan 14 2026'
+description: 'How the Budget Service handles currency precision, post-commit event publishing, compile-time DTO mapping, and caching in a real microservices system.'
+pubDate: 'Feb 10 2026'
 heroImage: '../../../assets/PFMS-budget-service-hero.jpg'
+tags: ['spring-boot', 'kafka', 'caching', 'mapstruct', 'microservices']
 ---
-## Introduction: Managing Budgets in a Distributed Environment
 
-In a distributed system, managing budgets efficiently involves ensuring data consistency, reliability, and performance. The Budget Service showcases a reliability-first design through its integration with Kafka for asynchronous event messaging. This ensures that messages are only dispatched to the Notification Service after successful database commits, thereby maintaining data consistency and integrity.
+## Introduction
 
-## Performance: Deep Dive into MapStruct and Spring Cache Lookups
+The Budget Service is the financial core of PFMS. It handles budget CRUD operations, publishes events to Kafka for downstream notifications, and caches hot data with Caffeine. This post walks through the real implementation — what's in the code, why it's built that way, and where the tradeoffs are.
 
-### 2.1 Event-Driven Architecture with Kafka
+## BigDecimal: Why Precision Matters in Fintech
 
-Kafka is used as the message broker to facilitate asynchronous communication between services. In this setup, the Budget Service acts as the producer of events, and the Notification Service serves as the consumer. Here’s how it works:
-
-1. **Event Publisher**: When a budget update occurs (e.g., creating or updating a budget), the Budget Service publishes an event to Kafka on the `notification_requests_topic`.
-2. **Transactional Outbox Pattern**: The Budget Service uses the Transactional Outbox pattern to ensure that events are only committed to Kafka after successful database commits. This is achieved by:
-   - Storing outgoing messages in a special outbox table within the same transaction.
-   - When the database commit succeeds, the service reads and deletes the message from the outbox table, then publishes it to Kafka.
-3. **Transactional Message Producer**: The Budget Service uses Spring Kafka’s `KafkaTemplate` with transactional support to send events reliably.
-
-Here is a simplified code snippet demonstrating this pattern:
+The `Budget` entity uses `BigDecimal` for the `amount` field, not `double`:
 
 ```java
-@Service
-public class BudgetService {
+// budget-service/.../entity/Budget.java
+@Entity
+@Table(name = "budgets")
+public class Budget {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String userId;
+    private BudgetCategory category;
+    private BigDecimal amount;      // Not double
+    private LocalDate startDate;
+    private LocalDate endDate;
+}
+```
 
-    @Autowired
-    private BudgetRepository budgetRepository;
+This is a deliberate choice. `double` arithmetic produces rounding errors — `0.1 + 0.2` evaluates to `0.30000000000000004` in IEEE 754. For a finance app, that's unacceptable. `BigDecimal` is slower (heap-allocated, method-call arithmetic) but guarantees exact decimal representation. When you're tracking someone's money, correctness wins over performance.
 
-    @Autowired
-    private KafkaTemplate<String, NotificationRequest> kafkaTemplate;
+## Post-Commit Event Publishing
 
-    @Transactional
-    public void updateBudget(Budget budget) {
-        // Update the budget in the database
-        budgetRepository.save(budget);
+The biggest architectural decision in this service is how events reach Kafka. The current blog post claimed a "Transactional Outbox pattern" with an outbox table — that's not what's actually implemented. The real approach uses Spring's `@TransactionalEventListener`:
 
-        // Publish event to Kafka only if the database commit is successful
-        NotificationRequest notification = new NotificationRequest(budget.getId(), "Budget updated");
-        kafkaTemplate.send("notification_requests_topic", notification);
+### Step 1: Save and Publish a Spring Event
+
+```java
+// budget-service/.../service/BudgetService.java
+@Transactional
+public Budget saveBudget(Budget budget) {
+    Budget savedBudget = this.budgetRepository.save(budget);
+    BudgetNotification notification = budgetMapper.toNotification(savedBudget);
+    eventPublisher.publishEvent(notification);  // Spring application event
+    return savedBudget;
+}
+```
+
+This does **not** send a Kafka message. It publishes a Spring `ApplicationEvent` within the current transaction.
+
+### Step 2: Post-Commit Handler
+
+```java
+// budget-service/.../producer/BudgetNotificationHandler.java
+@Component
+public class BudgetNotificationHandler {
+    private final BudgetNotificationProducer budgetNotificationProducer;
+
+    @Async  // Runs on a separate thread pool
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    public void handleBudgetNotification(BudgetNotification request) {
+        budgetNotificationProducer.sendBudgetRequest(request);
     }
 }
 ```
 
-### 2.2 Performance Benefits of MapStruct/Caching
+The key is `TransactionPhase.AFTER_COMMIT`. If the database transaction rolls back, this handler never fires — no orphaned Kafka messages. The `@Async` annotation moves the Kafka send to a background thread so the HTTP response returns immediately.
 
-1. **MapStruct for Clean Entity-to-DTO Conversions**:
-   - **Code Generation**: MapStruct generates type-safe, compile-time Java code that performs the mapping between entities and DTOs.
-   - **Performance**: This approach eliminates the need for reflection-based mapping frameworks, resulting in faster execution times.
+**The tradeoff:** slightly higher latency for notifications (they wait for the commit + thread handoff), but guaranteed consistency between the database and Kafka. This is not a classic Transactional Outbox (no outbox table, no polling) — it's a lighter-weight approach that works well when you don't need message replay.
 
-2. **Spring Cache for Caching High-Traffic Data**:
-   - **Read Through Caching**: When a budget lookup is requested by ID, the Budget Service checks if the budget data is already cached.
-   - **Cache Hit**: If available, it returns the cached data, reducing the need to hit the database.
-   - **Cache Miss**: If not available, it fetches the data from the database, stores it in cache for future requests, and then returns it.
-
-Here is a simplified example of using Spring Cache:
+### Step 3: Kafka Producer
 
 ```java
+// budget-service/.../producer/BudgetNotificationProducer.java
 @Service
-@EnableCaching
-public class BudgetService {
+public class BudgetNotificationProducer {
+    private final KafkaTemplate<String, BudgetNotification> kafkaTemplate;
+    private static final String TOPIC = "notification_requests_topic";
 
-    @Autowired
-    private BudgetRepository budgetRepository;
-
-    @Cacheable("budgets")
-    public Budget getBudgetById(Long id) {
-        return budgetRepository.findById(id).orElseThrow(() -> new RuntimeException("Budget not found"));
+    @Async
+    public void sendBudgetRequest(BudgetNotification request) {
+        kafkaTemplate.send(TOPIC, request.getUserId(), request);
     }
 }
 ```
 
-## Reliability: The Kafka Producer and Post-Commit Event Handling
+`request.getUserId()` as the Kafka key guarantees per-user ordering within a partition.
 
-### 2.3 Integration with Discovery Server (Eureka)
+## MapStruct: Compile-Time DTO Mapping
 
-The Budget Service integrates with the Eureka Discovery Server to register itself and discover other services dynamically:
+Converting the `Budget` entity to a `BudgetNotification` DTO is handled by MapStruct, which generates the mapping code at compile time:
 
-1. **Service Registration**: The Budget Service registers its metadata (e.g., service name, IP address, port) with the Eureka server.
-2. **Service Discovery**: When another service needs to communicate with the Budget Service, it queries the Eureka server to find out where the Budget Service is located.
-3. **Dynamic Scaling and Load Balancing**: Eureka facilitates dynamic scaling by enabling multiple instances of a service to be registered, and load balancing across these instances.
+```java
+// budget-service/.../mapper/BudgetMapper.java
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface BudgetMapper {
 
-Here is a simplified example of service registration in a Spring Boot application:
+    @Mapping(target = "id", source = "budget.id")
+    @Mapping(target = "userId", source = "budget.userId")
+    @Mapping(target = "subject", constant = "Producer Test")
+    @Mapping(target = "channel", constant = "SMS")
+    @Mapping(target = "messageBody", expression = "java(\"Budget created for category: \" + budget.getCategory())")
+    BudgetNotification toNotification(Budget budget);
+}
+```
+
+The `expression` attribute is MapStruct's escape hatch for complex transformations — it injects raw Java into the generated implementation. At compile time, MapStruct generates a concrete class that does plain field assignments. No reflection, no runtime overhead.
+
+**Why not ModelMapper?** ModelMapper uses reflection to match fields by name. It's convenient but slower at runtime and silently swallows mismatched fields. MapStruct catches mapping errors at compile time.
+
+## Caffeine Caching with Miss Logging
+
+Budget lookups by ID use Spring's `@Cacheable` backed by Caffeine:
+
+```java
+// budget-service/.../service/BudgetService.java
+@Cacheable(value = "budgets")
+public Optional<Budget> findBudgetById(Long id) {
+    long start = System.currentTimeMillis();
+    Optional<Budget> b = this.budgetRepository.findById(id);
+    log.info("Cache MISS - ID: {} | Execution: {}ms", id, (System.currentTimeMillis() - start));
+    return b;
+}
+```
+
+The log statement only fires on cache misses — when the method body actually executes. On cache hits, Spring returns the cached value without entering the method at all.
+
+The Caffeine configuration in `application.yml`:
 
 ```yaml
-# application.yml
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+# budget-service/src/main/resources/application.yml
+spring:
+  cache:
+    caffeine:
+      spec:
+        maximumSize: 500
+        expireAfterAccess: 600s
 ```
 
-## Observability: Using Custom Actuator Endpoints for System Maintenance
+500 items max, 10-minute TTL per entry. Caffeine is an in-process cache — no network hop, sub-microsecond reads. The tradeoff: it's not shared across service replicas. If you scale to multiple instances, each has its own cache, which means stale reads are possible. A distributed cache (Redis) would solve that, but adds a network dependency.
 
-Custom Actuator endpoints are crucial for monitoring and maintaining the health of your microservices in production. The Budget Service includes a custom Actuator endpoint to provide insights into its operation.
+## Custom Actuator: Runtime Introspection
+
+The service exposes runtime metadata through Spring Boot Actuator's `InfoContributor`:
 
 ```java
-@RestController
-@Endpoint(id = "budget-service")
-public class BudgetServiceMetrics {
+// budget-service/.../actuator/CustomInfoContributor.java
+@Component
+public class CustomInfoContributor implements InfoContributor {
+    private final Environment environment;
 
-    @Autowired
-    private BudgetService budgetService;
+    @Override
+    public void contribute(Info.Builder builder) {
+        Map<String, Object> appDetails = new HashMap<>();
+        appDetails.put("version", "2.5.0-SNAPSHOT");
+        appDetails.put("status", "OPERATIONAL");
+        appDetails.put("deployedAt", DateTimeFormatter.ISO_INSTANT.format(Instant.now()));
 
-    @ReadOperation
-    public Metrics getBudgetMetrics() {
-        // Gather metrics from the service
-        Metrics metrics = new Metrics();
-        metrics.setNumberOfBudets(budgetService.getAllBudgets().size());
-        return metrics;
+        String[] activeProfiles = environment.getActiveProfiles();
+        Map<String, Object> environmentInfo = new HashMap<>();
+        environmentInfo.put("profile", activeProfiles.length > 0
+            ? String.join(",", activeProfiles) : "default/not-specified");
+        environmentInfo.put("os", System.getProperty("os.name"));
+
+        builder.withDetail("application", appDetails);
+        builder.withDetail("runtime_environment", environmentInfo);
     }
 }
 ```
+
+Hit `/actuator/info` and you get the active Spring profile, OS, and deployment timestamp — useful for verifying which config profile is active in a given environment.
 
 ## Summary
 
-- **Reliability-First Design**: The Budget Service ensures that messages are only sent to Kafka after successful database commits using the Transactional Outbox pattern.
-- **Performance Optimization**: MapStruct provides fast and type-safe entity-to-DTO mappings, while Spring Cache reduces the need for repeated database queries through read-through caching.
-- **Service Discovery with Eureka**: The service registers itself with the Eureka server and dynamically discovers other services to facilitate communication.
-
-This architecture ensures that the Budget Service is highly reliable, performant, and scalable. By following these practices, you can build microservices that meet the demands of modern distributed systems.
+- **BigDecimal** for currency: correctness over performance
+- **Post-commit event publishing** via `@TransactionalEventListener(AFTER_COMMIT)` + `@Async`: consistency over latency, no orphaned Kafka messages
+- **MapStruct** for DTO mapping: compile-time code generation, zero reflection overhead
+- **Caffeine cache**: sub-microsecond reads, but per-instance — consider Redis if scaling horizontally
