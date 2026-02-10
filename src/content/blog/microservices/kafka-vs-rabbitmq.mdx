@@ -1,0 +1,183 @@
+---
+title: "Kafka vs RabbitMQ in the Same System: When Each Pattern Wins"
+description: "PFMS uses both Kafka and RabbitMQ. This post shows the real code for each, explains why two brokers exist in one system, and when to pick which."
+pubDate: 'Feb 10 2026'
+heroImage: '../../../assets/PFMS-kafka-hero.jpg'
+tags: ['kafka', 'rabbitmq', 'event-driven', 'microservices', 'architecture']
+---
+
+## Two Brokers, One System
+
+PFMS runs both Apache Kafka and RabbitMQ in production. This isn't accidental or a migration artifact — each broker handles a different communication pattern:
+
+- **RabbitMQ** handles account creation: transaction-service → account-service (point-to-point)
+- **Kafka** handles budget notifications: budget-service → notification-service (fan-out capable)
+
+Running two message brokers adds operational overhead. You maintain two Docker containers, two sets of connection configs, two monitoring dashboards. The justification: each broker's strengths match the specific pattern it's used for.
+
+## RabbitMQ: Point-to-Point Commands
+
+When a user creates an account, the transaction-service posts to RabbitMQ's `account_queue`. The account-service consumes from that queue.
+
+### The Producer (Transaction Service)
+
+```typescript
+// transaction-service/src/app.module.ts
+@Module({
+  imports: [
+    ClientsModule.register([
+      {
+        name: ACCOUNT_SERVICE,
+        transport: Transport.RMQ,
+        options: {
+          urls: [`amqp://guest:guest@${fs.existsSync('/.dockerenv')
+            ? 'host.docker.internal' : 'localhost'}:5672`],
+          queue: 'account_queue',
+          queueOptions: { durable: true },
+        },
+      },
+    ]),
+  ],
+})
+export class AppModule {}
+```
+
+```typescript
+// transaction-service/src/app.controller.ts
+@Post('account')
+async createAccount(@Body() account: any) {
+  try {
+    await lastValueFrom(this.accountRMQClient.emit("account-created", account));
+  } catch (err) {
+    console.error("Failed to emit to RMQ:", err);
+  }
+}
+```
+
+### The Consumer (Account Service)
+
+```typescript
+// account-service/src/app.controller.ts
+@MessagePattern("account-created")
+handleAccountCreated(@Payload() account: any) {
+  console.log('[Account-Service]: Received account: ', account);
+}
+```
+
+### Why RabbitMQ Fits Here
+
+- **One producer, one consumer.** There's no need for multiple subscribers. Account creation is a command: "create this account." RabbitMQ's queue model is built for this — one message, one consumer, acknowledged and deleted.
+- **`durable: true`** means the queue and its messages survive RabbitMQ restarts. No data loss if the broker bounces.
+- **Push-based delivery.** RabbitMQ pushes messages to consumers as soon as they're available. Low latency for command processing.
+
+## Kafka: Event Broadcasting
+
+When a user creates a budget, the budget-service publishes to Kafka's `notification_requests_topic`. The notification-service consumes it.
+
+### The Producer (Budget Service)
+
+```java
+// budget-service/.../producer/BudgetNotificationProducer.java
+@Service
+public class BudgetNotificationProducer {
+    private final KafkaTemplate<String, BudgetNotification> kafkaTemplate;
+    private static final String TOPIC = "notification_requests_topic";
+
+    @Async
+    public void sendBudgetRequest(BudgetNotification request) {
+        kafkaTemplate.send(TOPIC, request.getUserId(), request);
+    }
+}
+```
+
+This producer is called after the database transaction commits, via a `@TransactionalEventListener(phase = AFTER_COMMIT)` handler — see the [Budget Service post](/blog/microservices/budget_service) for the full chain.
+
+### The Consumer (Notification Service)
+
+```java
+// notification-service/.../consumer/NotificationConsumer.java
+@Component
+public class NotificationConsumer {
+    private final NotificationService notificationService;
+
+    @KafkaListener(topics = "notification_requests_topic", groupId = "notification-service-group")
+    public void listen(NotificationRequest request) {
+        notificationService.sendNotificationAsync(request);
+    }
+}
+```
+
+### Why Kafka Fits Here
+
+- **Fan-out capability.** Right now there's one consumer group (`notification-service-group`). But if you later add an analytics-service or audit-service, they can each create their own consumer group and independently read from the same topic — without changing the producer.
+- **Message retention.** Kafka retains messages on disk (configurable retention period). If the notification-service was down for an hour, it picks up where it left off when it comes back. With RabbitMQ, once a message is acknowledged, it's gone.
+- **`request.getUserId()` as the partition key.** All events for the same user land on the same partition, guaranteeing per-user ordering. Important for notifications — you don't want "budget updated" arriving before "budget created."
+
+## The Technical Differences
+
+| Aspect | RabbitMQ | Kafka |
+|--------|----------|-------|
+| Delivery model | Push (broker → consumer) | Pull (consumer → broker) |
+| Message lifecycle | Deleted after acknowledgment | Retained for configurable period |
+| Routing | Exchanges, bindings, routing keys | Topics and partitions |
+| Consumer groups | Competing consumers on one queue | Independent consumer groups per topic |
+| Ordering | Per-queue FIFO | Per-partition FIFO |
+| Throughput | Lower (per-message acknowledgment) | Higher (batch reads, sequential disk I/O) |
+| Replay | Not possible (messages deleted) | Possible (reset consumer offset) |
+
+## Decision Framework
+
+Based on the PFMS experience:
+
+**Use RabbitMQ when:**
+- One producer, one consumer (command pattern)
+- You need immediate push-based delivery
+- Message replay isn't needed
+- The NestJS ecosystem has first-class support (`@nestjs/microservices` Transport.RMQ)
+
+**Use Kafka when:**
+- Multiple consumers might subscribe now or in the future (event pattern)
+- You need message retention for replay or auditing
+- Ordering within a partition matters
+- The Spring ecosystem has first-class support (`spring-kafka`)
+
+**Could you use just one?** Yes. Kafka can do point-to-point (single consumer group). RabbitMQ can do fan-out (topic exchanges). But each broker's default model aligns better with one pattern. Using both means less configuration fighting against the grain.
+
+## The Infrastructure
+
+Both brokers run as Docker containers on the shared `pfms-network`:
+
+**RabbitMQ:**
+```yaml
+# message-broker/docker-compose.yml
+services:
+  rabbitmq:
+    image: rabbitmq:4-management
+    ports:
+      - "5672:5672"    # AMQP protocol
+      - "15672:15672"  # Management UI
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+```
+
+**Kafka (KRaft mode, no ZooKeeper):**
+```yaml
+# kafka/docker-compose.yml
+services:
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    environment:
+      KAFKA_PROCESS_ROLES: 'broker,controller'
+      KAFKA_ADVERTISED_LISTENERS: 'INTERNAL://global-service-kafka:29092,EXTERNAL://localhost:9092'
+      CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
+```
+
+Kafka runs in KRaft mode (`KAFKA_PROCESS_ROLES: 'broker,controller'`), eliminating the ZooKeeper dependency. One less service to manage.
+
+## Summary
+
+- **RabbitMQ for commands** (account creation): push-based, point-to-point, delete-after-ack
+- **Kafka for events** (budget notifications): pull-based, fan-out capable, retained on disk
+- **Two brokers = operational overhead** but each pattern gets the right tool
+- **NestJS ↔ RabbitMQ**, **Spring Boot ↔ Kafka** — each framework has native support for its broker
+- **Could consolidate to one** but you'd fight the default model for half your use cases
