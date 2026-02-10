@@ -1,55 +1,116 @@
 ---
-title: 'Dynamic Scaling: Implementing Netflix Eureka'
-description: "Master the art of service discovery with Netflix Eureka in a cloud-native environment, ensuring dynamic scaling and real-time health monitoring."
-pubDate: 'Jan 15 2026'
+title: "Dynamic Scaling: Implementing Netflix Eureka"
+description: "How PFMS uses Eureka for JVM service discovery, load-balanced routing with lb://, and the startup dependency chain that holds it all together."
+pubDate: 'Feb 10 2026'
 heroImage: '../../../assets/PFMS-discovery-server-hero.jpg'
+tags: ['eureka', 'spring-cloud', 'service-discovery', 'microservices']
 ---
-## Introduction: Moving beyond static IPs with Service Discovery
 
-In a cloud-native environment, resilience and scalability are crucial for maintaining high availability. The Personal Finance Management System (PFMS) employs Netflix Eureka as its service registry to manage service registration and discovery dynamically. This architecture ensures that client requests are efficiently routed to available service instances in a constantly evolving production environment.
+## Why Eureka
 
-## Configuration: Setting up Eureka with a Config Server dependency
+In PFMS, the API Gateway needs to route requests to the Budget Service, Goal Service, and others — but it shouldn't hardcode their host and port. Services might run on different ports during development, different IPs in Docker, or across multiple replicas in Kubernetes. Eureka solves this: services register themselves on startup, and the Gateway looks them up by name.
 
-The Config Server acts as the central configuration management tool, storing properties files for each microservice. This allows dynamic reconfiguration of services without needing to restart them. The Config Server is crucial for providing necessary configurations to the Discovery Server at startup.
+Spring Cloud has first-class Eureka support. Adding one dependency (`spring-cloud-starter-netflix-eureka-client`) and one annotation gets a service registered. No custom code needed on the client side.
 
-## Ecosystem: How the Gateway, Budget, and Goal services register themselves
+## The Server: One Annotation
 
-The Discovery Server (`discovery-server`) manages the service registry using Eureka. It registers itself as a service in the Eureka server and updates its status periodically to indicate whether it is up or down. Other services, such as the API Gateway, Goal Service, and Expense Service, register with the Discovery Server.
-
-## Resilience: Real-time health monitoring and load balancing
-
-Eureka continuously monitors the health of registered services. If a service goes down, Eureka marks it as unavailable and removes it from the routing table. This ensures that client requests are only routed to healthy instances, thereby improving system reliability and performance.
-
-## Dynamic Scaling
-
-As traffic increases or decreases, the Discovery Server can dynamically scale by registering new instances of microservices. Eureka automatically detects new instances and updates its service registry, ensuring that client requests are evenly distributed across all available instances.
-
-## Example Code Snippet
+The entire Eureka server is 16 lines of code:
 
 ```java
-@Configuration
-@EnableDiscoveryClient
-public class DiscoveryServerConfig {
-
-    @Value("${spring.application.name:discovery-server}")
-    private String applicationName;
-
-    @Bean
-    public EurekaInstanceConfigBean eurekaInstanceConfig(InetUtils inetUtils) {
-        EurekaInstanceConfigBean config = new EurekaInstanceConfigBean(inetUtils);
-        config.setInstanceId(applicationName + "-" + InetAddress.getLocalHost().getHostName());
-        return config;
-    }
-
-    @Bean
-    public EurekaClientConfigBean eurekaClient() {
-        EurekaClientConfigBean config = new EurekaClientConfigBean();
-        config.setRegisterWithEureka(true);
-        config.setFetchRegistry(true);
-        config.getServiceUrl().put("defaultZone", "http://localhost:8761/eureka/");
-        return config;
+// discovery-server/.../DiscoveryServerApplication.java
+@SpringBootApplication
+@EnableEurekaServer
+public class DiscoveryServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(DiscoveryServerApplication.class, args);
     }
 }
 ```
 
-The hierarchical startup sequence where the Discovery Server depends on the Config Server at port 8888 ensures that services are properly configured before they start. Eureka facilitates dynamic load balancing by managing service registration and discovery, real-time health monitoring, and dynamic scaling. This architecture is essential for building resilient and scalable cloud-native systems like the Personal Finance Management System (PFMS)
+`@EnableEurekaServer` turns this Spring Boot application into a service registry. The configuration lives in the Config Server's `config-repo`:
+
+```yaml
+# config-repo/discovery-server.yml
+server:
+  port: 8761
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+```
+
+`register-with-eureka: false` and `fetch-registry: false` — the Eureka server doesn't register with itself or try to fetch from itself. `wait-time-in-ms-when-sync-empty: 0` disables the default 5-minute delay before Eureka starts serving registrations, which speeds up development startup.
+
+## How Services Register
+
+A service like the Budget Service adds one Maven dependency and a few YAML lines:
+
+```yaml
+# budget-service/src/main/resources/application-dev.yml
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+```
+
+And the Docker variant swaps `localhost` for `host.docker.internal`:
+
+```yaml
+# budget-service/src/main/resources/application-docker.yml
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://host.docker.internal:8761/eureka
+    register-with-eureka: true
+```
+
+On startup, the service sends a registration request to Eureka containing its name (`budget-service`), host, and port. Eureka then serves this information to any service that asks for it.
+
+## How the API Gateway Uses Eureka
+
+The real payoff is in the Gateway routing. Instead of hardcoding `http://localhost:3001`, the Gateway uses Eureka's `lb://` prefix for load-balanced lookups:
+
+```properties
+# config-repo/api-gateway.properties
+spring.cloud.gateway.routes[0].id=user-service
+spring.cloud.gateway.routes[0].uri=lb://user-service
+spring.cloud.gateway.routes[0].predicates[0]=Path=/api/v1/users/**
+
+spring.cloud.gateway.routes[1].id=budget-service
+spring.cloud.gateway.routes[1].uri=lb://budget-service
+spring.cloud.gateway.routes[1].predicates[0]=Path=/v1/api/budgets/**
+```
+
+`lb://budget-service` tells Spring Cloud Gateway: "Look up `budget-service` in Eureka, get all registered instances, and load-balance across them." If you scale the Budget Service to 3 replicas, the Gateway automatically distributes traffic. No config change needed.
+
+## The Startup Dependency Chain
+
+There's an implicit ordering in PFMS:
+
+1. **Config Server** starts first (port 8888) — it serves configuration to everything
+2. **Discovery Server** starts next (port 8761) — it pulls its config from the Config Server, then opens for registrations
+3. **Business services** start last — they pull config from the Config Server, then register with Eureka
+
+If the Config Server is down, the Discovery Server won't start (fail-fast). If Eureka is down, services start but can't register — the Gateway won't find them. This strict ordering prevents services from running with stale or missing configuration.
+
+## Eureka vs Consul
+
+PFMS uses both — Eureka for JVM services, Consul for NestJS services. See the [Consul discovery post](/blog/microservices/consul_discovery) for the full story on why. In short:
+
+- **Eureka**: zero-code registration for Spring Boot (`@EnableDiscoveryClient`), tight integration with Spring Cloud Gateway (`lb://`), heartbeat-based health (clients push status)
+- **Consul**: language-agnostic HTTP API, active health polling (server pings clients), built-in KV store for config
+
+The tradeoff is running two discovery systems, but each service gets native-feeling integration with its ecosystem.
+
+## Summary
+
+- **`@EnableEurekaServer`** — the entire server is one annotation + config
+- **`lb://` routes** — Gateway discovers services by name, load-balances automatically
+- **Per-profile Eureka URLs** — `localhost` for dev, `host.docker.internal` for Docker
+- **Strict startup ordering** — Config Server → Eureka → business services prevents misconfig
+- **Complementary to Consul** — Eureka for JVM, Consul for polyglot
