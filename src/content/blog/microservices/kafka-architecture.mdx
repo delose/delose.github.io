@@ -1,7 +1,7 @@
 ---
 title: "Building a Resilient Microservice Backbone with Kafka and Spring Boot"
 description: "Learn how to transition from synchronous REST calls to an event-driven architecture using Apache Kafka within a Spring Boot microservices ecosystem."
-pubDate: 'Jan 17 2026'
+pubDate: 'Feb 10 2026'
 tags: ["microservices", "kafka", "spring-boot", "event-driven", "docker"]
 heroImage: '../../../assets/PFMS-kafka-hero.jpg'
 ---
@@ -82,76 +82,121 @@ volumes:
   portainer_data:
 ```
 
-## Use Case 1: Saving a Budget (Producer & Consumer Flow)
+## The Full Event Chain: Budget Save → Kafka → Notification
 
-When a user creates a budget, the `budget-service` saves it to the database and publishes an event. The `notification-service` listens for this event and sends an SMS or email asynchronously.
+When a user creates a budget, the event doesn't go straight to Kafka. There are three classes involved, and the ordering matters for data consistency.
 
-### 1. The Producer: `budget-service`
+### Step 1: Save and Publish a Spring Event
 
-The `BudgetNotificationProducer` uses Spring's `KafkaTemplate` to send a message to the `notification-topic`.
+`BudgetService.saveBudget()` saves to the database inside a `@Transactional` boundary, then publishes a Spring application event — not a Kafka message.
 
 ```java
+// budget-service/.../service/BudgetService.java
+@Transactional
+public Budget saveBudget(Budget budget) {
+    Budget savedBudget = this.budgetRepository.save(budget);
+    BudgetNotification notification = budgetMapper.toNotification(savedBudget);
+    eventPublisher.publishEvent(notification);  // Spring event, not Kafka yet
+    return savedBudget;
+}
+```
+
+### Step 2: Post-Commit Handler Triggers Kafka
+
+The `BudgetNotificationHandler` listens for that Spring event, but only fires **after the database transaction commits**. This is the key reliability guarantee: if the DB save fails and rolls back, no Kafka message is ever sent.
+
+```java
+// budget-service/.../producer/BudgetNotificationHandler.java
+@Component
+public class BudgetNotificationHandler {
+    private final BudgetNotificationProducer budgetNotificationProducer;
+
+    @Async  // Runs on a separate thread pool
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    public void handleBudgetNotification(BudgetNotification request) {
+        budgetNotificationProducer.sendBudgetRequest(request);
+    }
+}
+```
+
+The combination of `@TransactionalEventListener(phase = AFTER_COMMIT)` and `@Async` means: wait for the DB commit, then send the Kafka message on a background thread so the HTTP response isn't blocked.
+
+### Step 3: The Kafka Producer
+
+```java
+// budget-service/.../producer/BudgetNotificationProducer.java
 @Service
 public class BudgetNotificationProducer {
     private final KafkaTemplate<String, BudgetNotification> kafkaTemplate;
-
-    public BudgetNotificationProducer(KafkaTemplate<String, BudgetNotification> kafkaTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
-    }
+    private static final String TOPIC = "notification_requests_topic";
 
     @Async
     public void sendBudgetRequest(BudgetNotification request) {
-        // Send to the 'notification-topic'
-        kafkaTemplate.send("notification-topic", request.getUserId(), request);
+        kafkaTemplate.send(TOPIC, request.getUserId(), request);
     }
 }
 ```
 
-### 2. The Consumer: `notification-service`
+Using `request.getUserId()` as the Kafka key ensures all events for the same user land on the same partition, preserving per-user ordering.
 
-The `NotificationService` acts as a listener. The `@KafkaListener` annotation automatically polls the topic and processes incoming messages.
+### Step 4: The Consumer
+
+The `notification-service` has a dedicated `NotificationConsumer` component (not the service class itself) that listens on the topic and delegates:
 
 ```java
-@Service
-public class NotificationService {
-    private static final Logger logger = LoggerFactory.getLogger(NotificationService.class);
+// notification-service/.../consumer/NotificationConsumer.java
+@Component
+public class NotificationConsumer {
+    private final NotificationService notificationService;
 
-    @KafkaListener(topics = "notification-topic", groupId = "notification-group")
-    public void consume(NotificationRequest request) {
-        logger.info("Received notification request: {}", request);
-        
-        // Logic to send email/SMS
-        sendNotificationAsync(request);
-    }
-
-    @Async
-    public void sendNotificationAsync(NotificationRequest request) {
-        // Actual sending logic (e.g., via Twilio or SendGrid)
-        logger.info("Sending notification via {} for user {}", request.getChannel(), request.getUserId());
+    @KafkaListener(topics = "notification_requests_topic", groupId = "notification-service-group")
+    public void listen(NotificationRequest request) {
+        notificationService.sendNotificationAsync(request);
     }
 }
 ```
 
-## Future Roadmap Use Cases
+## Testing the Event Chain with Embedded Kafka
 
-The event-driven backbone opens doors for numerous scalable features:
+You don't need a running Kafka broker to test this. Spring's `@EmbeddedKafka` spins up an in-process broker:
 
-### 1. Real-time Transaction Auditing
-**Scenario:** Detect suspicious spending patterns immediately.
-**Flow:**
-1.  `transaction-service` publishes a `TransactionCreatedEvent` to a `transactions-topic`.
-2.  A new `audit-service` consumes these events.
-3.  It runs complex rules (e.g., "5 transactions in 1 minute from different locations") in real-time.
-4.  If a rule is triggered, it publishes a `FraudAlertEvent` to an `alerts-topic`, which the `notification-service` consumes to alert the user.
+```java
+// notification-service/.../consumer/NotificationConsumerTest.java
+@SpringBootTest
+@DirtiesContext
+@EnableKafka
+@EmbeddedKafka
+@ActiveProfiles("dev")
+public class NotificationConsumerTest {
 
-### 2. Asynchronous Reporting Generation
-**Scenario:** Generate monthly PDF reports without blocking the user interface.
-**Flow:**
-1.  User requests a report via the UI.
-2.  `reporting-service` publishes a `ReportGenerationRequest` to a `reports-topic`.
-3.  A dedicated `report-worker` service (or a separate thread pool) consumes the request.
-4.  It aggregates data from multiple services (Budgets, Transactions, Goals), generates the PDF, and uploads it to S3.
-5.  Finally, it publishes a `ReportReadyEvent` containing the S3 URL, which the UI polls or receives via WebSocket.
+    @Autowired
+    private KafkaTemplate<String, NotificationRequest> kafkaTemplate;
+
+    private static final int MESSAGE_COUNT = 5;
+    private static final String TOPIC = "notification_requests_topic";
+
+    @Test
+    void testConsumerReceivesAndProcessesMessage() throws Exception {
+        NotificationService.processedMessageCount.set(0);
+
+        for (int i = 0; i < 5; i++) {
+            NotificationRequest request = new NotificationRequest(
+                1L, "user" + i, "Test Subject " + i, "Test Body " + i, "EMAIL"
+            );
+            kafkaTemplate.send(TOPIC, request.getUserId(), request).get(1, TimeUnit.SECONDS);
+        }
+
+        Awaitility.await()
+            .atMost(10, TimeUnit.SECONDS)
+            .pollInterval(200, TimeUnit.MILLISECONDS)
+            .untilAsserted(() -> {
+                assertEquals(MESSAGE_COUNT, NotificationService.processedMessageCount.get());
+            });
+    }
+}
+```
+
+`Awaitility` is the right tool here — `Thread.sleep()` is unreliable for async assertions. The test produces 5 messages, then polls until all are consumed or 10 seconds elapse.
 
 ## Conclusion
 
