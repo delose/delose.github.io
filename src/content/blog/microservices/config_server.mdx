@@ -1,80 +1,141 @@
 ---
-title: 'Zero Restarts: Implementing a Git-Backed Config Server'
-description: "Master the heart of your microservices architecture with Spring Cloud Config Server, ensuring dynamic reconfiguration without service restarts."
-pubDate: 'Jan 14 2026'
+title: "Zero Restarts: Implementing a Git-Backed Config Server"
+description: "How PFMS uses Spring Cloud Config Server to centralize configuration across 10+ microservices, with multi-profile support and fail-fast behavior."
+pubDate: 'Feb 10 2026'
 heroImage: '../../../assets/PFMS-config-server-hero.jpg'
+tags: ['spring-cloud', 'config-server', 'gitops', 'microservices']
 ---
+
 ## Introduction
 
-In modern microservice architectures, managing environment-specific configurations efficiently and securely is crucial. Traditional methods of using hardcoded environment variables are no longer adequate for dynamic environments. Enter Spring Cloud Config Server—a powerful tool that provides a centralized 'single source of truth' for configuration properties across all microservices.
+With 10+ microservices, each needing database URLs, Eureka endpoints, JWT secrets, and Kafka bootstrap servers — and all of those varying per environment — hardcoding properties doesn't scale. PFMS uses Spring Cloud Config Server to centralize everything in a Git repository. Change a property, push to Git, and services pick it up without restarting.
 
-This blog post will guide you through setting up and implementing a Git-Backed Config Server to ensure zero restarts, dynamic reconfiguration, and fail-fast behavior in your microservices architecture.
+## The Config Server Bootstrap
 
-## The GitOps Flow: How the `config-repo` Manages Service Properties
+The entire Config Server is a single Spring Boot application with two annotations:
 
-The key to successful configuration management is a robust version-controlled repository. In our Personal Finance Management System (PFMS), we use a local `config-repo` hosted within the project repository. This Git-backed backend strategy ensures that all service properties are stored in a secure, auditable, and centralized location.
+```java
+// config-server/.../ConfigServerApplication.java
+@SpringBootApplication
+@EnableConfigServer
+@EnableDiscoveryClient
+public class ConfigServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ConfigServerApplication.class, args);
+    }
+}
+```
 
-### Configuration Repository
+`@EnableConfigServer` turns this into a config endpoint. `@EnableDiscoveryClient` registers it with Eureka so other services can find it by name rather than hardcoded URL.
 
-The `config-repo` acts as the central hub for all configuration data. Whenever a change is made (e.g., updating budget limits for different environments), this update is committed via a Git push. The Config Server automatically detects these changes and synchronizes its properties from the repository.
+The server configuration points at the Git repository:
 
-### Dynamic Configuration Refresh
+```yaml
+# config-server/src/main/resources/application.yml
+server:
+  port: 8888
 
-Each microservice that subscribes to the Config Server will automatically detect these changes and refresh their configuration without needing a restart. For example, when a new budget limit is pushed to the `config-repo`, the Budget Service will pull this updated property and apply it immediately, ensuring all users see the latest budget information.
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/delose/personal-finance-management-system.git
+          search-paths: config-repo
+          clone-on-start: true
+          default-label: master
+```
 
-## Resilience: The 'Fail-Fast' Model and Its Importance in Microservices
+`clone-on-start: true` means the server clones the repo during startup, not on first request. This trades a slower cold start for guaranteed availability — no first-request latency spike.
 
-The system we use in PFMS employs a strict fail-fast dependency model. This means that microservices require the `spring-cloud-starter-config` bootstrap to succeed before initialization. If the Config Server is unreachable, no microservice will start up.
+## Inside the config-repo
 
-### Fail-Fast Behavior
+The `config-repo/` directory in the Git repository holds per-service property files. Spring Cloud Config matches files to services by `spring.application.name`:
 
-- **Crash on Unreachable Config Server**: By crashing immediately if the Config Server is unreachable, we ensure that only services with valid configurations are running. This prevents misconfigurations from propagating throughout the ecosystem.
-  
-- **Fail-Safe Deployment**: In cases where manual intervention is required, deploying a 'canary' instance of the microservice ensures that changes do not impact the entire system. If the canary instance encounters issues, it will fail, and the change will be rolled back.
+```
+config-repo/
+├── api-gateway.properties          # Base config
+├── api-gateway-dev.properties      # Dev overrides
+├── api-gateway-docker.properties   # Docker overrides
+├── budget-service.yml
+└── discovery-server.yml
+```
 
-### Practical Example: Show Properties for the Budget Service and API Gateway
+### API Gateway Base Config
 
-#### API Gateway Startup
+The base `api-gateway.properties` defines Gateway routes using Eureka's `lb://` prefix for load-balanced routing:
 
-1. The API Gateway service boots up.
-2. It attempts to retrieve its configuration from the Config Server using `spring-cloud-starter-config`.
-3. If successful, it proceeds with initialization.
-4. If the Config Server is unreachable, the API Gateway will fail to start, preventing any requests from being processed until the issue is resolved.
+```properties
+# config-repo/api-gateway.properties
+spring.cloud.gateway.routes[0].id=user-service
+spring.cloud.gateway.routes[0].uri=lb://user-service
+spring.cloud.gateway.routes[0].predicates[0]=Path=/api/v1/users/**
 
-#### Budget Service Startup
+spring.cloud.gateway.routes[1].id=budget-service
+spring.cloud.gateway.routes[1].uri=lb://budget-service
+spring.cloud.gateway.routes[1].predicates[0]=Path=/v1/api/budgets/**
+```
 
-1. The Budget Service boots up.
-2. It attempts to retrieve its configuration from the Config Server using `spring-cloud-starter-config`.
-3. If successful, it proceeds with initialization and applies the latest budget limits immediately.
-4. If the Config Server is unreachable, the Budget Service will fail to start, ensuring that no budget-related operations can be performed.
+The `lb://budget-service` URI tells the Gateway to look up `budget-service` in Eureka and load-balance across instances. No hardcoded host or port.
+
+### Discovery Server Config
+
+```yaml
+# config-repo/discovery-server.yml
+server:
+  port: 8761
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+```
+
+Eureka itself sets `register-with-eureka: false` — the registry doesn't register with itself.
+
+## Multi-Profile Strategy
+
+The real power is environment-specific overrides. The same API Gateway gets different config depending on its active Spring profile:
+
+**Dev profile** (`api-gateway-dev.properties`):
+```properties
+# Local development
+spring.datasource.url=jdbc:mysql://localhost:3307/apigwdb?serverTimezone=UTC
+eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka
+eureka.client.register-with-eureka=false
+```
+
+**Docker profile** (`api-gateway-docker.properties`):
+```properties
+# Running in Docker
+spring.datasource.url=jdbc:mysql://host.docker.internal:3307/apigwdb?serverTimezone=UTC
+eureka.client.serviceUrl.defaultZone=http://host.docker.internal:8761/eureka
+eureka.client.register-with-eureka=true
+```
+
+The key difference: `localhost` vs `host.docker.internal`. In Docker, containers can't reach the host's `localhost`. The Docker profile also enables Eureka registration (`register-with-eureka=true`) since in Docker you want services to discover each other, while in local dev you might run services individually.
+
+A service activates a profile by setting `spring.profiles.active=docker` — the Config Server automatically merges the base config with the profile-specific overrides.
+
+## Fail-Fast: Why Services Crash Without Config
+
+Services in PFMS import the Config Server with `optional:configserver:`:
+
+```properties
+# In each service's application.properties
+spring.config.import=optional:configserver:http://localhost:8888
+```
+
+The `optional:` prefix means the service will start even if the Config Server is unreachable — it falls back to its local properties. This is a pragmatic choice: during local development, you often don't want to run the Config Server just to test one service. In production, you'd remove the `optional:` prefix to enforce strict dependency — no config server, no startup.
 
 ## Summary
 
-The centralized configuration management strategy in PFMS leverages Spring Cloud Config Server to provide dynamic reconfiguration without service restarts. By using a GitOps workflow and implementing a strict fail-fast dependency model, the system ensures that microservices only start up with valid configurations, maintaining environment consistency and preventing issues caused by misconfigurations.
-
-The Config Server acts as the backbone of this ecosystem, enabling efficient and secure management of configuration properties across all services. With Spring Cloud Config Server, you can achieve zero restarts and ensure a resilient microservices architecture.
-
----
-
-**Astro Frontmatter:**
-
-```yaml
----
-title: Zero Restarts: Implementing a Git-Backed Config Server
-date: 2023-10-05T00:00:00Z
-description: "Master the heart of your microservices architecture with Spring Cloud Config Server, ensuring dynamic reconfiguration without service restarts."
-author: DevOps Evangelist & Technical Writer
----
-```
-
-**Architectural Diagram:**
-
-```mermaid
-graph TD;
-    A[API Gateway] --> B{Config Server Available?};
-    B -- Yes --> C[Initialize];
-    B -- No --> D[Fail to Start];
-    A[Budget Service] --> E{Config Server Available?};
-    E -- Yes --> F[Fetch and Apply Config];
-    E -- No --> G[Fail to Start];
-```
+- **Centralized Git-backed config**: one source of truth, version-controlled, auditable
+- **`clone-on-start`**: slower startup but no first-request delay
+- **Multi-profile overrides**: same service, different config per environment (`dev`, `docker`, `sit`)
+- **`lb://` routes**: Gateway discovers services through Eureka, no hardcoded URLs
+- **`optional:` config import**: flexible for dev, strict for production
