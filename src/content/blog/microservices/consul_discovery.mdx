@@ -1,105 +1,169 @@
 ---
-title: 'The Polyglot Edge: Unified Discovery with Consul'
-description: "Learn how to integrate NestJS and Spring Boot using HashiCorp Consul for a seamless polyglot architecture."
-pubDate: 'Jan 15 2026'
+title: "The Polyglot Edge: Unified Discovery with Consul"
+description: "How the transaction-service registers with Consul using Docker-aware hostname detection, dual-transport NestJS, and graceful deregistration."
+pubDate: 'Feb 10 2026'
 heroImage: '../../../assets/PFMS-consul-server-hero.jpg'
+tags: ['consul', 'nestjs', 'service-discovery', 'docker', 'microservices']
 ---
-## Introduction: Why Polyglot Architectures are the Future
 
-In today's rapidly evolving technology landscape, developers are increasingly adopting polyglot architectures. These architectures allow teams to use multiple programming languages and frameworks in a single project. HashiCorp Consul is a robust tool that facilitates this by providing a unified service map for services written in different languages. Polyglot architectures offer several benefits, including:
+## The Polyglot Problem
 
-- **Flexibility**: Teams can leverage the strengths of each language and framework.
-- **Scalability**: Different components can be scaled independently based on their needs.
-- **Maintainability**: Different teams can work on different parts of the application without interfering with others.
+PFMS uses both Spring Boot (Java) and NestJS (TypeScript). Spring Boot services register with Eureka using `spring-cloud-starter-netflix-eureka-client` — one dependency and you're done. But NestJS has no Eureka client. There's no npm package that speaks Eureka's registration protocol reliably.
 
-However, integrating services written in different languages can be challenging. This is where Consul comes in.
+The solution: run Consul alongside Eureka. Consul exposes a simple HTTP API that any language can call. NestJS services register with Consul; Spring Boot services register with Eureka. The API Gateway routes to both.
 
-## Setup: Configuring Consul in Docker for High Availability
+## The Real ConsulService
 
-To get started, let's configure a high-availability Consul server using Docker. We'll use a single-server configuration for simplicity. Here’s how you can set it up:
-
-```bash
-docker run -d --name consul-server \
-  -p 8500:8500 \
-  -e 'CONSUL_LOCAL_CONFIG={"server": true, "bootstrap_expect": 1, "ui": true}'
-```
-
-- `--name consul-server`: Names the Docker container.
-- `-p 8500:8500`: Maps port 8500 on the host to port 8500 on the container, allowing access to the Consul UI and API.
-- `-e 'CONSUL_LOCAL_CONFIG={"server": true, "bootstrap_expect": 1, "ui": true}'`: Sets environment variables to configure the Consul Server:
-  - `"server": true`: Specifies that this instance is a server node.
-  - `"bootstrap_expect": 1`: Expects only one server in the cluster for simplicity (this should be adjusted based on production requirements).
-  - `"ui": true`: Enables the Consul UI for real-time monitoring.
-
-Once the Consul server is up and running, you can access it via your web browser at `http://localhost:8500`.
-
-## Integration: Mixing NestJS and Spring Boot in a Single Service Map
-
-Let's look at how to integrate a NestJS service (`transaction-service`) with a Spring Boot service (`goal-service`) using Consul.
-
-### Spring Boot Service Registering to Consul
-
-A Spring Boot service can register itself with Consul by adding the necessary dependencies and configuration. For example:
-
-```yaml
-spring:
-  application:
-    name: goal-service
-  cloud:
-    consul:
-      host: localhost
-      port: 8500
-```
-
-When the `goal-service` starts, it sends a request to the Consul Server, providing its service details.
-
-### NestJS Service Finding Spring Boot Service through Consul
-
-The `transaction-service`, written in NestJS, can find other services by querying the Consul registry. For example:
+The `transaction-service` has a hand-written `ConsulService` that handles registration, health checks, and graceful deregistration. Here's the full implementation:
 
 ```typescript
-import { Injectable } from '@nestjs/common';
-import * as axios from 'axios';
-
+// transaction-service/src/service/consul.service.ts
 @Injectable()
-export class GoalServiceClient {
-  private readonly goalServiceUrl: string;
+export class ConsulService implements OnModuleDestroy {
+  private consul: Consul;
+  private readonly logger = new Logger(ConsulService.name);
+  private serviceId: string;
 
   constructor() {
-    this.goalServiceUrl = 'http://consul-server/goal-service';
+    const txnSvcPort = 3002;
+    const consulHost = process.env.CONSUL_HOST || 'localhost';
+    this.consul = new Consul({ host: consulHost, port: 8500 });
+    this.serviceId = `transaction-service-${txnSvcPort}`;
   }
 
-  async getGoals(): Promise<any> {
-    const response = await axios.get(this.goalServiceUrl);
-    return response.data;
+  private getIPAddress(): string {
+    const interfaces = os.networkInterfaces();
+    for (const devName in interfaces) {
+      const iface = interfaces[devName];
+      if (iface) {
+        for (const alias of iface) {
+          if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+            const isDocker = fs.existsSync('/.dockerenv');
+            if (isDocker) {
+              return 'host.docker.internal';
+            }
+            return alias.address;
+          }
+        }
+      }
+    }
+    return '127.0.0.1';
+  }
+
+  async registerService(name: string, port: number) {
+    const hostAddr = this.getIPAddress();
+    const details = {
+      name,
+      id: this.serviceId,
+      address: hostAddr,
+      port,
+      check: {
+        name: `${name} Health Check`,
+        http: `http://${hostAddr}:${port}/health`,
+        interval: '10s',
+        timeout: '5s',
+        deregister_critical_service_after: '30s'
+      },
+    };
+    await this.consul.agent.service.register(details);
+  }
+
+  async onModuleDestroy() {
+    await this.consul.agent.service.deregister(this.serviceId);
   }
 }
 ```
 
-In this example, the `GoalServiceClient` in the `transaction-service` makes a request to the Consul Server's service map endpoint. Consul returns the IP address and port of the `goal-service`, allowing the `transaction-service` to communicate with it.
+Three things worth calling out:
 
-## Monitoring: Using the Consul UI and V1 API for Health Visibility
+### Docker-Aware Hostname Detection
 
-Consul provides both a web-based UI and an HTTP API that you can use to monitor the health and status of your services.
+`fs.existsSync('/.dockerenv')` checks whether the process is running inside a Docker container. Docker creates this file in every container. If it exists, the service registers with `host.docker.internal` instead of the machine's actual IP address — because inside Docker, the real IP is a private bridge network address that Consul (running on the host) can't reach.
 
-### Accessing the Consul UI
+This is a pragmatic hack. It's not a standard Docker pattern, and it breaks the twelve-factor app principle of configuring via environment variables. But it works without requiring any environment variable setup, which matters for developer experience when someone runs `docker-compose up` for the first time.
 
-You can access the Consul UI by navigating to `http://localhost:8500` in your web browser. Here, you can see all registered services, their health statuses, and other details.
+### Health Check Registration
 
-### Health Check for V1 Status API
+Consul doesn't just track which services are alive — it actively pings them. The `check` object tells Consul to hit `http://{host}:{port}/health` every 10 seconds. If the service fails 3 consecutive checks (30s with `deregister_critical_service_after`), Consul removes it from the registry entirely.
 
-A V1 health check ensures that the leader availability is maintained. This is crucial for maintaining a resilient discovery layer.
+### Graceful Deregistration
 
-To perform a health check, you can use the following command:
+`OnModuleDestroy` is a NestJS lifecycle hook that fires during graceful shutdown. The service deregisters itself from Consul before the process exits, so Consul doesn't spend 30 seconds pinging a dead service.
 
-```bash
-curl http://localhost:8500/v1/status/leader
+## Dual-Transport NestJS
+
+The `transaction-service` listens on two ports simultaneously — TCP for microservice messaging, HTTP for health checks:
+
+```typescript
+// transaction-service/src/main.ts
+async function bootstrap() {
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  const httpPort = 3004;  // Consul health checks + REST API
+  const tcpPort = 3002;   // Inter-service messaging
+
+  // TCP transport for microservice communication
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.TCP,
+    options: { host: '0.0.0.0', port: tcpPort },
+  });
+
+  // Register HTTP port with Consul (health checks hit this)
+  const consulService = app.get(ConsulService);
+  await consulService.registerService('transaction-service', httpPort);
+
+  await app.startAllMicroservices();
+  await app.listen(httpPort, '0.0.0.0');
+}
 ```
 
-The expected output should indicate whether a leader node is available or not. If no leader is available, Consul will attempt to elect one based on the configuration.
+Why two ports? TCP is more efficient for inter-service messaging (less overhead than HTTP), but Consul's health checker speaks HTTP. Separating them means health check traffic doesn't compete with business logic on the same port, and the TCP transport can use NestJS's `@MessagePattern` decorators for clean message routing.
 
-## Conclusion
+## Docker-Aware RabbitMQ in the Module
 
-HashiCorp Consul enables seamless communication between services with different language stacks by providing a unified service map. It allows services like `transaction-service` (NestJS) and `goal-service` (Spring Boot) to discover and communicate with each other through the Consul registry. The server-mode flags ensure leader availability, while health checks maintain the resilience of the discovery layer. This architecture demonstrates how diverse tech stacks can be integrated into a single, cohesive, and scalable production ecosystem.
+The same `/.dockerenv` detection pattern appears in the module configuration for RabbitMQ:
 
-By leveraging Consul, you can build robust polyglot architectures that are easier to manage and scale. Whether you’re working with NestJS, Spring Boot, or any other combination of technologies, Consul is your go-to tool for service discovery.
+```typescript
+// transaction-service/src/app.module.ts
+@Module({
+  imports: [
+    ClientsModule.register([
+      {
+        name: ACCOUNT_SERVICE,
+        transport: Transport.RMQ,
+        options: {
+          urls: [`amqp://guest:guest@${fs.existsSync('/.dockerenv')
+            ? 'host.docker.internal' : 'localhost'}:5672`],
+          queue: 'account_queue',
+          queueOptions: { durable: true },
+        },
+      },
+    ]),
+  ],
+  controllers: [AppController],
+  providers: [AppService, ConsulService],
+})
+export class AppModule {}
+```
+
+The `fs.existsSync` call runs at module initialization time — it's evaluated once when the app starts. If running in Docker, connect to RabbitMQ via `host.docker.internal`; otherwise, use `localhost`. The `durable: true` queue option means messages survive RabbitMQ restarts.
+
+## When Consul vs Eureka
+
+| Criteria | Eureka | Consul |
+|----------|--------|--------|
+| Best for | JVM services (Spring Cloud native) | Any language (HTTP API) |
+| Registration | Automatic via Spring dependency | Manual HTTP registration |
+| Health checks | Heartbeat-based (client sends) | Active polling (server pings) |
+| Config management | No (use Config Server) | Yes (built-in KV store) |
+| Setup overhead | One annotation (`@EnableDiscoveryClient`) | Custom service class per language |
+
+In PFMS, the tradeoff is operational overhead (two discovery systems) vs polyglot support. Running both Eureka and Consul means more infrastructure to maintain, but each service gets a native-feeling registration experience. The alternative — forcing NestJS to use a third-party Eureka client — would introduce a fragile dependency on a community library with inconsistent maintenance.
+
+## Summary
+
+- **`fs.existsSync('/.dockerenv')`** detects Docker at runtime — pragmatic but not twelve-factor
+- **Dual-transport NestJS**: TCP for messaging, HTTP for health checks — separation of concerns
+- **`OnModuleDestroy`** ensures clean Consul deregistration on shutdown
+- **`durable: true`** RabbitMQ queues survive broker restarts
+- **Eureka + Consul dual discovery**: operational overhead justified by polyglot support
