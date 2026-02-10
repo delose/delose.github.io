@@ -1,143 +1,194 @@
 ---
 title: "Spring Boot API Gateway"
-description: 'Securing and managing API access is crucial. The Spring Boot API Gateway serves as the central security coordinator for a distributed architecture, handling routing, load balancing, and securing requests through JWT-based authentication and authorization.'
-pubDate: 'Jan 13 2026'
+description: "How PFMS implements reactive security with WebFlux, stateless JWT authentication, and RFC 7807 error handling in the API Gateway."
+pubDate: 'Feb 10 2026'
 heroImage: '../../../assets/PFMS-apigw-hero.jpg'
+tags: ['spring-boot', 'webflux', 'jwt', 'security', 'api-gateway', 'microservices']
 ---
-## Concept: Event-Driven Design
 
-In today's microservices landscape, securing and managing API access is crucial. The Spring Boot API Gateway serves as the central security coordinator for a distributed architecture, handling routing, load balancing, and securing requests through JWT-based authentication and authorization.
+## Why Reactive
 
-## Security Core
+Spring Cloud Gateway is built on Project Reactor and Netty — it's a non-blocking, reactive web server. Traditional Spring MVC security (`@EnableWebSecurity`, `HttpSecurity`, servlet filters) doesn't work here. You need the reactive equivalents: `@EnableWebFluxSecurity`, `ServerHttpSecurity`, and `WebFilter`.
 
-### Deep Dive into JWT, /login, /signup, and Exception Handler
+This isn't optional. If you try to use `@EnableWebSecurity` in a Spring Cloud Gateway application, it will either be ignored or cause a startup error. The reactive security model is fundamentally different from servlet-based security.
 
-#### JSON Web Token (JWT)
+## The Security Filter Chain
 
-JWT is used to secure the `/login` and `/signup` endpoints. When a user logs in or signs up, the gateway generates a JWT that contains user claims, such as username and roles.
-
-```java
-@PostMapping("/login")
-public ResponseEntity<String> login(@RequestBody UserCredentials credentials) {
-    Authentication authentication = authenticate(credentials);
-    String token = generateToken(authentication);
-    return ResponseEntity.ok(token);
-}
-
-private Authentication authenticate(UserCredentials credentials) throws Exception {
-    try {
-        authManager.authenticate(new UsernamePasswordAuthenticationToken(credentials.getUsername(), credentials.getPassword()));
-    } catch (DisabledException e) {
-        throw new Exception("USER_DISABLED", e);
-    } catch (BadCredentialsException e) {
-        throw new Exception("INVALID_CREDENTIALS", e);
-    }
-}
-
-private String generateToken(Authentication authentication) throws Exception {
-    Map<String, Object> claims = new HashMap<>();
-    UserDetails userDetails = ((UserDetails) authentication.getPrincipal());
-    claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
-    claims.put(CLAIM_KEY_AUTHORITIES, userDetails.getAuthorities().stream()
-        .map(GrantedAuthority::getAuthority)
-        .collect(Collectors.toList()));
-    return Jwts.builder()
-        .setClaims(claims)
-        .setIssuedAt(new Date(System.currentTimeMillis()))
-        .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-        .signWith(SignatureAlgorithm.HS512, SECRET_KEY).compact();
-}
-```
-
-#### /login and /signup Endpoints
-
-The `/login` endpoint authenticates the user and returns a JWT. The `/signup` endpoint registers a new user.
+The core of the Gateway's security lives in `SecurityWebFluxConfiguration`:
 
 ```java
-@PostMapping("/signup")
-public ResponseEntity<String> signup(@RequestBody User user) {
-    userService.save(user);
-    return ResponseEntity.ok("User registered successfully");
-}
-```
-
-#### Exception Handler
-
-A centralized Global Exception Handler manages security-specific scenarios like token expiration and invalid signatures.
-
-```java
-@ControllerAdvice
-public class GlobalExceptionHandler {
-
-    @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<String> handleAuthenticationException(AuthenticationException e) {
-        return new ResponseEntity<>("Unauthorized: " + e.getMessage(), HttpStatus.UNAUTHORIZED);
-    }
-
-    // Other exception handlers...
-}
-```
-
-## Infrastructure
-
-### Config Server Link and application.properties
-
-The API Gateway registers with Eureka on port 8761, making it available for service discovery.
-
-```yaml
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-server:
-  port: 8080
-```
-
-It exposes itself to clients on port 8080:
-
-```yaml
-server:
-  port: 8080
-```
-
-### Thymeleaf Dashboard for JVM Metrics
-
-The gateway features an embedded Thymeleaf dashboard for real-time monitoring of JVM memory and CPU metrics. It uses Spring Boot Actuator to expose health and metrics endpoints, which are then accessible via a custom Thymeleaf template.
-
-```html
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>API Gateway Metrics</title>
-</head>
-<body>
-    <h1>API Gateway Metrics</h1>
-    <div th:with="metrics=${@metricRepository.metrics}">
-        Memory Usage: <span th:text="${metrics['jvm.memory.used'] / 1024 / 1024} MB"></span><br/>
-        CPU Load: <span th:text="${metrics['system.cpu.usage']}"></span>
-    </div>
-</body>
-</html>
-```
-
-## Bonus
-
-### Highlight the embedded Thymeleaf dashboard for JVM monitoring
-
-The gateway provides a powerful way to monitor its performance through an embedded Thymeleaf dashboard. This dashboard displays critical metrics like memory usage and CPU load, making it easier to maintain and optimize the API Gateway.
-
-```java
+// api-gateway/.../config/SecurityWebFluxConfiguration.java
 @Configuration
-public class ActuatorConfig {
+@EnableWebFluxSecurity
+public class SecurityWebFluxConfiguration {
+    private final CustomReactiveAuthenticationManager customReactiveAuthenticationManager;
+    private final ServerJwtAuthenticationConverter serverJwtAuthenticationConverter;
 
     @Bean
-    public EndpointWebExtensionEndpointHandlerMapping endpointWebExtensionEndpointHandlerMapping(
-            Collection<AbstractEndpoint<?>> endpoints) {
-        return new EndpointWebExtensionEndpointHandlerMapping(endpoints);
+    public SecurityWebFilterChain securityWebFilterChain(
+            ServerHttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) {
+
+        AuthenticationWebFilter authenticationWebFilter =
+            new AuthenticationWebFilter(customReactiveAuthenticationManager);
+        authenticationWebFilter.setServerAuthenticationConverter(serverJwtAuthenticationConverter);
+
+        http
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .authorizeExchange(exchanges -> exchanges
+                .pathMatchers("/auth/**", "/dashboard", "/actuator").permitAll()
+                .anyExchange().authenticated()
+            )
+            .csrf(ServerHttpSecurity.CsrfSpec::disable)
+            .securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
+            .exceptionHandling(exceptionHandling -> exceptionHandling
+                .authenticationEntryPoint((exchange, ex) -> Mono.error(ex))
+                .accessDeniedHandler((exchange, ex) -> Mono.error(ex))
+            )
+            .addFilterAt(authenticationWebFilter, AUTHENTICATION);
+        return http.build();
     }
 }
 ```
 
-### Conclusion
+Key decisions:
 
-The Spring Boot API Gateway is a robust solution for managing security and monitoring in a microservices architecture. By following the concepts covered in this post, you can build a secure and efficient gateway that enhances the reliability of your system.
+- **`NoOpServerSecurityContextRepository.getInstance()`** — this makes the security entirely stateless. No server-side session, no session cookie. Every request must carry a JWT. This is critical for horizontal scaling — you can run 10 Gateway replicas without shared session storage.
+- **`pathMatchers("/auth/**").permitAll()`** — authentication endpoints are excluded from JWT validation (you need to be able to log in without already being logged in).
+- **`Mono.error(ex)` in exception handlers** — instead of writing a response directly, exceptions are propagated to the global exception handler (more on that below).
+- **CSRF disabled** — standard for stateless JWT APIs. CSRF protection is for cookie-based sessions.
+
+## JWT Token Extraction: The Reactive Way
+
+In servlet-based Spring Security, you'd write a `OncePerRequestFilter` to extract the JWT. In WebFlux, you implement `ServerAuthenticationConverter`:
+
+```java
+// api-gateway/.../config/ServerJwtAuthenticationConverter.java
+@Component
+public class ServerJwtAuthenticationConverter implements ServerAuthenticationConverter {
+    private final JwtService jwtService;
+
+    @Override
+    public Mono<Authentication> convert(ServerWebExchange exchange) {
+        return Mono.justOrEmpty(
+                exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION))
+            .filter(authHeader -> authHeader.startsWith("Bearer "))
+            .map(authHeader -> authHeader.substring(7))
+            .flatMap(jwt -> {
+                String userEmail = jwtService.extractUsername(jwt);
+                if (userEmail == null) {
+                    return Mono.empty();
+                }
+                return Mono.just(
+                    new UsernamePasswordAuthenticationToken(userEmail, jwt, null));
+            });
+    }
+}
+```
+
+This is a purely reactive chain: `Mono.justOrEmpty()` handles the case where there's no `Authorization` header (returns empty Mono, meaning no authentication attempt). The JWT string is stored as the credentials field of the `UsernamePasswordAuthenticationToken` — it'll be validated in the next step.
+
+## Bridging Blocking and Reactive
+
+Here's the tricky part. The `CustomReactiveAuthenticationManager` needs to call `UserDetailsService.loadUserByUsername()`, which is a blocking JPA call. You can't make blocking calls on a Reactor event loop — it would stall all concurrent requests.
+
+```java
+// api-gateway/.../config/CustomReactiveAuthenticationManager.java
+@Component
+public class CustomReactiveAuthenticationManager implements ReactiveAuthenticationManager {
+    private final UserDetailsService userDetailsService;
+    private final JwtService jwtService;
+
+    @Override
+    public Mono<Authentication> authenticate(Authentication authentication) {
+        String userEmail = authentication.getName();
+        String jwt = (String) authentication.getCredentials();
+
+        return Mono.fromCallable(() -> {
+            UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
+            if (userDetails != null && jwtService.isTokenValid(jwt, userDetails)) {
+                return (Authentication) new UsernamePasswordAuthenticationToken(
+                    userDetails, null, userDetails.getAuthorities()
+                );
+            } else {
+                throw new BadCredentialsException("Invalid token or user details.");
+            }
+        }).subscribeOn(Schedulers.boundedElastic());
+    }
+}
+```
+
+`Mono.fromCallable()` wraps the blocking call. `.subscribeOn(Schedulers.boundedElastic())` moves the execution to a bounded thread pool designed for blocking I/O — separate from the Netty event loop threads.
+
+**The tradeoff:** `boundedElastic` has a limited thread pool (default: 10x CPU cores, capped at a queue of 100,000). Under extreme load, this becomes the bottleneck — every JWT validation requires a thread from this pool to make the JPA call. A fully non-blocking solution would use a reactive database driver (like R2DBC), but that would require rewriting the entire user persistence layer.
+
+## RFC 7807 ProblemDetail Error Handling
+
+When authentication fails, the Gateway returns structured error responses following RFC 7807:
+
+```java
+// api-gateway/.../exception/ReactiveGlobalExceptionHandler.java
+@Component
+@Order(-2)
+public class ReactiveGlobalExceptionHandler implements WebExceptionHandler {
+
+    @Override
+    public Mono<Void> handle(ServerWebExchange exchange, Throwable ex) {
+        if (exchange.getResponse().isCommitted()) {
+            return Mono.error(ex);
+        }
+        return handleException(ex, request)
+            .flatMap(response -> response.writeTo(exchange, context));
+    }
+
+    private Mono<ServerResponse> handleException(Throwable ex, ServerRequest request) {
+        HttpStatus status = getStatus(ex);
+        String messageCode = getDetailMessageCode(ex);
+
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(status, errorMessage);
+        problemDetail.setTitle(status.getReasonPhrase());
+        problemDetail.setProperty("errorCode", messageCode);
+
+        return ServerResponse.status(status).bodyValue(problemDetail);
+    }
+
+    private String getDetailMessageCode(Throwable ex) {
+        if (ex instanceof BadCredentialsException) return "error.auth.bad_credentials";
+        if (ex instanceof ExpiredJwtException)     return "error.auth.token_expired";
+        if (ex instanceof SignatureException)       return "error.auth.invalid_signature";
+        if (ex instanceof MalformedJwtException)    return "error.auth.malformed_token";
+        if (ex instanceof InsufficientAuthenticationException) return "error.auth.missing_token";
+        if (ex instanceof DuplicateKeyException)    return "error.db.duplicate_key";
+        return "error.general.internal_error";
+    }
+}
+```
+
+- **`@Order(-2)`** — this handler must run before Spring's default error handlers, which have order `-1`. Without this, Spring's built-in handler would catch exceptions first and return a generic error page.
+- **`ProblemDetail`** — Spring 6's implementation of RFC 7807. Returns a standardized JSON body with `status`, `title`, `detail`, and custom properties like `errorCode`.
+- **Per-exception error codes** — the frontend can switch on `errorCode` values like `error.auth.token_expired` to show specific UI messages (e.g., "Session expired, please log in again").
+
+## Gateway Routing via Eureka
+
+The Gateway routes are defined in the Config Server's `api-gateway.properties`, not hardcoded:
+
+```properties
+# config-repo/api-gateway.properties
+spring.cloud.gateway.routes[0].id=user-service
+spring.cloud.gateway.routes[0].uri=lb://user-service
+spring.cloud.gateway.routes[0].predicates[0]=Path=/api/v1/users/**
+
+spring.cloud.gateway.routes[1].id=budget-service
+spring.cloud.gateway.routes[1].uri=lb://budget-service
+spring.cloud.gateway.routes[1].predicates[0]=Path=/v1/api/budgets/**
+```
+
+`lb://budget-service` resolves through Eureka — the Gateway looks up all instances of `budget-service` and load-balances across them. Adding a new service requires adding a route in the config repo and restarting the Gateway (or using Spring Cloud Bus for hot reload).
+
+## Summary
+
+- **`@EnableWebFluxSecurity`** — mandatory for Spring Cloud Gateway, traditional MVC security won't work
+- **`NoOpServerSecurityContextRepository`** — stateless JWT, no server-side sessions, scales horizontally
+- **`Schedulers.boundedElastic()`** — bridges blocking JPA calls into the reactive pipeline, at the cost of a bounded thread pool
+- **`@Order(-2)` exception handler** — must precede Spring's defaults to catch auth errors
+- **RFC 7807 `ProblemDetail`** — structured error responses with per-exception error codes
+- **`lb://` routing** — service discovery via Eureka, load-balanced automatically
