@@ -1,148 +1,164 @@
 ---
 title: "Account Service Microservice with NestJS"
-description: 'A Deep Dive into Event-Driven Design'
-pubDate: 'Jan 13 2026'
+description: "How PFMS implements event-driven account creation with RabbitMQ, dual-transport NestJS, and cross-service message passing."
+pubDate: 'Feb 10 2026'
 heroImage: '../../../assets/PFMS-account-service-hero.jpg'
+tags: ['nestjs', 'rabbitmq', 'event-driven', 'microservices', 'typescript']
 ---
-## Concept: Event-Driven Design
 
-Event-driven design (EDD) is an architectural style where the flow of data and control is based on events, which are signals that something has occurred. In a microservices architecture like the one described, EDD plays a crucial role in enabling loose coupling between services and facilitating asynchronous communication.
+## What the Account Service Actually Does
 
-The main components involved in EDD within our Account Service microservice include:
+The account-service is not a full CRUD service. It's a lightweight event listener. Its only job: receive `account-created` events from the transaction-service via RabbitMQ and log them. The transaction-service handles the HTTP endpoint and emits the event; the account-service reacts to it.
 
-1. **Event Sources**: These are the systems or services that generate events. In our case, the `TransactionService` generates 'account create' events when new accounts are created.
-2. **Message Brokers**: Services like RabbitMQ act as intermediaries that receive events from event sources and forward them to subscribing services. This ensures that the event-driven communication is decoupled from the service-to-service interaction.
-3. **Event Consumers**: These are services that listen for and handle incoming events. The `AccountService` consumes 'account create' events from RabbitMQ, processes the data, and persists it in PostgreSQL.
+This separation means account creation is asynchronous — the HTTP response returns before the account-service has processed the event.
 
-## Deep Dive: Code Snippets
+## The Event Flow
 
-### 1. AccountController
-
-The `AccountController` handles incoming HTTP requests related to account management. It uses a service (`AccountService`) to perform business logic operations and communicates with the database through a repository (`AccountRepository`).
-
-```typescript
-// account.controller.ts
-import { Controller, Post, Body } from '@nestjs/common';
-import { AccountDto } from './account.dto';
-import { AccountService } from './account.service';
-
-@Controller('accounts')
-export class AccountController {
-  constructor(private readonly accountService: AccountService) {}
-
-  @Post()
-  createAccount(@Body() accountDto: AccountDto) {
-    return this.accountService.create(accountDto);
-  }
-}
+```
+POST /account (HTTP)
+     │
+     ▼
+transaction-service
+     │ emit("account-created", account)
+     ▼
+RabbitMQ (account_queue, durable)
+     │
+     ▼
+account-service
+     │ @MessagePattern("account-created")
+     ▼
+console.log(account)
 ```
 
-### 2. AccountService
+## The Producer: Transaction Service
 
-The `AccountService` contains the business logic for creating and managing accounts. It uses RabbitMQ to publish events and the PostgreSQL repository to persist data.
+The transaction-service exposes the HTTP endpoint and emits to RabbitMQ:
 
 ```typescript
-// account.service.ts
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { AccountDto } from './account.dto';
-import { AccountEntity } from './account.entity';
-import { RabbitMQService } from '../rabbitmq/rabbitmq.service';
-
-@Injectable()
-export class AccountService {
+// transaction-service/src/app.controller.ts
+@Controller()
+export class AppController {
   constructor(
-    @InjectRepository(AccountEntity)
-    private readonly accountRepository: Repository<AccountEntity>,
-    private readonly rabbitMqService: RabbitMQService,
-  ) {}
+    private readonly appService: AppService,
+    @Inject(ACCOUNT_SERVICE) private readonly accountRMQClient: ClientProxy
+  ) {
+    this.accountRMQClient.status.subscribe(status => {
+      console.log('RMQ Client Status:', status);
+    });
+  }
 
-  async create(accountDto: AccountDto) {
-    const newAccount = this.accountRepository.create(accountDto);
-    await this.accountRepository.save(newAccount);
-
-    // Publish 'account create' event to RabbitMQ
-    this.rabbitMqService.publish('account created', { account: newAccount });
-
-    return newAccount;
+  @Post('account')
+  async createAccount(@Body() account: any) {
+    try {
+      await lastValueFrom(this.accountRMQClient.emit("account-created", account));
+      console.log("Account emitted successfully:", account);
+    } catch (err) {
+      console.error("Failed to emit to RMQ:", err);
+    }
   }
 }
 ```
 
-### 3. RabbitMQService
+A few things to note:
 
-The `RabbitMQService` handles communication with RabbitMQ, including publishing events and consuming messages.
+- **`@Inject(ACCOUNT_SERVICE)`** — the `ClientProxy` is a NestJS abstraction over the RabbitMQ connection. `ACCOUNT_SERVICE` is just a string constant (`"ACCOUNT_SERVICE"`) used as the injection token.
+- **`emit()` vs `send()`** — `emit()` is fire-and-forget (no response expected). `send()` expects a response from the consumer. Account creation is one-way, so `emit()` is correct.
+- **`lastValueFrom()`** — `emit()` returns an Observable. Wrapping it in `lastValueFrom()` converts it to a Promise, so `await` actually waits for the message to be dispatched to RabbitMQ. Without this, the `try/catch` wouldn't catch RabbitMQ connection failures.
+
+## Module Registration: RabbitMQ Client
+
+The RabbitMQ client is configured in the transaction-service's module:
 
 ```typescript
-// rabbitmq.service.ts
-import { Injectable } from '@nestjs/common';
-import * as amqp from 'amqplib';
+// transaction-service/src/app.module.ts
+@Module({
+  imports: [
+    ClientsModule.register([
+      {
+        name: ACCOUNT_SERVICE,
+        transport: Transport.RMQ,
+        options: {
+          urls: [`amqp://guest:guest@${fs.existsSync('/.dockerenv')
+            ? 'host.docker.internal' : 'localhost'}:5672`],
+          queue: 'account_queue',
+          queueOptions: { durable: true },
+        },
+      },
+    ]),
+  ],
+  controllers: [AppController],
+  providers: [AppService, ConsulService],
+})
+export class AppModule {}
+```
 
-@Injectable()
-export class RabbitMQService {
-  private channel: amqp.Channel;
-  private connection: amqp.Connection;
+The `fs.existsSync('/.dockerenv')` check at module initialization swaps `localhost` for `host.docker.internal` when running in Docker. `durable: true` means the queue survives RabbitMQ restarts — messages aren't lost if the broker bounces.
 
-  async connect() {
-    this.connection = await amqp.connect('amqp://localhost');
-    this.channel = await this.connection.createChannel();
-    await this.channel.assertQueue('account_created_queue');
+## The Consumer: Account Service
+
+The account-service bootstrap connects both an HTTP server and a RabbitMQ microservice transport:
+
+```typescript
+// account-service/src/main.ts
+async function bootstrap() {
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const isDocker = fs.existsSync('/.dockerenv');
+  const rabbitHost = isDocker ? 'host.docker.internal' : 'localhost';
+  const rabbitMQUrl = process.env.RABBITMQ_URL || `amqp://guest:guest@${rabbitHost}:5672`;
+  const httpPort = 3003;
+
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.RMQ,
+    options: {
+      urls: [rabbitMQUrl],
+      queue: 'account_queue',
+      queueOptions: { durable: true },
+    },
+  });
+
+  await app.startAllMicroservices();
+  await app.listen(httpPort, '0.0.0.0');
+}
+```
+
+Two transports, one NestJS app:
+- **HTTP on port 3003** — serves the `/health` endpoint for readiness checks
+- **RabbitMQ** — listens on `account_queue` for incoming messages
+
+The actual message handler is minimal:
+
+```typescript
+// account-service/src/app.controller.ts
+@Controller()
+export class AppController {
+
+  @Get('health')
+  health(): string {
+    return 'OK';
   }
 
-  publish(eventType: string, data: any) {
-    this.channel.publish('account_created_queue', eventType, Buffer.from(JSON.stringify(data)));
+  @MessagePattern("account-created")
+  handleAccountCreated(@Payload() account: any) {
+    console.log('[Account-Service]: Received account: ', account);
   }
 }
 ```
 
-## Deployment: Docker/Consul
+`@MessagePattern("account-created")` tells NestJS to route any RabbitMQ message with that pattern to this handler. The `@Payload()` decorator extracts the message body. Right now it just logs — in a production system, this is where you'd persist the account to a database.
 
-### 3.1. Backend Services (Microservices)
+## Why RabbitMQ (Not Kafka) Here
 
-The microservices are containerized using Docker and can be managed with Docker Compose. Each service is built using Spring Boot and can be deployed independently or together.
+PFMS uses both Kafka and RabbitMQ. The choice for account creation is deliberate:
 
-##### Running the Services with Docker Compose
+- **RabbitMQ** is used here because account creation is **point-to-point**: one producer (transaction-service), one consumer (account-service). RabbitMQ's queue model is a natural fit — messages sit in a durable queue until the consumer acknowledges them.
+- **Kafka** is used elsewhere (budget-service → notification-service) because budget events are **fan-out**: multiple consumers might subscribe (notifications, analytics, auditing). Kafka's topic model supports multiple consumer groups natively.
 
-```bash
-docker-compose up
-```
+Using both adds operational overhead (two broker systems to maintain), but each pattern gets the right tool.
 
-This command will start all the services, including the API Gateway, User Service, Budget Service, and more.
+## Summary
 
-### 3.2. Front-End Deployment
-
-The React UI can be served using Nginx or another web server, and it can be integrated into the Docker Compose setup or deployed separately on platforms like Netlify or Vercel.
-
-#### Running the React UI
-
-1. **Development Mode**
-
-```bash
-cd pfms-ui
-npm start
-```
-
-This will start the development server at http://localhost:3000.
-
-### 4. Health Check for the API Gateway
-
-To verify that the API Gateway is running correctly, you can perform a health check using `curl`.
-
-```bash
-curl http://localhost:8080/actuator/health
-```
-
-The expected output is:
-
-```json
-{"status":"UP"}
-```
-
-### 5. Reactive Microservices Architecture with Messaging
-
-In our microservices architecture, RabbitMQ acts as the message broker, facilitating asynchronous communication between services. The Account Service listens for 'account create' events from the Transaction Service and processes them accordingly.
-
-By leveraging event-driven design and containerized deployment, our Account Service is designed to be scalable, resilient, and easy to maintain.
-
-I hope this comprehensive guide helps you understand how to implement a robust and efficient Account Service microservice using NestJS. If you have any questions or need further assistance, feel free to ask!
+- **Lightweight event listener** — the account-service has no CRUD, just `@MessagePattern`
+- **`lastValueFrom(emit())`** — converts Observable to Promise for proper error handling
+- **Dual transport** — HTTP for health checks, RabbitMQ for event consumption
+- **`durable: true` queues** — messages survive broker restarts
+- **RabbitMQ for point-to-point** — right tool for single-consumer patterns
