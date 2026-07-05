@@ -56,6 +56,20 @@ import metaImage from "../assets/PFMS-architectural-diagram.jpg";
 
 				<hr />
 
+				<!-- Gaby App Announcement -->
+				<section class="app-announcement">
+					<span class="announcement-badge">📱 Coming Soon to the App Store</span>
+					<h2>Gaby — your offline Spanish conversation partner</h2>
+					<p>
+						A private, on-device AI tutor for practicing spoken Spanish. Speak or type,
+						get gentle corrections, and build a daily habit — with <strong>no accounts and no
+						tracking</strong>. Every conversation stays on your iPhone.
+					</p>
+					<a href="/gaby/" class="btn btn-primary">Learn more →</a>
+				</section>
+
+				<hr />
+
 				<!-- Value Proposition -->
 				<section class="value-prop">
 					<h2>What You'll Learn Here 💡</h2>
@@ -361,6 +375,45 @@ cd pfms
 				border: none;
 				border-top: 2px solid #e5e7eb;
 				margin: 4rem 0;
+			}
+
+			/* Gaby App Announcement */
+			.app-announcement {
+				text-align: center;
+				background: linear-gradient(135deg, #c1440e 0%, #e07a5f 100%);
+				color: white;
+				padding: 3rem 2rem;
+				border-radius: 16px;
+			}
+
+			.app-announcement h2 {
+				color: white;
+				margin-top: 1rem;
+			}
+
+			.app-announcement p {
+				max-width: 640px;
+				margin: 0 auto 2rem;
+				font-size: 1.125rem;
+				line-height: 1.6;
+			}
+
+			.announcement-badge {
+				display: inline-block;
+				padding: 0.35rem 0.9rem;
+				background: rgba(255, 255, 255, 0.2);
+				border-radius: 999px;
+				font-size: 0.875rem;
+				font-weight: 600;
+			}
+
+			.app-announcement .btn-primary {
+				background: white;
+				color: #c1440e;
+			}
+
+			.app-announcement .btn-primary:hover {
+				background: #fff5f2;
 			}
 
 			/* Hero Section */
