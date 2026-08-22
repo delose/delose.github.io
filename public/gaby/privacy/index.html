@@ -17,25 +17,25 @@
 <body>
 <h1>Privacy Policy for Gaby</h1>
 <p class="meta">
-  Effective date: 2026-06-28<br>
-  App: Gaby — Spanish conversation practice<br>
+  Effective date: 2026-08-14<br>
+  App: Gaby — Spanish practice for moving to Spain<br>
   Developer: Eugene Sergio Castro De Los Santos<br>
   Contact: <a href="mailto:support@edsa.tech">support@edsa.tech</a>
 </p>
 
 <blockquote>
   Plain-language summary: <strong>Gaby collects nothing about you.</strong> Everything —
-  your conversations, your profile, what Gaby remembers, your voice — stays on
-  your device. There are no accounts, no analytics, no tracking, and no servers
-  that we operate receive your data.
+  your progress, your preferences, your voice — stays on your device. The app
+  makes no network requests at all: there are no accounts, no analytics, no
+  tracking, and no servers of ours for your data to reach.
 </blockquote>
 
 <h2>1. The short version</h2>
-<p>Gaby is an offline, on-device Spanish practice app. The AI that talks with you
-runs entirely on your iPhone. We do not have a backend, we do not have user
-accounts, and we never receive your messages, your voice, or any personal
-information. Because we collect nothing, there is nothing for us to sell, share,
-or lose.</p>
+<p>Gaby is an offline Spanish practice app. Everything it says to you is authored
+text that ships inside the app, and everything you say is checked on your own
+device. We do not have a backend, we do not have user accounts, and we never
+receive your answers, your voice, or any personal information. Because we
+collect nothing, there is nothing for us to sell, share, or lose.</p>
 
 <h2>2. Information we collect</h2>
 <p><strong>None that leaves your device.</strong> Gaby does not collect, transmit, or store any
@@ -44,10 +44,8 @@ advertising SDKs, and no third-party trackers.</p>
 <p>The following data is created and stored <strong>only on your device</strong> (in the app's
 local storage / iOS UserDefaults), and is removed when you delete the app:</p>
 <ul>
-  <li><strong>Your profile</strong> — the name, occupation, interest, and reason you enter during
-    onboarding, used to personalize Gaby's conversation.</li>
-  <li><strong>Your conversations</strong> — the Spanish chats you have with Gaby.</li>
-  <li><strong>"About me" memory</strong> — facts you explicitly confirm for Gaby to remember.</li>
+  <li><strong>Your progress</strong> — which situations and lessons you have completed, and at
+  which level.</li>
   <li><strong>Preferences</strong> — chosen voice, speaking rate, theme, and reminder settings.</li>
 </ul>
 <p>None of this is ever sent off the device by Gaby.</p>
@@ -67,15 +65,13 @@ frameworks. Their use is governed by
 framework to translate between Spanish and your language. Translation runs
 locally; the developer receives nothing.</p>
 
-<h2>5. The AI language model</h2>
-<p>On first launch, Gaby downloads its language model (~1.8 GB) one time from
-<strong>Hugging Face</strong> so the app can run fully offline afterward. As with any
-internet download, your device connects to Hugging Face's servers and that
-request includes your device's IP address. <strong>Gaby sends no account information,
-profile, conversation, or other personal data</strong> in this request — it only
-fetches the model files. Hugging Face's handling of that connection is governed
-by their own privacy policy. After this one-time download, the model runs
-entirely on your device and your conversations never leave your iPhone.</p>
+<h2>5. There is no AI language model</h2>
+<p>Earlier versions of Gaby downloaded a ~1.8 GB language model from Hugging Face on
+first launch. <strong>That is gone.</strong> Gaby ships no model, downloads nothing, and runs
+no inference of any kind. Every Spanish sentence and every correction in the app
+is authored text that ships inside the app bundle.</p>
+<p>If you used an affected version, the downloaded model was stored in your app's
+cache and is removed when you update or delete the app.</p>
 
 <h2>6. Notifications</h2>
 <p>If you enable practice reminders, Gaby schedules <strong>local notifications</strong> on your
@@ -83,27 +79,28 @@ device. Reminder text is generated on-device. No notification data is sent to a
 server.</p>
 
 <h2>7. Network use</h2>
-<p>Gaby's only network activity is:</p>
-<ol>
-  <li>The <strong>one-time model download</strong> described in Section 5.</li>
-  <li><strong>Apple-managed downloads</strong> of on-device speech/translation assets, handled
-    by iOS (not by the developer).</li>
-</ol>
-<p>There is no other network communication, no telemetry, and no background data
-collection.</p>
+<p><strong>Gaby makes no network requests.</strong> The app contains no networking code and
+needs no connection to do anything it does. It works with the device in
+aeroplane mode.</p>
+<p>The only network activity you may observe is <strong>Apple-managed downloads</strong> of
+on-device speech and translation assets, requested by iOS itself rather than by
+Gaby. There is no telemetry, no analytics, and no background data collection.</p>
 
 <h2>8. Data sharing</h2>
 <p>We do not share, sell, rent, or disclose your data to anyone, because we do not
 collect it. There are no third-party data recipients.</p>
 
 <h2>9. Children's privacy</h2>
-<p>Gaby does not collect personal information from anyone, including children. The
-app contains AI-generated conversational content (see the App Store age rating).</p>
+<p>Gaby does not collect personal information from anyone, including children. All
+conversational content in the app is written by a person and fixed at release —
+there is no generated content.</p>
 
 <h2>10. Your control and data deletion</h2>
 <p>All data Gaby creates lives on your device. To delete it, <strong>delete the app</strong> —
-this removes your profile, conversations, memory, and preferences. There is no
-server-side copy to request.</p>
+this removes your progress and preferences. There is no
+server-side copy to request. You can also erase everything without deleting the
+app: <strong>Settings → Erase all data and start over</strong> (the gear in the top-right of
+any tab).</p>
 
 <h2>11. Changes to this policy</h2>
 <p>If this policy changes, we will update the effective date above and post the
@@ -111,21 +108,12 @@ revised policy at the same URL. Material changes will be reflected in a future
 app update.</p>
 
 <h2>12. Contact</h2>
-<p>Questions about this policy: <a href="mailto:support@edsa.tech">support@edsa.tech</a></p>
+<p>Questions about this policy: <strong><a href="mailto:support@edsa.tech">support@edsa.tech</a></strong></p>
 
 <hr>
 
-<h2>Appendix — App Store "App Privacy" label mapping</h2>
-<p>Use this when filling out <strong>App Privacy</strong> in App Store Connect:</p>
-<ul>
-  <li><strong>Data collection:</strong> select <strong>"Data Not Collected."</strong> Nothing leaves the
-    device to a developer-controlled server.</li>
-  <li>This declaration covers the developer's own collection. Apple's OS-level
-    speech/translation frameworks and the one-time Hugging Face model download are
-    not developer data collection and do not change the "Data Not Collected"
-    answer.</li>
-  <li>If App Store Connect asks about <strong>tracking</strong>: <strong>No</strong> — Gaby does not track
-    users across apps or websites.</li>
-</ul>
+<p class="meta">
+  See also <a href="/gaby/support/">Support</a>.
+</p>
 </body>
 </html>
