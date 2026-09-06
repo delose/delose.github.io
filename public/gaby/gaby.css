@@ -549,3 +549,59 @@ p  { margin: 0 0 1rem; }
   .site-head__inner { gap: .5rem; }
   .brand { font-size: 1.3rem; }
 }
+
+/* ─── Screens strip ──────────────────────────────────────────────────────────
+   Real captures from the shipping app, added 2026-09-06. The hero iPhone stays
+   CSS — this is the separate thing it cannot do: show the Collection, the level
+   picker and a finished lesson.
+
+   A phone screenshot is 415x900 — over 2:1 tall. Laid out at full aspect in a
+   row of six it becomes a wall of glass that dwarfs everything around it, which
+   is exactly what it did on the first attempt. So the cards are a FIXED height
+   and crop from the top: you get the part of each screen that identifies it
+   (the title, the first row) at a size that sits inside the section instead of
+   swallowing it. Do not restore the full aspect ratio.
+
+   Same-origin JPEGs in /gaby/screens/ — no third-party request, which is the
+   part of "no external images" that has to stay true. ~350 KB for six.        */
+.screens {
+  display: flex;
+  gap: clamp(0.75rem, 1.6vw, 1.1rem);
+  overflow-x: auto;
+  padding: 0.4rem 0 1.2rem;
+  margin-top: clamp(1.6rem, 3vw, 2.4rem);
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.screens figure {
+  margin: 0;
+  flex: 0 0 auto;
+  width: 176px;
+  scroll-snap-align: start;
+}
+.screens img {
+  display: block;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: top center;
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  background: var(--paper-2);
+}
+.screens figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.screens figcaption b {
+  display: block;
+  font-weight: 800;
+  margin-bottom: 0.1rem;
+}
+@media (max-width: 680px) {
+  .screens figure { width: 148px; }
+  .screens img { height: 252px; }
+}

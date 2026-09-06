@@ -95,6 +95,17 @@ and footer column heads. Palette tokens live at the top of `gaby.css`
 The hero iPhone is **CSS, not an image** (`.phone` / `.ui-*`) — it reproduces the app's
 "At the tapas bar" correction screen. Update it if that screen changes.
 
+**Screens strip** (`.screens`, added 2026-09-06) — six real captures in
+`public/gaby/screens/`, inside the teal "What's inside" section. It exists to
+show what the CSS hero cannot: the Collection, the level picker, a finished
+lesson. Two rules:
+- The cards are a **fixed 300 px height, cropped from the top**. A phone
+  screenshot is 415×900, over 2:1 tall; laid out at full aspect in a row of six
+  it becomes a wall of glass that dwarfs the section. Do not restore the aspect ratio.
+- The JPEGs are **same-origin**. That is not a break of "no external images" —
+  the page still makes no third-party request, which is the part that matters.
+  ~350 KB for six. Re-export from `~/apps/gaby/tools/appstore-screenshots/screens/`.
+
 **Why it isn't Astro.** It lives in `public/` on purpose. Astro copies `public/`
 verbatim to `dist/`, so these pages ship byte-for-byte with no build step, no
 framework, no JS and no analytics — which is the point: Gaby's whole pitch is that
