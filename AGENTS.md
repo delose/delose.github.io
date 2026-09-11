@@ -86,25 +86,44 @@ public/gaby/
 ```
 
 **Design language.** Neo-brutalist, matching the app's own warmth: full-bleed saturated
-colour blocks stacked in a fixed rhythm (cream hero → sun marquee → blue → cream → teal →
-cream → terracotta → ink → coral → sun → ink footer), every block separated by a 3 px black
-rule; cream cards with `3px solid ink` borders and a hard `6px 6px 0` offset shadow; huge
+colour blocks stacked in a fixed rhythm (see **Section rhythm** below), every block
+separated by a 3 px black rule; cream cards with `3px solid ink` borders and a hard `6px 6px 0` offset shadow; huge
 tight headlines; monospace uppercase micro-labels (`.mono`, `.eyebrow`) for kickers, meta
 and footer column heads. Palette tokens live at the top of `gaby.css`
 (`--terracotta #c1440e`, `--coral`, `--teal`, `--blue`, `--sun`, `--ink`, `--paper`).
 The hero iPhone is **CSS, not an image** (`.phone` / `.ui-*`) — it reproduces the app's
 "At the tapas bar" correction screen. Update it if that screen changes.
 
-**Screens strip** (`.screens`, added 2026-09-06) — six real captures in
-`public/gaby/screens/`, inside the teal "What's inside" section. It exists to
-show what the CSS hero cannot: the Collection, the level picker, a finished
-lesson. Two rules:
+**Screens strip** (`.screens`, added 2026-09-06, made a marquee 2026-09-12) — six
+real captures in `public/gaby/screens/`, in their own dark band (`.s--night`)
+directly below the hero. It sits that high on purpose: it is the page's only real
+proof, and the question a store visitor actually has is "what does this look
+like". Four rules:
 - The cards are a **fixed 300 px height, cropped from the top**. A phone
   screenshot is 415×900, over 2:1 tall; laid out at full aspect in a row of six
   it becomes a wall of glass that dwarfs the section. Do not restore the aspect ratio.
 - The JPEGs are **same-origin**. That is not a break of "no external images" —
   the page still makes no third-party request, which is the part that matters.
   ~350 KB for six. Re-export from `~/apps/gaby/tools/appstore-screenshots/screens/`.
+- **The track holds four copies of the six shots** and the keyframe slides exactly
+  one copy (`6 * (--screen-w + --screens-gap)`) before looping. Copies two to four
+  are `aria-hidden="true"` with `alt=""`. If you add a seventh shot, change
+  `--screen-w`, or drop a copy, **update the `6` in the keyframe and re-check the
+  budget**: `(copies - 1) x 6 x (w + gap)` must exceed the widest viewport you care
+  about, or the loop will visibly jump. It currently covers ~3460 px.
+- The strip has `tabindex="0"` so it is a real tab stop. That is not decoration:
+  it is what makes `:focus-within` reachable (nothing inside it is focusable), so
+  a keyboard user can stop the motion, and it is what makes the reduced-motion
+  scroller operable. `prefers-reduced-motion` drops the animation, hides the
+  duplicate copies and restores the scroll-snap strip.
+
+**Section rhythm.** The bands run cream hero → `--night` screens → sun ticker →
+blue → cream → teal → cream → terracotta → ink → coral → sun → ink footer, each
+cut by a 3 px black rule. Two things that look arbitrary but are not: the text
+ticker sits *below* the screens band so the first screenful never stacks two
+moving strips, and `--night` (#123a4a, lifted from the app's own "Corrections you
+can trust" card) exists only for that band — light screenshots need a dark ground
+to read, and teal was too close in value.
 
 **Why it isn't Astro.** It lives in `public/` on purpose. Astro copies `public/`
 verbatim to `dist/`, so these pages ship byte-for-byte with no build step, no
