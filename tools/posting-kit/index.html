@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Gaby posting kit — PRIVATE</title>
+<style>
+  :root { --ink:#16110d; --paper:#f7efe0; --paper2:#fffaf1; --terra:#c1440e; --sun:#f2c14e; --teal:#35a08a; }
+  *{box-sizing:border-box}
+  body{margin:0;padding:1.5rem;font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:var(--paper);color:var(--ink)}
+  .wrap{max-width:900px;margin:0 auto}
+  h1{font-size:1.6rem;letter-spacing:-.03em;margin:0 0 .2rem}
+  .warn{background:#ffe1d6;border:2px solid var(--terra);border-radius:8px;padding:.7rem 1rem;font-size:.88rem;margin:1rem 0 1.5rem}
+  .nav{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.5rem}
+  .nav a{padding:.4rem .8rem;background:var(--paper2);border:2px solid var(--ink);border-radius:8px;text-decoration:none;color:var(--ink);font-weight:700}
+  .nav a.on{background:var(--sun)}
+  .meta{font:600 .72rem/1.4 ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:#6d5f55;margin-bottom:.3rem}
+  .q{font-size:1.25rem;font-weight:800;letter-spacing:-.02em;margin:.2rem 0 .8rem}
+  .ans{background:var(--paper2);border:2px solid var(--ink);border-radius:10px;padding:1rem 1.2rem;margin-bottom:1.8rem}
+  .ans b.a{display:block;font-size:1.1rem;margin:.2rem 0 .6rem}
+  .url{font-family:ui-monospace,Menlo,monospace;background:var(--sun);padding:.15rem .4rem;border-radius:4px}
+  .block{background:var(--paper2);border:2px solid var(--ink);border-radius:10px;margin-bottom:1rem;overflow:hidden}
+  .block h3{margin:0;padding:.6rem 1rem;background:var(--ink);color:var(--paper2);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+  .block button{font:700 .72rem/1 inherit;padding:.4rem .7rem;background:var(--sun);color:var(--ink);border:0;border-radius:5px;cursor:pointer}
+  .block button.done{background:var(--teal);color:#fff}
+  .block pre{margin:0;padding:1rem;white-space:pre-wrap;word-wrap:break-word;font:14px/1.55 ui-monospace,Menlo,monospace}
+  .hint{font-size:.82rem;color:#6d5f55;margin:.3rem 0 1.4rem}
+  h2{font-size:1rem;letter-spacing:.06em;text-transform:uppercase;margin:2.2rem 0 .8rem;padding-bottom:.4rem;border-bottom:2px solid rgba(22,17,13,.15)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Gaby posting kit</h1>
+  <div class="meta" id="channel"></div>
+  <div class="warn">
+    <b>Private — never deployed.</b> This file lives in <code>tools/</code>, outside <code>public/</code>,
+    so Astro never copies it to <code>dist/</code>. Serve it with <code>npm run kit</code> and open
+    <code>http://localhost:3100/?day=1</code>. Do not move it into <code>public/</code>.
+  </div>
+
+  <div class="nav" id="nav"></div>
+  <div id="day"></div>
+</div>
+
+<script>
+const PARAM = new URLSearchParams(location.search);
+let DATA = null;
+
+const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+// ---- the caption templates -------------------------------------------------
+// {{...}} are filled from quizzes.json. Edit freely; nothing here ships.
+function templates(q, url) {
+  const A = q.options.map((o, i) => String.fromCharCode(65 + i) + ') ' + o).join('\n');
+  return [
+    { group: 'Post caption', items: [
+      { name: 'Instagram / Threads', hint: 'Front-load the hook — only the first two lines show before "more".',
+        text:
+`You are standing in ${q.situationEn.toLowerCase()}. Somebody is waiting.
+Which one do you say?
+
+I got this wrong for a month after I moved.
+
+Quiz in the comments 👇 Answer in the second comment.
+
+#spanish #movingtospain #learnspanish #spainlife #españa #expatsinspain #spanishforbeginners` },
+      { name: 'TikTok', hint: 'Short. The hook is the video; the caption just frames the stakes.',
+        text:
+`${q.situationEn}. One of these is wrong and you will be understood anyway — but you will sound like you are guessing.
+
+Answer in the comments 👇
+
+#spanish #movingtospain #learnspanish #spainlife #españa` },
+      { name: 'Facebook', hint: 'FB tolerates more setup. Lead with the situation, not the grammar.',
+        text:
+`Real situation, not a textbook one: ${q.situationEn.toLowerCase()}.
+
+${q.question}
+
+${A}
+
+I have put the answer — and why it matters — in the comments. No prize, just the thing nobody tells you before you move.` },
+      { name: 'YouTube (Shorts)', hint: 'First 100 characters are the search snippet. Put the situation in them.',
+        text:
+`${q.situationEn} in Spanish — which one is right? | Day ${q.day}
+
+${q.question}
+
+${A}
+
+Answer: ${url}
+
+Gaby is an offline iPhone app that has you rehearse the conversations you will actually have in Spain — the pharmacy, the NIE appointment, the menú del día. You say your part out loud and it tells you what you got wrong. Written by a person, no subscription.
+
+https://apps.apple.com/app/id6790808283` },
+    ]},
+    { group: 'Comment 1 — the quiz', items: [
+      { name: 'All platforms (attach the quiz image)', hint: 'Post this first, with the image. No link yet — a bare question gets replies, a link gets scrolled past.',
+        text:
+`${q.question}
+
+${A}
+
+Say your answer before you scroll. I will post the correct one in a bit 👇` },
+    ]},
+    { group: 'Comment 2 — the answer link', items: [
+      { name: 'All platforms', hint: 'Reply to your own first comment so the two sit together.',
+        text:
+`Answer + why it is that one:
+${url}
+
+(No sign-up, no pop-up — just the answer and the reason.)` },
+      { name: 'Shorter variant', hint: 'For TikTok, where long comments get clipped.',
+        text:
+`Answer here 👉 ${url}` },
+    ]},
+    { group: 'Reply snippets', items: [
+      { name: 'Someone got it right', hint: '',
+        text: `That is the one 👏 ${q.takeaway}` },
+      { name: 'Someone got it wrong', hint: 'Never just "no" — give them the rule.',
+        text: `Close — it is "${q.answer}". ${q.takeaway}` },
+      { name: 'Someone asks what app this is', hint: '',
+        text:
+`It is Gaby — an offline iPhone app that drills the conversations you will actually have in Spain. You speak, it checks you. One-time $14.99, no subscription: https://apps.apple.com/app/id6790808283` },
+    ]},
+  ];
+}
+
+function render(day) {
+  const q = DATA.quizzes.find(x => x.day === day) || DATA.quizzes[0];
+  const url = 'https://edsa.tech/gaby/quiz/' + q.day;
+
+  document.getElementById('nav').innerHTML = DATA.quizzes
+    .map(x => `<a href="?day=${x.day}" class="${x.day === q.day ? 'on' : ''}">Day ${x.day}</a>`).join('');
+
+  let html =
+    `<div class="meta">Day ${q.day} · ${esc(q.situation)} — ${esc(q.situationEn)}</div>
+     <div class="q">${esc(q.question)}</div>
+     <div class="ans">
+       <div class="meta">Answer</div><b class="a">${esc(q.answer)}</b>
+       <div class="meta">Why</div><div>${q.why}</div>
+       <p style="margin:.8rem 0 0"><span class="meta" style="display:inline">Live page</span>
+       <a href="${url}" target="_blank" class="url">${url}</a></p>
+     </div>`;
+
+  for (const g of templates(q, url)) {
+    html += `<h2>${esc(g.group)}</h2>`;
+    for (const it of g.items) {
+      html += `<div class="block">
+        <h3>${esc(it.name)}<button data-copy>Copy</button></h3>
+        <pre>${esc(it.text)}</pre></div>`;
+      if (it.hint) html += `<p class="hint">${esc(it.hint)}</p>`;
+    }
+  }
+  document.getElementById('day').innerHTML = html;
+
+  document.querySelectorAll('[data-copy]').forEach(b => b.onclick = async () => {
+    await navigator.clipboard.writeText(b.closest('.block').querySelector('pre').textContent);
+    b.textContent = 'Copied'; b.classList.add('done');
+    setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('done'); }, 1400);
+  });
+}
+
+fetch('./quizzes.json').then(r => r.json()).then(d => {
+  DATA = d;
+  document.getElementById('channel').textContent = d.channel + ' · 100-day quiz run';
+  render(Number(PARAM.get('day')) || 1);
+});
+</script>
+</body>
+</html>

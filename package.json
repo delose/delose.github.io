@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "quiz:build": "node tools/build-quiz-pages.mjs",
+    "kit": "node tools/build-quiz-pages.mjs && npx --yes http-server tools/posting-kit -p 3100 -c-1 -o \"/?day=1\""
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",

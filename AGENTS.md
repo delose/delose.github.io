@@ -125,6 +125,32 @@ moving strips, and `--night` (#123a4a, lifted from the app's own "Corrections yo
 can trust" card) exists only for that band — light screenshots need a dark ground
 to read, and teal was too close in value.
 
+**Quiz answer pages** (`/gaby/quiz/<day>/`) — the landing pages for the second
+comment under each social post. The first comment poses a quiz; the second links
+here, so the answer never spoils the feed.
+- **They are generated. Never hand-edit them.** Source of truth is
+  `tools/posting-kit/quizzes.json`; `npm run quiz:build` rewrites
+  `public/gaby/quiz/` from scratch (it deletes the directory first).
+- **A day is a path segment, not a query string.** `?answer=5` cannot work: these
+  are static files with no JavaScript, so the server ignores everything after the
+  `?` and every day would have to ship all 100 answers in one file, where anyone
+  could read them in View Source. `/gaby/quiz/5/` gives each day its own file,
+  its own Open Graph preview, and only its own answer.
+- The answer sits behind a native `<details>`, so someone who lands on it by
+  accident still gets to guess first.
+
+**Posting kit** (`tools/posting-kit/`) — the private copy-paste console for the
+100-day quiz run: caption templates per platform, both comments, reply snippets.
+`npm run kit` regenerates the answer pages and serves it at
+`http://localhost:3100/?day=1`.
+- **It lives in `tools/` for a reason: everything under `public/` is published.**
+  A "private" page in `public/gaby/` would be live at edsa.tech. Do not move it
+  there. Because it never ships, it is allowed JavaScript — which is what lets
+  `?day=n` work there and not on the public pages.
+- Edit the templates in the `templates()` function in
+  `tools/posting-kit/index.html`. Adding a quiz means one more object in
+  `quizzes.json` and a re-run of `npm run quiz:build`.
+
 **Why it isn't Astro.** It lives in `public/` on purpose. Astro copies `public/`
 verbatim to `dist/`, so these pages ship byte-for-byte with no build step, no
 framework, no JS and no analytics — which is the point: Gaby's whole pitch is that
@@ -189,3 +215,23 @@ copy needs to change, change it in *every* place listed above.
    (to check a narrow viewport, load the page in a fixed-width `<iframe>` — `--window-size`
    alone does not force a narrow layout).
 3. If you changed a product fact, grep for it across `public/gaby/` and fix all copies.
+
+---
+
+## Backlog
+
+Not scheduled. Recorded so it is not lost.
+
+- **YouTube channel still shows the previous niche.** `UCRCabUlgVp726FoerZrv0GQ`
+  is linked from every Gaby footer, but its first screen is videos from the old
+  niche, so a visitor who clicks through lands somewhere off-brand. Plan is a
+  long-form video for the channel; until then consider a Gaby-specific playlist
+  or channel trailer so the landing view matches the link's promise.
+- **Analytics on the Gaby pages.** GA4 (`G-4HC3PKE1DJ`) covers Astro pages only;
+  `/gaby/**` has no measurement at all. GoatCounter chosen (cookieless, open
+  source). Blocked on the account's `/count` URL. When it lands, add the scoped
+  "This website, and the app" section to `/gaby/privacy/` — the App Store privacy
+  label is unaffected (it covers the app binary and its SDKs, and the app still
+  collects nothing), but that policy is the URL registered in App Store Connect
+  and must not read as if it denies the site's own analytics.
+- **Only 3 of 100 quizzes written.** `tools/posting-kit/quizzes.json`.
