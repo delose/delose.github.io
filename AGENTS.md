@@ -149,7 +149,10 @@ here, so the answer never spoils the feed.
   `?day=n` work there and not on the public pages.
 - Edit the templates in the `templates()` function in
   `tools/posting-kit/index.html`. Adding a quiz means one more object in
-  `quizzes.json` and a re-run of `npm run quiz:build`.
+  `quizzes.json` and a re-run of `npm run quiz:build`. Every quiz needs `day`,
+  `situation`, `situationEn`, `place`, `question`, `options[]`, `answer`, `why`
+  and `takeaway` — `place` exists because captions read "You are standing in
+  {place}", which needs "a neighbourhood bar in Madrid", not "At the tapas bar".
 
 **Why it isn't Astro.** It lives in `public/` on purpose. Astro copies `public/`
 verbatim to `dist/`, so these pages ship byte-for-byte with no build step, no

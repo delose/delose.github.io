@@ -1,13 +1,18 @@
 {
-  "_comment": "Single source of truth. Feeds BOTH the private posting kit (tools/posting-kit) and the public answer pages (public/gaby/quiz/<day>/). Run: npm run quiz:build",
+  "_comment": "Single source of truth. Feeds BOTH the private posting kit (tools/posting-kit) and the public answer pages (public/gaby/quiz/<day>/). Run: npm run quiz:build Every quiz needs: day, situation, situationEn, place, question, options[], answer, why (may contain <b>/<i>), takeaway.",
   "channel": "gabyspeaksspanish",
   "quizzes": [
     {
       "day": 1,
       "situation": "En un bar de barrio",
       "situationEn": "At the tapas bar",
+      "place": "a neighbourhood bar in Madrid",
       "question": "You are at the bar and want to ask what tapas they have. Which one is right?",
-      "options": ["¿Qué tapas tiene?", "¿Dónde están las tapas?", "¿Qué tapas tienen?"],
+      "options": [
+        "¿Qué tapas tiene?",
+        "¿Dónde están las tapas?",
+        "¿Qué tapas tienen?"
+      ],
       "answer": "¿Qué tapas tienen?",
       "why": "You are asking the bar, not one person — so it is <b>tienen</b>, the ustedes form. <i>¿Qué tapas tiene?</i> is grammatical but it asks a single individual, which is not how you address staff behind a counter. And <b>qué</b> takes the accent in a question.",
       "takeaway": "Addressing a business is almost always plural in Spain."
@@ -16,8 +21,13 @@
       "day": 2,
       "situation": "El menú del día",
       "situationEn": "The set lunch menu",
+      "place": "a restaurant at lunchtime",
       "question": "You want the set lunch. You say “Sí, el del día, por favor.” What is missing?",
-      "options": ["Nothing — it is fine", "menú", "plato"],
+      "options": [
+        "Nothing — it is fine",
+        "menú",
+        "plato"
+      ],
       "answer": "menú — “Sí, el menú del día, por favor.”",
       "why": "English lets you drop the noun once it is obvious. Spanish wants it in there: <b>el menú del día</b> is a fixed phrase, and leaving out <i>menú</i> makes <i>el del día</i> sound like you are pointing at something unnamed.",
       "takeaway": "You will be understood without it. You will also sound like you are guessing."
@@ -26,8 +36,13 @@
       "day": 3,
       "situation": "En la farmacia",
       "situationEn": "At the pharmacy",
+      "place": "the pharmacy",
       "question": "You want to ask if they know where the nearest health centre is. Saber or conocer?",
-      "options": ["¿Conoce dónde está el centro de salud?", "¿Sabe dónde está el centro de salud?", "Either works"],
+      "options": [
+        "¿Conoce dónde está el centro de salud?",
+        "¿Sabe dónde está el centro de salud?",
+        "Either works"
+      ],
       "answer": "¿Sabe dónde está el centro de salud?",
       "why": "<b>Saber</b> is for facts and information — an address, a time, how to do something. <b>Conocer</b> is for being familiar with a person or a place. You want the fact, so it is <i>sabe</i>. You would use <i>conocer</i> in <i>¿Conoce este barrio?</i>",
       "takeaway": "Saber = information. Conocer = familiarity."
