@@ -9,8 +9,9 @@
 import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 
-const SRC  = new URL('./posting-kit/quizzes.json', import.meta.url);
-const OUT  = new URL('../public/gaby/quiz/', import.meta.url);
+const SRC  = new URL('./quizzes.json', import.meta.url);
+const OUT  = new URL('../public/gaby/quizzes/', import.meta.url);
+const MANIFEST = new URL('./quiz-manifest.json', import.meta.url);
 const STORE = 'https://apps.apple.com/app/id6790808283';
 const GC    = 'https://edsa.goatcounter.com/count';
 
@@ -22,15 +23,15 @@ const head = (q) => `<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day ${q.day} — ${esc(q.situationEn)} — Gaby</title>
+<title>${esc(q.situationEn)} — Gaby quiz</title>
 <meta name="description" content="${esc(q.question)} The answer, and why — from Gaby, the offline Spanish app for people moving to Spain.">
-<link rel="canonical" href="https://edsa.tech/gaby/quiz/${q.slug}/">
+<link rel="canonical" href="https://edsa.tech/gaby/quizzes/${q.slug}/">
 <meta name="theme-color" content="#c1440e">
 <link rel="icon" type="image/svg+xml" href="/gaby/icon.svg">
 <link rel="stylesheet" href="/gaby/gaby.css">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://edsa.tech/gaby/quiz/${q.slug}/">
-<meta property="og:title" content="Day ${q.day}: ${esc(q.situationEn)} — the answer">
+<meta property="og:url" content="https://edsa.tech/gaby/quizzes/${q.slug}/">
+<meta property="og:title" content="${esc(q.situationEn)} — the answer">
 <meta property="og:description" content="${esc(q.question)}">
 <meta name="twitter:card" content="summary_large_image">
 <script data-goatcounter="${GC}"
@@ -96,7 +97,7 @@ const page = (q) => `${head(q)}${header}
 
   <section class="s s--night s--tight">
     <div class="wrap wrap--narrow">
-      <span class="eyebrow">Day ${q.day} · ${esc(q.situationEn)}</span>
+      <span class="eyebrow">${esc(q.situationEn)}</span>
       <h1 class="quiz__q">${esc(q.question)}</h1>
       <ol class="quiz__options">
 ${q.options.map((o) => `        <li>${esc(o)}</li>`).join('\n')}
@@ -147,7 +148,7 @@ for (const q of quizzes) {
     if (q[k] === undefined || q[k] === '') throw new Error(`day ${q.day}: missing "${k}"`);
   }
   if (!Array.isArray(q.options) || q.options.length < 2) throw new Error(`day ${q.day}: needs at least 2 options`);
-  if (!/^[a-z0-9-]+$/.test(q.slug)) throw new Error(`day ${q.day}: slug must be lowercase a-z, 0-9 and hyphens`);
+  if (!/^[a-z0-9-]+$/.test(q.slug)) throw new Error(`day ${q.day}: slug must be lowercase a-z, 0-9 and hyphens — no accents, they percent-encode into noise when pasted into a comment`);
   if (seen.has(q.slug)) throw new Error(`day ${q.day}: duplicate slug "${q.slug}" — slugs are permanent public URLs`);
   seen.add(q.slug);
 
@@ -165,5 +166,23 @@ for (const q of quizzes) {
   await mkdir(dir, { recursive: true });
   await writeFile(new URL('index.html', dir), page(q));
 }
-console.log(`wrote ${quizzes.length} answer pages:`);
-for (const q of quizzes) console.log(`  day ${q.day}  https://edsa.tech/gaby/quiz/${q.slug}/`);
+// Manifest for the GeoGain posting pipeline. NOT deployed — it contains answers.
+await writeFile(MANIFEST, JSON.stringify({
+  generated: new Date().toISOString().slice(0, 10),
+  base: 'https://edsa.tech/gaby/quizzes/',
+  count: quizzes.length,
+  quizzes: quizzes.map((q) => ({
+    order: q.day,
+    slug: q.slug,
+    url: `https://edsa.tech/gaby/quizzes/${q.slug}/`,
+    topic: q.situationEn,
+    place: q.place,
+    question: q.question,
+    options: q.options,
+    answer: q.answer,
+    takeaway: q.takeaway,
+  })),
+}, null, 2) + '\n');
+
+console.log(`wrote ${quizzes.length} answer pages -> public/gaby/quizzes/`);
+console.log('wrote tools/quiz-manifest.json for the GeoGain pipeline');

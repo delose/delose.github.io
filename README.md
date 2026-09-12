@@ -79,7 +79,7 @@ tag instead. So no page is double-counted.
 
 Log in at <https://edsa.goatcounter.com> (site code `edsa`). The front page *is* the
 dashboard — no navigating. **Pages** lists each URL with its visitor count, so
-`/gaby/quiz/tapas-bar/` tells you how many people actually clicked through from a
+`/gaby/quizzes/tapas-bar/` tells you how many people actually clicked through from a
 social comment; **Referrers** shows which platform sent them. Change the period with
 the date control at the top right.
 

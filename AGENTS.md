@@ -125,36 +125,34 @@ moving strips, and `--night` (#123a4a, lifted from the app's own "Corrections yo
 can trust" card) exists only for that band — light screenshots need a dark ground
 to read, and teal was too close in value.
 
-**Quiz answer pages** (`/gaby/quiz/<slug>/`) — the landing pages for the second
-comment under each social post. The first comment poses a quiz; the second links
-here, so the answer never spoils the feed.
+**Quiz answer pages** (`/gaby/quizzes/<slug>/`) — 100 pages, one per quiz. They are
+the landing page for the *second* comment under a social post: comment 1 is the
+quiz card image with no answer on it, comment 2 links here.
 - **They are generated. Never hand-edit them.** Source of truth is
-  `tools/posting-kit/quizzes.json`; `npm run quiz:build` rewrites
-  `public/gaby/quiz/` from scratch (it deletes the directory first).
-- **One file per quiz, addressed by a readable slug** — `/gaby/quiz/tapas-bar/`.
-  This is deliberate and was arrived at the hard way. The alternative considered
-  was a single page reading `?answer=n`: that cannot work without JavaScript
-  (a static host serves the same file for every query value), and making it work
-  means shipping all 100 answers to every visitor, since opening a page downloads
-  the whole HTML file to their device — View Source then reads the lot. A file per
-  slug means a visitor downloads only the answer they were sent, needs no
-  JavaScript, and each quiz gets its own link preview.
-- **A slug is a permanent public URL.** It goes into social comments that outlive
-  any redesign. Never change one after posting, never reuse one, and never let a
-  slug give the answer away (`saber-o-conocer` is fine — it names the choice, not
-  the winner). The build fails on a duplicate or non-`[a-z0-9-]` slug.
-- The answer sits behind a native `<details>`, so someone who lands on it by
-  accident still gets to guess first.
+  `tools/quizzes.json`; `npm run quiz:build` rewrites `public/gaby/quizzes/` from
+  scratch and refreshes `tools/quiz-manifest.json`.
+- **No day number appears anywhere public, deliberately.** A page that says
+  "Day 16" cannot be re-shared six months later. `day` survives in the JSON purely
+  as ordering for the posting pipeline.
+- **One file per quiz, addressed by a readable slug.** A single page reading
+  `?answer=n` was considered and rejected twice: a static host serves the same file
+  for every query value, so it needs JavaScript, and it means shipping all 100
+  answers to every visitor — opening a page downloads the whole HTML to the device,
+  and View Source then reads the lot.
+- **A slug is a permanent public URL** once a comment is posted. The build fails on
+  a duplicate slug, a duplicate question, a non-`[a-z0-9-]` slug (accents
+  percent-encode into noise when pasted), or a slug that gives the answer away —
+  it must name the choice, not the winner (`ser-o-estar`, not `para-llevar`).
+- The answer sits behind a native `<details>`, so an accidental visitor still guesses.
 
-**Analytics.** GoatCounter (`https://edsa.goatcounter.com/count`) is on all Gaby
-pages including the generated quiz pages; the Astro pages use GA4 instead
-(`G-4HC3PKE1DJ` in `BaseHead.astro`). GoatCounter is cookieless and stores no IP,
-which is why it is the one third-party request allowed here — see section 11 of
-`/gaby/privacy/`, which exists to keep that policy accurate, because it is the
-Privacy Policy URL registered in App Store Connect. **This changes nothing about
-the app's App Store privacy label**: that covers the app binary and its SDKs, and
-the app still collects nothing and makes no network requests. Keep the two
-clearly separated in any copy you write.
+**`tools/quiz-manifest.json`** is written by the same build and is **not deployed**,
+because it contains every answer. It exists for the GeoGain posting pipeline, which
+lives in a different repo — see `docs/geogain-gaby-handover.md`.
+
+**There is no posting kit in this repo any more.** An earlier session built one at
+`tools/posting-kit/`; it duplicated a subset of GeoGain admin, worse, and collided
+with it on port 3100 and the `/gaby/today` path. Deleted 2026-09-12. Captions and
+card images are GeoGain's job; this repo owns only the answer pages and the manifest.
 
 **Why it isn't Astro.** It lives in `public/` on purpose. Astro copies `public/`
 verbatim to `dist/`, so these pages ship byte-for-byte with no build step, no
@@ -238,8 +236,7 @@ Not scheduled. Recorded so it is not lost.
 - **Unify analytics?** Gaby pages are on GoatCounter, Astro pages still on GA4,
   so there is no single dashboard for edsa.tech. Moving the Astro pages to
   GoatCounter too would fix that and drop a Google dependency.
-- **30 of 100 quizzes written.** `tools/posting-kit/quizzes.json`. Days 1-30 cover
-  the app's own situations plus the grammar that trips English speakers. Adding
-  more is one object per quiz; `npm run quiz:build` validates required fields,
-  slug format, duplicate slugs and slugs that give the answer away, and fails
-  the build on any of them.
+- **All 100 quizzes are written and live, and none has had a human read yet.**
+  `tools/quizzes.json`. Gaby's whole claim is that its Spanish is written by a
+  person and never generated, so a generated error in a public comment would hit
+  the exact nerve the product sells on. Nothing should be posted unreviewed.

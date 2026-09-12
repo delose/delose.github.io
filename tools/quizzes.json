@@ -1,0 +1,1606 @@
+{
+  "_comment": "Single source of truth. Feeds BOTH the private posting kit (tools/posting-kit) and the public answer pages (public/gaby/quiz/<slug>/). Run: npm run quiz:build. Every quiz needs: day, slug, situation, situationEn, place, question, options[], answer, why (may contain <b>/<i>), takeaway. The slug is the public URL and lives forever in social comments — never change one after posting, and never let it give the answer away.",
+  "channel": "gabyspeaksspanish",
+  "quizzes": [
+    {
+      "day": 1,
+      "slug": "tapas-bar",
+      "situation": "En un bar de barrio",
+      "situationEn": "At the tapas bar",
+      "place": "a neighbourhood bar in Madrid",
+      "question": "You are at the bar and want to ask what tapas they have. Which one is right?",
+      "options": [
+        "¿Qué tapas tiene?",
+        "¿Dónde están las tapas?",
+        "¿Qué tapas tienen?"
+      ],
+      "answer": "¿Qué tapas tienen?",
+      "why": "You are asking the bar, not one person — so it is <b>tienen</b>, the ustedes form. <i>¿Qué tapas tiene?</i> is grammatical but it asks a single individual, which is not how you address staff behind a counter. And <b>qué</b> takes the accent in a question.",
+      "takeaway": "Addressing a business is almost always plural in Spain."
+    },
+    {
+      "day": 2,
+      "slug": "comer-a-mediodia",
+      "situation": "El menú del día",
+      "situationEn": "The set lunch menu",
+      "place": "a restaurant at lunchtime",
+      "question": "You want the set lunch. You say “Sí, el del día, por favor.” What is missing?",
+      "options": [
+        "Nothing — it is fine",
+        "menú",
+        "plato"
+      ],
+      "answer": "menú — “Sí, el menú del día, por favor.”",
+      "why": "English lets you drop the noun once it is obvious. Spanish wants it in there: <b>el menú del día</b> is a fixed phrase, and leaving out <i>menú</i> makes <i>el del día</i> sound like you are pointing at something unnamed.",
+      "takeaway": "You will be understood without it. You will also sound like you are guessing."
+    },
+    {
+      "day": 3,
+      "slug": "saber-o-conocer",
+      "situation": "En la farmacia",
+      "situationEn": "At the pharmacy",
+      "place": "the pharmacy",
+      "question": "You want to ask if they know where the nearest health centre is. Saber or conocer?",
+      "options": [
+        "¿Conoce dónde está el centro de salud?",
+        "¿Sabe dónde está el centro de salud?",
+        "Either works"
+      ],
+      "answer": "¿Sabe dónde está el centro de salud?",
+      "why": "<b>Saber</b> is for facts and information — an address, a time, how to do something. <b>Conocer</b> is for being familiar with a person or a place. You want the fact, so it is <i>sabe</i>. You would use <i>conocer</i> in <i>¿Conoce este barrio?</i>",
+      "takeaway": "Saber = information. Conocer = familiarity."
+    },
+    {
+      "day": 4,
+      "slug": "empadronamiento",
+      "situation": "El empadronamiento",
+      "situationEn": "Registering at the town hall",
+      "place": "the queue at your local ayuntamiento",
+      "question": "You turn up at the town hall to register. The first thing they ask is whether you have one of these. Which?",
+      "options": [
+        "una cita previa",
+        "una cita anterior",
+        "un cita previo"
+      ],
+      "answer": "una cita previa",
+      "why": "<b>Cita previa</b> — a prior appointment — is the phrase that runs Spanish bureaucracy, and almost nothing happens without one. <i>Cita</i> is feminine, so it is <b>una</b> and <b>previa</b>. <i>Anterior</i> means previous in time (the previous one), not booked in advance.",
+      "takeaway": "Learn “cita previa” before you learn anything else. You will need it for the NIE, the padrón and the doctor."
+    },
+    {
+      "day": 5,
+      "slug": "control-de-pasaportes",
+      "situation": "En el control de pasaportes",
+      "situationEn": "Passport control",
+      "place": "the arrivals hall at Madrid-Barajas",
+      "question": "The officer asks “¿Cuál es el motivo de su viaje?” You are moving here. What do you say?",
+      "options": [
+        "Vengo a vivir aquí.",
+        "Vengo para vivir aquí.",
+        "Both are fine."
+      ],
+      "answer": "Both are fine — “Vengo a vivir aquí” is what you will hear most.",
+      "why": "After a verb of motion, Spanish uses <b>a</b> + infinitive to give the purpose: <i>vengo a vivir</i>, <i>voy a comprar</i>. <b>Para</b> + infinitive is also correct and slightly more emphatic about the goal. What does not work is leaving the preposition out.",
+      "takeaway": "Verb of motion + a + infinitive. “Vengo a…”, “Voy a…”, “Salgo a…”."
+    },
+    {
+      "day": 6,
+      "slug": "un-taxi-al-piso",
+      "situation": "Un taxi al piso",
+      "situationEn": "The taxi rank",
+      "place": "the taxi rank outside the terminal",
+      "question": "You get in and want to give the driver an address. Which opener sounds native?",
+      "options": [
+        "¿Me lleva a esta dirección?",
+        "¿Me toma a esta dirección?",
+        "¿Me conduce esta dirección?"
+      ],
+      "answer": "¿Me lleva a esta dirección?",
+      "why": "<b>Llevar</b> is to take someone somewhere, and it is the verb for taxis and lifts. <i>Tomar</i> is what you do to a bus or a coffee, not to a passenger. <i>Conducir</i> is to drive the vehicle itself, which is his job, not your request.",
+      "takeaway": "You llevar a person. You tomar a bus. The driver conduce."
+    },
+    {
+      "day": 7,
+      "slug": "abrir-una-cuenta",
+      "situation": "Abrir una cuenta",
+      "situationEn": "Opening a bank account",
+      "place": "a bank branch on a Tuesday morning",
+      "question": "You want an everyday current account. What do you ask for?",
+      "options": [
+        "una cuenta corriente",
+        "una cuenta actual",
+        "una cuenta presente"
+      ],
+      "answer": "una cuenta corriente",
+      "why": "<b>Cuenta corriente</b> is the fixed term for a current account. <i>Actual</i> is a false friend — it means <b>current in time</b> (present-day), not current as in an account, so <i>cuenta actual</i> reads as “my present account”.",
+      "takeaway": "Actual = present-day, not “actual”. One of the false friends that bites hardest."
+    },
+    {
+      "day": 8,
+      "slug": "contratar-el-movil",
+      "situation": "Contratar el móvil",
+      "situationEn": "Getting a phone contract",
+      "place": "a phone shop on the high street",
+      "question": "You do not want to be locked in. How do you ask for a contract with no minimum term?",
+      "options": [
+        "¿Tienen tarifas sin permanencia?",
+        "¿Tienen tarifas sin contrato?",
+        "¿Tienen tarifas sin duración?"
+      ],
+      "answer": "¿Tienen tarifas sin permanencia?",
+      "why": "<b>Permanencia</b> is the industry word for the lock-in period, and <i>sin permanencia</i> is printed on every advert. <i>Sin contrato</i> means prepaid, which is a different product, and <i>sin duración</i> is not a thing.",
+      "takeaway": "Sin permanencia = no lock-in. Sin contrato = prepaid. They are not the same offer."
+    },
+    {
+      "day": 9,
+      "slug": "en-el-centro-de-salud",
+      "situation": "En el centro de salud",
+      "situationEn": "At the health centre",
+      "place": "your local centro de salud",
+      "question": "You have a headache and need to say so. Which is right?",
+      "options": [
+        "Estoy dolor de cabeza.",
+        "Me duele la cabeza.",
+        "Tengo duele la cabeza."
+      ],
+      "answer": "Me duele la cabeza.",
+      "why": "<b>Doler</b> works like <i>gustar</i>: the body part is the subject and you are the indirect object — literally “the head hurts to me”. So it is <i>me duele la cabeza</i>, and with plurals <i>me duelen las piernas</i>. You can also say <i>tengo dolor de cabeza</i>.",
+      "takeaway": "Me duele + singular. Me duelen + plural. Never “estoy dolor”."
+    },
+    {
+      "day": 10,
+      "slug": "ver-un-piso",
+      "situation": "Ver un piso",
+      "situationEn": "Viewing a flat",
+      "place": "an empty flat with the estate agent waiting",
+      "question": "The agent mentions the deposit you will have to put down. Which word is that?",
+      "options": [
+        "el depósito",
+        "la fianza",
+        "el aval"
+      ],
+      "answer": "la fianza",
+      "why": "<b>La fianza</b> is the rental deposit, normally one or two months. <i>El aval</i> is a separate and much bigger thing — a guarantee, often several months held in a bank, which landlords ask of newcomers with no Spanish payslips. <i>Depósito</i> exists but is not the rental term.",
+      "takeaway": "Fianza = deposit. Aval = guarantee. Ask which one they want before you sign."
+    },
+    {
+      "day": 11,
+      "slug": "por-o-para",
+      "situation": "Por o para",
+      "situationEn": "Por vs para",
+      "place": "your neighbour’s doorway, thanking them",
+      "question": "You are thanking a neighbour for their help. Which one?",
+      "options": [
+        "Gracias para la ayuda.",
+        "Gracias por la ayuda.",
+        "Gracias de la ayuda."
+      ],
+      "answer": "Gracias por la ayuda.",
+      "why": "<b>Por</b> covers the cause or reason — what you are grateful <i>because of</i>. <b>Para</b> covers the destination or purpose: <i>Esto es para ti</i>. Thanks is always <i>por</i>: por la ayuda, por venir, por todo.",
+      "takeaway": "Por = the reason behind. Para = the goal ahead."
+    },
+    {
+      "day": 12,
+      "slug": "ser-o-estar",
+      "situation": "Ser o estar",
+      "situationEn": "Ser vs estar",
+      "place": "a friend’s kitchen, making small talk",
+      "question": "You want to say you are bored right now. Which?",
+      "options": [
+        "Soy aburrido.",
+        "Estoy aburrido.",
+        "Tengo aburrido."
+      ],
+      "answer": "Estoy aburrido.",
+      "why": "<b>Estar</b> is the state you are in now, so <i>estoy aburrido</i> = I am bored. <b>Ser</b> is what you are as a rule, so <i>soy aburrido</i> tells the room you are a boring person. The same trap hits <i>listo</i> (ready vs clever) and <i>rico</i> (tasty vs wealthy).",
+      "takeaway": "Estoy aburrido = I am bored. Soy aburrido = I am boring. Pick carefully."
+    },
+    {
+      "day": 13,
+      "slug": "embarazada",
+      "situation": "Un falso amigo",
+      "situationEn": "A false friend",
+      "place": "a shop, having just knocked something over",
+      "question": "You did something clumsy and want to say you are embarrassed. Which?",
+      "options": [
+        "Estoy embarazada.",
+        "Me da vergüenza.",
+        "Estoy embarazoso."
+      ],
+      "answer": "Me da vergüenza.",
+      "why": "<b>Embarazada</b> means <i>pregnant</i>. To say embarrassed, Spanish uses <i>me da vergüenza</i> (it gives me embarrassment) or <i>qué vergüenza</i>. This is the single most reliable way for an English speaker to derail a conversation in Spain.",
+      "takeaway": "Embarazada = pregnant. Vergüenza = embarrassment."
+    },
+    {
+      "day": 14,
+      "slug": "constipado",
+      "situation": "Otro falso amigo",
+      "situationEn": "Another false friend",
+      "place": "the pharmacy, again",
+      "question": "You have a blocked nose and a sore throat. What do you tell the pharmacist?",
+      "options": [
+        "Estoy constipado.",
+        "Estoy constipada del estómago.",
+        "Soy constipado."
+      ],
+      "answer": "Estoy constipado. (constipada if you are female)",
+      "why": "<b>Constipado</b> means <i>having a cold</i> — nothing to do with the English word. The pharmacist will hand you something for your nose. Note it takes <b>estar</b>, because it is a temporary state, and it agrees with you: <i>constipado</i> / <i>constipada</i>.",
+      "takeaway": "Estoy constipado = I have a cold. It is not what it looks like."
+    },
+    {
+      "day": 15,
+      "slug": "tu-o-usted",
+      "situation": "¿Tú o usted?",
+      "situationEn": "Tú vs usted",
+      "place": "a government office with a queue number",
+      "question": "Same afternoon, two places. Where would you use usted?",
+      "options": [
+        "The bar — staff expect respect.",
+        "The town hall clerk.",
+        "Both, always. It is safer."
+      ],
+      "answer": "The town hall clerk.",
+      "why": "Spain is far more <b>tú</b> than most learners expect. In bars, shops and among anyone near your age, <i>tú</i> is normal and <i>usted</i> can sound stiff or distancing. Keep <b>usted</b> for officials, much older strangers, and formal paperwork — and drop it the moment they tutean you.",
+      "takeaway": "Default to tú in daily life. Save usted for the counter with a queue number."
+    },
+    {
+      "day": 16,
+      "slug": "vosotros-o-ustedes",
+      "situation": "Vosotros",
+      "situationEn": "The one Spain keeps",
+      "place": "a bar terrace with two friends",
+      "question": "You are addressing two friends informally, in Spain. Which?",
+      "options": [
+        "¿Ustedes quieren otra?",
+        "¿Vosotros queréis otra?",
+        "¿Tú quieres otra?"
+      ],
+      "answer": "¿Vosotros queréis otra?",
+      "why": "Spain keeps <b>vosotros</b> for informal plural you, with its own endings — <i>queréis</i>, <i>tenéis</i>, <i>sois</i>. Latin America dropped it and uses <i>ustedes</i> for everyone. If you learned Spanish in the Americas, this is the form you have to add.",
+      "takeaway": "In Spain, vosotros for friends, ustedes for formality. Both exist."
+    },
+    {
+      "day": 17,
+      "slug": "pedir-en-la-barra",
+      "situation": "¿Me pones?",
+      "situationEn": "Ordering at a bar",
+      "place": "a bar, at the counter rather than a table",
+      "question": "You want a small draught beer. What do Spaniards actually say?",
+      "options": [
+        "Quiero una caña.",
+        "¿Me pones una caña?",
+        "Deseo una caña, por favor."
+      ],
+      "answer": "¿Me pones una caña?",
+      "why": "<b>¿Me pones…?</b> — literally “will you put me…?” — is the standard, friendly way to order at a bar in Spain. <i>Quiero</i> is not rude but lands flat, and <i>deseo</i> belongs in a letter from 1950. <i>Me pone</i> is the usted version.",
+      "takeaway": "¿Me pones…? at the bar. ¿Me pone…? if you are being formal."
+    },
+    {
+      "day": 18,
+      "slug": "la-cuenta",
+      "situation": "La cuenta",
+      "situationEn": "Asking for the bill",
+      "place": "a restaurant, at the end of a long lunch",
+      "question": "You want the bill. Which is the natural one?",
+      "options": [
+        "¿Nos cobras cuando puedas?",
+        "¿Puedo pagar la factura?",
+        "¿Me das el recibo?"
+      ],
+      "answer": "¿Nos cobras cuando puedas?",
+      "why": "<b>Cobrar</b> is to charge, and <i>¿nos cobras?</i> is how it is usually done, often with <i>cuando puedas</i> to stay polite. <i>La cuenta, por favor</i> is also perfectly fine. A <b>factura</b> is a formal invoice for a business, and a <b>recibo</b> is the little slip afterwards.",
+      "takeaway": "La cuenta = the bill. La factura = the invoice you claim on."
+    },
+    {
+      "day": 19,
+      "slug": "que-o-cual",
+      "situation": "¿Qué o cuál?",
+      "situationEn": "Qué vs cuál",
+      "place": "a queue, filling in a form",
+      "question": "Someone asks for your address. Which question did they use?",
+      "options": [
+        "¿Qué es tu dirección?",
+        "¿Cuál es tu dirección?",
+        "¿Cómo es tu dirección?"
+      ],
+      "answer": "¿Cuál es tu dirección?",
+      "why": "Before the verb <b>ser</b>, Spanish picks <b>cuál</b> when it is asking you to select a specific piece of information: <i>¿Cuál es tu nombre?</i>, <i>¿Cuál es el problema?</i>. <b>Qué</b> + <i>ser</i> asks for a definition — <i>¿Qué es una fianza?</i> means “what is a fianza?”.",
+      "takeaway": "Cuál asks which one. Qué asks what a thing means."
+    },
+    {
+      "day": 20,
+      "slug": "muy-o-mucho",
+      "situation": "Muy o mucho",
+      "situationEn": "Muy vs mucho",
+      "place": "August in Madrid",
+      "question": "It is 40 degrees. How do you say it is very hot?",
+      "options": [
+        "Hace muy calor.",
+        "Hace mucho calor.",
+        "Es muy caliente."
+      ],
+      "answer": "Hace mucho calor.",
+      "why": "<b>Calor</b> is a noun — it is heat, not hot — and nouns take <b>mucho</b>, not <i>muy</i>. <b>Muy</b> only modifies adjectives and adverbs: <i>muy caluroso</i>, <i>muy rápido</i>. The weather uses <i>hacer</i>: hace frío, hace viento, hace sol.",
+      "takeaway": "Muy + adjective. Mucho + noun. Hace + weather."
+    },
+    {
+      "day": 21,
+      "slug": "coger-o-tomar",
+      "situation": "Coger",
+      "situationEn": "A verb that changes by country",
+      "place": "a bus stop in Madrid",
+      "question": "In Spain, how do you say you are going to catch the bus?",
+      "options": [
+        "Voy a coger el autobús.",
+        "Voy a tomar el autobús.",
+        "Both work in Spain."
+      ],
+      "answer": "Both work in Spain — coger is the everyday one.",
+      "why": "<b>Coger</b> is completely ordinary in Spain for catching, taking or picking something up. In much of Latin America the same verb is vulgar, which is why many courses avoid teaching it — but in Madrid you will hear it constantly. <i>Tomar</i> is also fine and travels better.",
+      "takeaway": "In Spain: coger. Across the Atlantic: tomar. Know why they differ."
+    },
+    {
+      "day": 22,
+      "slug": "el-mercado",
+      "situation": "El mercado",
+      "situationEn": "The weekly market",
+      "place": "the market, with a queue behind you",
+      "question": "You want half a kilo of tomatoes. Which?",
+      "options": [
+        "¿Me pone medio kilo de tomates?",
+        "¿Me pone la mitad de kilo de tomates?",
+        "¿Me pone medio de kilo de tomates?"
+      ],
+      "answer": "¿Me pone medio kilo de tomates?",
+      "why": "<b>Medio</b> goes straight in front of the unit with no article and no <i>de</i>: <i>medio kilo</i>, <i>media hora</i>, <i>medio litro</i>. <b>La mitad</b> is the half of a specific thing — <i>la mitad del pan</i>, half of the loaf — which is a different idea.",
+      "takeaway": "Medio kilo, media hora. La mitad de = half of that particular thing."
+    },
+    {
+      "day": 23,
+      "slug": "en-la-peluqueria",
+      "situation": "En la peluquería",
+      "situationEn": "At the barber",
+      "place": "the barber’s, cape already on",
+      "question": "They ask “¿Cómo lo quiere?” You want a little off, just the ends. Which?",
+      "options": [
+        "Solo las puntas, por favor.",
+        "Solo los finales, por favor.",
+        "Solo un poco corto."
+      ],
+      "answer": "Solo las puntas, por favor.",
+      "why": "<b>Las puntas</b> are the ends of the hair, and this is the phrase that saves haircuts. Useful neighbours: <i>por detrás</i> (at the back), <i>por los lados</i> (at the sides), <i>las patillas</i> (sideburns), and <i>no muy corto</i> (not too short).",
+      "takeaway": "Las puntas, por detrás, por los lados. Three phrases, one survivable haircut."
+    },
+    {
+      "day": 24,
+      "slug": "los-vecinos",
+      "situation": "Los vecinos",
+      "situationEn": "Meeting the neighbours",
+      "place": "the lift in your building",
+      "question": "A neighbour steps into the lift. What do you say?",
+      "options": [
+        "Nothing — it would be intrusive.",
+        "Buenos días.",
+        "¿Cómo está usted hoy?"
+      ],
+      "answer": "Buenos días.",
+      "why": "Greeting people in shared spaces is close to obligatory in Spain — the lift, the stairwell, a small shop, a doctor's waiting room. Saying nothing reads as rude rather than private. <i>Buenos días</i> until about 2pm, then <b>buenas tardes</b>; <i>hola, buenas</i> works all day.",
+      "takeaway": "Say hello when you walk into a small space. Silence is the impolite option."
+    },
+    {
+      "day": 25,
+      "slug": "gustar",
+      "situation": "Me gusta",
+      "situationEn": "How gustar really works",
+      "place": "a tapas bar, ordering for the table",
+      "question": "You like tapas — plural. Which?",
+      "options": [
+        "Me gusta las tapas.",
+        "Me gustan las tapas.",
+        "Yo gusto las tapas."
+      ],
+      "answer": "Me gustan las tapas.",
+      "why": "<b>Gustar</b> does not mean “to like”, it means <i>to be pleasing</i>. The thing you like is the subject, so it drives the verb: <i>me gusta el café</i> (singular) but <i>me gustan las tapas</i> (plural). <i>Yo gusto</i> says that you are the one being pleasing.",
+      "takeaway": "The thing you like is the subject. Count it, then pick gusta or gustan."
+    },
+    {
+      "day": 26,
+      "slug": "la-gente",
+      "situation": "La gente",
+      "situationEn": "A word that traps English speakers",
+      "place": "your new town, describing it to someone back home",
+      "question": "You want to say the people here are very friendly. Which?",
+      "options": [
+        "La gente aquí son muy amables.",
+        "La gente aquí es muy amable.",
+        "Las gentes aquí son muy amables."
+      ],
+      "answer": "La gente aquí es muy amable.",
+      "why": "<b>Gente</b> is a singular feminine collective noun in Spanish, even though it means many people. So the verb is singular — <i>es</i> — and the adjective is singular too: <i>amable</i>. <i>Las gentes</i> exists but is literary and will sound odd in conversation.",
+      "takeaway": "La gente es. Not son. One of the last errors to disappear."
+    },
+    {
+      "day": 27,
+      "slug": "pedir-un-cafe",
+      "situation": "Para llevar",
+      "situationEn": "Takeaway",
+      "place": "a café, mid-morning",
+      "question": "You want your coffee to take away. Which?",
+      "options": [
+        "Para llevar, por favor.",
+        "Para tomar fuera, por favor.",
+        "Para salir, por favor."
+      ],
+      "answer": "Para llevar, por favor.",
+      "why": "<b>Para llevar</b> is the fixed phrase for takeaway, and the opposite is <b>para tomar aquí</b> (to have here) — which is the question you will be asked first. <i>Para salir</i> means in order to go out, which will get you a puzzled look.",
+      "takeaway": "¿Para tomar aquí o para llevar? Learn the question, not just the answer."
+    },
+    {
+      "day": 28,
+      "slug": "el-agua",
+      "situation": "El agua",
+      "situationEn": "A noun that looks like it broke",
+      "place": "a bar, ordering the simplest thing there is",
+      "question": "You want cold water. Which is correct?",
+      "options": [
+        "el agua frío",
+        "el agua fría",
+        "la agua fría"
+      ],
+      "answer": "el agua fría",
+      "why": "<b>Agua</b> is feminine, but a singular feminine noun starting with a stressed <i>a-</i> takes <b>el</b> instead of <i>la</i>, purely so the two a-sounds do not collide. The noun stays feminine, so the adjective does too: <i>el agua fría</i>. In the plural it goes back to normal: <i>las aguas</i>.",
+      "takeaway": "El agua, but fría. The article changes; the gender does not."
+    },
+    {
+      "day": 29,
+      "slug": "cuanto-hace",
+      "situation": "¿Cuánto hace?",
+      "situationEn": "Saying how long",
+      "place": "a bar, meeting someone for the first time",
+      "question": "You have lived here two months. Which?",
+      "options": [
+        "Hace dos meses que vivo aquí.",
+        "Vivo aquí por dos meses.",
+        "Hace dos meses que viví aquí."
+      ],
+      "answer": "Hace dos meses que vivo aquí.",
+      "why": "For something that started in the past and is <b>still going</b>, Spanish uses <i>hace + time + que + present tense</i>. The present tense is the part English speakers drop, because English says “I have lived”. <i>Por dos meses</i> suggests a fixed stint that is over or planned to end.",
+      "takeaway": "Hace dos meses que vivo aquí. Present tense, because you still live here."
+    },
+    {
+      "day": 30,
+      "slug": "quedar",
+      "situation": "Quedar",
+      "situationEn": "Making plans",
+      "place": "the doorway after your language class",
+      "question": "You want to suggest meeting a friend on Friday. Which?",
+      "options": [
+        "¿Nos encontramos el viernes?",
+        "¿Quedamos el viernes?",
+        "¿Nos reunimos el viernes?"
+      ],
+      "answer": "¿Quedamos el viernes?",
+      "why": "<b>Quedar</b> is the everyday verb for arranging to meet socially — <i>¿quedamos?</i>, <i>he quedado con Ana</i>. <i>Encontrarse</i> leans towards running into someone by chance, and <i>reunirse</i> is a meeting with an agenda. Quedar is also how you say something suits you: <i>me queda bien</i>.",
+      "takeaway": "Quedar = meet up on purpose. Encontrarse = bump into. Reunirse = at work."
+    },
+    {
+      "day": 31,
+      "slug": "palabras-en-cion",
+      "situation": "Palabras en -ción",
+      "situationEn": "English -tion words",
+      "place": "a café, trying to explain your job",
+      "question": "English \"conversation\" becomes which Spanish word?",
+      "options": [
+        "conversacion",
+        "conversación",
+        "conversación (masculine)"
+      ],
+      "answer": "conversación — and it is feminine",
+      "why": "English <b>-tion</b> becomes <b>-ción</b>, and every one of them is <b>feminine</b>: <i>la conversación</i>, <i>la información</i>, <i>la nación</i>. The accent is not optional — it marks the stress on the last syllable.",
+      "takeaway": "-tion → -ción, always feminine, always accented."
+    },
+    {
+      "day": 32,
+      "slug": "palabras-en-dad",
+      "situation": "Palabras en -dad",
+      "situationEn": "English -ty words",
+      "place": "a university office",
+      "question": "English \"university\" becomes which Spanish word?",
+      "options": [
+        "universidad",
+        "universidád",
+        "universitad"
+      ],
+      "answer": "universidad — feminine, no accent",
+      "why": "English <b>-ty</b> becomes <b>-dad</b> (or <b>-tad</b>): <i>ciudad</i>, <i>libertad</i>, <i>dificultad</i>. They are all <b>feminine</b>, and unlike -ción they carry no written accent, because they already end in a consonant that takes the stress naturally.",
+      "takeaway": "-ty → -dad. Feminine, and no accent needed."
+    },
+    {
+      "day": 33,
+      "slug": "palabras-en-mente",
+      "situation": "Palabras en -mente",
+      "situationEn": "English -ly words",
+      "place": "giving directions, quickly",
+      "question": "How do you turn \"rápido\" into \"rapidly\"?",
+      "options": [
+        "rápidomente",
+        "rápidamente",
+        "rapidamente"
+      ],
+      "answer": "rápidamente",
+      "why": "Add <b>-mente</b> to the <b>feminine</b> form of the adjective: <i>rápida → rápidamente</i>, <i>lenta → lentamente</i>. The original accent stays where it was, even though the word grows.",
+      "takeaway": "Feminine adjective + -mente. Keep the accent you started with."
+    },
+    {
+      "day": 34,
+      "slug": "palabras-en-oso",
+      "situation": "Palabras en -oso",
+      "situationEn": "English -ous words",
+      "place": "a restaurant, praising the food",
+      "question": "English \"delicious\" becomes which Spanish word?",
+      "options": [
+        "delicioso",
+        "deliciouso",
+        "delicious"
+      ],
+      "answer": "delicioso",
+      "why": "English <b>-ous</b> becomes <b>-oso</b>: <i>famoso</i>, <i>curioso</i>, <i>nervioso</i>, <i>generoso</i>. It is an adjective, so it agrees: <i>una comida deliciosa</i>.",
+      "takeaway": "-ous → -oso. Then make it agree with what it describes."
+    },
+    {
+      "day": 35,
+      "slug": "palabras-en-mento",
+      "situation": "Palabras en -mento",
+      "situationEn": "English -ment words",
+      "place": "a gestoría, holding a folder",
+      "question": "English \"document\" becomes which Spanish word?",
+      "options": [
+        "documiento",
+        "documento",
+        "documenta"
+      ],
+      "answer": "documento",
+      "why": "English <b>-ment</b> usually becomes <b>-mento</b>: <i>momento</i>, <i>argumento</i>, <i>departamento</i>. Watch the exception you will need most: <i>government</i> is <b>gobierno</b>, not <i>gobiernamento</i>.",
+      "takeaway": "-ment → -mento. Except gobierno, which you will meet at the town hall."
+    },
+    {
+      "day": 36,
+      "slug": "palabras-en-encia",
+      "situation": "Palabras en -encia",
+      "situationEn": "English -ence words",
+      "place": "explaining what changed",
+      "question": "English \"difference\" becomes which Spanish word?",
+      "options": [
+        "diferencia",
+        "diferrencia",
+        "diferéncia"
+      ],
+      "answer": "diferencia — one r, no accent",
+      "why": "English <b>-ence/-ance</b> becomes <b>-encia/-ancia</b>: <i>importancia</i>, <i>experiencia</i>, <i>paciencia</i>. All feminine. Note Spanish spells it with one <b>r</b> — <i>diferencia</i>, not <i>differencia</i>.",
+      "takeaway": "-ence → -encia, feminine. Spanish rarely doubles consonants."
+    },
+    {
+      "day": 37,
+      "slug": "palabras-en-ista",
+      "situation": "Palabras en -ista",
+      "situationEn": "English -ist words",
+      "place": "the dentist's waiting room",
+      "question": "Your dentist is a woman. What do you call her?",
+      "options": [
+        "la dentista",
+        "la dentisto",
+        "el dentista"
+      ],
+      "answer": "la dentista",
+      "why": "<b>-ist</b> becomes <b>-ista</b>, and the word does not change for gender — only the article does: <i>el dentista</i> / <i>la dentista</i>, <i>el artista</i> / <i>la artista</i>. There is no <i>dentisto</i>.",
+      "takeaway": "-ista never changes. Change the article instead."
+    },
+    {
+      "day": 38,
+      "slug": "palabras-en-ico",
+      "situation": "Palabras en -ico",
+      "situationEn": "English -ic words",
+      "place": "reading a sign on a public building",
+      "question": "English \"public\" becomes which Spanish word?",
+      "options": [
+        "publico",
+        "público",
+        "publicó"
+      ],
+      "answer": "público",
+      "why": "English <b>-ic</b> becomes <b>-ico</b>, and the stress lands two syllables from the end, so it takes a written accent: <i>público</i>, <i>música</i>, <i>práctico</i>. Careful — <i>publicó</i> with the accent at the end means “he published”.",
+      "takeaway": "-ic → -ico, accented on the third-from-last syllable."
+    },
+    {
+      "day": 39,
+      "slug": "palabras-en-ivo",
+      "situation": "Palabras en -ivo",
+      "situationEn": "English -ive words",
+      "place": "describing yourself in an interview",
+      "question": "English \"active\" becomes which Spanish word?",
+      "options": [
+        "activo",
+        "activé",
+        "actif"
+      ],
+      "answer": "activo",
+      "why": "English <b>-ive</b> becomes <b>-ivo</b>: <i>positivo</i>, <i>creativo</i>, <i>intensivo</i>. Adjective, so it agrees: <i>una persona activa</i>.",
+      "takeaway": "-ive → -ivo, then agree it."
+    },
+    {
+      "day": 40,
+      "slug": "palabras-en-ario",
+      "situation": "Palabras en -ario",
+      "situationEn": "English -ary words",
+      "place": "a bank, reading the small print",
+      "question": "English \"necessary\" becomes which Spanish word?",
+      "options": [
+        "necesario",
+        "neccesario",
+        "necesária"
+      ],
+      "answer": "necesario — one c, one s",
+      "why": "English <b>-ary</b> becomes <b>-ario</b>: <i>ordinario</i>, <i>voluntario</i>, <i>salario</i>. The trap in <i>necesario</i> is the spelling: English doubles the c and the s, Spanish doubles neither.",
+      "takeaway": "-ary → -ario. And Spanish almost never doubles a consonant."
+    },
+    {
+      "day": 41,
+      "slug": "exito",
+      "situation": "Un falso amigo",
+      "situationEn": "A false friend",
+      "place": "a theatre, looking for the way out",
+      "question": "You see a sign saying \"ÉXITO\". What does it mean?",
+      "options": [
+        "Exit",
+        "Success",
+        "Extra"
+      ],
+      "answer": "Success",
+      "why": "<b>Éxito</b> means success — <i>tuvo mucho éxito</i>, it was a big hit. The way out is <b>la salida</b>, which is what every emergency sign in Spain actually says.",
+      "takeaway": "Éxito = success. Salida = exit. Do not follow the wrong sign."
+    },
+    {
+      "day": 42,
+      "slug": "sensible",
+      "situation": "Otro falso amigo",
+      "situationEn": "Another false friend",
+      "place": "a conversation about a friend",
+      "question": "You want to say a friend is sensible (level-headed). Which?",
+      "options": [
+        "Es muy sensible.",
+        "Es muy sensato.",
+        "Es muy sensitivo."
+      ],
+      "answer": "Es muy sensato.",
+      "why": "<b>Sensible</b> in Spanish means <i>sensitive</i> — easily moved or hurt. Level-headed is <b>sensato</b>. So <i>es muy sensible</i> says your friend cries at adverts, which may not be the compliment you were reaching for.",
+      "takeaway": "Sensible = sensitive. Sensato = sensible."
+    },
+    {
+      "day": 43,
+      "slug": "actualmente",
+      "situation": "Actualmente",
+      "situationEn": "Actually vs currently",
+      "place": "catching up with someone",
+      "question": "You want to say \"actually, I live in Valencia\". Which?",
+      "options": [
+        "Actualmente, vivo en Valencia.",
+        "En realidad, vivo en Valencia.",
+        "Realmente actual, vivo en Valencia."
+      ],
+      "answer": "En realidad, vivo en Valencia.",
+      "why": "<b>Actualmente</b> means <i>currently, at present</i>. For the English “actually” — correcting an assumption — Spanish uses <b>en realidad</b> or <b>de hecho</b>. Both are useful; they just are not the same word.",
+      "takeaway": "Actualmente = currently. En realidad = actually."
+    },
+    {
+      "day": 44,
+      "slug": "largo",
+      "situation": "Largo",
+      "situationEn": "Long vs large",
+      "place": "a shop, holding up a shirt",
+      "question": "The shirt is too big. Which do you say?",
+      "options": [
+        "Es muy largo.",
+        "Es muy grande.",
+        "Es muy largo de tamaño."
+      ],
+      "answer": "Es muy grande.",
+      "why": "<b>Largo</b> means <i>long</i> — a long film, long hair, a long street. Big is <b>grande</b>. So <i>es muy largo</i> tells the assistant the shirt reaches your knees, not that it is too wide.",
+      "takeaway": "Largo = long. Grande = big."
+    },
+    {
+      "day": 45,
+      "slug": "ropa",
+      "situation": "La ropa",
+      "situationEn": "Clothes, not rope",
+      "place": "a laundrette on a Sunday",
+      "question": "Which word means \"clothes\"?",
+      "options": [
+        "la cuerda",
+        "la ropa",
+        "el ropaje"
+      ],
+      "answer": "la ropa",
+      "why": "<b>La ropa</b> is clothes, and it is <b>singular</b> in Spanish even though English treats clothes as plural: <i>la ropa está sucia</i>, the clothes are dirty. Rope is <b>la cuerda</b>.",
+      "takeaway": "La ropa está — singular, always."
+    },
+    {
+      "day": 46,
+      "slug": "carpeta",
+      "situation": "La carpeta",
+      "situationEn": "Folder, not carpet",
+      "place": "a gestoría, handing over paperwork",
+      "question": "The gestor asks for \"la carpeta\". What do they want?",
+      "options": [
+        "The carpet",
+        "The folder",
+        "The car park"
+      ],
+      "answer": "The folder",
+      "why": "<b>Carpeta</b> is a folder or file — the thing your NIE paperwork lives in. A carpet is <b>una alfombra</b>, and a car park is <b>un parking</b> or <b>un aparcamiento</b>.",
+      "takeaway": "Carpeta = folder. Alfombra = carpet."
+    },
+    {
+      "day": 47,
+      "slug": "asistir",
+      "situation": "Asistir",
+      "situationEn": "Attend, not assist",
+      "place": "a residents' meeting notice",
+      "question": "The notice says \"se ruega asistir\". What is being asked?",
+      "options": [
+        "Please help out",
+        "Please attend",
+        "Please assist the president"
+      ],
+      "answer": "Please attend",
+      "why": "<b>Asistir a</b> means to attend — a meeting, a class, an event. To assist someone is <b>ayudar</b>. You will meet this one on every <i>comunidad de vecinos</i> notice in your building.",
+      "takeaway": "Asistir = attend. Ayudar = help."
+    },
+    {
+      "day": 48,
+      "slug": "realizar",
+      "situation": "Realizar",
+      "situationEn": "Carry out, not realize",
+      "place": "a form asking what you did",
+      "question": "You want to say \"I realized I was wrong\". Which?",
+      "options": [
+        "Realicé que estaba equivocado.",
+        "Me di cuenta de que estaba equivocado.",
+        "Realizé que estaba equivocado."
+      ],
+      "answer": "Me di cuenta de que estaba equivocado.",
+      "why": "<b>Realizar</b> means to carry out or perform — <i>realizar un trámite</i>, to do a piece of paperwork. To realise something is <b>darse cuenta de</b>. Note the <i>de</i>: <i>me di cuenta <b>de</b> que…</i>",
+      "takeaway": "Realizar = carry out. Darse cuenta de = realise."
+    },
+    {
+      "day": 49,
+      "slug": "molestar",
+      "situation": "Molestar",
+      "situationEn": "Bother, nothing worse",
+      "place": "knocking on a neighbour's door",
+      "question": "You want to say \"sorry to bother you\". Which?",
+      "options": [
+        "Perdona que te moleste.",
+        "Perdona que te molestes.",
+        "Perdona por molestación."
+      ],
+      "answer": "Perdona que te moleste.",
+      "why": "<b>Molestar</b> simply means to bother or disturb — it carries none of the weight of the English word that looks like it. <i>¿Te molesta si…?</i> is “do you mind if…”, and <i>no molestar</i> is what hangs on a hotel door.",
+      "takeaway": "Molestar = to bother. Completely ordinary, use it freely."
+    },
+    {
+      "day": 50,
+      "slug": "embarazoso",
+      "situation": "Embarazoso",
+      "situationEn": "One letter apart",
+      "place": "recounting an awkward moment",
+      "question": "You want to call a situation embarrassing. Which?",
+      "options": [
+        "una situación embarazada",
+        "una situación embarazosa",
+        "una situación vergüenza"
+      ],
+      "answer": "una situación embarazosa",
+      "why": "<b>Embarazoso/a</b> does mean embarrassing — but only for situations and things, never for people. A person feels it: <i>me dio vergüenza</i>. And <b>embarazada</b> still means pregnant.",
+      "takeaway": "Situación embarazosa = fine. Estoy embarazada = a very different sentence."
+    },
+    {
+      "day": 51,
+      "slug": "nombres-en-ma",
+      "situation": "El problema",
+      "situationEn": "Nouns in -ma",
+      "place": "a phone shop, explaining a fault",
+      "question": "You want to say “the problem”. Which is correct?",
+      "options": [
+        "la problema",
+        "el problema",
+        "el problemo"
+      ],
+      "answer": "el problema",
+      "why": "A group of nouns ending in <b>-ma</b> came from Greek and stayed <b>masculine</b>: <i>el problema</i>, <i>el tema</i>, <i>el sistema</i>, <i>el idioma</i>, <i>el clima</i>. They look feminine and are not.",
+      "takeaway": "El problema, el tema, el idioma. Greek words keep their gender."
+    },
+    {
+      "day": 52,
+      "slug": "la-mano",
+      "situation": "La mano",
+      "situationEn": "A noun that breaks the rule",
+      "place": "a pharmacy, describing an injury",
+      "question": "You hurt your right hand and need to say so. Which is correct?",
+      "options": [
+        "el mano derecho",
+        "la mano derecha",
+        "la mano derecho"
+      ],
+      "answer": "la mano derecha",
+      "why": "<b>Mano</b> ends in -o but is <b>feminine</b>, so everything around it is feminine too: <i>la mano derecha</i>, <i>las manos frías</i>. Its friends in this club are <i>la foto</i> and <i>la moto</i>, both shortened from longer feminine words.",
+      "takeaway": "La mano, la foto, la moto. The -o is lying to you."
+    },
+    {
+      "day": 53,
+      "slug": "el-dia",
+      "situation": "El día",
+      "situationEn": "A noun that breaks it the other way",
+      "place": "wishing someone well in the morning",
+      "question": "It is nine in the morning and you pass a neighbour. Which greeting?",
+      "options": [
+        "Buena día",
+        "Buenos días",
+        "Buenas días"
+      ],
+      "answer": "Buenos días",
+      "why": "<b>Día</b> ends in -a but is <b>masculine</b>, so the greeting is <i>buenos días</i>. The other two are feminine and behave normally: <i>buenas tardes</i>, <i>buenas noches</i>. That is why the first one looks odd next to the others.",
+      "takeaway": "Buenos días, buenas tardes, buenas noches. Only the first is masculine."
+    },
+    {
+      "day": 54,
+      "slug": "concordancia",
+      "situation": "La concordancia",
+      "situationEn": "Making things agree",
+      "place": "a market stall, praising the produce",
+      "question": "The oranges on the stall are delicious. Which is correct?",
+      "options": [
+        "Las naranjas están muy rico.",
+        "Las naranjas están muy ricas.",
+        "Las naranjas está muy ricas."
+      ],
+      "answer": "Las naranjas están muy ricas.",
+      "why": "Everything lines up with the noun: plural feminine noun → plural verb (<i>están</i>) → plural feminine adjective (<i>ricas</i>). English changes almost nothing, so this is the habit that takes longest to build.",
+      "takeaway": "Noun sets the gender and number. Verb and adjective follow."
+    },
+    {
+      "day": 55,
+      "slug": "ir-a",
+      "situation": "Ir a",
+      "situationEn": "Talking about tomorrow",
+      "place": "making plans at a bar",
+      "question": "You want to say \"I am going to look for a flat\". Which?",
+      "options": [
+        "Voy buscar un piso.",
+        "Voy a buscar un piso.",
+        "Voy para buscar un piso."
+      ],
+      "answer": "Voy a buscar un piso.",
+      "why": "<b>Ir a</b> + infinitive is how Spanish does the near future, and the <b>a</b> is compulsory — you cannot drop it the way English drops “to”. This one construction will carry most of your future tense for months.",
+      "takeaway": "Voy a + infinitive. Never leave out the a."
+    },
+    {
+      "day": 56,
+      "slug": "acabar-de",
+      "situation": "Acabar de",
+      "situationEn": "Something that just happened",
+      "place": "arriving at a friend's flat",
+      "question": "You want to say \"I have just arrived\". Which?",
+      "options": [
+        "Acabo de llegar.",
+        "Acabo llegar.",
+        "Acabo de llegado."
+      ],
+      "answer": "Acabo de llegar.",
+      "why": "<b>Acabar de</b> + infinitive means to have just done something: <i>acabo de comer</i>, <i>acaba de salir</i>. It stays in the present tense even though English uses “have just”, and the verb after <i>de</i> stays in the infinitive.",
+      "takeaway": "Acabo de + infinitive = I have just…"
+    },
+    {
+      "day": 57,
+      "slug": "hay-o-esta",
+      "situation": "Hay o está",
+      "situationEn": "Hay vs está",
+      "place": "asking for directions",
+      "question": "You are asking whether there is a pharmacy nearby. Which?",
+      "options": [
+        "¿Está una farmacia por aquí?",
+        "¿Hay una farmacia por aquí?",
+        "¿Es una farmacia por aquí?"
+      ],
+      "answer": "¿Hay una farmacia por aquí?",
+      "why": "<b>Hay</b> states that something exists, and it goes with <i>un/una</i> or no article at all. <b>Está</b> locates something you have both already identified: <i>¿Dónde está la farmacia?</i> — the one we both know about.",
+      "takeaway": "Hay = there is one somewhere. Está = where the known one is."
+    },
+    {
+      "day": 58,
+      "slug": "saber-hacer",
+      "situation": "Saber + infinitivo",
+      "situationEn": "Saying you can do something",
+      "place": "a job conversation",
+      "question": "You want to say you can drive. Which?",
+      "options": [
+        "Puedo conducir.",
+        "Sé conducir.",
+        "Conozco conducir."
+      ],
+      "answer": "Sé conducir.",
+      "why": "For a learned skill, Spanish uses <b>saber</b> + infinitive: <i>sé conducir</i>, <i>sé cocinar</i>, <i>sé nadar</i>. <i>Puedo conducir</i> is also grammatical but means you are able to right now — you have the car and you are not over the limit.",
+      "takeaway": "Sé = I know how to. Puedo = I am able to right now."
+    },
+    {
+      "day": 59,
+      "slug": "pedir-o-preguntar",
+      "situation": "Pedir o preguntar",
+      "situationEn": "Pedir vs preguntar",
+      "place": "a bar, needing one more thing",
+      "question": "You want to ask for the bill. Which verb?",
+      "options": [
+        "Voy a preguntar la cuenta.",
+        "Voy a pedir la cuenta.",
+        "Voy a preguntar por la cuenta."
+      ],
+      "answer": "Voy a pedir la cuenta.",
+      "why": "<b>Pedir</b> is to ask <i>for</i> a thing — the bill, a coffee, a favour. <b>Preguntar</b> is to ask a question. English uses “ask” for both, which is why this error survives so long.",
+      "takeaway": "Pedir = request a thing. Preguntar = ask a question."
+    },
+    {
+      "day": 60,
+      "slug": "llevar-o-traer",
+      "situation": "Llevar o traer",
+      "situationEn": "Llevar vs traer",
+      "place": "an invitation to dinner",
+      "question": "They say \"trae algo de postre\". What are they asking?",
+      "options": [
+        "Take some dessert away",
+        "Bring some dessert here",
+        "Buy some dessert"
+      ],
+      "answer": "Bring some dessert here",
+      "why": "<b>Traer</b> moves something <i>towards</i> where the speaker is; <b>llevar</b> moves it <i>away</i>. So <i>trae el postre</i> means bring it to me, and <i>lleva el postre</i> means take it with you somewhere else.",
+      "takeaway": "Traer = towards me. Llevar = away from me."
+    },
+    {
+      "day": 61,
+      "slug": "que-hora-es",
+      "situation": "¿Qué hora es?",
+      "situationEn": "Telling the time",
+      "place": "a platform, checking a departure",
+      "question": "It is three o clock. Which?",
+      "options": [
+        "Es las tres.",
+        "Son las tres.",
+        "Está las tres."
+      ],
+      "answer": "Son las tres.",
+      "why": "The verb agrees with the <b>hour</b>, which is plural from two onwards: <i>son las tres</i>, <i>son las diez</i>. Only one o'clock is singular: <i>es la una</i>. Spain also runs on the 24-hour clock for timetables.",
+      "takeaway": "Es la una, but son las dos, las tres, las diez."
+    },
+    {
+      "day": 62,
+      "slug": "verbos-reflexivos",
+      "situation": "Verbos reflexivos",
+      "situationEn": "Reflexive verbs",
+      "place": "describing your morning",
+      "question": "You want to say \"I get up at seven\". Which?",
+      "options": [
+        "Me levanto a las siete.",
+        "Levanto a las siete.",
+        "Me levanto las siete."
+      ],
+      "answer": "Me levanto a las siete.",
+      "why": "<b>Levantarse</b> is reflexive — you raise yourself — so the pronoun is compulsory: <i>me levanto</i>, <i>te levantas</i>. Without it, <i>levanto</i> means you lift something else. The <b>a</b> before a time is compulsory too.",
+      "takeaway": "Me levanto, me ducho, me acuesto. Keep the pronoun."
+    },
+    {
+      "day": 63,
+      "slug": "se-me-olvido",
+      "situation": "Se me olvidó",
+      "situationEn": "The blameless past",
+      "place": "apologising for forgetting something",
+      "question": "The natural way to say \"I forgot the keys\" is:",
+      "options": [
+        "Olvidé las llaves.",
+        "Se me olvidaron las llaves.",
+        "Me olvidé las llaves."
+      ],
+      "answer": "Se me olvidaron las llaves.",
+      "why": "Spanish likes to present accidents as things that happened <i>to</i> you: literally “the keys got forgotten on me”. Because <i>las llaves</i> is the subject, the verb is plural — <b>olvidaron</b>. <i>Olvidé las llaves</i> is correct but sounds more deliberate.",
+      "takeaway": "Se me olvidó / se me olvidaron. The object decides the verb."
+    },
+    {
+      "day": 64,
+      "slug": "pasado-en-espana",
+      "situation": "El pretérito perfecto",
+      "situationEn": "The past tense Spain prefers",
+      "place": "recounting your day over dinner",
+      "question": "You ate at a new place earlier today. In Spain you would most likely say:",
+      "options": [
+        "Hoy comí en un sitio nuevo.",
+        "Hoy he comido en un sitio nuevo.",
+        "Hoy como en un sitio nuevo."
+      ],
+      "answer": "Hoy he comido en un sitio nuevo.",
+      "why": "For something finished but inside a period that is <b>still going</b> — today, this week, this year — Spain strongly prefers the <b>pretérito perfecto</b>: <i>he comido</i>, <i>he ido</i>, <i>he visto</i>. Much of Latin America uses the simple past here instead.",
+      "takeaway": "Hoy / esta semana / este año → he + participle."
+    },
+    {
+      "day": 65,
+      "slug": "espero-que",
+      "situation": "Espero que",
+      "situationEn": "Your first subjunctive",
+      "place": "texting a friend who is ill",
+      "question": "You want to say \"I hope you are well\". Which?",
+      "options": [
+        "Espero que estás bien.",
+        "Espero que estés bien.",
+        "Espero que eres bien."
+      ],
+      "answer": "Espero que estés bien.",
+      "why": "<b>Espero que</b> expresses a wish, not a fact, so what follows goes into the <b>subjunctive</b>: <i>estés</i>, not <i>estás</i>. You do not need to understand the whole system to use the handful that come up daily — this one, <i>ojalá que</i>, and <i>quiero que</i>.",
+      "takeaway": "Espero que + subjunctive. Learn it as a phrase first, a rule later."
+    },
+    {
+      "day": 66,
+      "slug": "tio-y-tia",
+      "situation": "Tío y tía",
+      "situationEn": "What friends call each other",
+      "place": "a terrace with friends",
+      "question": "A friend says \"¿qué tal, tío?\". What did they call you?",
+      "options": [
+        "Uncle",
+        "Mate",
+        "Sir"
+      ],
+      "answer": "Mate",
+      "why": "<b>Tío/tía</b> literally means uncle and aunt, but among friends in Spain it is simply <i>mate</i> or <i>dude</i> — and it is extremely common. It is informal: use it with friends, not with the clerk at the town hall.",
+      "takeaway": "Tío = mate, between friends. Never at the counter."
+    },
+    {
+      "day": 67,
+      "slug": "vale",
+      "situation": "Vale",
+      "situationEn": "The word you will hear most",
+      "place": "any conversation, constantly",
+      "question": "What does \"vale\" mean in everyday Spain?",
+      "options": [
+        "It is worth it",
+        "OK",
+        "Goodbye"
+      ],
+      "answer": "OK",
+      "why": "<b>Vale</b> is the Spanish “OK” — agreement, acknowledgement, end of discussion. It comes from <i>valer</i>, to be worth, and it appears several times in almost every conversation. <i>¿Vale?</i> at the end of a sentence is “alright?”.",
+      "takeaway": "Vale is the single most useful word in Spain. Use it liberally."
+    },
+    {
+      "day": 68,
+      "slug": "guay-o-guai",
+      "situation": "Guay",
+      "situationEn": "Saying something is great",
+      "place": "after a friend's good news",
+      "question": "A friend gets the flat they wanted. You say:",
+      "options": [
+        "¡Qué guay!",
+        "¡Qué guai!",
+        "¡Qué güay!"
+      ],
+      "answer": "¡Qué guay!",
+      "why": "<b>Guay</b> means cool or great, spelled exactly that way. It is casual and very Spanish — Latin America has its own words for this. Its close relative is <i>¡qué bien!</i>, which works everywhere and with anyone.",
+      "takeaway": "Guay = cool. Qué bien = great, and safe in any country."
+    },
+    {
+      "day": 69,
+      "slug": "movil-o-celular",
+      "situation": "El móvil",
+      "situationEn": "Spain's own vocabulary",
+      "place": "a phone shop, again",
+      "question": "In Spain, what do you call a mobile phone?",
+      "options": [
+        "el celular",
+        "el móvil",
+        "el teléfono móvil celular"
+      ],
+      "answer": "el móvil",
+      "why": "Spain says <b>el móvil</b>; most of Latin America says <i>el celular</i>. Same story elsewhere in the shop: Spain uses <b>el ordenador</b> where others say <i>la computadora</i>. Both are correct Spanish — they are just from different places.",
+      "takeaway": "Móvil and ordenador in Spain. Celular and computadora elsewhere."
+    },
+    {
+      "day": 70,
+      "slug": "zumo-o-jugo",
+      "situation": "Zumo o jugo",
+      "situationEn": "Breakfast vocabulary",
+      "place": "a café at nine in the morning",
+      "question": "You want orange juice in Madrid. Which?",
+      "options": [
+        "un jugo de naranja",
+        "un zumo de naranja",
+        "una naranja líquida"
+      ],
+      "answer": "un zumo de naranja",
+      "why": "Spain says <b>zumo</b>; Latin America says <i>jugo</i>. The same split runs through the menu: <b>patatas</b> in Spain, <i>papas</i> elsewhere. Order a <i>jugo</i> in Madrid and you will be understood, just placed instantly as a foreigner.",
+      "takeaway": "Zumo and patatas in Spain. Jugo and papas across the Atlantic."
+    },
+    {
+      "day": 71,
+      "slug": "aparcar-o-estacionar",
+      "situation": "Aparcar",
+      "situationEn": "Getting around",
+      "place": "looking for somewhere to leave the car",
+      "question": "In Spain, how do you say \"to park\"?",
+      "options": [
+        "estacionar",
+        "aparcar",
+        "parquear"
+      ],
+      "answer": "aparcar",
+      "why": "Spain uses <b>aparcar</b>, and the noun is <i>el aparcamiento</i> or simply <i>el parking</i>. Latin America prefers <i>estacionar</i> or <i>parquear</i>. Same for driving: Spain <b>conducir</b>, elsewhere <i>manejar</i>.",
+      "takeaway": "Aparcar and conducir in Spain."
+    },
+    {
+      "day": 72,
+      "slug": "currar",
+      "situation": "Currar",
+      "situationEn": "Talking about work",
+      "place": "a bar on a Friday evening",
+      "question": "A friend says \"mañana curro\". What are they doing tomorrow?",
+      "options": [
+        "Cooking",
+        "Working",
+        "Travelling"
+      ],
+      "answer": "Working",
+      "why": "<b>Currar</b> is colloquial Spanish for working, and <b>el curro</b> is the job itself — <i>voy al curro</i>. It is informal and warm, not rude. The neutral word is <i>trabajar</i>, which you would use on any form.",
+      "takeaway": "Curro = job, informally. Trabajo on the paperwork."
+    },
+    {
+      "day": 73,
+      "slug": "comprar-sellos",
+      "situation": "El estanco",
+      "situationEn": "The tobacconist",
+      "place": "a small shop with a brown and yellow sign",
+      "question": "Where do you buy stamps in Spain?",
+      "options": [
+        "en la farmacia",
+        "en el estanco",
+        "en el quiosco"
+      ],
+      "answer": "en el estanco",
+      "why": "<b>El estanco</b> is a state-licensed tobacconist, and it is where you buy <i>sellos</i> (stamps) as well as bus passes and official paper. Correos does sell stamps too, but the estanco is nearer and has no queue.",
+      "takeaway": "Sellos at the estanco. It is the errand nobody explains."
+    },
+    {
+      "day": 74,
+      "slug": "las-tiendas-en-eria",
+      "situation": "La ferretería",
+      "situationEn": "The hardware shop",
+      "place": "a street of small shops",
+      "question": "Your tap is dripping. Which shop?",
+      "options": [
+        "la ferretería",
+        "la panadería",
+        "la papelería"
+      ],
+      "answer": "la ferretería",
+      "why": "<b>Ferretería</b> is the hardware shop. The <b>-ería</b> ending marks the place where a thing is sold or done, and once you see it you can decode half a Spanish street: <i>panadería</i> bread, <i>papelería</i> stationery, <i>peluquería</i> hair, <i>lavandería</i> laundry.",
+      "takeaway": "-ería = the shop for that thing. One ending, twenty shops."
+    },
+    {
+      "day": 75,
+      "slug": "cita-en-el-medico",
+      "situation": "Pedir cita",
+      "situationEn": "Booking a doctor",
+      "place": "your local health centre, on the phone",
+      "question": "You want to book an appointment with your GP. Which?",
+      "options": [
+        "Quiero pedir cita con mi médico de cabecera.",
+        "Quiero preguntar cita con mi médico principal.",
+        "Quiero una reserva con mi doctor."
+      ],
+      "answer": "Quiero pedir cita con mi médico de cabecera.",
+      "why": "You <b>pedir</b> a cita, never <i>preguntar</i> one, and <i>reserva</i> is for restaurants and hotels. Your assigned GP is the <b>médico de cabecera</b> — the phrase the receptionist will use and expect back.",
+      "takeaway": "Pedir cita con el médico de cabecera. Three words that unlock the system."
+    },
+    {
+      "day": 76,
+      "slug": "la-comunidad",
+      "situation": "La comunidad de vecinos",
+      "situationEn": "The residents' association",
+      "place": "a notice in your building's hallway",
+      "question": "A notice announces \"la junta de la comunidad\". What is it?",
+      "options": [
+        "A community festival",
+        "A residents' meeting",
+        "A council inspection"
+      ],
+      "answer": "A residents' meeting",
+      "why": "<b>La comunidad de vecinos</b> is the residents' association every block of flats has, and <b>la junta</b> is its meeting, where the lift repairs and the roof get argued about. If you rent, you usually do not pay the fees; if you buy, you do.",
+      "takeaway": "La junta = the meeting. Attend one and your Spanish will age five years in a night."
+    },
+    {
+      "day": 77,
+      "slug": "la-basura",
+      "situation": "La basura",
+      "situationEn": "Taking the bins out",
+      "place": "the bin area at ten at night",
+      "question": "Which bin does glass go in?",
+      "options": [
+        "el contenedor amarillo",
+        "el contenedor verde",
+        "el contenedor azul"
+      ],
+      "answer": "el contenedor verde",
+      "why": "Spanish recycling runs on colour: <b>verde</b> glass, <b>amarillo</b> plastic and cans, <b>azul</b> paper and card, <b>marrón</b> organic, grey for the rest. Getting it wrong is the fastest way to meet your neighbours.",
+      "takeaway": "Verde glass, amarillo plastic, azul paper. Learn the colours, not the words."
+    },
+    {
+      "day": 78,
+      "slug": "la-luz",
+      "situation": "Dar de alta la luz",
+      "situationEn": "Setting up the electricity",
+      "place": "an empty flat with no power",
+      "question": "You need to set up an electricity contract. The phrase is:",
+      "options": [
+        "dar de alta la luz",
+        "dar de baja la luz",
+        "poner alta la luz"
+      ],
+      "answer": "dar de alta la luz",
+      "why": "<b>Dar de alta</b> means to register or activate a service; <b>dar de baja</b> is to cancel it. You will use both constantly — for electricity, water, the gym, the phone. Mixing them up cancels the thing you were trying to start.",
+      "takeaway": "Alta = switch on. Baja = switch off. Opposites, one letter apart in your memory."
+    },
+    {
+      "day": 79,
+      "slug": "el-gestor",
+      "situation": "El gestor",
+      "situationEn": "The paperwork agent",
+      "place": "an office full of filing cabinets",
+      "question": "What does a \"gestor\" do for you?",
+      "options": [
+        "Manages your investments",
+        "Handles your official paperwork",
+        "Manages a building"
+      ],
+      "answer": "Handles your official paperwork",
+      "why": "A <b>gestor</b> — working from a <b>gestoría</b> — is a paid specialist who files your paperwork with the Spanish state: taxes, self-employment, residency, car transfers. There is no exact British or American equivalent, and almost every foreigner ends up using one.",
+      "takeaway": "Gestoría: the shortcut through Spanish bureaucracy. Budget for it."
+    },
+    {
+      "day": 80,
+      "slug": "autonomo",
+      "situation": "Hacerse autónomo",
+      "situationEn": "Going self-employed",
+      "place": "a gestoría, discussing work",
+      "question": "What does \"autónomo\" mean in Spain?",
+      "options": [
+        "Automatic",
+        "Self-employed",
+        "Independent-minded"
+      ],
+      "answer": "Self-employed",
+      "why": "<b>Autónomo</b> is the official status for the self-employed, with its own monthly social security payment — <i>la cuota de autónomos</i> — which is due whether you earned anything that month or not. If you freelance here, this word will run your year.",
+      "takeaway": "Autónomo = self-employed, and it costs a fixed monthly amount."
+    },
+    {
+      "day": 81,
+      "slug": "la-hache",
+      "situation": "La hache muda",
+      "situationEn": "The silent h",
+      "place": "introducing yourself",
+      "question": "How is \"hola\" pronounced?",
+      "options": [
+        "HO-la, with the h sounded",
+        "O-la, the h is silent",
+        "JO-la, like a Spanish j"
+      ],
+      "answer": "O-la, the h is silent",
+      "why": "Spanish <b>h</b> is always silent: <i>hola</i>, <i>hora</i>, <i>hospital</i>, <i>hermano</i>. The sound English speakers reach for lives in the letter <b>j</b> instead. The h is still written, and leaving it out is a spelling error.",
+      "takeaway": "Write the h. Never say it."
+    },
+    {
+      "day": 82,
+      "slug": "la-jota",
+      "situation": "La jota",
+      "situationEn": "The j sound",
+      "place": "asking for a ride",
+      "question": "How is the j in \"trabajo\" pronounced?",
+      "options": [
+        "Like English j in job",
+        "Like English y in yes",
+        "Like the ch in Scottish loch"
+      ],
+      "answer": "Like the ch in Scottish loch",
+      "why": "Spanish <b>j</b> is a rasp at the back of the throat — <i>trabajo</i>, <i>jamón</i>, <i>hijo</i>. The letter <b>g</b> does the same before <i>e</i> and <i>i</i>: <i>gente</i>, <i>girar</i>. Elsewhere g is hard, as in <i>gato</i>.",
+      "takeaway": "J always rasps. G rasps before e and i only."
+    },
+    {
+      "day": 83,
+      "slug": "pero-o-perro",
+      "situation": "Pero o perro",
+      "situationEn": "One r or two",
+      "place": "talking about your neighbour's dog",
+      "question": "Which means \"dog\"?",
+      "options": [
+        "pero",
+        "perro",
+        "pérro"
+      ],
+      "answer": "perro",
+      "why": "A single <b>r</b> between vowels is a quick tap; a double <b>rr</b> is a full trill. They are different words, not different accents: <i>pero</i> but, <i>perro</i> dog; <i>caro</i> expensive, <i>carro</i> cart. An r at the start of a word trills anyway.",
+      "takeaway": "Pero / perro, caro / carro. The trill carries meaning."
+    },
+    {
+      "day": 84,
+      "slug": "la-ce-espanola",
+      "situation": "La c y la z",
+      "situationEn": "The Spanish th",
+      "place": "ordering at a bar in Madrid",
+      "question": "In most of Spain, how is the c in \"cerveza\" pronounced?",
+      "options": [
+        "Like s",
+        "Like th in think",
+        "Like k"
+      ],
+      "answer": "Like th in think",
+      "why": "In most of Spain, <b>c</b> before e or i, and <b>z</b> anywhere, are pronounced like the English <i>th</i> in “think” — so <i>cerveza</i> is roughly <i>ther-VE-tha</i>. Southern Spain and all of Latin America use an s sound instead. Both are standard.",
+      "takeaway": "Central and northern Spain: c and z are th. Nobody will misunderstand either way."
+    },
+    {
+      "day": 85,
+      "slug": "el-acento",
+      "situation": "El acento",
+      "situationEn": "When the accent changes the word",
+      "place": "reading a menu out loud",
+      "question": "What is the difference between \"papa\" and \"papá\"?",
+      "options": [
+        "Nothing, the accent is decoration",
+        "Potato vs dad",
+        "Pope vs potato"
+      ],
+      "answer": "Potato vs dad",
+      "why": "The written accent marks which syllable is stressed, and moving it makes a different word: <i>papa</i> potato, <i>papá</i> dad; <i>tu</i> your, <i>tú</i> you; <i>si</i> if, <i>sí</i> yes; <i>el</i> the, <i>él</i> he. It is never optional.",
+      "takeaway": "The accent is not decoration. It is spelling."
+    },
+    {
+      "day": 86,
+      "slug": "la-tilde",
+      "situation": "La eñe",
+      "situationEn": "The letter English does not have",
+      "place": "talking about how old you are",
+      "question": "What is the difference between \"año\" and \"ano\"?",
+      "options": [
+        "None",
+        "One is a year, the other is not something you want to say",
+        "One is plural"
+      ],
+      "answer": "One is a year, the other is not something you want to say",
+      "why": "<b>ñ</b> is its own letter with its own sound, roughly the <i>ny</i> in “canyon”. <i>Año</i> is year; <i>ano</i> is the anatomical word. Saying how many <i>anos</i> you have is the classic first-week mistake.",
+      "takeaway": "Tengo treinta años. Always type the ñ."
+    },
+    {
+      "day": 87,
+      "slug": "la-silaba-tonica",
+      "situation": "La sílaba tónica",
+      "situationEn": "Where the stress falls",
+      "place": "saying a word you have only read",
+      "question": "Where is the stress in \"hablo\" (no written accent)?",
+      "options": [
+        "HA-blo",
+        "ha-BLO",
+        "Either is fine"
+      ],
+      "answer": "HA-blo",
+      "why": "Words ending in a <b>vowel, n or s</b> are stressed on the second-to-last syllable: <i>HA-blo</i>, <i>CA-sa</i>, <i>ha-BLA-mos</i>. Everything else is stressed on the last. A written accent exists precisely to mark the exceptions — <i>ha-BLÓ</i>, he spoke.",
+      "takeaway": "Vowel, n or s → stress the second-to-last. Otherwise the last."
+    },
+    {
+      "day": 88,
+      "slug": "los-numeros",
+      "situation": "Los números",
+      "situationEn": "Saying a price",
+      "place": "a market stall, paying",
+      "question": "The stallholder says \"son dos con cincuenta\". How much?",
+      "options": [
+        "2.50 €",
+        "250 €",
+        "2 for 50 cents"
+      ],
+      "answer": "2.50 €",
+      "why": "Prices are said as <b>euros con céntimos</b>: <i>dos con cincuenta</i> is €2.50. In writing, Spain uses a comma for the decimal and a dot for thousands — <b>1.250,50 €</b> — which is the exact reverse of English, and the euro sign goes after the number.",
+      "takeaway": "Dos con cincuenta = 2,50 €. Comma for decimals, symbol at the end."
+    },
+    {
+      "day": 89,
+      "slug": "la-fecha",
+      "situation": "La fecha",
+      "situationEn": "Writing the date",
+      "place": "filling in any official form",
+      "question": "A form is dated 04/09/2026. Which date is that?",
+      "options": [
+        "4 September",
+        "9 April",
+        "Either, it is ambiguous"
+      ],
+      "answer": "4 September",
+      "why": "Spain writes dates <b>day first</b>: 04/09/2026 is the fourth of September. Said aloud it is <i>el cuatro de septiembre</i>, with <b>de</b> and no capital letter on the month. Getting this wrong on a cita previa costs you the appointment.",
+      "takeaway": "Day, month, year. And months are lower-case."
+    },
+    {
+      "day": 90,
+      "slug": "la-hora-oficial",
+      "situation": "Las 24 horas",
+      "situationEn": "The 24-hour clock",
+      "place": "reading a train ticket",
+      "question": "Your appointment says 16:30. What time is that?",
+      "options": [
+        "4:30 in the afternoon",
+        "6:30 in the evening",
+        "10:30 in the morning"
+      ],
+      "answer": "4:30 in the afternoon",
+      "why": "Official Spain runs on the <b>24-hour clock</b> — trains, appointments, opening hours. Spoken aloud people usually revert to twelve: <i>las cuatro y media</i>. And <i>y media</i> is half past, while <i>menos cuarto</i> is quarter to.",
+      "takeaway": "16:30 written, “las cuatro y media” spoken."
+    },
+    {
+      "day": 91,
+      "slug": "la-cortesia",
+      "situation": "La cortesía",
+      "situationEn": "How polite to be",
+      "place": "a bar, ordering quickly",
+      "question": "Which sounds most natural at a busy bar in Spain?",
+      "options": [
+        "Perdone, señor, ¿sería tan amable de ponerme una caña?",
+        "Una caña, por favor.",
+        "Deme una caña inmediatamente."
+      ],
+      "answer": "Una caña, por favor.",
+      "why": "Spanish politeness lives in <b>tone</b> more than in extra words. A short, warm <i>una caña, por favor</i> is perfectly courteous; the long version sounds strained, and English speakers often over-pad because dropping “could I possibly” feels rude to them. It is not.",
+      "takeaway": "Short is not rude in Spain. Warm tone does the work."
+    },
+    {
+      "day": 92,
+      "slug": "tuteo",
+      "situation": "Tutear",
+      "situationEn": "Switching to tú",
+      "place": "a shop where the assistant is your age",
+      "question": "Someone says \"puedes tutearme\". What are they offering?",
+      "options": [
+        "Call me by my first name",
+        "Use tú instead of usted",
+        "Pay later"
+      ],
+      "answer": "Use tú instead of usted",
+      "why": "<b>Tutear</b> means to address someone as <i>tú</i>. Being invited to do it is a small social gift — take it immediately, because carrying on with <i>usted</i> after that reads as keeping your distance.",
+      "takeaway": "If they offer tutearme, switch on the spot."
+    },
+    {
+      "day": 93,
+      "slug": "perdon-o-lo-siento",
+      "situation": "Perdón o lo siento",
+      "situationEn": "Two kinds of sorry",
+      "place": "a crowded metro carriage",
+      "question": "You need to squeeze past someone. Which?",
+      "options": [
+        "Lo siento.",
+        "Perdón.",
+        "Disculpe, lo siento mucho."
+      ],
+      "answer": "Perdón.",
+      "why": "<b>Perdón</b> (or <i>perdona/perdone</i>) is the light one — excuse me, getting past, small interruptions. <b>Lo siento</b> carries real regret and is for things that actually went wrong. Using <i>lo siento</i> to get off the metro sounds oddly heavy.",
+      "takeaway": "Perdón to get past. Lo siento when you mean it."
+    },
+    {
+      "day": 94,
+      "slug": "responder-a-gracias",
+      "situation": "De nada",
+      "situationEn": "Answering thanks",
+      "place": "after helping a neighbour",
+      "question": "Someone thanks you. Which reply is most common in Spain?",
+      "options": [
+        "De nada.",
+        "Bienvenido.",
+        "Por favor."
+      ],
+      "answer": "De nada.",
+      "why": "<b>De nada</b> is the standard “you're welcome”. <i>Nada, nada</i> and <i>no hay de qué</i> both work too. <i>Bienvenido</i> means welcome as in welcome to my home — it is not a reply to thanks, which is a direct import from English.",
+      "takeaway": "De nada. Never bienvenido."
+    },
+    {
+      "day": 95,
+      "slug": "no-te-entiendo",
+      "situation": "Cuando no entiendes",
+      "situationEn": "Saying you did not catch it",
+      "place": "a conversation moving too fast",
+      "question": "You did not catch what someone said. The most useful phrase is:",
+      "options": [
+        "¿Perdón?",
+        "No hablo español.",
+        "¿Puedes repetir más despacio, por favor?"
+      ],
+      "answer": "¿Puedes repetir más despacio, por favor?",
+      "why": "This is the single most valuable sentence you can carry, because it keeps the conversation in Spanish instead of ending it. <i>No hablo español</i> closes the door — and after a few weeks it is not even true. <i>¿Perdón?</i> just gets the same speed again.",
+      "takeaway": "Ask for slower, not for English. It is the whole difference."
+    },
+    {
+      "day": 96,
+      "slug": "pedir-una-palabra",
+      "situation": "¿Cómo se dice?",
+      "situationEn": "Asking for a word",
+      "place": "mid-sentence, stuck",
+      "question": "You need a word you do not know. Which?",
+      "options": [
+        "¿Cómo se dice “screwdriver” en español?",
+        "¿Qué es “screwdriver” español?",
+        "¿Cómo dice “screwdriver”?"
+      ],
+      "answer": "¿Cómo se dice “screwdriver” en español?",
+      "why": "<b>¿Cómo se dice… en español?</b> is the phrase that lets you build vocabulary from inside a conversation rather than from a list afterwards. Its partner is <b>¿Qué significa…?</b> for when you hear something you do not know.",
+      "takeaway": "¿Cómo se dice…? and ¿Qué significa…? Two phrases, endless vocabulary."
+    },
+    {
+      "day": 97,
+      "slug": "responder-que-tal",
+      "situation": "Más o menos",
+      "situationEn": "Answering honestly",
+      "place": "someone asks how your Spanish is",
+      "question": "Someone asks how your Spanish is going. A natural modest answer:",
+      "options": [
+        "Más o menos.",
+        "Mucho bien.",
+        "Un poco bien."
+      ],
+      "answer": "Más o menos.",
+      "why": "<b>Más o menos</b> — more or less — is the universal Spanish hedge, for your Spanish, the weather, the food and how you slept. <i>Mucho bien</i> is not Spanish: <i>bien</i> is an adverb, so it takes <i>muy</i>, giving <b>muy bien</b>.",
+      "takeaway": "Más o menos for honest. Muy bien, never mucho bien."
+    },
+    {
+      "day": 98,
+      "slug": "el-tuteo-telefono",
+      "situation": "Por teléfono",
+      "situationEn": "On the phone",
+      "place": "a call you have been putting off",
+      "question": "You answer the phone in Spain. What do you say?",
+      "options": [
+        "¿Hola?",
+        "¿Dígame?",
+        "¿Quién es?"
+      ],
+      "answer": "¿Dígame?",
+      "why": "<b>¿Dígame?</b> — literally “tell me” — is the standard way to answer a phone in Spain, along with <i>¿sí?</i>. <i>¿Quién es?</i> sounds blunt, closer to “who is this”. Phone calls are where your Spanish feels worst, because you lose every visual clue.",
+      "takeaway": "¿Dígame? to answer. And phone Spanish is hard for everyone."
+    },
+    {
+      "day": 99,
+      "slug": "quedar-bien",
+      "situation": "Quedar bien",
+      "situationEn": "Clothes that fit",
+      "place": "a changing room",
+      "question": "The shirt fits you well. Which?",
+      "options": [
+        "Me queda bien.",
+        "Me quedo bien.",
+        "Está bien quedado."
+      ],
+      "answer": "Me queda bien.",
+      "why": "<b>Quedar</b> used this way works like <i>gustar</i>: the garment is the subject, so it is <i>me queda bien</i> for one item and <i>me quedan bien</i> for trousers or shoes. <i>Me quedo</i> means “I stay”, which is a different verb entirely.",
+      "takeaway": "Me queda bien = it suits me. Me quedo = I stay."
+    },
+    {
+      "day": 100,
+      "slug": "ya-esta",
+      "situation": "Ya está",
+      "situationEn": "Finishing anything",
+      "place": "the end of almost any transaction",
+      "question": "The assistant finishes and says \"ya está\". What do they mean?",
+      "options": [
+        "It is already there",
+        "That is it, we are done",
+        "It is still in progress"
+      ],
+      "answer": "That is it, we are done",
+      "why": "<b>Ya está</b> closes things — the payment went through, the form is filed, the haircut is finished. <b>Ya</b> on its own is one of the hardest little words in Spanish, sliding between already, now, and right away depending on where it sits.",
+      "takeaway": "Ya está = done. You will hear it ten times a day."
+    }
+  ]
+}

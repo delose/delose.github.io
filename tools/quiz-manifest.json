@@ -1,0 +1,1507 @@
+{
+  "generated": "2026-09-12",
+  "base": "https://edsa.tech/gaby/quizzes/",
+  "count": 100,
+  "quizzes": [
+    {
+      "order": 1,
+      "slug": "tapas-bar",
+      "url": "https://edsa.tech/gaby/quizzes/tapas-bar/",
+      "topic": "At the tapas bar",
+      "place": "a neighbourhood bar in Madrid",
+      "question": "You are at the bar and want to ask what tapas they have. Which one is right?",
+      "options": [
+        "¿Qué tapas tiene?",
+        "¿Dónde están las tapas?",
+        "¿Qué tapas tienen?"
+      ],
+      "answer": "¿Qué tapas tienen?",
+      "takeaway": "Addressing a business is almost always plural in Spain."
+    },
+    {
+      "order": 2,
+      "slug": "comer-a-mediodia",
+      "url": "https://edsa.tech/gaby/quizzes/comer-a-mediodia/",
+      "topic": "The set lunch menu",
+      "place": "a restaurant at lunchtime",
+      "question": "You want the set lunch. You say “Sí, el del día, por favor.” What is missing?",
+      "options": [
+        "Nothing — it is fine",
+        "menú",
+        "plato"
+      ],
+      "answer": "menú — “Sí, el menú del día, por favor.”",
+      "takeaway": "You will be understood without it. You will also sound like you are guessing."
+    },
+    {
+      "order": 3,
+      "slug": "saber-o-conocer",
+      "url": "https://edsa.tech/gaby/quizzes/saber-o-conocer/",
+      "topic": "At the pharmacy",
+      "place": "the pharmacy",
+      "question": "You want to ask if they know where the nearest health centre is. Saber or conocer?",
+      "options": [
+        "¿Conoce dónde está el centro de salud?",
+        "¿Sabe dónde está el centro de salud?",
+        "Either works"
+      ],
+      "answer": "¿Sabe dónde está el centro de salud?",
+      "takeaway": "Saber = information. Conocer = familiarity."
+    },
+    {
+      "order": 4,
+      "slug": "empadronamiento",
+      "url": "https://edsa.tech/gaby/quizzes/empadronamiento/",
+      "topic": "Registering at the town hall",
+      "place": "the queue at your local ayuntamiento",
+      "question": "You turn up at the town hall to register. The first thing they ask is whether you have one of these. Which?",
+      "options": [
+        "una cita previa",
+        "una cita anterior",
+        "un cita previo"
+      ],
+      "answer": "una cita previa",
+      "takeaway": "Learn “cita previa” before you learn anything else. You will need it for the NIE, the padrón and the doctor."
+    },
+    {
+      "order": 5,
+      "slug": "control-de-pasaportes",
+      "url": "https://edsa.tech/gaby/quizzes/control-de-pasaportes/",
+      "topic": "Passport control",
+      "place": "the arrivals hall at Madrid-Barajas",
+      "question": "The officer asks “¿Cuál es el motivo de su viaje?” You are moving here. What do you say?",
+      "options": [
+        "Vengo a vivir aquí.",
+        "Vengo para vivir aquí.",
+        "Both are fine."
+      ],
+      "answer": "Both are fine — “Vengo a vivir aquí” is what you will hear most.",
+      "takeaway": "Verb of motion + a + infinitive. “Vengo a…”, “Voy a…”, “Salgo a…”."
+    },
+    {
+      "order": 6,
+      "slug": "un-taxi-al-piso",
+      "url": "https://edsa.tech/gaby/quizzes/un-taxi-al-piso/",
+      "topic": "The taxi rank",
+      "place": "the taxi rank outside the terminal",
+      "question": "You get in and want to give the driver an address. Which opener sounds native?",
+      "options": [
+        "¿Me lleva a esta dirección?",
+        "¿Me toma a esta dirección?",
+        "¿Me conduce esta dirección?"
+      ],
+      "answer": "¿Me lleva a esta dirección?",
+      "takeaway": "You llevar a person. You tomar a bus. The driver conduce."
+    },
+    {
+      "order": 7,
+      "slug": "abrir-una-cuenta",
+      "url": "https://edsa.tech/gaby/quizzes/abrir-una-cuenta/",
+      "topic": "Opening a bank account",
+      "place": "a bank branch on a Tuesday morning",
+      "question": "You want an everyday current account. What do you ask for?",
+      "options": [
+        "una cuenta corriente",
+        "una cuenta actual",
+        "una cuenta presente"
+      ],
+      "answer": "una cuenta corriente",
+      "takeaway": "Actual = present-day, not “actual”. One of the false friends that bites hardest."
+    },
+    {
+      "order": 8,
+      "slug": "contratar-el-movil",
+      "url": "https://edsa.tech/gaby/quizzes/contratar-el-movil/",
+      "topic": "Getting a phone contract",
+      "place": "a phone shop on the high street",
+      "question": "You do not want to be locked in. How do you ask for a contract with no minimum term?",
+      "options": [
+        "¿Tienen tarifas sin permanencia?",
+        "¿Tienen tarifas sin contrato?",
+        "¿Tienen tarifas sin duración?"
+      ],
+      "answer": "¿Tienen tarifas sin permanencia?",
+      "takeaway": "Sin permanencia = no lock-in. Sin contrato = prepaid. They are not the same offer."
+    },
+    {
+      "order": 9,
+      "slug": "en-el-centro-de-salud",
+      "url": "https://edsa.tech/gaby/quizzes/en-el-centro-de-salud/",
+      "topic": "At the health centre",
+      "place": "your local centro de salud",
+      "question": "You have a headache and need to say so. Which is right?",
+      "options": [
+        "Estoy dolor de cabeza.",
+        "Me duele la cabeza.",
+        "Tengo duele la cabeza."
+      ],
+      "answer": "Me duele la cabeza.",
+      "takeaway": "Me duele + singular. Me duelen + plural. Never “estoy dolor”."
+    },
+    {
+      "order": 10,
+      "slug": "ver-un-piso",
+      "url": "https://edsa.tech/gaby/quizzes/ver-un-piso/",
+      "topic": "Viewing a flat",
+      "place": "an empty flat with the estate agent waiting",
+      "question": "The agent mentions the deposit you will have to put down. Which word is that?",
+      "options": [
+        "el depósito",
+        "la fianza",
+        "el aval"
+      ],
+      "answer": "la fianza",
+      "takeaway": "Fianza = deposit. Aval = guarantee. Ask which one they want before you sign."
+    },
+    {
+      "order": 11,
+      "slug": "por-o-para",
+      "url": "https://edsa.tech/gaby/quizzes/por-o-para/",
+      "topic": "Por vs para",
+      "place": "your neighbour’s doorway, thanking them",
+      "question": "You are thanking a neighbour for their help. Which one?",
+      "options": [
+        "Gracias para la ayuda.",
+        "Gracias por la ayuda.",
+        "Gracias de la ayuda."
+      ],
+      "answer": "Gracias por la ayuda.",
+      "takeaway": "Por = the reason behind. Para = the goal ahead."
+    },
+    {
+      "order": 12,
+      "slug": "ser-o-estar",
+      "url": "https://edsa.tech/gaby/quizzes/ser-o-estar/",
+      "topic": "Ser vs estar",
+      "place": "a friend’s kitchen, making small talk",
+      "question": "You want to say you are bored right now. Which?",
+      "options": [
+        "Soy aburrido.",
+        "Estoy aburrido.",
+        "Tengo aburrido."
+      ],
+      "answer": "Estoy aburrido.",
+      "takeaway": "Estoy aburrido = I am bored. Soy aburrido = I am boring. Pick carefully."
+    },
+    {
+      "order": 13,
+      "slug": "embarazada",
+      "url": "https://edsa.tech/gaby/quizzes/embarazada/",
+      "topic": "A false friend",
+      "place": "a shop, having just knocked something over",
+      "question": "You did something clumsy and want to say you are embarrassed. Which?",
+      "options": [
+        "Estoy embarazada.",
+        "Me da vergüenza.",
+        "Estoy embarazoso."
+      ],
+      "answer": "Me da vergüenza.",
+      "takeaway": "Embarazada = pregnant. Vergüenza = embarrassment."
+    },
+    {
+      "order": 14,
+      "slug": "constipado",
+      "url": "https://edsa.tech/gaby/quizzes/constipado/",
+      "topic": "Another false friend",
+      "place": "the pharmacy, again",
+      "question": "You have a blocked nose and a sore throat. What do you tell the pharmacist?",
+      "options": [
+        "Estoy constipado.",
+        "Estoy constipada del estómago.",
+        "Soy constipado."
+      ],
+      "answer": "Estoy constipado. (constipada if you are female)",
+      "takeaway": "Estoy constipado = I have a cold. It is not what it looks like."
+    },
+    {
+      "order": 15,
+      "slug": "tu-o-usted",
+      "url": "https://edsa.tech/gaby/quizzes/tu-o-usted/",
+      "topic": "Tú vs usted",
+      "place": "a government office with a queue number",
+      "question": "Same afternoon, two places. Where would you use usted?",
+      "options": [
+        "The bar — staff expect respect.",
+        "The town hall clerk.",
+        "Both, always. It is safer."
+      ],
+      "answer": "The town hall clerk.",
+      "takeaway": "Default to tú in daily life. Save usted for the counter with a queue number."
+    },
+    {
+      "order": 16,
+      "slug": "vosotros-o-ustedes",
+      "url": "https://edsa.tech/gaby/quizzes/vosotros-o-ustedes/",
+      "topic": "The one Spain keeps",
+      "place": "a bar terrace with two friends",
+      "question": "You are addressing two friends informally, in Spain. Which?",
+      "options": [
+        "¿Ustedes quieren otra?",
+        "¿Vosotros queréis otra?",
+        "¿Tú quieres otra?"
+      ],
+      "answer": "¿Vosotros queréis otra?",
+      "takeaway": "In Spain, vosotros for friends, ustedes for formality. Both exist."
+    },
+    {
+      "order": 17,
+      "slug": "pedir-en-la-barra",
+      "url": "https://edsa.tech/gaby/quizzes/pedir-en-la-barra/",
+      "topic": "Ordering at a bar",
+      "place": "a bar, at the counter rather than a table",
+      "question": "You want a small draught beer. What do Spaniards actually say?",
+      "options": [
+        "Quiero una caña.",
+        "¿Me pones una caña?",
+        "Deseo una caña, por favor."
+      ],
+      "answer": "¿Me pones una caña?",
+      "takeaway": "¿Me pones…? at the bar. ¿Me pone…? if you are being formal."
+    },
+    {
+      "order": 18,
+      "slug": "la-cuenta",
+      "url": "https://edsa.tech/gaby/quizzes/la-cuenta/",
+      "topic": "Asking for the bill",
+      "place": "a restaurant, at the end of a long lunch",
+      "question": "You want the bill. Which is the natural one?",
+      "options": [
+        "¿Nos cobras cuando puedas?",
+        "¿Puedo pagar la factura?",
+        "¿Me das el recibo?"
+      ],
+      "answer": "¿Nos cobras cuando puedas?",
+      "takeaway": "La cuenta = the bill. La factura = the invoice you claim on."
+    },
+    {
+      "order": 19,
+      "slug": "que-o-cual",
+      "url": "https://edsa.tech/gaby/quizzes/que-o-cual/",
+      "topic": "Qué vs cuál",
+      "place": "a queue, filling in a form",
+      "question": "Someone asks for your address. Which question did they use?",
+      "options": [
+        "¿Qué es tu dirección?",
+        "¿Cuál es tu dirección?",
+        "¿Cómo es tu dirección?"
+      ],
+      "answer": "¿Cuál es tu dirección?",
+      "takeaway": "Cuál asks which one. Qué asks what a thing means."
+    },
+    {
+      "order": 20,
+      "slug": "muy-o-mucho",
+      "url": "https://edsa.tech/gaby/quizzes/muy-o-mucho/",
+      "topic": "Muy vs mucho",
+      "place": "August in Madrid",
+      "question": "It is 40 degrees. How do you say it is very hot?",
+      "options": [
+        "Hace muy calor.",
+        "Hace mucho calor.",
+        "Es muy caliente."
+      ],
+      "answer": "Hace mucho calor.",
+      "takeaway": "Muy + adjective. Mucho + noun. Hace + weather."
+    },
+    {
+      "order": 21,
+      "slug": "coger-o-tomar",
+      "url": "https://edsa.tech/gaby/quizzes/coger-o-tomar/",
+      "topic": "A verb that changes by country",
+      "place": "a bus stop in Madrid",
+      "question": "In Spain, how do you say you are going to catch the bus?",
+      "options": [
+        "Voy a coger el autobús.",
+        "Voy a tomar el autobús.",
+        "Both work in Spain."
+      ],
+      "answer": "Both work in Spain — coger is the everyday one.",
+      "takeaway": "In Spain: coger. Across the Atlantic: tomar. Know why they differ."
+    },
+    {
+      "order": 22,
+      "slug": "el-mercado",
+      "url": "https://edsa.tech/gaby/quizzes/el-mercado/",
+      "topic": "The weekly market",
+      "place": "the market, with a queue behind you",
+      "question": "You want half a kilo of tomatoes. Which?",
+      "options": [
+        "¿Me pone medio kilo de tomates?",
+        "¿Me pone la mitad de kilo de tomates?",
+        "¿Me pone medio de kilo de tomates?"
+      ],
+      "answer": "¿Me pone medio kilo de tomates?",
+      "takeaway": "Medio kilo, media hora. La mitad de = half of that particular thing."
+    },
+    {
+      "order": 23,
+      "slug": "en-la-peluqueria",
+      "url": "https://edsa.tech/gaby/quizzes/en-la-peluqueria/",
+      "topic": "At the barber",
+      "place": "the barber’s, cape already on",
+      "question": "They ask “¿Cómo lo quiere?” You want a little off, just the ends. Which?",
+      "options": [
+        "Solo las puntas, por favor.",
+        "Solo los finales, por favor.",
+        "Solo un poco corto."
+      ],
+      "answer": "Solo las puntas, por favor.",
+      "takeaway": "Las puntas, por detrás, por los lados. Three phrases, one survivable haircut."
+    },
+    {
+      "order": 24,
+      "slug": "los-vecinos",
+      "url": "https://edsa.tech/gaby/quizzes/los-vecinos/",
+      "topic": "Meeting the neighbours",
+      "place": "the lift in your building",
+      "question": "A neighbour steps into the lift. What do you say?",
+      "options": [
+        "Nothing — it would be intrusive.",
+        "Buenos días.",
+        "¿Cómo está usted hoy?"
+      ],
+      "answer": "Buenos días.",
+      "takeaway": "Say hello when you walk into a small space. Silence is the impolite option."
+    },
+    {
+      "order": 25,
+      "slug": "gustar",
+      "url": "https://edsa.tech/gaby/quizzes/gustar/",
+      "topic": "How gustar really works",
+      "place": "a tapas bar, ordering for the table",
+      "question": "You like tapas — plural. Which?",
+      "options": [
+        "Me gusta las tapas.",
+        "Me gustan las tapas.",
+        "Yo gusto las tapas."
+      ],
+      "answer": "Me gustan las tapas.",
+      "takeaway": "The thing you like is the subject. Count it, then pick gusta or gustan."
+    },
+    {
+      "order": 26,
+      "slug": "la-gente",
+      "url": "https://edsa.tech/gaby/quizzes/la-gente/",
+      "topic": "A word that traps English speakers",
+      "place": "your new town, describing it to someone back home",
+      "question": "You want to say the people here are very friendly. Which?",
+      "options": [
+        "La gente aquí son muy amables.",
+        "La gente aquí es muy amable.",
+        "Las gentes aquí son muy amables."
+      ],
+      "answer": "La gente aquí es muy amable.",
+      "takeaway": "La gente es. Not son. One of the last errors to disappear."
+    },
+    {
+      "order": 27,
+      "slug": "pedir-un-cafe",
+      "url": "https://edsa.tech/gaby/quizzes/pedir-un-cafe/",
+      "topic": "Takeaway",
+      "place": "a café, mid-morning",
+      "question": "You want your coffee to take away. Which?",
+      "options": [
+        "Para llevar, por favor.",
+        "Para tomar fuera, por favor.",
+        "Para salir, por favor."
+      ],
+      "answer": "Para llevar, por favor.",
+      "takeaway": "¿Para tomar aquí o para llevar? Learn the question, not just the answer."
+    },
+    {
+      "order": 28,
+      "slug": "el-agua",
+      "url": "https://edsa.tech/gaby/quizzes/el-agua/",
+      "topic": "A noun that looks like it broke",
+      "place": "a bar, ordering the simplest thing there is",
+      "question": "You want cold water. Which is correct?",
+      "options": [
+        "el agua frío",
+        "el agua fría",
+        "la agua fría"
+      ],
+      "answer": "el agua fría",
+      "takeaway": "El agua, but fría. The article changes; the gender does not."
+    },
+    {
+      "order": 29,
+      "slug": "cuanto-hace",
+      "url": "https://edsa.tech/gaby/quizzes/cuanto-hace/",
+      "topic": "Saying how long",
+      "place": "a bar, meeting someone for the first time",
+      "question": "You have lived here two months. Which?",
+      "options": [
+        "Hace dos meses que vivo aquí.",
+        "Vivo aquí por dos meses.",
+        "Hace dos meses que viví aquí."
+      ],
+      "answer": "Hace dos meses que vivo aquí.",
+      "takeaway": "Hace dos meses que vivo aquí. Present tense, because you still live here."
+    },
+    {
+      "order": 30,
+      "slug": "quedar",
+      "url": "https://edsa.tech/gaby/quizzes/quedar/",
+      "topic": "Making plans",
+      "place": "the doorway after your language class",
+      "question": "You want to suggest meeting a friend on Friday. Which?",
+      "options": [
+        "¿Nos encontramos el viernes?",
+        "¿Quedamos el viernes?",
+        "¿Nos reunimos el viernes?"
+      ],
+      "answer": "¿Quedamos el viernes?",
+      "takeaway": "Quedar = meet up on purpose. Encontrarse = bump into. Reunirse = at work."
+    },
+    {
+      "order": 31,
+      "slug": "palabras-en-cion",
+      "url": "https://edsa.tech/gaby/quizzes/palabras-en-cion/",
+      "topic": "English -tion words",
+      "place": "a café, trying to explain your job",
+      "question": "English \"conversation\" becomes which Spanish word?",
+      "options": [
+        "conversacion",
+        "conversación",
+        "conversación (masculine)"
+      ],
+      "answer": "conversación — and it is feminine",
+      "takeaway": "-tion → -ción, always feminine, always accented."
+    },
+    {
+      "order": 32,
+      "slug": "palabras-en-dad",
+      "url": "https://edsa.tech/gaby/quizzes/palabras-en-dad/",
+      "topic": "English -ty words",
+      "place": "a university office",
+      "question": "English \"university\" becomes which Spanish word?",
+      "options": [
+        "universidad",
+        "universidád",
+        "universitad"
+      ],
+      "answer": "universidad — feminine, no accent",
+      "takeaway": "-ty → -dad. Feminine, and no accent needed."
+    },
+    {
+      "order": 33,
+      "slug": "palabras-en-mente",
+      "url": "https://edsa.tech/gaby/quizzes/palabras-en-mente/",
+      "topic": "English -ly words",
+      "place": "giving directions, quickly",
+      "question": "How do you turn \"rápido\" into \"rapidly\"?",
+      "options": [
+        "rápidomente",
+        "rápidamente",
+        "rapidamente"
+      ],
+      "answer": "rápidamente",
+      "takeaway": "Feminine adjective + -mente. Keep the accent you started with."
+    },
+    {
+      "order": 34,
+      "slug": "palabras-en-oso",
+      "url": "https://edsa.tech/gaby/quizzes/palabras-en-oso/",
+      "topic": "English -ous words",
+      "place": "a restaurant, praising the food",
+      "question": "English \"delicious\" becomes which Spanish word?",
+      "options": [
+        "delicioso",
+        "deliciouso",
+        "delicious"
+      ],
+      "answer": "delicioso",
+      "takeaway": "-ous → -oso. Then make it agree with what it describes."
+    },
+    {
+      "order": 35,
+      "slug": "palabras-en-mento",
+      "url": "https://edsa.tech/gaby/quizzes/palabras-en-mento/",
+      "topic": "English -ment words",
+      "place": "a gestoría, holding a folder",
+      "question": "English \"document\" becomes which Spanish word?",
+      "options": [
+        "documiento",
+        "documento",
+        "documenta"
+      ],
+      "answer": "documento",
+      "takeaway": "-ment → -mento. Except gobierno, which you will meet at the town hall."
+    },
+    {
+      "order": 36,
+      "slug": "palabras-en-encia",
+      "url": "https://edsa.tech/gaby/quizzes/palabras-en-encia/",
+      "topic": "English -ence words",
+      "place": "explaining what changed",
+      "question": "English \"difference\" becomes which Spanish word?",
+      "options": [
+        "diferencia",
+        "diferrencia",
+        "diferéncia"
+      ],
+      "answer": "diferencia — one r, no accent",
+      "takeaway": "-ence → -encia, feminine. Spanish rarely doubles consonants."
+    },
+    {
+      "order": 37,
+      "slug": "palabras-en-ista",
+      "url": "https://edsa.tech/gaby/quizzes/palabras-en-ista/",
+      "topic": "English -ist words",
+      "place": "the dentist's waiting room",
+      "question": "Your dentist is a woman. What do you call her?",
+      "options": [
+        "la dentista",
+        "la dentisto",
+        "el dentista"
+      ],
+      "answer": "la dentista",
+      "takeaway": "-ista never changes. Change the article instead."
+    },
+    {
+      "order": 38,
+      "slug": "palabras-en-ico",
+      "url": "https://edsa.tech/gaby/quizzes/palabras-en-ico/",
+      "topic": "English -ic words",
+      "place": "reading a sign on a public building",
+      "question": "English \"public\" becomes which Spanish word?",
+      "options": [
+        "publico",
+        "público",
+        "publicó"
+      ],
+      "answer": "público",
+      "takeaway": "-ic → -ico, accented on the third-from-last syllable."
+    },
+    {
+      "order": 39,
+      "slug": "palabras-en-ivo",
+      "url": "https://edsa.tech/gaby/quizzes/palabras-en-ivo/",
+      "topic": "English -ive words",
+      "place": "describing yourself in an interview",
+      "question": "English \"active\" becomes which Spanish word?",
+      "options": [
+        "activo",
+        "activé",
+        "actif"
+      ],
+      "answer": "activo",
+      "takeaway": "-ive → -ivo, then agree it."
+    },
+    {
+      "order": 40,
+      "slug": "palabras-en-ario",
+      "url": "https://edsa.tech/gaby/quizzes/palabras-en-ario/",
+      "topic": "English -ary words",
+      "place": "a bank, reading the small print",
+      "question": "English \"necessary\" becomes which Spanish word?",
+      "options": [
+        "necesario",
+        "neccesario",
+        "necesária"
+      ],
+      "answer": "necesario — one c, one s",
+      "takeaway": "-ary → -ario. And Spanish almost never doubles a consonant."
+    },
+    {
+      "order": 41,
+      "slug": "exito",
+      "url": "https://edsa.tech/gaby/quizzes/exito/",
+      "topic": "A false friend",
+      "place": "a theatre, looking for the way out",
+      "question": "You see a sign saying \"ÉXITO\". What does it mean?",
+      "options": [
+        "Exit",
+        "Success",
+        "Extra"
+      ],
+      "answer": "Success",
+      "takeaway": "Éxito = success. Salida = exit. Do not follow the wrong sign."
+    },
+    {
+      "order": 42,
+      "slug": "sensible",
+      "url": "https://edsa.tech/gaby/quizzes/sensible/",
+      "topic": "Another false friend",
+      "place": "a conversation about a friend",
+      "question": "You want to say a friend is sensible (level-headed). Which?",
+      "options": [
+        "Es muy sensible.",
+        "Es muy sensato.",
+        "Es muy sensitivo."
+      ],
+      "answer": "Es muy sensato.",
+      "takeaway": "Sensible = sensitive. Sensato = sensible."
+    },
+    {
+      "order": 43,
+      "slug": "actualmente",
+      "url": "https://edsa.tech/gaby/quizzes/actualmente/",
+      "topic": "Actually vs currently",
+      "place": "catching up with someone",
+      "question": "You want to say \"actually, I live in Valencia\". Which?",
+      "options": [
+        "Actualmente, vivo en Valencia.",
+        "En realidad, vivo en Valencia.",
+        "Realmente actual, vivo en Valencia."
+      ],
+      "answer": "En realidad, vivo en Valencia.",
+      "takeaway": "Actualmente = currently. En realidad = actually."
+    },
+    {
+      "order": 44,
+      "slug": "largo",
+      "url": "https://edsa.tech/gaby/quizzes/largo/",
+      "topic": "Long vs large",
+      "place": "a shop, holding up a shirt",
+      "question": "The shirt is too big. Which do you say?",
+      "options": [
+        "Es muy largo.",
+        "Es muy grande.",
+        "Es muy largo de tamaño."
+      ],
+      "answer": "Es muy grande.",
+      "takeaway": "Largo = long. Grande = big."
+    },
+    {
+      "order": 45,
+      "slug": "ropa",
+      "url": "https://edsa.tech/gaby/quizzes/ropa/",
+      "topic": "Clothes, not rope",
+      "place": "a laundrette on a Sunday",
+      "question": "Which word means \"clothes\"?",
+      "options": [
+        "la cuerda",
+        "la ropa",
+        "el ropaje"
+      ],
+      "answer": "la ropa",
+      "takeaway": "La ropa está — singular, always."
+    },
+    {
+      "order": 46,
+      "slug": "carpeta",
+      "url": "https://edsa.tech/gaby/quizzes/carpeta/",
+      "topic": "Folder, not carpet",
+      "place": "a gestoría, handing over paperwork",
+      "question": "The gestor asks for \"la carpeta\". What do they want?",
+      "options": [
+        "The carpet",
+        "The folder",
+        "The car park"
+      ],
+      "answer": "The folder",
+      "takeaway": "Carpeta = folder. Alfombra = carpet."
+    },
+    {
+      "order": 47,
+      "slug": "asistir",
+      "url": "https://edsa.tech/gaby/quizzes/asistir/",
+      "topic": "Attend, not assist",
+      "place": "a residents' meeting notice",
+      "question": "The notice says \"se ruega asistir\". What is being asked?",
+      "options": [
+        "Please help out",
+        "Please attend",
+        "Please assist the president"
+      ],
+      "answer": "Please attend",
+      "takeaway": "Asistir = attend. Ayudar = help."
+    },
+    {
+      "order": 48,
+      "slug": "realizar",
+      "url": "https://edsa.tech/gaby/quizzes/realizar/",
+      "topic": "Carry out, not realize",
+      "place": "a form asking what you did",
+      "question": "You want to say \"I realized I was wrong\". Which?",
+      "options": [
+        "Realicé que estaba equivocado.",
+        "Me di cuenta de que estaba equivocado.",
+        "Realizé que estaba equivocado."
+      ],
+      "answer": "Me di cuenta de que estaba equivocado.",
+      "takeaway": "Realizar = carry out. Darse cuenta de = realise."
+    },
+    {
+      "order": 49,
+      "slug": "molestar",
+      "url": "https://edsa.tech/gaby/quizzes/molestar/",
+      "topic": "Bother, nothing worse",
+      "place": "knocking on a neighbour's door",
+      "question": "You want to say \"sorry to bother you\". Which?",
+      "options": [
+        "Perdona que te moleste.",
+        "Perdona que te molestes.",
+        "Perdona por molestación."
+      ],
+      "answer": "Perdona que te moleste.",
+      "takeaway": "Molestar = to bother. Completely ordinary, use it freely."
+    },
+    {
+      "order": 50,
+      "slug": "embarazoso",
+      "url": "https://edsa.tech/gaby/quizzes/embarazoso/",
+      "topic": "One letter apart",
+      "place": "recounting an awkward moment",
+      "question": "You want to call a situation embarrassing. Which?",
+      "options": [
+        "una situación embarazada",
+        "una situación embarazosa",
+        "una situación vergüenza"
+      ],
+      "answer": "una situación embarazosa",
+      "takeaway": "Situación embarazosa = fine. Estoy embarazada = a very different sentence."
+    },
+    {
+      "order": 51,
+      "slug": "nombres-en-ma",
+      "url": "https://edsa.tech/gaby/quizzes/nombres-en-ma/",
+      "topic": "Nouns in -ma",
+      "place": "a phone shop, explaining a fault",
+      "question": "You want to say “the problem”. Which is correct?",
+      "options": [
+        "la problema",
+        "el problema",
+        "el problemo"
+      ],
+      "answer": "el problema",
+      "takeaway": "El problema, el tema, el idioma. Greek words keep their gender."
+    },
+    {
+      "order": 52,
+      "slug": "la-mano",
+      "url": "https://edsa.tech/gaby/quizzes/la-mano/",
+      "topic": "A noun that breaks the rule",
+      "place": "a pharmacy, describing an injury",
+      "question": "You hurt your right hand and need to say so. Which is correct?",
+      "options": [
+        "el mano derecho",
+        "la mano derecha",
+        "la mano derecho"
+      ],
+      "answer": "la mano derecha",
+      "takeaway": "La mano, la foto, la moto. The -o is lying to you."
+    },
+    {
+      "order": 53,
+      "slug": "el-dia",
+      "url": "https://edsa.tech/gaby/quizzes/el-dia/",
+      "topic": "A noun that breaks it the other way",
+      "place": "wishing someone well in the morning",
+      "question": "It is nine in the morning and you pass a neighbour. Which greeting?",
+      "options": [
+        "Buena día",
+        "Buenos días",
+        "Buenas días"
+      ],
+      "answer": "Buenos días",
+      "takeaway": "Buenos días, buenas tardes, buenas noches. Only the first is masculine."
+    },
+    {
+      "order": 54,
+      "slug": "concordancia",
+      "url": "https://edsa.tech/gaby/quizzes/concordancia/",
+      "topic": "Making things agree",
+      "place": "a market stall, praising the produce",
+      "question": "The oranges on the stall are delicious. Which is correct?",
+      "options": [
+        "Las naranjas están muy rico.",
+        "Las naranjas están muy ricas.",
+        "Las naranjas está muy ricas."
+      ],
+      "answer": "Las naranjas están muy ricas.",
+      "takeaway": "Noun sets the gender and number. Verb and adjective follow."
+    },
+    {
+      "order": 55,
+      "slug": "ir-a",
+      "url": "https://edsa.tech/gaby/quizzes/ir-a/",
+      "topic": "Talking about tomorrow",
+      "place": "making plans at a bar",
+      "question": "You want to say \"I am going to look for a flat\". Which?",
+      "options": [
+        "Voy buscar un piso.",
+        "Voy a buscar un piso.",
+        "Voy para buscar un piso."
+      ],
+      "answer": "Voy a buscar un piso.",
+      "takeaway": "Voy a + infinitive. Never leave out the a."
+    },
+    {
+      "order": 56,
+      "slug": "acabar-de",
+      "url": "https://edsa.tech/gaby/quizzes/acabar-de/",
+      "topic": "Something that just happened",
+      "place": "arriving at a friend's flat",
+      "question": "You want to say \"I have just arrived\". Which?",
+      "options": [
+        "Acabo de llegar.",
+        "Acabo llegar.",
+        "Acabo de llegado."
+      ],
+      "answer": "Acabo de llegar.",
+      "takeaway": "Acabo de + infinitive = I have just…"
+    },
+    {
+      "order": 57,
+      "slug": "hay-o-esta",
+      "url": "https://edsa.tech/gaby/quizzes/hay-o-esta/",
+      "topic": "Hay vs está",
+      "place": "asking for directions",
+      "question": "You are asking whether there is a pharmacy nearby. Which?",
+      "options": [
+        "¿Está una farmacia por aquí?",
+        "¿Hay una farmacia por aquí?",
+        "¿Es una farmacia por aquí?"
+      ],
+      "answer": "¿Hay una farmacia por aquí?",
+      "takeaway": "Hay = there is one somewhere. Está = where the known one is."
+    },
+    {
+      "order": 58,
+      "slug": "saber-hacer",
+      "url": "https://edsa.tech/gaby/quizzes/saber-hacer/",
+      "topic": "Saying you can do something",
+      "place": "a job conversation",
+      "question": "You want to say you can drive. Which?",
+      "options": [
+        "Puedo conducir.",
+        "Sé conducir.",
+        "Conozco conducir."
+      ],
+      "answer": "Sé conducir.",
+      "takeaway": "Sé = I know how to. Puedo = I am able to right now."
+    },
+    {
+      "order": 59,
+      "slug": "pedir-o-preguntar",
+      "url": "https://edsa.tech/gaby/quizzes/pedir-o-preguntar/",
+      "topic": "Pedir vs preguntar",
+      "place": "a bar, needing one more thing",
+      "question": "You want to ask for the bill. Which verb?",
+      "options": [
+        "Voy a preguntar la cuenta.",
+        "Voy a pedir la cuenta.",
+        "Voy a preguntar por la cuenta."
+      ],
+      "answer": "Voy a pedir la cuenta.",
+      "takeaway": "Pedir = request a thing. Preguntar = ask a question."
+    },
+    {
+      "order": 60,
+      "slug": "llevar-o-traer",
+      "url": "https://edsa.tech/gaby/quizzes/llevar-o-traer/",
+      "topic": "Llevar vs traer",
+      "place": "an invitation to dinner",
+      "question": "They say \"trae algo de postre\". What are they asking?",
+      "options": [
+        "Take some dessert away",
+        "Bring some dessert here",
+        "Buy some dessert"
+      ],
+      "answer": "Bring some dessert here",
+      "takeaway": "Traer = towards me. Llevar = away from me."
+    },
+    {
+      "order": 61,
+      "slug": "que-hora-es",
+      "url": "https://edsa.tech/gaby/quizzes/que-hora-es/",
+      "topic": "Telling the time",
+      "place": "a platform, checking a departure",
+      "question": "It is three o clock. Which?",
+      "options": [
+        "Es las tres.",
+        "Son las tres.",
+        "Está las tres."
+      ],
+      "answer": "Son las tres.",
+      "takeaway": "Es la una, but son las dos, las tres, las diez."
+    },
+    {
+      "order": 62,
+      "slug": "verbos-reflexivos",
+      "url": "https://edsa.tech/gaby/quizzes/verbos-reflexivos/",
+      "topic": "Reflexive verbs",
+      "place": "describing your morning",
+      "question": "You want to say \"I get up at seven\". Which?",
+      "options": [
+        "Me levanto a las siete.",
+        "Levanto a las siete.",
+        "Me levanto las siete."
+      ],
+      "answer": "Me levanto a las siete.",
+      "takeaway": "Me levanto, me ducho, me acuesto. Keep the pronoun."
+    },
+    {
+      "order": 63,
+      "slug": "se-me-olvido",
+      "url": "https://edsa.tech/gaby/quizzes/se-me-olvido/",
+      "topic": "The blameless past",
+      "place": "apologising for forgetting something",
+      "question": "The natural way to say \"I forgot the keys\" is:",
+      "options": [
+        "Olvidé las llaves.",
+        "Se me olvidaron las llaves.",
+        "Me olvidé las llaves."
+      ],
+      "answer": "Se me olvidaron las llaves.",
+      "takeaway": "Se me olvidó / se me olvidaron. The object decides the verb."
+    },
+    {
+      "order": 64,
+      "slug": "pasado-en-espana",
+      "url": "https://edsa.tech/gaby/quizzes/pasado-en-espana/",
+      "topic": "The past tense Spain prefers",
+      "place": "recounting your day over dinner",
+      "question": "You ate at a new place earlier today. In Spain you would most likely say:",
+      "options": [
+        "Hoy comí en un sitio nuevo.",
+        "Hoy he comido en un sitio nuevo.",
+        "Hoy como en un sitio nuevo."
+      ],
+      "answer": "Hoy he comido en un sitio nuevo.",
+      "takeaway": "Hoy / esta semana / este año → he + participle."
+    },
+    {
+      "order": 65,
+      "slug": "espero-que",
+      "url": "https://edsa.tech/gaby/quizzes/espero-que/",
+      "topic": "Your first subjunctive",
+      "place": "texting a friend who is ill",
+      "question": "You want to say \"I hope you are well\". Which?",
+      "options": [
+        "Espero que estás bien.",
+        "Espero que estés bien.",
+        "Espero que eres bien."
+      ],
+      "answer": "Espero que estés bien.",
+      "takeaway": "Espero que + subjunctive. Learn it as a phrase first, a rule later."
+    },
+    {
+      "order": 66,
+      "slug": "tio-y-tia",
+      "url": "https://edsa.tech/gaby/quizzes/tio-y-tia/",
+      "topic": "What friends call each other",
+      "place": "a terrace with friends",
+      "question": "A friend says \"¿qué tal, tío?\". What did they call you?",
+      "options": [
+        "Uncle",
+        "Mate",
+        "Sir"
+      ],
+      "answer": "Mate",
+      "takeaway": "Tío = mate, between friends. Never at the counter."
+    },
+    {
+      "order": 67,
+      "slug": "vale",
+      "url": "https://edsa.tech/gaby/quizzes/vale/",
+      "topic": "The word you will hear most",
+      "place": "any conversation, constantly",
+      "question": "What does \"vale\" mean in everyday Spain?",
+      "options": [
+        "It is worth it",
+        "OK",
+        "Goodbye"
+      ],
+      "answer": "OK",
+      "takeaway": "Vale is the single most useful word in Spain. Use it liberally."
+    },
+    {
+      "order": 68,
+      "slug": "guay-o-guai",
+      "url": "https://edsa.tech/gaby/quizzes/guay-o-guai/",
+      "topic": "Saying something is great",
+      "place": "after a friend's good news",
+      "question": "A friend gets the flat they wanted. You say:",
+      "options": [
+        "¡Qué guay!",
+        "¡Qué guai!",
+        "¡Qué güay!"
+      ],
+      "answer": "¡Qué guay!",
+      "takeaway": "Guay = cool. Qué bien = great, and safe in any country."
+    },
+    {
+      "order": 69,
+      "slug": "movil-o-celular",
+      "url": "https://edsa.tech/gaby/quizzes/movil-o-celular/",
+      "topic": "Spain's own vocabulary",
+      "place": "a phone shop, again",
+      "question": "In Spain, what do you call a mobile phone?",
+      "options": [
+        "el celular",
+        "el móvil",
+        "el teléfono móvil celular"
+      ],
+      "answer": "el móvil",
+      "takeaway": "Móvil and ordenador in Spain. Celular and computadora elsewhere."
+    },
+    {
+      "order": 70,
+      "slug": "zumo-o-jugo",
+      "url": "https://edsa.tech/gaby/quizzes/zumo-o-jugo/",
+      "topic": "Breakfast vocabulary",
+      "place": "a café at nine in the morning",
+      "question": "You want orange juice in Madrid. Which?",
+      "options": [
+        "un jugo de naranja",
+        "un zumo de naranja",
+        "una naranja líquida"
+      ],
+      "answer": "un zumo de naranja",
+      "takeaway": "Zumo and patatas in Spain. Jugo and papas across the Atlantic."
+    },
+    {
+      "order": 71,
+      "slug": "aparcar-o-estacionar",
+      "url": "https://edsa.tech/gaby/quizzes/aparcar-o-estacionar/",
+      "topic": "Getting around",
+      "place": "looking for somewhere to leave the car",
+      "question": "In Spain, how do you say \"to park\"?",
+      "options": [
+        "estacionar",
+        "aparcar",
+        "parquear"
+      ],
+      "answer": "aparcar",
+      "takeaway": "Aparcar and conducir in Spain."
+    },
+    {
+      "order": 72,
+      "slug": "currar",
+      "url": "https://edsa.tech/gaby/quizzes/currar/",
+      "topic": "Talking about work",
+      "place": "a bar on a Friday evening",
+      "question": "A friend says \"mañana curro\". What are they doing tomorrow?",
+      "options": [
+        "Cooking",
+        "Working",
+        "Travelling"
+      ],
+      "answer": "Working",
+      "takeaway": "Curro = job, informally. Trabajo on the paperwork."
+    },
+    {
+      "order": 73,
+      "slug": "comprar-sellos",
+      "url": "https://edsa.tech/gaby/quizzes/comprar-sellos/",
+      "topic": "The tobacconist",
+      "place": "a small shop with a brown and yellow sign",
+      "question": "Where do you buy stamps in Spain?",
+      "options": [
+        "en la farmacia",
+        "en el estanco",
+        "en el quiosco"
+      ],
+      "answer": "en el estanco",
+      "takeaway": "Sellos at the estanco. It is the errand nobody explains."
+    },
+    {
+      "order": 74,
+      "slug": "las-tiendas-en-eria",
+      "url": "https://edsa.tech/gaby/quizzes/las-tiendas-en-eria/",
+      "topic": "The hardware shop",
+      "place": "a street of small shops",
+      "question": "Your tap is dripping. Which shop?",
+      "options": [
+        "la ferretería",
+        "la panadería",
+        "la papelería"
+      ],
+      "answer": "la ferretería",
+      "takeaway": "-ería = the shop for that thing. One ending, twenty shops."
+    },
+    {
+      "order": 75,
+      "slug": "cita-en-el-medico",
+      "url": "https://edsa.tech/gaby/quizzes/cita-en-el-medico/",
+      "topic": "Booking a doctor",
+      "place": "your local health centre, on the phone",
+      "question": "You want to book an appointment with your GP. Which?",
+      "options": [
+        "Quiero pedir cita con mi médico de cabecera.",
+        "Quiero preguntar cita con mi médico principal.",
+        "Quiero una reserva con mi doctor."
+      ],
+      "answer": "Quiero pedir cita con mi médico de cabecera.",
+      "takeaway": "Pedir cita con el médico de cabecera. Three words that unlock the system."
+    },
+    {
+      "order": 76,
+      "slug": "la-comunidad",
+      "url": "https://edsa.tech/gaby/quizzes/la-comunidad/",
+      "topic": "The residents' association",
+      "place": "a notice in your building's hallway",
+      "question": "A notice announces \"la junta de la comunidad\". What is it?",
+      "options": [
+        "A community festival",
+        "A residents' meeting",
+        "A council inspection"
+      ],
+      "answer": "A residents' meeting",
+      "takeaway": "La junta = the meeting. Attend one and your Spanish will age five years in a night."
+    },
+    {
+      "order": 77,
+      "slug": "la-basura",
+      "url": "https://edsa.tech/gaby/quizzes/la-basura/",
+      "topic": "Taking the bins out",
+      "place": "the bin area at ten at night",
+      "question": "Which bin does glass go in?",
+      "options": [
+        "el contenedor amarillo",
+        "el contenedor verde",
+        "el contenedor azul"
+      ],
+      "answer": "el contenedor verde",
+      "takeaway": "Verde glass, amarillo plastic, azul paper. Learn the colours, not the words."
+    },
+    {
+      "order": 78,
+      "slug": "la-luz",
+      "url": "https://edsa.tech/gaby/quizzes/la-luz/",
+      "topic": "Setting up the electricity",
+      "place": "an empty flat with no power",
+      "question": "You need to set up an electricity contract. The phrase is:",
+      "options": [
+        "dar de alta la luz",
+        "dar de baja la luz",
+        "poner alta la luz"
+      ],
+      "answer": "dar de alta la luz",
+      "takeaway": "Alta = switch on. Baja = switch off. Opposites, one letter apart in your memory."
+    },
+    {
+      "order": 79,
+      "slug": "el-gestor",
+      "url": "https://edsa.tech/gaby/quizzes/el-gestor/",
+      "topic": "The paperwork agent",
+      "place": "an office full of filing cabinets",
+      "question": "What does a \"gestor\" do for you?",
+      "options": [
+        "Manages your investments",
+        "Handles your official paperwork",
+        "Manages a building"
+      ],
+      "answer": "Handles your official paperwork",
+      "takeaway": "Gestoría: the shortcut through Spanish bureaucracy. Budget for it."
+    },
+    {
+      "order": 80,
+      "slug": "autonomo",
+      "url": "https://edsa.tech/gaby/quizzes/autonomo/",
+      "topic": "Going self-employed",
+      "place": "a gestoría, discussing work",
+      "question": "What does \"autónomo\" mean in Spain?",
+      "options": [
+        "Automatic",
+        "Self-employed",
+        "Independent-minded"
+      ],
+      "answer": "Self-employed",
+      "takeaway": "Autónomo = self-employed, and it costs a fixed monthly amount."
+    },
+    {
+      "order": 81,
+      "slug": "la-hache",
+      "url": "https://edsa.tech/gaby/quizzes/la-hache/",
+      "topic": "The silent h",
+      "place": "introducing yourself",
+      "question": "How is \"hola\" pronounced?",
+      "options": [
+        "HO-la, with the h sounded",
+        "O-la, the h is silent",
+        "JO-la, like a Spanish j"
+      ],
+      "answer": "O-la, the h is silent",
+      "takeaway": "Write the h. Never say it."
+    },
+    {
+      "order": 82,
+      "slug": "la-jota",
+      "url": "https://edsa.tech/gaby/quizzes/la-jota/",
+      "topic": "The j sound",
+      "place": "asking for a ride",
+      "question": "How is the j in \"trabajo\" pronounced?",
+      "options": [
+        "Like English j in job",
+        "Like English y in yes",
+        "Like the ch in Scottish loch"
+      ],
+      "answer": "Like the ch in Scottish loch",
+      "takeaway": "J always rasps. G rasps before e and i only."
+    },
+    {
+      "order": 83,
+      "slug": "pero-o-perro",
+      "url": "https://edsa.tech/gaby/quizzes/pero-o-perro/",
+      "topic": "One r or two",
+      "place": "talking about your neighbour's dog",
+      "question": "Which means \"dog\"?",
+      "options": [
+        "pero",
+        "perro",
+        "pérro"
+      ],
+      "answer": "perro",
+      "takeaway": "Pero / perro, caro / carro. The trill carries meaning."
+    },
+    {
+      "order": 84,
+      "slug": "la-ce-espanola",
+      "url": "https://edsa.tech/gaby/quizzes/la-ce-espanola/",
+      "topic": "The Spanish th",
+      "place": "ordering at a bar in Madrid",
+      "question": "In most of Spain, how is the c in \"cerveza\" pronounced?",
+      "options": [
+        "Like s",
+        "Like th in think",
+        "Like k"
+      ],
+      "answer": "Like th in think",
+      "takeaway": "Central and northern Spain: c and z are th. Nobody will misunderstand either way."
+    },
+    {
+      "order": 85,
+      "slug": "el-acento",
+      "url": "https://edsa.tech/gaby/quizzes/el-acento/",
+      "topic": "When the accent changes the word",
+      "place": "reading a menu out loud",
+      "question": "What is the difference between \"papa\" and \"papá\"?",
+      "options": [
+        "Nothing, the accent is decoration",
+        "Potato vs dad",
+        "Pope vs potato"
+      ],
+      "answer": "Potato vs dad",
+      "takeaway": "The accent is not decoration. It is spelling."
+    },
+    {
+      "order": 86,
+      "slug": "la-tilde",
+      "url": "https://edsa.tech/gaby/quizzes/la-tilde/",
+      "topic": "The letter English does not have",
+      "place": "talking about how old you are",
+      "question": "What is the difference between \"año\" and \"ano\"?",
+      "options": [
+        "None",
+        "One is a year, the other is not something you want to say",
+        "One is plural"
+      ],
+      "answer": "One is a year, the other is not something you want to say",
+      "takeaway": "Tengo treinta años. Always type the ñ."
+    },
+    {
+      "order": 87,
+      "slug": "la-silaba-tonica",
+      "url": "https://edsa.tech/gaby/quizzes/la-silaba-tonica/",
+      "topic": "Where the stress falls",
+      "place": "saying a word you have only read",
+      "question": "Where is the stress in \"hablo\" (no written accent)?",
+      "options": [
+        "HA-blo",
+        "ha-BLO",
+        "Either is fine"
+      ],
+      "answer": "HA-blo",
+      "takeaway": "Vowel, n or s → stress the second-to-last. Otherwise the last."
+    },
+    {
+      "order": 88,
+      "slug": "los-numeros",
+      "url": "https://edsa.tech/gaby/quizzes/los-numeros/",
+      "topic": "Saying a price",
+      "place": "a market stall, paying",
+      "question": "The stallholder says \"son dos con cincuenta\". How much?",
+      "options": [
+        "2.50 €",
+        "250 €",
+        "2 for 50 cents"
+      ],
+      "answer": "2.50 €",
+      "takeaway": "Dos con cincuenta = 2,50 €. Comma for decimals, symbol at the end."
+    },
+    {
+      "order": 89,
+      "slug": "la-fecha",
+      "url": "https://edsa.tech/gaby/quizzes/la-fecha/",
+      "topic": "Writing the date",
+      "place": "filling in any official form",
+      "question": "A form is dated 04/09/2026. Which date is that?",
+      "options": [
+        "4 September",
+        "9 April",
+        "Either, it is ambiguous"
+      ],
+      "answer": "4 September",
+      "takeaway": "Day, month, year. And months are lower-case."
+    },
+    {
+      "order": 90,
+      "slug": "la-hora-oficial",
+      "url": "https://edsa.tech/gaby/quizzes/la-hora-oficial/",
+      "topic": "The 24-hour clock",
+      "place": "reading a train ticket",
+      "question": "Your appointment says 16:30. What time is that?",
+      "options": [
+        "4:30 in the afternoon",
+        "6:30 in the evening",
+        "10:30 in the morning"
+      ],
+      "answer": "4:30 in the afternoon",
+      "takeaway": "16:30 written, “las cuatro y media” spoken."
+    },
+    {
+      "order": 91,
+      "slug": "la-cortesia",
+      "url": "https://edsa.tech/gaby/quizzes/la-cortesia/",
+      "topic": "How polite to be",
+      "place": "a bar, ordering quickly",
+      "question": "Which sounds most natural at a busy bar in Spain?",
+      "options": [
+        "Perdone, señor, ¿sería tan amable de ponerme una caña?",
+        "Una caña, por favor.",
+        "Deme una caña inmediatamente."
+      ],
+      "answer": "Una caña, por favor.",
+      "takeaway": "Short is not rude in Spain. Warm tone does the work."
+    },
+    {
+      "order": 92,
+      "slug": "tuteo",
+      "url": "https://edsa.tech/gaby/quizzes/tuteo/",
+      "topic": "Switching to tú",
+      "place": "a shop where the assistant is your age",
+      "question": "Someone says \"puedes tutearme\". What are they offering?",
+      "options": [
+        "Call me by my first name",
+        "Use tú instead of usted",
+        "Pay later"
+      ],
+      "answer": "Use tú instead of usted",
+      "takeaway": "If they offer tutearme, switch on the spot."
+    },
+    {
+      "order": 93,
+      "slug": "perdon-o-lo-siento",
+      "url": "https://edsa.tech/gaby/quizzes/perdon-o-lo-siento/",
+      "topic": "Two kinds of sorry",
+      "place": "a crowded metro carriage",
+      "question": "You need to squeeze past someone. Which?",
+      "options": [
+        "Lo siento.",
+        "Perdón.",
+        "Disculpe, lo siento mucho."
+      ],
+      "answer": "Perdón.",
+      "takeaway": "Perdón to get past. Lo siento when you mean it."
+    },
+    {
+      "order": 94,
+      "slug": "responder-a-gracias",
+      "url": "https://edsa.tech/gaby/quizzes/responder-a-gracias/",
+      "topic": "Answering thanks",
+      "place": "after helping a neighbour",
+      "question": "Someone thanks you. Which reply is most common in Spain?",
+      "options": [
+        "De nada.",
+        "Bienvenido.",
+        "Por favor."
+      ],
+      "answer": "De nada.",
+      "takeaway": "De nada. Never bienvenido."
+    },
+    {
+      "order": 95,
+      "slug": "no-te-entiendo",
+      "url": "https://edsa.tech/gaby/quizzes/no-te-entiendo/",
+      "topic": "Saying you did not catch it",
+      "place": "a conversation moving too fast",
+      "question": "You did not catch what someone said. The most useful phrase is:",
+      "options": [
+        "¿Perdón?",
+        "No hablo español.",
+        "¿Puedes repetir más despacio, por favor?"
+      ],
+      "answer": "¿Puedes repetir más despacio, por favor?",
+      "takeaway": "Ask for slower, not for English. It is the whole difference."
+    },
+    {
+      "order": 96,
+      "slug": "pedir-una-palabra",
+      "url": "https://edsa.tech/gaby/quizzes/pedir-una-palabra/",
+      "topic": "Asking for a word",
+      "place": "mid-sentence, stuck",
+      "question": "You need a word you do not know. Which?",
+      "options": [
+        "¿Cómo se dice “screwdriver” en español?",
+        "¿Qué es “screwdriver” español?",
+        "¿Cómo dice “screwdriver”?"
+      ],
+      "answer": "¿Cómo se dice “screwdriver” en español?",
+      "takeaway": "¿Cómo se dice…? and ¿Qué significa…? Two phrases, endless vocabulary."
+    },
+    {
+      "order": 97,
+      "slug": "responder-que-tal",
+      "url": "https://edsa.tech/gaby/quizzes/responder-que-tal/",
+      "topic": "Answering honestly",
+      "place": "someone asks how your Spanish is",
+      "question": "Someone asks how your Spanish is going. A natural modest answer:",
+      "options": [
+        "Más o menos.",
+        "Mucho bien.",
+        "Un poco bien."
+      ],
+      "answer": "Más o menos.",
+      "takeaway": "Más o menos for honest. Muy bien, never mucho bien."
+    },
+    {
+      "order": 98,
+      "slug": "el-tuteo-telefono",
+      "url": "https://edsa.tech/gaby/quizzes/el-tuteo-telefono/",
+      "topic": "On the phone",
+      "place": "a call you have been putting off",
+      "question": "You answer the phone in Spain. What do you say?",
+      "options": [
+        "¿Hola?",
+        "¿Dígame?",
+        "¿Quién es?"
+      ],
+      "answer": "¿Dígame?",
+      "takeaway": "¿Dígame? to answer. And phone Spanish is hard for everyone."
+    },
+    {
+      "order": 99,
+      "slug": "quedar-bien",
+      "url": "https://edsa.tech/gaby/quizzes/quedar-bien/",
+      "topic": "Clothes that fit",
+      "place": "a changing room",
+      "question": "The shirt fits you well. Which?",
+      "options": [
+        "Me queda bien.",
+        "Me quedo bien.",
+        "Está bien quedado."
+      ],
+      "answer": "Me queda bien.",
+      "takeaway": "Me queda bien = it suits me. Me quedo = I stay."
+    },
+    {
+      "order": 100,
+      "slug": "ya-esta",
+      "url": "https://edsa.tech/gaby/quizzes/ya-esta/",
+      "topic": "Finishing anything",
+      "place": "the end of almost any transaction",
+      "question": "The assistant finishes and says \"ya está\". What do they mean?",
+      "options": [
+        "It is already there",
+        "That is it, we are done",
+        "It is still in progress"
+      ],
+      "answer": "That is it, we are done",
+      "takeaway": "Ya está = done. You will hear it ten times a day."
+    }
+  ]
+}
