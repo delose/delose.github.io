@@ -1,7 +1,10 @@
-/* Generates the PUBLIC answer pages at public/gaby/quiz/<day>/index.html from
+/* Generates the PUBLIC answer pages at public/gaby/quiz/<slug>/index.html from
    tools/posting-kit/quizzes.json.
-   One page per day, each containing only its own answer — that is what keeps
-   the other 99 unspoiled. No JS, same design system as the rest of /gaby/.
+
+   One file per quiz, each containing ONLY its own answer. That is the whole
+   point: a visitor downloads the page they were sent and nothing else, so the
+   other 99 answers are not sitting on their device waiting to be read. It also
+   means no JavaScript is needed, and each quiz gets its own link preview.
    Run: npm run quiz:build                                                    */
 import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -9,6 +12,7 @@ import { existsSync } from 'node:fs';
 const SRC  = new URL('./posting-kit/quizzes.json', import.meta.url);
 const OUT  = new URL('../public/gaby/quiz/', import.meta.url);
 const STORE = 'https://apps.apple.com/app/id6790808283';
+const GC    = 'https://edsa.goatcounter.com/count';
 
 const esc = (s) => String(s).replace(/&(?![a-z#]+;)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 // `why` is authored HTML (<b>/<i>) so it is intentionally not escaped.
@@ -20,15 +24,17 @@ const head = (q) => `<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Day ${q.day} — ${esc(q.situationEn)} — Gaby</title>
 <meta name="description" content="${esc(q.question)} The answer, and why — from Gaby, the offline Spanish app for people moving to Spain.">
-<link rel="canonical" href="https://edsa.tech/gaby/quiz/${q.day}/">
+<link rel="canonical" href="https://edsa.tech/gaby/quiz/${q.slug}/">
 <meta name="theme-color" content="#c1440e">
 <link rel="icon" type="image/svg+xml" href="/gaby/icon.svg">
 <link rel="stylesheet" href="/gaby/gaby.css">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://edsa.tech/gaby/quiz/${q.day}/">
+<meta property="og:url" content="https://edsa.tech/gaby/quiz/${q.slug}/">
 <meta property="og:title" content="Day ${q.day}: ${esc(q.situationEn)} — the answer">
 <meta property="og:description" content="${esc(q.question)}">
 <meta name="twitter:card" content="summary_large_image">
+<script data-goatcounter="${GC}"
+        async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>`;
 
@@ -133,10 +139,17 @@ ${q.options.map((o) => `        <li>${esc(o)}</li>`).join('\n')}
 `;
 
 const { quizzes } = JSON.parse(await readFile(SRC, 'utf8'));
+const seen = new Set();
+for (const q of quizzes) {
+  if (!/^[a-z0-9-]+$/.test(q.slug || '')) throw new Error(`day ${q.day}: slug must be lowercase a-z, 0-9 and hyphens`);
+  if (seen.has(q.slug)) throw new Error(`day ${q.day}: duplicate slug "${q.slug}" — slugs are permanent public URLs`);
+  seen.add(q.slug);
+}
 if (existsSync(OUT)) await rm(OUT, { recursive: true });
 for (const q of quizzes) {
-  const dir = new URL(`${q.day}/`, OUT);
+  const dir = new URL(`${q.slug}/`, OUT);
   await mkdir(dir, { recursive: true });
   await writeFile(new URL('index.html', dir), page(q));
 }
-console.log(`wrote ${quizzes.length} answer pages -> public/gaby/quiz/{${quizzes.map(q=>q.day).join(',')}}/`);
+console.log(`wrote ${quizzes.length} answer pages:`);
+for (const q of quizzes) console.log(`  day ${q.day}  https://edsa.tech/gaby/quiz/${q.slug}/`);

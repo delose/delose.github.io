@@ -1,9 +1,10 @@
 {
-  "_comment": "Single source of truth. Feeds BOTH the private posting kit (tools/posting-kit) and the public answer pages (public/gaby/quiz/<day>/). Run: npm run quiz:build Every quiz needs: day, situation, situationEn, place, question, options[], answer, why (may contain <b>/<i>), takeaway.",
+  "_comment": "Single source of truth. Feeds BOTH the private posting kit (tools/posting-kit) and the public answer pages (public/gaby/quiz/<slug>/). Run: npm run quiz:build. Every quiz needs: day, slug, situation, situationEn, place, question, options[], answer, why (may contain <b>/<i>), takeaway. The slug is the public URL and lives forever in social comments — never change one after posting, and never let it give the answer away.",
   "channel": "gabyspeaksspanish",
   "quizzes": [
     {
       "day": 1,
+      "slug": "tapas-bar",
       "situation": "En un bar de barrio",
       "situationEn": "At the tapas bar",
       "place": "a neighbourhood bar in Madrid",
@@ -19,6 +20,7 @@
     },
     {
       "day": 2,
+      "slug": "menu-del-dia",
       "situation": "El menú del día",
       "situationEn": "The set lunch menu",
       "place": "a restaurant at lunchtime",
@@ -34,6 +36,7 @@
     },
     {
       "day": 3,
+      "slug": "saber-o-conocer",
       "situation": "En la farmacia",
       "situationEn": "At the pharmacy",
       "place": "the pharmacy",

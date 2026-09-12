@@ -129,7 +129,7 @@ ${url}
 
 function render(day) {
   const q = DATA.quizzes.find(x => x.day === day) || DATA.quizzes[0];
-  const url = 'https://edsa.tech/gaby/quiz/' + q.day;
+  const url = 'https://edsa.tech/gaby/quiz/' + q.slug;
 
   document.getElementById('nav').innerHTML = DATA.quizzes
     .map(x => `<a href="?day=${x.day}" class="${x.day === q.day ? 'on' : ''}">Day ${x.day}</a>`).join('');

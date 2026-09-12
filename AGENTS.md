@@ -125,34 +125,36 @@ moving strips, and `--night` (#123a4a, lifted from the app's own "Corrections yo
 can trust" card) exists only for that band — light screenshots need a dark ground
 to read, and teal was too close in value.
 
-**Quiz answer pages** (`/gaby/quiz/<day>/`) — the landing pages for the second
+**Quiz answer pages** (`/gaby/quiz/<slug>/`) — the landing pages for the second
 comment under each social post. The first comment poses a quiz; the second links
 here, so the answer never spoils the feed.
 - **They are generated. Never hand-edit them.** Source of truth is
   `tools/posting-kit/quizzes.json`; `npm run quiz:build` rewrites
   `public/gaby/quiz/` from scratch (it deletes the directory first).
-- **A day is a path segment, not a query string.** `?answer=5` cannot work: these
-  are static files with no JavaScript, so the server ignores everything after the
-  `?` and every day would have to ship all 100 answers in one file, where anyone
-  could read them in View Source. `/gaby/quiz/5/` gives each day its own file,
-  its own Open Graph preview, and only its own answer.
+- **One file per quiz, addressed by a readable slug** — `/gaby/quiz/tapas-bar/`.
+  This is deliberate and was arrived at the hard way. The alternative considered
+  was a single page reading `?answer=n`: that cannot work without JavaScript
+  (a static host serves the same file for every query value), and making it work
+  means shipping all 100 answers to every visitor, since opening a page downloads
+  the whole HTML file to their device — View Source then reads the lot. A file per
+  slug means a visitor downloads only the answer they were sent, needs no
+  JavaScript, and each quiz gets its own link preview.
+- **A slug is a permanent public URL.** It goes into social comments that outlive
+  any redesign. Never change one after posting, never reuse one, and never let a
+  slug give the answer away (`saber-o-conocer` is fine — it names the choice, not
+  the winner). The build fails on a duplicate or non-`[a-z0-9-]` slug.
 - The answer sits behind a native `<details>`, so someone who lands on it by
   accident still gets to guess first.
 
-**Posting kit** (`tools/posting-kit/`) — the private copy-paste console for the
-100-day quiz run: caption templates per platform, both comments, reply snippets.
-`npm run kit` regenerates the answer pages and serves it at
-`http://localhost:3100/?day=1`.
-- **It lives in `tools/` for a reason: everything under `public/` is published.**
-  A "private" page in `public/gaby/` would be live at edsa.tech. Do not move it
-  there. Because it never ships, it is allowed JavaScript — which is what lets
-  `?day=n` work there and not on the public pages.
-- Edit the templates in the `templates()` function in
-  `tools/posting-kit/index.html`. Adding a quiz means one more object in
-  `quizzes.json` and a re-run of `npm run quiz:build`. Every quiz needs `day`,
-  `situation`, `situationEn`, `place`, `question`, `options[]`, `answer`, `why`
-  and `takeaway` — `place` exists because captions read "You are standing in
-  {place}", which needs "a neighbourhood bar in Madrid", not "At the tapas bar".
+**Analytics.** GoatCounter (`https://edsa.goatcounter.com/count`) is on all Gaby
+pages including the generated quiz pages; the Astro pages use GA4 instead
+(`G-4HC3PKE1DJ` in `BaseHead.astro`). GoatCounter is cookieless and stores no IP,
+which is why it is the one third-party request allowed here — see section 11 of
+`/gaby/privacy/`, which exists to keep that policy accurate, because it is the
+Privacy Policy URL registered in App Store Connect. **This changes nothing about
+the app's App Store privacy label**: that covers the app binary and its SDKs, and
+the app still collects nothing and makes no network requests. Keep the two
+clearly separated in any copy you write.
 
 **Why it isn't Astro.** It lives in `public/` on purpose. Astro copies `public/`
 verbatim to `dist/`, so these pages ship byte-for-byte with no build step, no
@@ -165,10 +167,13 @@ also keeps the product's brand fully separate from the blog chrome (`Header.astr
 
 - All three pages share `/gaby/gaby.css`. Put changes there, not in per-page
   `<style>` blocks, so the pages stay consistent.
-- Keep it dependency-free: **no** Google Fonts, no CDN scripts, no analytics, no
-  tracking pixels, no external images, **no JavaScript** (the FAQ accordions are native
-  `<details>`). System font stack only — a page that brags about zero network requests
-  should not make any. If a design ever needs a webfont, self-host it in `public/gaby/`.
+- Keep it dependency-free: **no** Google Fonts, no CDN scripts, no external images,
+  **no JavaScript of our own** (the FAQ accordions and the quiz reveal are native
+  `<details>`). System font stack only. If a design ever needs a webfont, self-host
+  it in `public/gaby/`.
+- The **one** permitted third-party request is the GoatCounter tag (see Analytics
+  above). Adding a second one needs a real argument — the pitch on these pages is
+  that Gaby does not phone home, and the network tab should stay close to that.
 - Hand-placed `<br>` in headings must have **a space before it** (`Spanish <br>you'll`),
   because `gaby.css` hides those breaks below 680 px and the space is what keeps the words
   apart when it does.
@@ -230,11 +235,7 @@ Not scheduled. Recorded so it is not lost.
   niche, so a visitor who clicks through lands somewhere off-brand. Plan is a
   long-form video for the channel; until then consider a Gaby-specific playlist
   or channel trailer so the landing view matches the link's promise.
-- **Analytics on the Gaby pages.** GA4 (`G-4HC3PKE1DJ`) covers Astro pages only;
-  `/gaby/**` has no measurement at all. GoatCounter chosen (cookieless, open
-  source). Blocked on the account's `/count` URL. When it lands, add the scoped
-  "This website, and the app" section to `/gaby/privacy/` — the App Store privacy
-  label is unaffected (it covers the app binary and its SDKs, and the app still
-  collects nothing), but that policy is the URL registered in App Store Connect
-  and must not read as if it denies the site's own analytics.
+- **Unify analytics?** Gaby pages are on GoatCounter, Astro pages still on GA4,
+  so there is no single dashboard for edsa.tech. Moving the Astro pages to
+  GoatCounter too would fix that and drop a Google dependency.
 - **Only 3 of 100 quizzes written.** `tools/posting-kit/quizzes.json`.
