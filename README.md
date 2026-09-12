@@ -61,5 +61,39 @@ Check out [our documentation](https://docs.astro.build) or jump into our [Discor
 
 This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
 
-## View traffic - visible to owner ONLY
-[GH](https://github.com/delose/delose.github.io/graphs/traffic), [GA](https://analytics.google.com/analytics/web/#/a382128010p521752320/reports/intelligenthome)
+## Analytics — the two dashboards
+
+Two tools, split by which part of the site they cover. Both are owner-only.
+
+| Dashboard | Covers | Link |
+|---|---|---|
+| **GoatCounter** | `edsa.tech/gaby/**` — the app landing page, privacy, support, and every quiz answer page | <https://edsa.goatcounter.com> |
+| **GA4** | Everything Astro renders — `/`, `/blog`, `/about`, blog posts | [Google Analytics property](https://analytics.google.com/analytics/web/#/a382128010p521752320/reports/intelligenthome) |
+| GitHub traffic | Repo-level views and referrers, 14-day window | [Insights → Traffic](https://github.com/delose/delose.github.io/graphs/traffic) |
+
+They do not overlap: GA4 is injected by `src/components/BaseHead.astro`, which only
+runs on Astro pages; the Gaby pages are hand-written HTML and carry the GoatCounter
+tag instead. So no page is double-counted.
+
+### Reading GoatCounter
+
+Log in at <https://edsa.goatcounter.com> (site code `edsa`). The front page *is* the
+dashboard — no navigating. **Pages** lists each URL with its visitor count, so
+`/gaby/quiz/tapas-bar/` tells you how many people actually clicked through from a
+social comment; **Referrers** shows which platform sent them. Change the period with
+the date control at the top right.
+
+### Reading GA4
+
+1. Go to the [property link above](https://analytics.google.com/analytics/web/#/a382128010p521752320/reports/intelligenthome)
+   and sign in as the account that owns property `G-4HC3PKE1DJ`.
+2. Left sidebar → **Reports**.
+3. **Reports snapshot** for the overview; **Life cycle → Engagement → Pages and
+   screens** for per-page numbers; **Life cycle → Acquisition → Traffic acquisition**
+   for where visitors came from.
+4. Set the date range top right — it defaults to the last 28 days.
+5. **Realtime** (under Reports) shows the last 30 minutes, which is the quickest way
+   to confirm tracking is alive after a deploy.
+
+GA4 processing lags by up to 24–48 hours; Realtime does not. GoatCounter is near
+instant.

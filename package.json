@@ -8,7 +8,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "quiz:build": "node tools/build-quiz-pages.mjs",
-    "kit": "node tools/build-quiz-pages.mjs && npx --yes http-server tools/posting-kit -p 3100 -c-1 -o \"/?day=1\""
+    "kit": "node tools/build-quiz-pages.mjs && npx --yes http-server tools/posting-kit -p 3100 -c-1 -o \"/gaby/today?day=1\""
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",

@@ -139,11 +139,25 @@ ${q.options.map((o) => `        <li>${esc(o)}</li>`).join('\n')}
 `;
 
 const { quizzes } = JSON.parse(await readFile(SRC, 'utf8'));
+const REQUIRED = ['day','slug','situation','situationEn','place','question','options','answer','why','takeaway'];
+const slugify = (t) => String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-');
 const seen = new Set();
 for (const q of quizzes) {
-  if (!/^[a-z0-9-]+$/.test(q.slug || '')) throw new Error(`day ${q.day}: slug must be lowercase a-z, 0-9 and hyphens`);
+  for (const k of REQUIRED) {
+    if (q[k] === undefined || q[k] === '') throw new Error(`day ${q.day}: missing "${k}"`);
+  }
+  if (!Array.isArray(q.options) || q.options.length < 2) throw new Error(`day ${q.day}: needs at least 2 options`);
+  if (!/^[a-z0-9-]+$/.test(q.slug)) throw new Error(`day ${q.day}: slug must be lowercase a-z, 0-9 and hyphens`);
   if (seen.has(q.slug)) throw new Error(`day ${q.day}: duplicate slug "${q.slug}" — slugs are permanent public URLs`);
   seen.add(q.slug);
+
+  // A slug spoils only if it points at the answer and NOT at the other options.
+  // "constipado" is fine when every option contains it; "para-llevar" was not.
+  const inAnswer = slugify(q.answer).includes(q.slug);
+  const inOthers = q.options.some((o) => !slugify(q.answer).includes(slugify(o)) && slugify(o).includes(q.slug));
+  if (inAnswer && !inOthers) {
+    throw new Error(`day ${q.day}: slug "${q.slug}" gives the answer away — name the choice, not the winner`);
+  }
 }
 if (existsSync(OUT)) await rm(OUT, { recursive: true });
 for (const q of quizzes) {

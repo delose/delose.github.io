@@ -238,4 +238,8 @@ Not scheduled. Recorded so it is not lost.
 - **Unify analytics?** Gaby pages are on GoatCounter, Astro pages still on GA4,
   so there is no single dashboard for edsa.tech. Moving the Astro pages to
   GoatCounter too would fix that and drop a Google dependency.
-- **Only 3 of 100 quizzes written.** `tools/posting-kit/quizzes.json`.
+- **30 of 100 quizzes written.** `tools/posting-kit/quizzes.json`. Days 1-30 cover
+  the app's own situations plus the grammar that trips English speakers. Adding
+  more is one object per quiz; `npm run quiz:build` validates required fields,
+  slug format, duplicate slugs and slugs that give the answer away, and fails
+  the build on any of them.
