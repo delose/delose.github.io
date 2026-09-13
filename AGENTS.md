@@ -126,33 +126,55 @@ can trust" card) exists only for that band — light screenshots need a dark gro
 to read, and teal was too close in value.
 
 **Quiz answer pages** (`/gaby/quizzes/<slug>/`) — 100 pages, one per quiz. They are
-the landing page for the *second* comment under a social post: comment 1 is the
-quiz card image with no answer on it, comment 2 links here.
-- **They are generated. Never hand-edit them.** Source of truth is
-  `tools/quizzes.json`; `npm run quiz:build` rewrites `public/gaby/quizzes/` from
-  scratch and refreshes `tools/quiz-manifest.json`.
-- **No day number appears anywhere public, deliberately.** A page that says
-  "Day 16" cannot be re-shared six months later. `day` survives in the JSON purely
-  as ordering for the posting pipeline.
-- **One file per quiz, addressed by a readable slug.** A single page reading
-  `?answer=n` was considered and rejected twice: a static host serves the same file
-  for every query value, so it needs JavaScript, and it means shipping all 100
-  answers to every visitor — opening a page downloads the whole HTML to the device,
-  and View Source then reads the lot.
-- **A slug is a permanent public URL** once a comment is posted. The build fails on
-  a duplicate slug, a duplicate question, a non-`[a-z0-9-]` slug (accents
-  percent-encode into noise when pasted), or a slug that gives the answer away —
-  it must name the choice, not the winner (`ser-o-estar`, not `para-llevar`).
+the landing page for the *second* comment under a social post: comment 1 is the quiz
+card image with no answer on it, comment 2 links here.
+
+**The content is NOT written in this repo.** It is imported from the GeoGain project,
+which is a separate repo on the same machine and owns the quizzes, the card images and
+the posting pipeline:
+
+```bash
+npm run quiz:import   # GeoGain content_queue (niche=spanish) -> tools/quizzes.json
+npm run quiz:build    # tools/quizzes.json -> public/gaby/quizzes/ + tools/quiz-manifest.json
+```
+
+`tools/quizzes.json` is a **committed snapshot**, so the site still builds anywhere
+without GeoGain present. Re-import whenever GeoGain's quizzes change. Override the
+database location with `GEOGAIN_DB=/path/to/geogain.db`. Each entry keeps GeoGain's
+row `id`, which is the join key the posting pipeline uses.
+
+- **Never hand-edit a page or `tools/quizzes.json`.** Edit the quiz in GeoGain, re-import.
+- **No day number appears anywhere public, deliberately.** A page that says "Day 16"
+  cannot be re-shared six months later. Ordering lives in GeoGain.
+- **One file per quiz, addressed by a readable slug** derived from the lesson title.
+  A single page reading `?answer=n` was proposed twice and cannot work: a static host
+  serves the same file for every query value, so it needs JavaScript, and it means
+  shipping all 100 answers to every visitor — opening a page downloads the whole HTML
+  to the device, and View Source then reads the lot.
+- **A slug is a permanent public URL** once a comment is posted. The build fails on a
+  duplicate slug, a non-`[a-z0-9-]` slug (accents percent-encode into noise when
+  pasted), an `answer` that no longer matches `options[answerIndex]` (a stale import),
+  or a slug that gives the answer away. That last one is real: the lesson titled
+  "Me gustaría" has "Me gustaría la cuenta" as its answer, so it is remapped to
+  `pedir-con-cortesia` via `SLUG_OVERRIDES` in the importer, keyed by GeoGain id.
 - The answer sits behind a native `<details>`, so an accidental visitor still guesses.
 
-**`tools/quiz-manifest.json`** is written by the same build and is **not deployed**,
-because it contains every answer. It exists for the GeoGain posting pipeline, which
-lives in a different repo — see `docs/geogain-gaby-handover.md`.
+**The video band.** Every answer page embeds one promotional YouTube Short
+(`xzgKFO4RYO4`), placed **after** the answer rather than before it. The link promised
+an answer, so the answer comes first — a gate the visitor can scroll past is friction
+without benefit, and the moment right after the payoff is when they are most receptive
+to the app. It is **click-to-load**: the poster is drawn in CSS and nothing is
+requested from Google until the visitor presses play, which is the only reason these
+pages can still claim one third-party request on load. Section 11 of `/gaby/privacy/`
+documents both it and GoatCounter.
 
-**There is no posting kit in this repo any more.** An earlier session built one at
-`tools/posting-kit/`; it duplicated a subset of GeoGain admin, worse, and collided
-with it on port 3100 and the `/gaby/today` path. Deleted 2026-09-12. Captions and
-card images are GeoGain's job; this repo owns only the answer pages and the manifest.
+**`tools/quiz-manifest.json`** is written by the same build and is **not deployed**,
+because it contains every answer. It exists for the GeoGain posting pipeline — see
+`docs/geogain-gaby-handover.md`.
+
+**There is no posting kit in this repo.** An earlier session built one; it duplicated a
+subset of GeoGain admin, worse, and collided with it on port 3100 and the `/gaby/today`
+path. Deleted 2026-09-12. Captions and card images are GeoGain's job.
 
 **Why it isn't Astro.** It lives in `public/` on purpose. Astro copies `public/`
 verbatim to `dist/`, so these pages ship byte-for-byte with no build step, no
@@ -236,7 +258,7 @@ Not scheduled. Recorded so it is not lost.
 - **Unify analytics?** Gaby pages are on GoatCounter, Astro pages still on GA4,
   so there is no single dashboard for edsa.tech. Moving the Astro pages to
   GoatCounter too would fix that and drop a Google dependency.
-- **All 100 quizzes are written and live, and none has had a human read yet.**
-  `tools/quizzes.json`. Gaby's whole claim is that its Spanish is written by a
-  person and never generated, so a generated error in a public comment would hit
-  the exact nerve the product sells on. Nothing should be posted unreviewed.
+- **The 100 quizzes an earlier session wrote by hand are gone** — they were invented
+  content that did not match anything GeoGain posts, and the pages are now imported
+  from GeoGain instead. The old set is still in git history at commit `1f7cd72` if
+  any of it is ever worth reusing as lesson material.

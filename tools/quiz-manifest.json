@@ -1,1507 +1,1572 @@
 {
-  "generated": "2026-09-12",
+  "generated": "2026-09-13",
   "base": "https://edsa.tech/gaby/quizzes/",
   "count": 100,
   "quizzes": [
     {
       "order": 1,
-      "slug": "tapas-bar",
-      "url": "https://edsa.tech/gaby/quizzes/tapas-bar/",
-      "topic": "At the tapas bar",
-      "place": "a neighbourhood bar in Madrid",
-      "question": "You are at the bar and want to ask what tapas they have. Which one is right?",
+      "geogainId": "0070df5e-66b1-4c0f-a89e-b30031b8d8b7",
+      "slug": "say-hello-in-spanish",
+      "url": "https://edsa.tech/gaby/quizzes/say-hello-in-spanish/",
+      "topic": "Say Hello in Spanish",
+      "question": "How do you say 'Good evening' or 'Good night' in Spanish, say at 8 PM?",
       "options": [
-        "¿Qué tapas tiene?",
-        "¿Dónde están las tapas?",
-        "¿Qué tapas tienen?"
+        "Buenas tardes",
+        "Buenas noches",
+        "Buenos días"
       ],
-      "answer": "¿Qué tapas tienen?",
-      "takeaway": "Addressing a business is almost always plural in Spain."
+      "answerIndex": 1,
+      "answer": "Buenas noches",
+      "why": "Buenas noches is for evening and night."
     },
     {
       "order": 2,
-      "slug": "comer-a-mediodia",
-      "url": "https://edsa.tech/gaby/quizzes/comer-a-mediodia/",
-      "topic": "The set lunch menu",
-      "place": "a restaurant at lunchtime",
-      "question": "You want the set lunch. You say “Sí, el del día, por favor.” What is missing?",
+      "geogainId": "1b0599b3-a538-4ad6-b86f-2bbd32014f96",
+      "slug": "magic-words",
+      "url": "https://edsa.tech/gaby/quizzes/magic-words/",
+      "topic": "Magic Words",
+      "question": "How do you respond to 'Gracias'?",
       "options": [
-        "Nothing — it is fine",
-        "menú",
-        "plato"
+        "Por favor",
+        "De nada",
+        "Perdón"
       ],
-      "answer": "menú — “Sí, el menú del día, por favor.”",
-      "takeaway": "You will be understood without it. You will also sound like you are guessing."
+      "answerIndex": 1,
+      "answer": "De nada",
+      "why": "It means 'you're welcome'."
     },
     {
       "order": 3,
-      "slug": "saber-o-conocer",
-      "url": "https://edsa.tech/gaby/quizzes/saber-o-conocer/",
-      "topic": "At the pharmacy",
-      "place": "the pharmacy",
-      "question": "You want to ask if they know where the nearest health centre is. Saber or conocer?",
+      "geogainId": "1da3e3bc-bd40-485d-a0fb-675bf212ff63",
+      "slug": "como-estas-replies",
+      "url": "https://edsa.tech/gaby/quizzes/como-estas-replies/",
+      "topic": "¿Cómo estás? — Replies",
+      "question": "What does \"Más o menos\" mean?",
       "options": [
-        "¿Conoce dónde está el centro de salud?",
-        "¿Sabe dónde está el centro de salud?",
-        "Either works"
+        "Very well",
+        "So-so",
+        "I'm good"
       ],
-      "answer": "¿Sabe dónde está el centro de salud?",
-      "takeaway": "Saber = information. Conocer = familiarity."
+      "answerIndex": 1,
+      "answer": "So-so",
+      "why": "Más o menos means 'so-so' or 'more or less'."
     },
     {
       "order": 4,
-      "slug": "empadronamiento",
-      "url": "https://edsa.tech/gaby/quizzes/empadronamiento/",
-      "topic": "Registering at the town hall",
-      "place": "the queue at your local ayuntamiento",
-      "question": "You turn up at the town hall to register. The first thing they ask is whether you have one of these. Which?",
+      "geogainId": "5c5db58d-f920-45a3-8ec7-7a99083b4ae8",
+      "slug": "spanish-vowels",
+      "url": "https://edsa.tech/gaby/quizzes/spanish-vowels/",
+      "topic": "Spanish Vowels",
+      "question": "How does the 'i' in 'sí' sound?",
       "options": [
-        "una cita previa",
-        "una cita anterior",
-        "un cita previo"
+        "Like 'ee' in see",
+        "Like 'eye' in eye",
+        "Like 'ih' in sit"
       ],
-      "answer": "una cita previa",
-      "takeaway": "Learn “cita previa” before you learn anything else. You will need it for the NIE, the padrón and the doctor."
+      "answerIndex": 0,
+      "answer": "Like 'ee' in see",
+      "why": "The Spanish 'i' always makes the 'ee' sound."
     },
     {
       "order": 5,
-      "slug": "control-de-pasaportes",
-      "url": "https://edsa.tech/gaby/quizzes/control-de-pasaportes/",
-      "topic": "Passport control",
-      "place": "the arrivals hall at Madrid-Barajas",
-      "question": "The officer asks “¿Cuál es el motivo de su viaje?” You are moving here. What do you say?",
+      "geogainId": "993a5275-010c-4473-954a-0db9bc9f5524",
+      "slug": "introduce-yourself",
+      "url": "https://edsa.tech/gaby/quizzes/introduce-yourself/",
+      "topic": "Introduce Yourself!",
+      "question": "How do you ask, 'What's your name?' in Spanish?",
       "options": [
-        "Vengo a vivir aquí.",
-        "Vengo para vivir aquí.",
-        "Both are fine."
+        "¿Quién eres?",
+        "¿Cómo te llamas?",
+        "¿Qué pasa?"
       ],
-      "answer": "Both are fine — “Vengo a vivir aquí” is what you will hear most.",
-      "takeaway": "Verb of motion + a + infinitive. “Vengo a…”, “Voy a…”, “Salgo a…”."
+      "answerIndex": 1,
+      "answer": "¿Cómo te llamas?",
+      "why": "¿Cómo te llamas? is how you ask someone's name."
     },
     {
       "order": 6,
-      "slug": "un-taxi-al-piso",
-      "url": "https://edsa.tech/gaby/quizzes/un-taxi-al-piso/",
-      "topic": "The taxi rank",
-      "place": "the taxi rank outside the terminal",
-      "question": "You get in and want to give the driver an address. Which opener sounds native?",
+      "geogainId": "62324c76-6e31-4d01-a7e1-a34118d4ee8d",
+      "slug": "easy-spanish-cognates",
+      "url": "https://edsa.tech/gaby/quizzes/easy-spanish-cognates/",
+      "topic": "Easy Spanish Cognates",
+      "question": "Which of these words is NOT spelled the same in Spanish?",
       "options": [
-        "¿Me lleva a esta dirección?",
-        "¿Me toma a esta dirección?",
-        "¿Me conduce esta dirección?"
+        "hotel",
+        "chocolate",
+        "telephone"
       ],
-      "answer": "¿Me lleva a esta dirección?",
-      "takeaway": "You llevar a person. You tomar a bus. The driver conduce."
+      "answerIndex": 2,
+      "answer": "telephone",
+      "why": "In Spanish, 'telephone' is 'teléfono'."
     },
     {
       "order": 7,
-      "slug": "abrir-una-cuenta",
-      "url": "https://edsa.tech/gaby/quizzes/abrir-una-cuenta/",
-      "topic": "Opening a bank account",
-      "place": "a bank branch on a Tuesday morning",
-      "question": "You want an everyday current account. What do you ask for?",
+      "geogainId": "b0ffcaad-b2fc-4a60-ad4c-65baf6f0d473",
+      "slug": "4-ways-to-say-goodbye",
+      "url": "https://edsa.tech/gaby/quizzes/4-ways-to-say-goodbye/",
+      "topic": "4 Ways to Say Goodbye",
+      "question": "Which phrase literally means 'we will see each other'?",
       "options": [
-        "una cuenta corriente",
-        "una cuenta actual",
-        "una cuenta presente"
+        "Adiós",
+        "Hasta luego",
+        "Nos vemos"
       ],
-      "answer": "una cuenta corriente",
-      "takeaway": "Actual = present-day, not “actual”. One of the false friends that bites hardest."
+      "answerIndex": 2,
+      "answer": "Nos vemos",
+      "why": "'Nos vemos' translates to 'we see each other'."
     },
     {
       "order": 8,
-      "slug": "contratar-el-movil",
-      "url": "https://edsa.tech/gaby/quizzes/contratar-el-movil/",
-      "topic": "Getting a phone contract",
-      "place": "a phone shop on the high street",
-      "question": "You do not want to be locked in. How do you ask for a contract with no minimum term?",
+      "geogainId": "baf300e3-508d-436b-8266-e02f44e63225",
+      "slug": "english-tion-words",
+      "url": "https://edsa.tech/gaby/quizzes/english-tion-words/",
+      "topic": "English -tion words",
+      "question": "How do you say \"conversation\"?",
       "options": [
-        "¿Tienen tarifas sin permanencia?",
-        "¿Tienen tarifas sin contrato?",
-        "¿Tienen tarifas sin duración?"
+        "conversación",
+        "conversacion"
       ],
-      "answer": "¿Tienen tarifas sin permanencia?",
-      "takeaway": "Sin permanencia = no lock-in. Sin contrato = prepaid. They are not the same offer."
+      "answerIndex": 0,
+      "answer": "conversación",
+      "why": "'-tion' becomes '-ción' and it's feminine."
     },
     {
       "order": 9,
-      "slug": "en-el-centro-de-salud",
-      "url": "https://edsa.tech/gaby/quizzes/en-el-centro-de-salud/",
-      "topic": "At the health centre",
-      "place": "your local centro de salud",
-      "question": "You have a headache and need to say so. Which is right?",
+      "geogainId": "06b40b17-2ed2-47a3-acaa-c7f8f30994eb",
+      "slug": "un-vs-una-say-a",
+      "url": "https://edsa.tech/gaby/quizzes/un-vs-una-say-a/",
+      "topic": "Un vs Una: Say 'A'",
+      "question": "How do you say: a house?",
       "options": [
-        "Estoy dolor de cabeza.",
-        "Me duele la cabeza.",
-        "Tengo duele la cabeza."
+        "un casa",
+        "una casa"
       ],
-      "answer": "Me duele la cabeza.",
-      "takeaway": "Me duele + singular. Me duelen + plural. Never “estoy dolor”."
+      "answerIndex": 1,
+      "answer": "una casa",
+      "why": "Casa is a feminine noun, so you use 'una'."
     },
     {
       "order": 10,
-      "slug": "ver-un-piso",
-      "url": "https://edsa.tech/gaby/quizzes/ver-un-piso/",
-      "topic": "Viewing a flat",
-      "place": "an empty flat with the estate agent waiting",
-      "question": "The agent mentions the deposit you will have to put down. Which word is that?",
+      "geogainId": "58babab7-944d-430a-8af6-2db4d98ad418",
+      "slug": "noun-gender-trick",
+      "url": "https://edsa.tech/gaby/quizzes/noun-gender-trick/",
+      "topic": "Noun Gender Trick",
+      "question": "Is 'ventana' (window) masculine or feminine?",
       "options": [
-        "el depósito",
-        "la fianza",
-        "el aval"
+        "Masculine",
+        "Feminine"
       ],
-      "answer": "la fianza",
-      "takeaway": "Fianza = deposit. Aval = guarantee. Ask which one they want before you sign."
+      "answerIndex": 1,
+      "answer": "Feminine",
+      "why": "It ends in -a, so it's feminine!"
     },
     {
       "order": 11,
-      "slug": "por-o-para",
-      "url": "https://edsa.tech/gaby/quizzes/por-o-para/",
-      "topic": "Por vs para",
-      "place": "your neighbour’s doorway, thanking them",
-      "question": "You are thanking a neighbour for their help. Which one?",
+      "geogainId": "a2ee0505-2f4e-4ff1-a7db-04630297be5e",
+      "slug": "plurals-made-easy",
+      "url": "https://edsa.tech/gaby/quizzes/plurals-made-easy/",
+      "topic": "Plurals Made Easy",
+      "question": "How do you say \"the colors\" (plural)?",
       "options": [
-        "Gracias para la ayuda.",
-        "Gracias por la ayuda.",
-        "Gracias de la ayuda."
+        "el colores",
+        "los color",
+        "los colores"
       ],
-      "answer": "Gracias por la ayuda.",
-      "takeaway": "Por = the reason behind. Para = the goal ahead."
+      "answerIndex": 2,
+      "answer": "los colores",
+      "why": "\"Color\" ends in a consonant, so add -es. \"El\" becomes \"los\" for masculine plural."
     },
     {
       "order": 12,
-      "slug": "ser-o-estar",
-      "url": "https://edsa.tech/gaby/quizzes/ser-o-estar/",
-      "topic": "Ser vs estar",
-      "place": "a friend’s kitchen, making small talk",
-      "question": "You want to say you are bored right now. Which?",
+      "geogainId": "f34a9a8f-21bc-4c88-9b54-0f27b1a46046",
+      "slug": "the-4-ways-to-say-the",
+      "url": "https://edsa.tech/gaby/quizzes/the-4-ways-to-say-the/",
+      "topic": "The 4 Ways to Say 'The'",
+      "question": "How do you say: the books?",
       "options": [
-        "Soy aburrido.",
-        "Estoy aburrido.",
-        "Tengo aburrido."
+        "los libros",
+        "las libros",
+        "el libros"
       ],
-      "answer": "Estoy aburrido.",
-      "takeaway": "Estoy aburrido = I am bored. Soy aburrido = I am boring. Pick carefully."
+      "answerIndex": 0,
+      "answer": "los libros",
+      "why": "Libros is masculine and plural, so use 'los'."
     },
     {
       "order": 13,
-      "slug": "embarazada",
-      "url": "https://edsa.tech/gaby/quizzes/embarazada/",
-      "topic": "A false friend",
-      "place": "a shop, having just knocked something over",
-      "question": "You did something clumsy and want to say you are embarrassed. Which?",
+      "geogainId": "c0d5ab63-5247-4dfe-a7ab-7933d68cd52d",
+      "slug": "estar-feelings-places",
+      "url": "https://edsa.tech/gaby/quizzes/estar-feelings-places/",
+      "topic": "ESTAR: Feelings & Places",
+      "question": "How do you say: We are happy (right now)?",
       "options": [
-        "Estoy embarazada.",
-        "Me da vergüenza.",
-        "Estoy embarazoso."
+        "Nosotros somos felices",
+        "Nosotros estamos felices"
       ],
-      "answer": "Me da vergüenza.",
-      "takeaway": "Embarazada = pregnant. Vergüenza = embarrassment."
+      "answerIndex": 1,
+      "answer": "Nosotros estamos felices",
+      "why": "Estar is for temporary feelings."
     },
     {
       "order": 14,
-      "slug": "constipado",
-      "url": "https://edsa.tech/gaby/quizzes/constipado/",
-      "topic": "Another false friend",
-      "place": "the pharmacy, again",
-      "question": "You have a blocked nose and a sore throat. What do you tell the pharmacist?",
+      "geogainId": "ca2e8491-5cbe-4a46-abe8-5459461759e0",
+      "slug": "ser-who-you-are",
+      "url": "https://edsa.tech/gaby/quizzes/ser-who-you-are/",
+      "topic": "Ser: Who You Are",
+      "question": "How do you say: She is a doctor?",
       "options": [
-        "Estoy constipado.",
-        "Estoy constipada del estómago.",
-        "Soy constipado."
+        "Ella soy doctora",
+        "Ella eres doctora",
+        "Ella es doctora"
       ],
-      "answer": "Estoy constipado. (constipada if you are female)",
-      "takeaway": "Estoy constipado = I have a cold. It is not what it looks like."
+      "answerIndex": 2,
+      "answer": "Ella es doctora",
+      "why": "'Ella es' is the correct form of 'ser' for 'she is'."
     },
     {
       "order": 15,
-      "slug": "tu-o-usted",
-      "url": "https://edsa.tech/gaby/quizzes/tu-o-usted/",
-      "topic": "Tú vs usted",
-      "place": "a government office with a queue number",
-      "question": "Same afternoon, two places. Where would you use usted?",
+      "geogainId": "d97b70cc-5d48-405e-b3f2-e2ba07f60c88",
+      "slug": "ser-vs-estar",
+      "url": "https://edsa.tech/gaby/quizzes/ser-vs-estar/",
+      "topic": "Ser vs. Estar",
+      "question": "How do you say: I am tired?",
       "options": [
-        "The bar — staff expect respect.",
-        "The town hall clerk.",
-        "Both, always. It is safer."
+        "Soy cansado.",
+        "Estoy cansado."
       ],
-      "answer": "The town hall clerk.",
-      "takeaway": "Default to tú in daily life. Save usted for the counter with a queue number."
+      "answerIndex": 1,
+      "answer": "Estoy cansado.",
+      "why": "Tired is a temporary state, so use Estar."
     },
     {
       "order": 16,
-      "slug": "vosotros-o-ustedes",
-      "url": "https://edsa.tech/gaby/quizzes/vosotros-o-ustedes/",
-      "topic": "The one Spain keeps",
-      "place": "a bar terrace with two friends",
-      "question": "You are addressing two friends informally, in Spain. Which?",
+      "geogainId": "50f0cc96-4eb8-4940-b643-dcb6e61c3bb2",
+      "slug": "conjugate-ar-verbs",
+      "url": "https://edsa.tech/gaby/quizzes/conjugate-ar-verbs/",
+      "topic": "Conjugate -AR Verbs",
+      "question": "How do you say: you dance?",
       "options": [
-        "¿Ustedes quieren otra?",
-        "¿Vosotros queréis otra?",
-        "¿Tú quieres otra?"
+        "bailo",
+        "bailas",
+        "bailan"
       ],
-      "answer": "¿Vosotros queréis otra?",
-      "takeaway": "In Spain, vosotros for friends, ustedes for formality. Both exist."
+      "answerIndex": 1,
+      "answer": "bailas",
+      "why": "For 'tú' (you informal), -AR verbs end in -AS."
     },
     {
       "order": 17,
-      "slug": "pedir-en-la-barra",
-      "url": "https://edsa.tech/gaby/quizzes/pedir-en-la-barra/",
-      "topic": "Ordering at a bar",
-      "place": "a bar, at the counter rather than a table",
-      "question": "You want a small draught beer. What do Spaniards actually say?",
+      "geogainId": "663f7895-1189-4d7e-a192-6fc68b3fb8bd",
+      "slug": "tener-to-have-to-be",
+      "url": "https://edsa.tech/gaby/quizzes/tener-to-have-to-be/",
+      "topic": "Tener: To Have & To Be",
+      "question": "How do you say: I am 30 years old?",
       "options": [
-        "Quiero una caña.",
-        "¿Me pones una caña?",
-        "Deseo una caña, por favor."
+        "Soy treinta años",
+        "Tengo treinta años"
       ],
-      "answer": "¿Me pones una caña?",
-      "takeaway": "¿Me pones…? at the bar. ¿Me pone…? if you are being formal."
+      "answerIndex": 1,
+      "answer": "Tengo treinta años",
+      "why": "The answer is 'Tengo treinta años' because in Spanish, you 'have' your age."
     },
     {
       "order": 18,
-      "slug": "la-cuenta",
-      "url": "https://edsa.tech/gaby/quizzes/la-cuenta/",
-      "topic": "Asking for the bill",
-      "place": "a restaurant, at the end of a long lunch",
-      "question": "You want the bill. Which is the natural one?",
+      "geogainId": "9c2ab58d-5eb2-4831-82e7-df85b8884f47",
+      "slug": "hay-there-is-are",
+      "url": "https://edsa.tech/gaby/quizzes/hay-there-is-are/",
+      "topic": "Hay: There Is / Are",
+      "question": "How do you say: There are two cats?",
       "options": [
-        "¿Nos cobras cuando puedas?",
-        "¿Puedo pagar la factura?",
-        "¿Me das el recibo?"
+        "Hay dos gatos.",
+        "Están dos gatos."
       ],
-      "answer": "¿Nos cobras cuando puedas?",
-      "takeaway": "La cuenta = the bill. La factura = the invoice you claim on."
+      "answerIndex": 0,
+      "answer": "Hay dos gatos.",
+      "why": "'Hay' means 'there are' for plural things."
     },
     {
       "order": 19,
-      "slug": "que-o-cual",
-      "url": "https://edsa.tech/gaby/quizzes/que-o-cual/",
-      "topic": "Qué vs cuál",
-      "place": "a queue, filling in a form",
-      "question": "Someone asks for your address. Which question did they use?",
+      "geogainId": "a9ee9a3a-01ed-46e2-bb22-4ae96a0af71c",
+      "slug": "er-ir-verbs",
+      "url": "https://edsa.tech/gaby/quizzes/er-ir-verbs/",
+      "topic": "ER & IR Verbs",
+      "question": "How do you say: we live?",
       "options": [
-        "¿Qué es tu dirección?",
-        "¿Cuál es tu dirección?",
-        "¿Cómo es tu dirección?"
+        "vivimos",
+        "vivamos",
+        "viven"
       ],
-      "answer": "¿Cuál es tu dirección?",
-      "takeaway": "Cuál asks which one. Qué asks what a thing means."
+      "answerIndex": 0,
+      "answer": "vivimos",
+      "why": "`vivimos` is the 'we' form for -IR verbs."
     },
     {
       "order": 20,
-      "slug": "muy-o-mucho",
-      "url": "https://edsa.tech/gaby/quizzes/muy-o-mucho/",
-      "topic": "Muy vs mucho",
-      "place": "August in Madrid",
-      "question": "It is 40 degrees. How do you say it is very hot?",
+      "geogainId": "03c311ef-7856-47e5-8b09-0e8dfff47a34",
+      "slug": "numbers-11-100",
+      "url": "https://edsa.tech/gaby/quizzes/numbers-11-100/",
+      "topic": "Numbers 11-100",
+      "question": "How do you say: 54?",
       "options": [
-        "Hace muy calor.",
-        "Hace mucho calor.",
-        "Es muy caliente."
+        "cincuenta y cuatro",
+        "cincuenta cuatro",
+        "cincuentaycuatro"
       ],
-      "answer": "Hace mucho calor.",
-      "takeaway": "Muy + adjective. Mucho + noun. Hace + weather."
+      "answerIndex": 0,
+      "answer": "cincuenta y cuatro",
+      "why": "Remember to use 'y' for combined numbers!"
     },
     {
       "order": 21,
-      "slug": "coger-o-tomar",
-      "url": "https://edsa.tech/gaby/quizzes/coger-o-tomar/",
-      "topic": "A verb that changes by country",
-      "place": "a bus stop in Madrid",
-      "question": "In Spain, how do you say you are going to catch the bus?",
+      "geogainId": "0b2a2b6e-a455-4d9a-877e-9f1db6429315",
+      "slug": "what-time-is-it",
+      "url": "https://edsa.tech/gaby/quizzes/what-time-is-it/",
+      "topic": "What Time Is It?",
+      "question": "How do you say: It is 2 o'clock?",
       "options": [
-        "Voy a coger el autobús.",
-        "Voy a tomar el autobús.",
-        "Both work in Spain."
+        "Es la dos",
+        "Son las dos"
       ],
-      "answer": "Both work in Spain — coger is the everyday one.",
-      "takeaway": "In Spain: coger. Across the Atlantic: tomar. Know why they differ."
+      "answerIndex": 1,
+      "answer": "Son las dos",
+      "why": "'Son las' is used for all plural hours."
     },
     {
       "order": 22,
-      "slug": "el-mercado",
-      "url": "https://edsa.tech/gaby/quizzes/el-mercado/",
-      "topic": "The weekly market",
-      "place": "the market, with a queue behind you",
-      "question": "You want half a kilo of tomatoes. Which?",
+      "geogainId": "3f2bf4af-16cb-431e-907f-02ef59453150",
+      "slug": "days-of-the-week",
+      "url": "https://edsa.tech/gaby/quizzes/days-of-the-week/",
+      "topic": "Days of the Week",
+      "question": "Which day of the week is \"jueves\"?",
       "options": [
-        "¿Me pone medio kilo de tomates?",
-        "¿Me pone la mitad de kilo de tomates?",
-        "¿Me pone medio de kilo de tomates?"
+        "Tuesday",
+        "Thursday",
+        "Saturday"
       ],
-      "answer": "¿Me pone medio kilo de tomates?",
-      "takeaway": "Medio kilo, media hora. La mitad de = half of that particular thing."
+      "answerIndex": 1,
+      "answer": "Thursday",
+      "why": "\"Jueves\" means Thursday."
     },
     {
       "order": 23,
-      "slug": "en-la-peluqueria",
-      "url": "https://edsa.tech/gaby/quizzes/en-la-peluqueria/",
-      "topic": "At the barber",
-      "place": "the barber’s, cape already on",
-      "question": "They ask “¿Cómo lo quiere?” You want a little off, just the ends. Which?",
+      "geogainId": "5825d30e-e4b8-4fc2-bdda-05251c062578",
+      "slug": "quiero-puedo",
+      "url": "https://edsa.tech/gaby/quizzes/quiero-puedo/",
+      "topic": "Quiero & Puedo",
+      "question": "How do you say: I want to travel?",
       "options": [
-        "Solo las puntas, por favor.",
-        "Solo los finales, por favor.",
-        "Solo un poco corto."
+        "Quiero viajar",
+        "Puedo viajar",
+        "Viajar quiero"
       ],
-      "answer": "Solo las puntas, por favor.",
-      "takeaway": "Las puntas, por detrás, por los lados. Three phrases, one survivable haircut."
+      "answerIndex": 0,
+      "answer": "Quiero viajar",
+      "why": "Quiero means 'I want' and viajar means 'to travel'."
     },
     {
       "order": 24,
-      "slug": "los-vecinos",
-      "url": "https://edsa.tech/gaby/quizzes/los-vecinos/",
-      "topic": "Meeting the neighbours",
-      "place": "the lift in your building",
-      "question": "A neighbour steps into the lift. What do you say?",
+      "geogainId": "79d2ea6f-0cbe-4601-bad5-e3767ed4592f",
+      "slug": "future-with-ir-a",
+      "url": "https://edsa.tech/gaby/quizzes/future-with-ir-a/",
+      "topic": "Future with IR + A",
+      "question": "How do you say: She is going to work?",
       "options": [
-        "Nothing — it would be intrusive.",
-        "Buenos días.",
-        "¿Cómo está usted hoy?"
+        "Ella trabaja.",
+        "Ella va a trabajar.",
+        "Ella trabajará."
       ],
-      "answer": "Buenos días.",
-      "takeaway": "Say hello when you walk into a small space. Silence is the impolite option."
+      "answerIndex": 1,
+      "answer": "Ella va a trabajar.",
+      "why": "`Va a trabajar` means \"is going to work.\""
     },
     {
       "order": 25,
-      "slug": "gustar",
-      "url": "https://edsa.tech/gaby/quizzes/gustar/",
-      "topic": "How gustar really works",
-      "place": "a tapas bar, ordering for the table",
-      "question": "You like tapas — plural. Which?",
+      "geogainId": "d95690c2-87ea-4fda-8c37-c1c8a95a444c",
+      "slug": "easy-months-seasons",
+      "url": "https://edsa.tech/gaby/quizzes/easy-months-seasons/",
+      "topic": "Easy Months & Seasons",
+      "question": "How do you say 'July' in Spanish?",
       "options": [
-        "Me gusta las tapas.",
-        "Me gustan las tapas.",
-        "Yo gusto las tapas."
+        "Julio",
+        "Mayo",
+        "Junio"
       ],
-      "answer": "Me gustan las tapas.",
-      "takeaway": "The thing you like is the subject. Count it, then pick gusta or gustan."
+      "answerIndex": 0,
+      "answer": "Julio",
+      "why": "Julio is July in Spanish, and it's capitalized here for the option, but remember months are lowercase in sentences!"
     },
     {
       "order": 26,
-      "slug": "la-gente",
-      "url": "https://edsa.tech/gaby/quizzes/la-gente/",
-      "topic": "A word that traps English speakers",
-      "place": "your new town, describing it to someone back home",
-      "question": "You want to say the people here are very friendly. Which?",
+      "geogainId": "ec54e0ce-a77f-4241-a9bc-9426ce156514",
+      "slug": "count-to-10",
+      "url": "https://edsa.tech/gaby/quizzes/count-to-10/",
+      "topic": "Count to 10!",
+      "question": "What number is 'siete'?",
       "options": [
-        "La gente aquí son muy amables.",
-        "La gente aquí es muy amable.",
-        "Las gentes aquí son muy amables."
+        "Six",
+        "Seven",
+        "Eight"
       ],
-      "answer": "La gente aquí es muy amable.",
-      "takeaway": "La gente es. Not son. One of the last errors to disappear."
+      "answerIndex": 1,
+      "answer": "Seven",
+      "why": "'Siete' means seven!"
     },
     {
       "order": 27,
-      "slug": "pedir-un-cafe",
-      "url": "https://edsa.tech/gaby/quizzes/pedir-un-cafe/",
-      "topic": "Takeaway",
-      "place": "a café, mid-morning",
-      "question": "You want your coffee to take away. Which?",
+      "geogainId": "5f4ec880-0eb7-4a2d-aaaf-a771c5b5b2c8",
+      "slug": "say-no-in-spanish",
+      "url": "https://edsa.tech/gaby/quizzes/say-no-in-spanish/",
+      "topic": "Say NO in Spanish",
+      "question": "How do you say: I don't know?",
       "options": [
-        "Para llevar, por favor.",
-        "Para tomar fuera, por favor.",
-        "Para salir, por favor."
+        "No sé.",
+        "Yo no saber."
       ],
-      "answer": "Para llevar, por favor.",
-      "takeaway": "¿Para tomar aquí o para llevar? Learn the question, not just the answer."
+      "answerIndex": 0,
+      "answer": "No sé.",
+      "why": "In Spanish, 'no' goes before the verb 'sé' (I know)."
     },
     {
       "order": 28,
-      "slug": "el-agua",
-      "url": "https://edsa.tech/gaby/quizzes/el-agua/",
-      "topic": "A noun that looks like it broke",
-      "place": "a bar, ordering the simplest thing there is",
-      "question": "You want cold water. Which is correct?",
+      "geogainId": "65c9c940-988b-46d7-a063-44376273df22",
+      "slug": "6-question-words",
+      "url": "https://edsa.tech/gaby/quizzes/6-question-words/",
+      "topic": "6 Question Words",
+      "question": "How do you ask 'where' in Spanish?",
       "options": [
-        "el agua frío",
-        "el agua fría",
-        "la agua fría"
+        "¿Qué?",
+        "¿Dónde?",
+        "¿Cuándo?"
       ],
-      "answer": "el agua fría",
-      "takeaway": "El agua, but fría. The article changes; the gender does not."
+      "answerIndex": 1,
+      "answer": "¿Dónde?",
+      "why": "To ask 'where', you say '¿Dónde?'"
     },
     {
       "order": 29,
-      "slug": "cuanto-hace",
-      "url": "https://edsa.tech/gaby/quizzes/cuanto-hace/",
-      "topic": "Saying how long",
-      "place": "a bar, meeting someone for the first time",
-      "question": "You have lived here two months. Which?",
+      "geogainId": "9f3cf166-e8cf-487b-93ef-bc1a1c3db337",
+      "slug": "this-that-the-other-that",
+      "url": "https://edsa.tech/gaby/quizzes/this-that-the-other-that/",
+      "topic": "This, That, The Other That",
+      "question": "How do you say: this coffee?",
       "options": [
-        "Hace dos meses que vivo aquí.",
-        "Vivo aquí por dos meses.",
-        "Hace dos meses que viví aquí."
+        "este café",
+        "esa café",
+        "aquel café"
       ],
-      "answer": "Hace dos meses que vivo aquí.",
-      "takeaway": "Hace dos meses que vivo aquí. Present tense, because you still live here."
+      "answerIndex": 0,
+      "answer": "este café",
+      "why": "'Café' is masculine, and 'este' means 'this' (near me)."
     },
     {
       "order": 30,
-      "slug": "quedar",
-      "url": "https://edsa.tech/gaby/quizzes/quedar/",
-      "topic": "Making plans",
-      "place": "the doorway after your language class",
-      "question": "You want to suggest meeting a friend on Friday. Which?",
+      "geogainId": "18a51a8f-9cde-4726-a3d1-cf3e01d078dc",
+      "slug": "my-your-his",
+      "url": "https://edsa.tech/gaby/quizzes/my-your-his/",
+      "topic": "My, Your, His",
+      "question": "How do you say: my friends?",
       "options": [
-        "¿Nos encontramos el viernes?",
-        "¿Quedamos el viernes?",
-        "¿Nos reunimos el viernes?"
+        "mi amigos",
+        "mis amigos",
+        "mi amiga"
       ],
-      "answer": "¿Quedamos el viernes?",
-      "takeaway": "Quedar = meet up on purpose. Encontrarse = bump into. Reunirse = at work."
+      "answerIndex": 1,
+      "answer": "mis amigos",
+      "why": "'Amigos' is plural, so 'mi' becomes 'mis'."
     },
     {
       "order": 31,
-      "slug": "palabras-en-cion",
-      "url": "https://edsa.tech/gaby/quizzes/palabras-en-cion/",
-      "topic": "English -tion words",
-      "place": "a café, trying to explain your job",
-      "question": "English \"conversation\" becomes which Spanish word?",
+      "geogainId": "d448200b-3b1d-472f-ae67-68a1d642a27f",
+      "slug": "order-food-like-a-local",
+      "url": "https://edsa.tech/gaby/quizzes/order-food-like-a-local/",
+      "topic": "Order Food Like a Local",
+      "question": "How do you politely ask for the check?",
       "options": [
-        "conversacion",
-        "conversación",
-        "conversación (masculine)"
+        "¿Dónde está el baño?",
+        "La cuenta, por favor.",
+        "Quiero la comida."
       ],
-      "answer": "conversación — and it is feminine",
-      "takeaway": "-tion → -ción, always feminine, always accented."
+      "answerIndex": 1,
+      "answer": "La cuenta, por favor.",
+      "why": "\"La cuenta, por favor\" means \"The check, please.\""
     },
     {
       "order": 32,
-      "slug": "palabras-en-dad",
-      "url": "https://edsa.tech/gaby/quizzes/palabras-en-dad/",
-      "topic": "English -ty words",
-      "place": "a university office",
-      "question": "English \"university\" becomes which Spanish word?",
+      "geogainId": "eb7a6056-df99-4bc3-876f-99fa9dd4522d",
+      "slug": "donde-esta",
+      "url": "https://edsa.tech/gaby/quizzes/donde-esta/",
+      "topic": "¿Dónde está…?",
+      "question": "What does 'a la izquierda' mean?",
       "options": [
-        "universidad",
-        "universidád",
-        "universitad"
+        "to the right",
+        "to the left",
+        "straight ahead"
       ],
-      "answer": "universidad — feminine, no accent",
-      "takeaway": "-ty → -dad. Feminine, and no accent needed."
+      "answerIndex": 1,
+      "answer": "to the left",
+      "why": "'A la izquierda' means 'to the left'."
     },
     {
       "order": 33,
-      "slug": "palabras-en-mente",
-      "url": "https://edsa.tech/gaby/quizzes/palabras-en-mente/",
-      "topic": "English -ly words",
-      "place": "giving directions, quickly",
-      "question": "How do you turn \"rápido\" into \"rapidly\"?",
+      "geogainId": "17f3f17d-bd8a-4dc8-bb3f-0077a9055f43",
+      "slug": "shopping-spanish",
+      "url": "https://edsa.tech/gaby/quizzes/shopping-spanish/",
+      "topic": "Shopping Spanish",
+      "question": "How do you say: How much does it cost?",
       "options": [
-        "rápidomente",
-        "rápidamente",
-        "rapidamente"
+        "¿Cuánto cuesta?",
+        "¿Qué precio?"
       ],
-      "answer": "rápidamente",
-      "takeaway": "Feminine adjective + -mente. Keep the accent you started with."
+      "answerIndex": 0,
+      "answer": "¿Cuánto cuesta?",
+      "why": "Use \"¿Cuánto cuesta?\" to ask for the price."
     },
     {
       "order": 34,
-      "slug": "palabras-en-oso",
-      "url": "https://edsa.tech/gaby/quizzes/palabras-en-oso/",
-      "topic": "English -ous words",
-      "place": "a restaurant, praising the food",
-      "question": "English \"delicious\" becomes which Spanish word?",
+      "geogainId": "33772d81-8556-4a08-9330-aba52204472c",
+      "slug": "how-to-say-feelings",
+      "url": "https://edsa.tech/gaby/quizzes/how-to-say-feelings/",
+      "topic": "How to Say Feelings",
+      "question": "How does a woman say: I am tired?",
       "options": [
-        "delicioso",
-        "deliciouso",
-        "delicious"
+        "Soy cansada",
+        "Estoy cansada",
+        "Estoy cansado"
       ],
-      "answer": "delicioso",
-      "takeaway": "-ous → -oso. Then make it agree with what it describes."
+      "answerIndex": 1,
+      "answer": "Estoy cansada",
+      "why": "Feelings use 'estar', and 'cansada' is for a woman."
     },
     {
       "order": 35,
-      "slug": "palabras-en-mento",
-      "url": "https://edsa.tech/gaby/quizzes/palabras-en-mento/",
-      "topic": "English -ment words",
-      "place": "a gestoría, holding a folder",
-      "question": "English \"document\" becomes which Spanish word?",
+      "geogainId": "6b836aae-d288-4b54-8be0-0098e0ae2b1b",
+      "slug": "talking-about-weather",
+      "url": "https://edsa.tech/gaby/quizzes/talking-about-weather/",
+      "topic": "Talking About Weather",
+      "question": "How do you say: It is cold?",
       "options": [
-        "documiento",
-        "documento",
-        "documenta"
+        "Hace frío",
+        "Está frío"
       ],
-      "answer": "documento",
-      "takeaway": "-ment → -mento. Except gobierno, which you will meet at the town hall."
+      "answerIndex": 0,
+      "answer": "Hace frío",
+      "why": "Use 'hace' for general weather states like 'cold'."
     },
     {
       "order": 36,
-      "slug": "palabras-en-encia",
-      "url": "https://edsa.tech/gaby/quizzes/palabras-en-encia/",
-      "topic": "English -ence words",
-      "place": "explaining what changed",
-      "question": "English \"difference\" becomes which Spanish word?",
+      "geogainId": "8ef25a48-307e-4371-9ecb-f2566c54b9dc",
+      "slug": "4-phrases-that-save-your-convo",
+      "url": "https://edsa.tech/gaby/quizzes/4-phrases-that-save-your-convo/",
+      "topic": "4 Phrases That Save Your Convo",
+      "question": "How do you ask someone to speak slower?",
       "options": [
-        "diferencia",
-        "diferrencia",
-        "diferéncia"
+        "No entiendo",
+        "¿Puede repetir?",
+        "Más despacio, por favor"
       ],
-      "answer": "diferencia — one r, no accent",
-      "takeaway": "-ence → -encia, feminine. Spanish rarely doubles consonants."
+      "answerIndex": 2,
+      "answer": "Más despacio, por favor",
+      "why": "Más despacio, por favor means 'slower, please'."
     },
     {
       "order": 37,
-      "slug": "palabras-en-ista",
-      "url": "https://edsa.tech/gaby/quizzes/palabras-en-ista/",
-      "topic": "English -ist words",
-      "place": "the dentist's waiting room",
-      "question": "Your dentist is a woman. What do you call her?",
+      "geogainId": "99727ead-7291-440c-b500-a88039b82033",
+      "slug": "spanish-false-friends",
+      "url": "https://edsa.tech/gaby/quizzes/spanish-false-friends/",
+      "topic": "Spanish False Friends",
+      "question": "What does \"embarazada\" mean in Spanish?",
       "options": [
-        "la dentista",
-        "la dentisto",
-        "el dentista"
+        "Embarrassed",
+        "Pregnant",
+        "Excited"
       ],
-      "answer": "la dentista",
-      "takeaway": "-ista never changes. Change the article instead."
+      "answerIndex": 1,
+      "answer": "Pregnant",
+      "why": "\"Embarazada\" means pregnant, not embarrassed!"
     },
     {
       "order": 38,
-      "slug": "palabras-en-ico",
-      "url": "https://edsa.tech/gaby/quizzes/palabras-en-ico/",
-      "topic": "English -ic words",
-      "place": "reading a sign on a public building",
-      "question": "English \"public\" becomes which Spanish word?",
+      "geogainId": "ab4c802f-e27e-4c75-87b6-f96d2ee196f8",
+      "slug": "family-words-in-spanish",
+      "url": "https://edsa.tech/gaby/quizzes/family-words-in-spanish/",
+      "topic": "Family Words in Spanish",
+      "question": "How do you say \"parents\" in Spanish?",
       "options": [
-        "publico",
-        "público",
-        "publicó"
+        "parientes",
+        "los padres"
       ],
-      "answer": "público",
-      "takeaway": "-ic → -ico, accented on the third-from-last syllable."
+      "answerIndex": 1,
+      "answer": "los padres",
+      "why": "\"Los padres\" means parents. \"Parientes\" means relatives!"
     },
     {
       "order": 39,
-      "slug": "palabras-en-ivo",
-      "url": "https://edsa.tech/gaby/quizzes/palabras-en-ivo/",
-      "topic": "English -ive words",
-      "place": "describing yourself in an interview",
-      "question": "English \"active\" becomes which Spanish word?",
+      "geogainId": "fb8c6691-818d-4f15-afac-19d0549f42ac",
+      "slug": "colors-change",
+      "url": "https://edsa.tech/gaby/quizzes/colors-change/",
+      "topic": "Colors Change!",
+      "question": "How do you say: 'The white house'?",
       "options": [
-        "activo",
-        "activé",
-        "actif"
+        "La casa blanco",
+        "La casa blanca",
+        "El casa blanca"
       ],
-      "answer": "activo",
-      "takeaway": "-ive → -ivo, then agree it."
+      "answerIndex": 1,
+      "answer": "La casa blanca",
+      "why": "Casa is feminine, so the color white must also be feminine: blanca."
     },
     {
       "order": 40,
-      "slug": "palabras-en-ario",
-      "url": "https://edsa.tech/gaby/quizzes/palabras-en-ario/",
-      "topic": "English -ary words",
-      "place": "a bank, reading the small print",
-      "question": "English \"necessary\" becomes which Spanish word?",
+      "geogainId": "7411932f-0c46-4969-9fad-552f790597db",
+      "slug": "spanish-gender-exceptions",
+      "url": "https://edsa.tech/gaby/quizzes/spanish-gender-exceptions/",
+      "topic": "Spanish Gender Exceptions",
+      "question": "How do you say \"the hand\" in Spanish?",
       "options": [
-        "necesario",
-        "neccesario",
-        "necesária"
+        "el mano",
+        "la mano"
       ],
-      "answer": "necesario — one c, one s",
-      "takeaway": "-ary → -ario. And Spanish almost never doubles a consonant."
+      "answerIndex": 1,
+      "answer": "la mano",
+      "why": "\"Mano\" is an exception; it's feminine despite ending in -o."
     },
     {
       "order": 41,
-      "slug": "exito",
-      "url": "https://edsa.tech/gaby/quizzes/exito/",
-      "topic": "A false friend",
-      "place": "a theatre, looking for the way out",
-      "question": "You see a sign saying \"ÉXITO\". What does it mean?",
+      "geogainId": "54b73f9c-1fa6-41a1-9c52-12ba1b71f0bc",
+      "slug": "r-vs-rr-dog-or-but",
+      "url": "https://edsa.tech/gaby/quizzes/r-vs-rr-dog-or-but/",
+      "topic": "R vs RR: Dog or But?",
+      "question": "Which word means 'but'?",
       "options": [
-        "Exit",
-        "Success",
-        "Extra"
+        "perro",
+        "pero"
       ],
-      "answer": "Success",
-      "takeaway": "Éxito = success. Salida = exit. Do not follow the wrong sign."
+      "answerIndex": 1,
+      "answer": "pero",
+      "why": "'Pero' has a single 'r' sound, meaning 'but'."
     },
     {
       "order": 42,
-      "slug": "sensible",
-      "url": "https://edsa.tech/gaby/quizzes/sensible/",
-      "topic": "Another false friend",
-      "place": "a conversation about a friend",
-      "question": "You want to say a friend is sensible (level-headed). Which?",
+      "geogainId": "95508ee3-6a4c-4ed8-b657-be3e2ee2314b",
+      "slug": "accent-marks-matter",
+      "url": "https://edsa.tech/gaby/quizzes/accent-marks-matter/",
+      "topic": "Accent Marks Matter",
+      "question": "How do you say 'dad'?",
       "options": [
-        "Es muy sensible.",
-        "Es muy sensato.",
-        "Es muy sensitivo."
+        "papa",
+        "papá"
       ],
-      "answer": "Es muy sensato.",
-      "takeaway": "Sensible = sensitive. Sensato = sensible."
+      "answerIndex": 1,
+      "answer": "papá",
+      "why": "The accent mark tells you to stress the last syllable for 'dad'."
     },
     {
       "order": 43,
-      "slug": "actualmente",
-      "url": "https://edsa.tech/gaby/quizzes/actualmente/",
-      "topic": "Actually vs currently",
-      "place": "catching up with someone",
-      "question": "You want to say \"actually, I live in Valencia\". Which?",
+      "geogainId": "d049a116-3a5a-485c-8c3e-e67df6755411",
+      "slug": "the-n-sound",
+      "url": "https://edsa.tech/gaby/quizzes/the-n-sound/",
+      "topic": "The Ñ Sound",
+      "question": "How do you say: I am thirty years old?",
       "options": [
-        "Actualmente, vivo en Valencia.",
-        "En realidad, vivo en Valencia.",
-        "Realmente actual, vivo en Valencia."
+        "Tengo treinta anos.",
+        "Tengo treinta años."
       ],
-      "answer": "En realidad, vivo en Valencia.",
-      "takeaway": "Actualmente = currently. En realidad = actually."
+      "answerIndex": 1,
+      "answer": "Tengo treinta años.",
+      "why": "The 'ñ' in 'años' makes it 'years', not 'anos' (anuses)."
     },
     {
       "order": 44,
-      "slug": "largo",
-      "url": "https://edsa.tech/gaby/quizzes/largo/",
-      "topic": "Long vs large",
-      "place": "a shop, holding up a shirt",
-      "question": "The shirt is too big. Which do you say?",
+      "geogainId": "d3698c61-7202-4ffd-b424-5681d8264bbd",
+      "slug": "the-spanish-j-sound",
+      "url": "https://edsa.tech/gaby/quizzes/the-spanish-j-sound/",
+      "topic": "The Spanish J Sound",
+      "question": "Does 'gente' start with a hard or soft 'g' sound?",
       "options": [
-        "Es muy largo.",
-        "Es muy grande.",
-        "Es muy largo de tamaño."
+        "Hard 'g'",
+        "Soft 'h'"
       ],
-      "answer": "Es muy grande.",
-      "takeaway": "Largo = long. Grande = big."
+      "answerIndex": 1,
+      "answer": "Soft 'h'",
+      "why": "G before 'e' or 'i' is a soft 'h' sound."
     },
     {
       "order": 45,
-      "slug": "ropa",
-      "url": "https://edsa.tech/gaby/quizzes/ropa/",
-      "topic": "Clothes, not rope",
-      "place": "a laundrette on a Sunday",
-      "question": "Which word means \"clothes\"?",
+      "geogainId": "dbe828ae-055f-42bd-80be-af3d2285e03c",
+      "slug": "the-y-sound",
+      "url": "https://edsa.tech/gaby/quizzes/the-y-sound/",
+      "topic": "The 'Y' Sound",
+      "question": "How do you say 'chicken'?",
       "options": [
-        "la cuerda",
-        "la ropa",
-        "el ropaje"
+        "pollo",
+        "llamo",
+        "yo"
       ],
-      "answer": "la ropa",
-      "takeaway": "La ropa está — singular, always."
+      "answerIndex": 0,
+      "answer": "pollo",
+      "why": "Pollo means chicken. Remember the 'LL' sounds like 'y' in 'yes'!"
     },
     {
       "order": 46,
-      "slug": "carpeta",
-      "url": "https://edsa.tech/gaby/quizzes/carpeta/",
-      "topic": "Folder, not carpet",
-      "place": "a gestoría, handing over paperwork",
-      "question": "The gestor asks for \"la carpeta\". What do they want?",
+      "geogainId": "171e579c-de54-4d6f-96c5-b905beb93d6d",
+      "slug": "me-gusta-vs-me-gustan",
+      "url": "https://edsa.tech/gaby/quizzes/me-gusta-vs-me-gustan/",
+      "topic": "Me Gusta vs Me Gustan",
+      "question": "How do you say: I like dogs?",
       "options": [
-        "The carpet",
-        "The folder",
-        "The car park"
+        "Me gusta los perros",
+        "Me gustan los perros"
       ],
-      "answer": "The folder",
-      "takeaway": "Carpeta = folder. Alfombra = carpet."
+      "answerIndex": 1,
+      "answer": "Me gustan los perros",
+      "why": "Dogs (perros) are plural, so use 'gustan'."
     },
     {
       "order": 47,
-      "slug": "asistir",
-      "url": "https://edsa.tech/gaby/quizzes/asistir/",
-      "topic": "Attend, not assist",
-      "place": "a residents' meeting notice",
-      "question": "The notice says \"se ruega asistir\". What is being asked?",
+      "geogainId": "1eacf0f3-e814-4e61-9462-0fdaf316cc15",
+      "slug": "saber-vs-conocer",
+      "url": "https://edsa.tech/gaby/quizzes/saber-vs-conocer/",
+      "topic": "Saber vs. Conocer",
+      "question": "How do you ask: Do you know Madrid?",
       "options": [
-        "Please help out",
-        "Please attend",
-        "Please assist the president"
+        "¿Sabes Madrid?",
+        "¿Conoces Madrid?"
       ],
-      "answer": "Please attend",
-      "takeaway": "Asistir = attend. Ayudar = help."
+      "answerIndex": 1,
+      "answer": "¿Conoces Madrid?",
+      "why": "'Conocer' is used for places you're familiar with."
     },
     {
       "order": 48,
-      "slug": "realizar",
-      "url": "https://edsa.tech/gaby/quizzes/realizar/",
-      "topic": "Carry out, not realize",
-      "place": "a form asking what you did",
-      "question": "You want to say \"I realized I was wrong\". Which?",
+      "geogainId": "354cd158-cf44-4489-beb8-d46bf9ee641e",
+      "slug": "o-to-ue-verbs",
+      "url": "https://edsa.tech/gaby/quizzes/o-to-ue-verbs/",
+      "topic": "O to UE Verbs",
+      "question": "How do you say: I sleep eight hours?",
       "options": [
-        "Realicé que estaba equivocado.",
-        "Me di cuenta de que estaba equivocado.",
-        "Realizé que estaba equivocado."
+        "Duermo ocho horas.",
+        "Dormo ocho horas."
       ],
-      "answer": "Me di cuenta de que estaba equivocado.",
-      "takeaway": "Realizar = carry out. Darse cuenta de = realise."
+      "answerIndex": 0,
+      "answer": "Duermo ocho horas.",
+      "why": "The 'o' in 'dormir' changes to 'ue' for 'I sleep'."
     },
     {
       "order": 49,
-      "slug": "molestar",
-      "url": "https://edsa.tech/gaby/quizzes/molestar/",
-      "topic": "Bother, nothing worse",
-      "place": "knocking on a neighbour's door",
-      "question": "You want to say \"sorry to bother you\". Which?",
+      "geogainId": "677ba3b5-cf9d-4052-b15d-5de938eb2375",
+      "slug": "do-it-to-yourself",
+      "url": "https://edsa.tech/gaby/quizzes/do-it-to-yourself/",
+      "topic": "Do It To Yourself",
+      "question": "In 'Me levanto' (I get up), what does 'me' mean?",
       "options": [
-        "Perdona que te moleste.",
-        "Perdona que te molestes.",
-        "Perdona por molestación."
+        "I",
+        "you",
+        "to myself"
       ],
-      "answer": "Perdona que te moleste.",
-      "takeaway": "Molestar = to bother. Completely ordinary, use it freely."
+      "answerIndex": 2,
+      "answer": "to myself",
+      "why": "It means the action is done *to* you."
     },
     {
       "order": 50,
-      "slug": "embarazoso",
-      "url": "https://edsa.tech/gaby/quizzes/embarazoso/",
-      "topic": "One letter apart",
-      "place": "recounting an awkward moment",
-      "question": "You want to call a situation embarrassing. Which?",
+      "geogainId": "6e5b6eb2-34d6-43aa-858d-b6bfde88066a",
+      "slug": "e-to-i-verbs-i-ask",
+      "url": "https://edsa.tech/gaby/quizzes/e-to-i-verbs-i-ask/",
+      "topic": "E to I Verbs: I Ask",
+      "question": "How do you say: I order the chicken?",
       "options": [
-        "una situación embarazada",
-        "una situación embarazosa",
-        "una situación vergüenza"
+        "Pido el pollo.",
+        "Pedo el pollo."
       ],
-      "answer": "una situación embarazosa",
-      "takeaway": "Situación embarazosa = fine. Estoy embarazada = a very different sentence."
+      "answerIndex": 0,
+      "answer": "Pido el pollo.",
+      "why": "Remember, 'e' changes to 'i' in 'pido'."
     },
     {
       "order": 51,
-      "slug": "nombres-en-ma",
-      "url": "https://edsa.tech/gaby/quizzes/nombres-en-ma/",
-      "topic": "Nouns in -ma",
-      "place": "a phone shop, explaining a fault",
-      "question": "You want to say “the problem”. Which is correct?",
+      "geogainId": "843b376c-fbfe-4aec-9a71-aa313051bec5",
+      "slug": "verbs-like-gustar",
+      "url": "https://edsa.tech/gaby/quizzes/verbs-like-gustar/",
+      "topic": "Verbs Like Gustar",
+      "question": "How do you say: My feet hurt?",
       "options": [
-        "la problema",
-        "el problema",
-        "el problemo"
+        "Me duele los pies",
+        "Me duelen los pies",
+        "Mis pies duelen"
       ],
-      "answer": "el problema",
-      "takeaway": "El problema, el tema, el idioma. Greek words keep their gender."
+      "answerIndex": 1,
+      "answer": "Me duelen los pies",
+      "why": "'Duelen' for plural 'pies'."
     },
     {
       "order": 52,
-      "slug": "la-mano",
-      "url": "https://edsa.tech/gaby/quizzes/la-mano/",
-      "topic": "A noun that breaks the rule",
-      "place": "a pharmacy, describing an injury",
-      "question": "You hurt your right hand and need to say so. Which is correct?",
+      "geogainId": "84f22b7b-18cb-4a4b-9676-9705b506dbde",
+      "slug": "your-day-in-spanish",
+      "url": "https://edsa.tech/gaby/quizzes/your-day-in-spanish/",
+      "topic": "Your Day in Spanish",
+      "question": "What does 'me acuesto' mean?",
       "options": [
-        "el mano derecho",
-        "la mano derecha",
-        "la mano derecho"
+        "I wake up",
+        "I go to bed",
+        "I eat breakfast"
       ],
-      "answer": "la mano derecha",
-      "takeaway": "La mano, la foto, la moto. The -o is lying to you."
+      "answerIndex": 1,
+      "answer": "I go to bed",
+      "why": "Me acuesto means 'I go to bed'."
     },
     {
       "order": 53,
-      "slug": "el-dia",
-      "url": "https://edsa.tech/gaby/quizzes/el-dia/",
-      "topic": "A noun that breaks it the other way",
-      "place": "wishing someone well in the morning",
-      "question": "It is nine in the morning and you pass a neighbour. Which greeting?",
+      "geogainId": "b03e7a11-de65-4ba6-89eb-56318289bd88",
+      "slug": "irregular-yo-verbs",
+      "url": "https://edsa.tech/gaby/quizzes/irregular-yo-verbs/",
+      "topic": "Irregular Yo Verbs",
+      "question": "How do you say: I go out?",
       "options": [
-        "Buena día",
-        "Buenos días",
-        "Buenas días"
+        "Yo salo",
+        "Yo salgo",
+        "Yo salimos"
       ],
-      "answer": "Buenos días",
-      "takeaway": "Buenos días, buenas tardes, buenas noches. Only the first is masculine."
+      "answerIndex": 1,
+      "answer": "Yo salgo",
+      "why": "'Salgo' is the special 'yo' form of 'salir'."
     },
     {
       "order": 54,
-      "slug": "concordancia",
-      "url": "https://edsa.tech/gaby/quizzes/concordancia/",
-      "topic": "Making things agree",
-      "place": "a market stall, praising the produce",
-      "question": "The oranges on the stall are delicious. Which is correct?",
+      "geogainId": "d79667be-3d5b-4ab7-911d-72a92a25737d",
+      "slug": "e-to-ie-verb-changes",
+      "url": "https://edsa.tech/gaby/quizzes/e-to-ie-verb-changes/",
+      "topic": "E to IE Verb Changes",
+      "question": "How do you say: I think?",
       "options": [
-        "Las naranjas están muy rico.",
-        "Las naranjas están muy ricas.",
-        "Las naranjas está muy ricas."
+        "pienso",
+        "penso"
       ],
-      "answer": "Las naranjas están muy ricas.",
-      "takeaway": "Noun sets the gender and number. Verb and adjective follow."
+      "answerIndex": 0,
+      "answer": "pienso",
+      "why": "Remember, 'e' changes to 'ie' in this verb!"
     },
     {
       "order": 55,
-      "slug": "ir-a",
-      "url": "https://edsa.tech/gaby/quizzes/ir-a/",
-      "topic": "Talking about tomorrow",
-      "place": "making plans at a bar",
-      "question": "You want to say \"I am going to look for a flat\". Which?",
+      "geogainId": "02ad72d0-34ae-4499-bd3a-7778883d4bb0",
+      "slug": "le-and-les-to-for-someone",
+      "url": "https://edsa.tech/gaby/quizzes/le-and-les-to-for-someone/",
+      "topic": "Le and Les: To/For Someone",
+      "question": "How do you say: I write to her?",
       "options": [
-        "Voy buscar un piso.",
-        "Voy a buscar un piso.",
-        "Voy para buscar un piso."
+        "Yo escribo a ella",
+        "Le escribo",
+        "La escribo"
       ],
-      "answer": "Voy a buscar un piso.",
-      "takeaway": "Voy a + infinitive. Never leave out the a."
+      "answerIndex": 1,
+      "answer": "Le escribo",
+      "why": "'Le' means 'to her' or 'to him' when you're writing TO someone."
     },
     {
       "order": 56,
-      "slug": "acabar-de",
-      "url": "https://edsa.tech/gaby/quizzes/acabar-de/",
-      "topic": "Something that just happened",
-      "place": "arriving at a friend's flat",
-      "question": "You want to say \"I have just arrived\". Which?",
+      "geogainId": "4dd825bb-5dd7-49cd-b387-a24d4c415125",
+      "slug": "describing-people",
+      "url": "https://edsa.tech/gaby/quizzes/describing-people/",
+      "topic": "Describing People",
+      "question": "How do you say: She has long hair?",
       "options": [
-        "Acabo de llegar.",
-        "Acabo llegar.",
-        "Acabo de llegado."
+        "Ella es pelo largo.",
+        "Ella tiene el pelo largo."
       ],
-      "answer": "Acabo de llegar.",
-      "takeaway": "Acabo de + infinitive = I have just…"
+      "answerIndex": 1,
+      "answer": "Ella tiene el pelo largo.",
+      "why": "Use 'tener' for hair."
     },
     {
       "order": 57,
-      "slug": "hay-o-esta",
-      "url": "https://edsa.tech/gaby/quizzes/hay-o-esta/",
-      "topic": "Hay vs está",
-      "place": "asking for directions",
-      "question": "You are asking whether there is a pharmacy nearby. Which?",
+      "geogainId": "695079d2-7afe-41cc-9644-a3bf3e992df3",
+      "slug": "the-personal-a",
+      "url": "https://edsa.tech/gaby/quizzes/the-personal-a/",
+      "topic": "The Personal 'a'",
+      "question": "What goes in the blank: \"Busco ___ mi hermano.\" (I'm looking for my brother.)",
       "options": [
-        "¿Está una farmacia por aquí?",
-        "¿Hay una farmacia por aquí?",
-        "¿Es una farmacia por aquí?"
+        "a",
+        "Ø (nothing)"
       ],
-      "answer": "¿Hay una farmacia por aquí?",
-      "takeaway": "Hay = there is one somewhere. Está = where the known one is."
+      "answerIndex": 0,
+      "answer": "a",
+      "why": "\"Mi hermano\" is a person, so we need 'a'."
     },
     {
       "order": 58,
-      "slug": "saber-hacer",
-      "url": "https://edsa.tech/gaby/quizzes/saber-hacer/",
-      "topic": "Saying you can do something",
-      "place": "a job conversation",
-      "question": "You want to say you can drive. Which?",
+      "geogainId": "69a45237-b52a-47a7-a596-5428fd343be8",
+      "slug": "comparing-things",
+      "url": "https://edsa.tech/gaby/quizzes/comparing-things/",
+      "topic": "Comparing Things",
+      "question": "How do you say: better than this?",
       "options": [
-        "Puedo conducir.",
-        "Sé conducir.",
-        "Conozco conducir."
+        "más bueno que esto",
+        "mejor que esto",
+        "más mejor que esto"
       ],
-      "answer": "Sé conducir.",
-      "takeaway": "Sé = I know how to. Puedo = I am able to right now."
+      "answerIndex": 1,
+      "answer": "mejor que esto",
+      "why": "Mejor is the irregular word for better."
     },
     {
       "order": 59,
-      "slug": "pedir-o-preguntar",
-      "url": "https://edsa.tech/gaby/quizzes/pedir-o-preguntar/",
-      "topic": "Pedir vs preguntar",
-      "place": "a bar, needing one more thing",
-      "question": "You want to ask for the bill. Which verb?",
+      "geogainId": "6f780d58-2320-4e3a-96ba-2e7e92ed85e7",
+      "slug": "the-se-secret",
+      "url": "https://edsa.tech/gaby/quizzes/the-se-secret/",
+      "topic": "The 'Se' Secret",
+      "question": "How do you ask: \"How do you say water?\"",
       "options": [
-        "Voy a preguntar la cuenta.",
-        "Voy a pedir la cuenta.",
-        "Voy a preguntar por la cuenta."
+        "¿Cómo se dice agua?",
+        "¿Cómo digo agua?"
       ],
-      "answer": "Voy a pedir la cuenta.",
-      "takeaway": "Pedir = request a thing. Preguntar = ask a question."
+      "answerIndex": 0,
+      "answer": "¿Cómo se dice agua?",
+      "why": "'Se dice' is for how things are said generally."
     },
     {
       "order": 60,
-      "slug": "llevar-o-traer",
-      "url": "https://edsa.tech/gaby/quizzes/llevar-o-traer/",
-      "topic": "Llevar vs traer",
-      "place": "an invitation to dinner",
-      "question": "They say \"trae algo de postre\". What are they asking?",
+      "geogainId": "847a8985-ca38-48f5-ba42-4fb4755fed8d",
+      "slug": "lo-la-los-las",
+      "url": "https://edsa.tech/gaby/quizzes/lo-la-los-las/",
+      "topic": "Lo, La, Los, Las",
+      "question": "How do you say: I see her?",
       "options": [
-        "Take some dessert away",
-        "Bring some dessert here",
-        "Buy some dessert"
+        "La veo",
+        "Veo la",
+        "Ella veo"
       ],
-      "answer": "Bring some dessert here",
-      "takeaway": "Traer = towards me. Llevar = away from me."
+      "answerIndex": 0,
+      "answer": "La veo",
+      "why": "The pronoun 'la' goes before the verb 'veo'."
     },
     {
       "order": 61,
-      "slug": "que-hora-es",
-      "url": "https://edsa.tech/gaby/quizzes/que-hora-es/",
-      "topic": "Telling the time",
-      "place": "a platform, checking a departure",
-      "question": "It is three o clock. Which?",
+      "geogainId": "8cd2b871-a790-4185-aeee-7fedeb01aa6e",
+      "slug": "two-pronouns-at-once",
+      "url": "https://edsa.tech/gaby/quizzes/two-pronouns-at-once/",
+      "topic": "Two Pronouns At Once",
+      "question": "What word replaces 'le' when it comes before 'lo' or 'la'?",
       "options": [
-        "Es las tres.",
-        "Son las tres.",
-        "Está las tres."
+        "me",
+        "se",
+        "te"
       ],
-      "answer": "Son las tres.",
-      "takeaway": "Es la una, but son las dos, las tres, las diez."
+      "answerIndex": 1,
+      "answer": "se",
+      "why": "'Le' changes to 'se' before 'lo' or 'la' for better flow."
     },
     {
       "order": 62,
-      "slug": "verbos-reflexivos",
-      "url": "https://edsa.tech/gaby/quizzes/verbos-reflexivos/",
-      "topic": "Reflexive verbs",
-      "place": "describing your morning",
-      "question": "You want to say \"I get up at seven\". Which?",
+      "geogainId": "8ce19412-9b13-40d1-8172-ce59771a4e42",
+      "slug": "describe-people",
+      "url": "https://edsa.tech/gaby/quizzes/describe-people/",
+      "topic": "Describe People",
+      "question": "How do you describe a funny woman?",
       "options": [
-        "Me levanto a las siete.",
-        "Levanto a las siete.",
-        "Me levanto las siete."
+        "gracioso",
+        "graciosa"
       ],
-      "answer": "Me levanto a las siete.",
-      "takeaway": "Me levanto, me ducho, me acuesto. Keep the pronoun."
+      "answerIndex": 1,
+      "answer": "graciosa",
+      "why": "For a woman, 'gracioso' changes to 'graciosa'."
     },
     {
       "order": 63,
-      "slug": "se-me-olvido",
-      "url": "https://edsa.tech/gaby/quizzes/se-me-olvido/",
-      "topic": "The blameless past",
-      "place": "apologising for forgetting something",
-      "question": "The natural way to say \"I forgot the keys\" is:",
+      "geogainId": "d234f7d2-31a7-4b86-a2c2-a1e8e09cb47e",
+      "slug": "el-mas-mejor",
+      "url": "https://edsa.tech/gaby/quizzes/el-mas-mejor/",
+      "topic": "El Más / Mejor",
+      "question": "How do you say: the best restaurant?",
       "options": [
-        "Olvidé las llaves.",
-        "Se me olvidaron las llaves.",
-        "Me olvidé las llaves."
+        "el más mejor restaurante",
+        "el mejor restaurante",
+        "el restaurante mejor"
       ],
-      "answer": "Se me olvidaron las llaves.",
-      "takeaway": "Se me olvidó / se me olvidaron. The object decides the verb."
+      "answerIndex": 1,
+      "answer": "el mejor restaurante",
+      "why": "We use 'mejor' for 'best' and it comes before the noun."
     },
     {
       "order": 64,
-      "slug": "pasado-en-espana",
-      "url": "https://edsa.tech/gaby/quizzes/pasado-en-espana/",
-      "topic": "The past tense Spain prefers",
-      "place": "recounting your day over dinner",
-      "question": "You ate at a new place earlier today. In Spain you would most likely say:",
+      "geogainId": "293380f0-b0b7-4477-b872-c6b67f634772",
+      "slug": "past-actions-er-ir",
+      "url": "https://edsa.tech/gaby/quizzes/past-actions-er-ir/",
+      "topic": "Past Actions: -ER/-IR",
+      "question": "How do you say: I ate at home?",
       "options": [
-        "Hoy comí en un sitio nuevo.",
-        "Hoy he comido en un sitio nuevo.",
-        "Hoy como en un sitio nuevo."
+        "Comí en casa.",
+        "Como en casa.",
+        "Comemos en casa."
       ],
-      "answer": "Hoy he comido en un sitio nuevo.",
-      "takeaway": "Hoy / esta semana / este año → he + participle."
+      "answerIndex": 0,
+      "answer": "Comí en casa.",
+      "why": "`Comí` is the past tense for 'I ate'."
     },
     {
       "order": 65,
-      "slug": "espero-que",
-      "url": "https://edsa.tech/gaby/quizzes/espero-que/",
-      "topic": "Your first subjunctive",
-      "place": "texting a friend who is ill",
-      "question": "You want to say \"I hope you are well\". Which?",
+      "geogainId": "47cffae4-ffda-499d-9358-f0be2f497659",
+      "slug": "irregular-past-tense",
+      "url": "https://edsa.tech/gaby/quizzes/irregular-past-tense/",
+      "topic": "Irregular Past Tense",
+      "question": "How do you say: I went to the market?",
       "options": [
-        "Espero que estás bien.",
-        "Espero que estés bien.",
-        "Espero que eres bien."
+        "Fui al mercado.",
+        "Tuve al mercado.",
+        "Hice al mercado."
       ],
-      "answer": "Espero que estés bien.",
-      "takeaway": "Espero que + subjunctive. Learn it as a phrase first, a rule later."
+      "answerIndex": 0,
+      "answer": "Fui al mercado.",
+      "why": "`Fui` means 'I went' for past actions."
     },
     {
       "order": 66,
-      "slug": "tio-y-tia",
-      "url": "https://edsa.tech/gaby/quizzes/tio-y-tia/",
-      "topic": "What friends call each other",
-      "place": "a terrace with friends",
-      "question": "A friend says \"¿qué tal, tío?\". What did they call you?",
+      "geogainId": "62b65c39-2205-4904-95b4-6a7973a00edd",
+      "slug": "hablar-del-pasado",
+      "url": "https://edsa.tech/gaby/quizzes/hablar-del-pasado/",
+      "topic": "Hablar del pasado",
+      "question": "What does \"la semana pasada\" mean?",
       "options": [
-        "Uncle",
-        "Mate",
-        "Sir"
+        "Tomorrow",
+        "Last week",
+        "Next month"
       ],
-      "answer": "Mate",
-      "takeaway": "Tío = mate, between friends. Never at the counter."
+      "answerIndex": 1,
+      "answer": "Last week",
+      "why": "'La semana pasada' means last week."
     },
     {
       "order": 67,
-      "slug": "vale",
-      "url": "https://edsa.tech/gaby/quizzes/vale/",
-      "topic": "The word you will hear most",
-      "place": "any conversation, constantly",
-      "question": "What does \"vale\" mean in everyday Spain?",
+      "geogainId": "6447bd4a-d68e-4b82-9079-af33a6adcee1",
+      "slug": "past-habits-era-tenia",
+      "url": "https://edsa.tech/gaby/quizzes/past-habits-era-tenia/",
+      "topic": "Past Habits: Era, Tenía",
+      "question": "How do you say: I used to live in Madrid?",
       "options": [
-        "It is worth it",
-        "OK",
-        "Goodbye"
+        "Viví en Madrid.",
+        "Vivo en Madrid.",
+        "Vivía en Madrid."
       ],
-      "answer": "OK",
-      "takeaway": "Vale is the single most useful word in Spain. Use it liberally."
+      "answerIndex": 2,
+      "answer": "Vivía en Madrid.",
+      "why": "'Vivía' is the imperfect tense, used for past habits or ongoing actions."
     },
     {
       "order": 68,
-      "slug": "guay-o-guai",
-      "url": "https://edsa.tech/gaby/quizzes/guay-o-guai/",
-      "topic": "Saying something is great",
-      "place": "after a friend's good news",
-      "question": "A friend gets the flat they wanted. You say:",
+      "geogainId": "84c6a295-68b5-434f-a120-6cfdbf6a30e8",
+      "slug": "conectores-de-historia",
+      "url": "https://edsa.tech/gaby/quizzes/conectores-de-historia/",
+      "topic": "Conectores de Historia",
+      "question": "What does 'Al final' mean?",
       "options": [
-        "¡Qué guay!",
-        "¡Qué guai!",
-        "¡Qué güay!"
+        "First",
+        "In the end",
+        "Then"
       ],
-      "answer": "¡Qué guay!",
-      "takeaway": "Guay = cool. Qué bien = great, and safe in any country."
+      "answerIndex": 1,
+      "answer": "In the end",
+      "why": "'Al final' means 'in the end', perfect for wrapping up your story."
     },
     {
       "order": 69,
-      "slug": "movil-o-celular",
-      "url": "https://edsa.tech/gaby/quizzes/movil-o-celular/",
-      "topic": "Spain's own vocabulary",
-      "place": "a phone shop, again",
-      "question": "In Spain, what do you call a mobile phone?",
+      "geogainId": "a23f44fd-b388-4768-921a-90226b2a60af",
+      "slug": "talk-about-yesterday",
+      "url": "https://edsa.tech/gaby/quizzes/talk-about-yesterday/",
+      "topic": "Talk About Yesterday",
+      "question": "How do you say 'I worked yesterday'?",
       "options": [
-        "el celular",
-        "el móvil",
-        "el teléfono móvil celular"
+        "Trabajo ayer",
+        "Trabajé ayer"
       ],
-      "answer": "el móvil",
-      "takeaway": "Móvil and ordenador in Spain. Celular and computadora elsewhere."
+      "answerIndex": 1,
+      "answer": "Trabajé ayer",
+      "why": "'Trabajé' means 'I worked' in the past. The accent is key!"
     },
     {
       "order": 70,
-      "slug": "zumo-o-jugo",
-      "url": "https://edsa.tech/gaby/quizzes/zumo-o-jugo/",
-      "topic": "Breakfast vocabulary",
-      "place": "a café at nine in the morning",
-      "question": "You want orange juice in Madrid. Which?",
+      "geogainId": "a4d57a7c-4978-489d-b138-5d2e13e3f619",
+      "slug": "past-tense-secret",
+      "url": "https://edsa.tech/gaby/quizzes/past-tense-secret/",
+      "topic": "Past Tense Secret",
+      "question": "How do you say: It was raining?",
       "options": [
-        "un jugo de naranja",
-        "un zumo de naranja",
-        "una naranja líquida"
+        "Llovió",
+        "Llovía"
       ],
-      "answer": "un zumo de naranja",
-      "takeaway": "Zumo and patatas in Spain. Jugo and papas across the Atlantic."
+      "answerIndex": 1,
+      "answer": "Llovía",
+      "why": "Llovía describes the ongoing weather, the setting."
     },
     {
       "order": 71,
-      "slug": "aparcar-o-estacionar",
-      "url": "https://edsa.tech/gaby/quizzes/aparcar-o-estacionar/",
-      "topic": "Getting around",
-      "place": "looking for somewhere to leave the car",
-      "question": "In Spain, how do you say \"to park\"?",
+      "geogainId": "e5d44126-0408-4d11-bb8a-9f98e5d87cac",
+      "slug": "muy-vs-mucho",
+      "url": "https://edsa.tech/gaby/quizzes/muy-vs-mucho/",
+      "topic": "Muy vs Mucho",
+      "question": "How do you say 'very tired'?",
       "options": [
-        "estacionar",
-        "aparcar",
-        "parquear"
+        "muy cansado",
+        "mucho cansado"
       ],
-      "answer": "aparcar",
-      "takeaway": "Aparcar and conducir in Spain."
+      "answerIndex": 0,
+      "answer": "muy cansado",
+      "why": "Cansado is an adjective, so we use 'muy'."
     },
     {
       "order": 72,
-      "slug": "currar",
-      "url": "https://edsa.tech/gaby/quizzes/currar/",
-      "topic": "Talking about work",
-      "place": "a bar on a Friday evening",
-      "question": "A friend says \"mañana curro\". What are they doing tomorrow?",
+      "geogainId": "f6fcea05-7062-4690-befb-2d17adcc5a9c",
+      "slug": "es-vs-esta-meanings",
+      "url": "https://edsa.tech/gaby/quizzes/es-vs-esta-meanings/",
+      "topic": "Es vs Está: Meanings",
+      "question": "How do you say: The soup tastes delicious?",
       "options": [
-        "Cooking",
-        "Working",
-        "Travelling"
+        "La sopa es rica.",
+        "La sopa está rica."
       ],
-      "answer": "Working",
-      "takeaway": "Curro = job, informally. Trabajo on the paperwork."
+      "answerIndex": 1,
+      "answer": "La sopa está rica.",
+      "why": "Use 'está' for taste."
     },
     {
       "order": 73,
-      "slug": "comprar-sellos",
-      "url": "https://edsa.tech/gaby/quizzes/comprar-sellos/",
-      "topic": "The tobacconist",
-      "place": "a small shop with a brown and yellow sign",
-      "question": "Where do you buy stamps in Spain?",
+      "geogainId": "3ceb91a1-8ef7-4a4b-b879-1c4042ce74c1",
+      "slug": "hace-dos-anos",
+      "url": "https://edsa.tech/gaby/quizzes/hace-dos-anos/",
+      "topic": "Hace Dos Años",
+      "question": "How do you say: I have studied Spanish for a year?",
       "options": [
-        "en la farmacia",
-        "en el estanco",
-        "en el quiosco"
+        "Hace un año que estudio español.",
+        "Yo estudio español por un año."
       ],
-      "answer": "en el estanco",
-      "takeaway": "Sellos at the estanco. It is the errand nobody explains."
+      "answerIndex": 0,
+      "answer": "Hace un año que estudio español.",
+      "why": "Use 'Hace...que' for durations."
     },
     {
       "order": 74,
-      "slug": "las-tiendas-en-eria",
-      "url": "https://edsa.tech/gaby/quizzes/las-tiendas-en-eria/",
-      "topic": "The hardware shop",
-      "place": "a street of small shops",
-      "question": "Your tap is dripping. Which shop?",
+      "geogainId": "3dd260e6-6a0d-4c78-9d60-f874969fae0d",
+      "slug": "simple-future-i-will",
+      "url": "https://edsa.tech/gaby/quizzes/simple-future-i-will/",
+      "topic": "Simple Future: I Will...",
+      "question": "How do you say: I will travel tomorrow?",
       "options": [
-        "la ferretería",
-        "la panadería",
-        "la papelería"
+        "Viajaré mañana",
+        "Yo voy a viajar mañana",
+        "Viajo mañana"
       ],
-      "answer": "la ferretería",
-      "takeaway": "-ería = the shop for that thing. One ending, twenty shops."
+      "answerIndex": 0,
+      "answer": "Viajaré mañana",
+      "why": "The simple future form for 'viajar' is 'viajaré'."
     },
     {
       "order": 75,
-      "slug": "cita-en-el-medico",
-      "url": "https://edsa.tech/gaby/quizzes/cita-en-el-medico/",
-      "topic": "Booking a doctor",
-      "place": "your local health centre, on the phone",
-      "question": "You want to book an appointment with your GP. Which?",
+      "geogainId": "a51edf03-0daf-4269-8ff0-ac82ecbbcb0b",
+      "slug": "commands-for-friends",
+      "url": "https://edsa.tech/gaby/quizzes/commands-for-friends/",
+      "topic": "Commands for Friends",
+      "question": "How do you tell a friend to 'speak slower'?",
       "options": [
-        "Quiero pedir cita con mi médico de cabecera.",
-        "Quiero preguntar cita con mi médico principal.",
-        "Quiero una reserva con mi doctor."
+        "Habla más despacio",
+        "Hablar más despacio",
+        "Hablo más despacio"
       ],
-      "answer": "Quiero pedir cita con mi médico de cabecera.",
-      "takeaway": "Pedir cita con el médico de cabecera. Three words that unlock the system."
+      "answerIndex": 0,
+      "answer": "Habla más despacio",
+      "why": "'Habla' is the command form for a friend."
     },
     {
       "order": 76,
-      "slug": "la-comunidad",
-      "url": "https://edsa.tech/gaby/quizzes/la-comunidad/",
-      "topic": "The residents' association",
-      "place": "a notice in your building's hallway",
-      "question": "A notice announces \"la junta de la comunidad\". What is it?",
+      "geogainId": "d4d4b156-c16e-4cd2-8c95-25cf5f0d636f",
+      "slug": "pedir-con-cortesia",
+      "url": "https://edsa.tech/gaby/quizzes/pedir-con-cortesia/",
+      "topic": "Me gustaría",
+      "question": "How do you politely ask for the bill?",
       "options": [
-        "A community festival",
-        "A residents' meeting",
-        "A council inspection"
+        "Quiero la cuenta",
+        "Me gustaría la cuenta"
       ],
-      "answer": "A residents' meeting",
-      "takeaway": "La junta = the meeting. Attend one and your Spanish will age five years in a night."
+      "answerIndex": 1,
+      "answer": "Me gustaría la cuenta",
+      "why": "'Me gustaría' is the polite option."
     },
     {
       "order": 77,
-      "slug": "la-basura",
-      "url": "https://edsa.tech/gaby/quizzes/la-basura/",
-      "topic": "Taking the bins out",
-      "place": "the bin area at ten at night",
-      "question": "Which bin does glass go in?",
+      "geogainId": "ff7db643-a5d0-4adb-acff-4127217919e8",
+      "slug": "hacer-planes",
+      "url": "https://edsa.tech/gaby/quizzes/hacer-planes/",
+      "topic": "Hacer planes",
+      "question": "How do you suggest meeting at eight?",
       "options": [
-        "el contenedor amarillo",
-        "el contenedor verde",
-        "el contenedor azul"
+        "¿Qué haces a las ocho?",
+        "¿Nos vemos a las ocho?",
+        "¿Quieres ir a las ocho?"
       ],
-      "answer": "el contenedor verde",
-      "takeaway": "Verde glass, amarillo plastic, azul paper. Learn the colours, not the words."
+      "answerIndex": 1,
+      "answer": "¿Nos vemos a las ocho?",
+      "why": "To suggest meeting at a specific time, use '¿Nos vemos a las…?'"
     },
     {
       "order": 78,
-      "slug": "la-luz",
-      "url": "https://edsa.tech/gaby/quizzes/la-luz/",
-      "topic": "Setting up the electricity",
-      "place": "an empty flat with no power",
-      "question": "You need to set up an electricity contract. The phrase is:",
+      "geogainId": "0b964fb3-13f0-4d55-901f-172b4701189b",
+      "slug": "hotel-check-in",
+      "url": "https://edsa.tech/gaby/quizzes/hotel-check-in/",
+      "topic": "Hotel Check-in",
+      "question": "How do you say: I have a reservation?",
       "options": [
-        "dar de alta la luz",
-        "dar de baja la luz",
-        "poner alta la luz"
+        "Tengo una reserva",
+        "Necesito un cuarto",
+        "Quiero un cuarto"
       ],
-      "answer": "dar de alta la luz",
-      "takeaway": "Alta = switch on. Baja = switch off. Opposites, one letter apart in your memory."
+      "answerIndex": 0,
+      "answer": "Tengo una reserva",
+      "why": "This means 'I have a reservation.'"
     },
     {
       "order": 79,
-      "slug": "el-gestor",
-      "url": "https://edsa.tech/gaby/quizzes/el-gestor/",
-      "topic": "The paperwork agent",
-      "place": "an office full of filing cabinets",
-      "question": "What does a \"gestor\" do for you?",
+      "geogainId": "2eb41a6b-8064-4485-9bca-fe4cb52263f4",
+      "slug": "ask-politely",
+      "url": "https://edsa.tech/gaby/quizzes/ask-politely/",
+      "topic": "Ask Politely",
+      "question": "Which is more polite when asking for water?",
       "options": [
-        "Manages your investments",
-        "Handles your official paperwork",
-        "Manages a building"
+        "Quiero agua",
+        "Quisiera agua"
       ],
-      "answer": "Handles your official paperwork",
-      "takeaway": "Gestoría: the shortcut through Spanish bureaucracy. Budget for it."
+      "answerIndex": 1,
+      "answer": "Quisiera agua",
+      "why": "Quisiera means 'I would like,' which is more polite than 'I want.'"
     },
     {
       "order": 80,
-      "slug": "autonomo",
-      "url": "https://edsa.tech/gaby/quizzes/autonomo/",
-      "topic": "Going self-employed",
-      "place": "a gestoría, discussing work",
-      "question": "What does \"autónomo\" mean in Spain?",
+      "geogainId": "71e4ea36-5f95-4fc0-8b62-097b5acebcf3",
+      "slug": "say-what-hurts",
+      "url": "https://edsa.tech/gaby/quizzes/say-what-hurts/",
+      "topic": "Say What Hurts",
+      "question": "How do you say: My stomach hurts?",
       "options": [
-        "Automatic",
-        "Self-employed",
-        "Independent-minded"
+        "Me duele el estómago",
+        "Mi estómago duele",
+        "Estoy dolor de estómago"
       ],
-      "answer": "Self-employed",
-      "takeaway": "Autónomo = self-employed, and it costs a fixed monthly amount."
+      "answerIndex": 0,
+      "answer": "Me duele el estómago",
+      "why": "Use 'Me duele' for body parts that hurt."
     },
     {
       "order": 81,
-      "slug": "la-hache",
-      "url": "https://edsa.tech/gaby/quizzes/la-hache/",
-      "topic": "The silent h",
-      "place": "introducing yourself",
-      "question": "How is \"hola\" pronounced?",
+      "geogainId": "b3cf02dc-ff40-4032-b6d1-2e2d08198c0e",
+      "slug": "dining-out-the-bill",
+      "url": "https://edsa.tech/gaby/quizzes/dining-out-the-bill/",
+      "topic": "Dining Out: The Bill",
+      "question": "How do you ask for the bill?",
       "options": [
-        "HO-la, with the h sounded",
-        "O-la, the h is silent",
-        "JO-la, like a Spanish j"
+        "La mesa, por favor",
+        "La cuenta, por favor",
+        "¿Está lista la comida?"
       ],
-      "answer": "O-la, the h is silent",
-      "takeaway": "Write the h. Never say it."
+      "answerIndex": 1,
+      "answer": "La cuenta, por favor",
+      "why": "La cuenta means 'the bill'."
     },
     {
       "order": 82,
-      "slug": "la-jota",
-      "url": "https://edsa.tech/gaby/quizzes/la-jota/",
-      "topic": "The j sound",
-      "place": "asking for a ride",
-      "question": "How is the j in \"trabajo\" pronounced?",
+      "geogainId": "b5852742-4eac-4dc6-968d-ec5b15e13ba5",
+      "slug": "no-hables",
+      "url": "https://edsa.tech/gaby/quizzes/no-hables/",
+      "topic": "¡No Hables!",
+      "question": "How do you say: Do not worry?",
       "options": [
-        "Like English j in job",
-        "Like English y in yes",
-        "Like the ch in Scottish loch"
+        "No te preocupes",
+        "No te preocupas",
+        "No te preocupar"
       ],
-      "answer": "Like the ch in Scottish loch",
-      "takeaway": "J always rasps. G rasps before e and i only."
+      "answerIndex": 0,
+      "answer": "No te preocupes",
+      "why": "\"Preocuparse\" is an -AR verb, so it takes the -es ending."
     },
     {
       "order": 83,
-      "slug": "pero-o-perro",
-      "url": "https://edsa.tech/gaby/quizzes/pero-o-perro/",
-      "topic": "One r or two",
-      "place": "talking about your neighbour's dog",
-      "question": "Which means \"dog\"?",
+      "geogainId": "d9c302aa-4124-4e43-816f-a59ec15b2a49",
+      "slug": "por-vs-para-the-basics",
+      "url": "https://edsa.tech/gaby/quizzes/por-vs-para-the-basics/",
+      "topic": "Por vs Para: The Basics",
+      "question": "How do you say: This is for you?",
       "options": [
-        "pero",
-        "perro",
-        "pérro"
+        "Es para ti",
+        "Es por ti"
       ],
-      "answer": "perro",
-      "takeaway": "Pero / perro, caro / carro. The trill carries meaning."
+      "answerIndex": 0,
+      "answer": "Es para ti",
+      "why": "'Para' is used when something is destined for someone."
     },
     {
       "order": 84,
-      "slug": "la-ce-espanola",
-      "url": "https://edsa.tech/gaby/quizzes/la-ce-espanola/",
-      "topic": "The Spanish th",
-      "place": "ordering at a bar in Madrid",
-      "question": "In most of Spain, how is the c in \"cerveza\" pronounced?",
+      "geogainId": "fa71332a-8366-4a1d-b21b-7db5b5817daa",
+      "slug": "getting-around",
+      "url": "https://edsa.tech/gaby/quizzes/getting-around/",
+      "topic": "Getting Around",
+      "question": "How do you ask: How do I get to the station?",
       "options": [
-        "Like s",
-        "Like th in think",
-        "Like k"
+        "¿Cómo llego a la estación?",
+        "¿Cuánto cuesta a la estación?"
       ],
-      "answer": "Like th in think",
-      "takeaway": "Central and northern Spain: c and z are th. Nobody will misunderstand either way."
+      "answerIndex": 0,
+      "answer": "¿Cómo llego a la estación?",
+      "why": "Use 'cómo llego a' for 'how do I get to'."
     },
     {
       "order": 85,
-      "slug": "el-acento",
-      "url": "https://edsa.tech/gaby/quizzes/el-acento/",
-      "topic": "When the accent changes the word",
-      "place": "reading a menu out loud",
-      "question": "What is the difference between \"papa\" and \"papá\"?",
+      "geogainId": "09f25d0f-a9e2-4455-88ef-f42923b58d9f",
+      "slug": "share-your-opinion",
+      "url": "https://edsa.tech/gaby/quizzes/share-your-opinion/",
+      "topic": "Share Your Opinion",
+      "question": "How do you say: I think so?",
       "options": [
-        "Nothing, the accent is decoration",
-        "Potato vs dad",
-        "Pope vs potato"
+        "Creo que sí",
+        "Me parece bien",
+        "No estoy seguro"
       ],
-      "answer": "Potato vs dad",
-      "takeaway": "The accent is not decoration. It is spelling."
+      "answerIndex": 0,
+      "answer": "Creo que sí",
+      "why": "'Creo que sí' means 'I think so'."
     },
     {
       "order": 86,
-      "slug": "la-tilde",
-      "url": "https://edsa.tech/gaby/quizzes/la-tilde/",
-      "topic": "The letter English does not have",
-      "place": "talking about how old you are",
-      "question": "What is the difference between \"año\" and \"ano\"?",
+      "geogainId": "23d567e5-df37-4254-915f-c927db79651a",
+      "slug": "body-parts-pain",
+      "url": "https://edsa.tech/gaby/quizzes/body-parts-pain/",
+      "topic": "Body Parts & Pain",
+      "question": "How do you say 'back' in Spanish?",
       "options": [
-        "None",
-        "One is a year, the other is not something you want to say",
-        "One is plural"
+        "la cabeza",
+        "la espalda",
+        "el estómago"
       ],
-      "answer": "One is a year, the other is not something you want to say",
-      "takeaway": "Tengo treinta años. Always type the ñ."
+      "answerIndex": 1,
+      "answer": "la espalda",
+      "why": "La espalda means back."
     },
     {
       "order": 87,
-      "slug": "la-silaba-tonica",
-      "url": "https://edsa.tech/gaby/quizzes/la-silaba-tonica/",
-      "topic": "Where the stress falls",
-      "place": "saying a word you have only read",
-      "question": "Where is the stress in \"hablo\" (no written accent)?",
+      "geogainId": "45677428-57da-43d3-a0b5-c13442efda35",
+      "slug": "answering-the-phone",
+      "url": "https://edsa.tech/gaby/quizzes/answering-the-phone/",
+      "topic": "Answering the Phone",
+      "question": "Which greeting is commonly used when answering the phone in Mexico?",
       "options": [
-        "HA-blo",
-        "ha-BLO",
-        "Either is fine"
+        "¿Aló?",
+        "¿Bueno?",
+        "¿Diga?"
       ],
-      "answer": "HA-blo",
-      "takeaway": "Vowel, n or s → stress the second-to-last. Otherwise the last."
+      "answerIndex": 1,
+      "answer": "¿Bueno?",
+      "why": "Mexico uses '¿Bueno?'"
     },
     {
       "order": 88,
-      "slug": "los-numeros",
-      "url": "https://edsa.tech/gaby/quizzes/los-numeros/",
-      "topic": "Saying a price",
-      "place": "a market stall, paying",
-      "question": "The stallholder says \"son dos con cincuenta\". How much?",
+      "geogainId": "5cd39cdc-c070-4151-a72f-335c10b84523",
+      "slug": "small-talk-spanish",
+      "url": "https://edsa.tech/gaby/quizzes/small-talk-spanish/",
+      "topic": "Small Talk Spanish",
+      "question": "How do you ask what someone does for work?",
       "options": [
-        "2.50 €",
-        "250 €",
-        "2 for 50 cents"
+        "¿De dónde eres?",
+        "¿A qué te dedicas?",
+        "¿Cuánto tiempo llevas aquí?"
       ],
-      "answer": "2.50 €",
-      "takeaway": "Dos con cincuenta = 2,50 €. Comma for decimals, symbol at the end."
+      "answerIndex": 1,
+      "answer": "¿A qué te dedicas?",
+      "why": "This phrase asks about someone's profession or line of work."
     },
     {
       "order": 89,
-      "slug": "la-fecha",
-      "url": "https://edsa.tech/gaby/quizzes/la-fecha/",
-      "topic": "Writing the date",
-      "place": "filling in any official form",
-      "question": "A form is dated 04/09/2026. Which date is that?",
+      "geogainId": "74283e1e-1294-4fe0-b247-91184420ef50",
+      "slug": "agree-disagree",
+      "url": "https://edsa.tech/gaby/quizzes/agree-disagree/",
+      "topic": "Agree & Disagree",
+      "question": "How do you tell someone they are right?",
       "options": [
-        "4 September",
-        "9 April",
-        "Either, it is ambiguous"
+        "No estoy de acuerdo",
+        "Tienes razón",
+        "Estoy de acuerdo"
       ],
-      "answer": "4 September",
-      "takeaway": "Day, month, year. And months are lower-case."
+      "answerIndex": 1,
+      "answer": "Tienes razón",
+      "why": "'Tienes razón' means 'You are right'."
     },
     {
       "order": 90,
-      "slug": "la-hora-oficial",
-      "url": "https://edsa.tech/gaby/quizzes/la-hora-oficial/",
-      "topic": "The 24-hour clock",
-      "place": "reading a train ticket",
-      "question": "Your appointment says 16:30. What time is that?",
+      "geogainId": "8cc3ec3e-3af7-4bb9-964e-d2ad4747ed46",
+      "slug": "glue-your-sentences",
+      "url": "https://edsa.tech/gaby/quizzes/glue-your-sentences/",
+      "topic": "Glue Your Sentences",
+      "question": "Which word means 'besides'?",
       "options": [
-        "4:30 in the afternoon",
-        "6:30 in the evening",
-        "10:30 in the morning"
+        "pero",
+        "porque",
+        "además"
       ],
-      "answer": "4:30 in the afternoon",
-      "takeaway": "16:30 written, “las cuatro y media” spoken."
+      "answerIndex": 2,
+      "answer": "además",
+      "why": "¡Exacto! Además means besides."
     },
     {
       "order": 91,
-      "slug": "la-cortesia",
-      "url": "https://edsa.tech/gaby/quizzes/la-cortesia/",
-      "topic": "How polite to be",
-      "place": "a bar, ordering quickly",
-      "question": "Which sounds most natural at a busy bar in Spain?",
+      "geogainId": "957dc0ab-a850-4056-9df9-5b62b6d09de2",
+      "slug": "comprar-ropa",
+      "url": "https://edsa.tech/gaby/quizzes/comprar-ropa/",
+      "topic": "Comprar Ropa 🛍️",
+      "question": "How do you ask for a bigger size in Spanish?",
       "options": [
-        "Perdone, señor, ¿sería tan amable de ponerme una caña?",
-        "Una caña, por favor.",
-        "Deme una caña inmediatamente."
+        "¿Dónde está el probador?",
+        "¿Tiene una talla más grande?",
+        "¿Puedo probármelo?"
       ],
-      "answer": "Una caña, por favor.",
-      "takeaway": "Short is not rude in Spain. Warm tone does the work."
+      "answerIndex": 1,
+      "answer": "¿Tiene una talla más grande?",
+      "why": "¿Tiene una talla más grande? means 'Do you have a bigger size?'"
     },
     {
       "order": 92,
-      "slug": "tuteo",
-      "url": "https://edsa.tech/gaby/quizzes/tuteo/",
-      "topic": "Switching to tú",
-      "place": "a shop where the assistant is your age",
-      "question": "Someone says \"puedes tutearme\". What are they offering?",
+      "geogainId": "e138930a-2cd7-4905-bdc0-547b1bdcf5f4",
+      "slug": "emergencias-en-espanol",
+      "url": "https://edsa.tech/gaby/quizzes/emergencias-en-espanol/",
+      "topic": "Emergencias en Español",
+      "question": "How do you shout for help in Spanish?",
       "options": [
-        "Call me by my first name",
-        "Use tú instead of usted",
-        "Pay later"
+        "¡Ayuda!",
+        "¡Auxilio!",
+        "¡Socorro!"
       ],
-      "answer": "Use tú instead of usted",
-      "takeaway": "If they offer tutearme, switch on the spot."
+      "answerIndex": 0,
+      "answer": "¡Ayuda!",
+      "why": "¡Ayuda! means Help! in Spanish."
     },
     {
       "order": 93,
-      "slug": "perdon-o-lo-siento",
-      "url": "https://edsa.tech/gaby/quizzes/perdon-o-lo-siento/",
-      "topic": "Two kinds of sorry",
-      "place": "a crowded metro carriage",
-      "question": "You need to squeeze past someone. Which?",
+      "geogainId": "e464edef-1bb6-4104-849d-9b32ab016e7d",
+      "slug": "airport-spanish",
+      "url": "https://edsa.tech/gaby/quizzes/airport-spanish/",
+      "topic": "Airport Spanish",
+      "question": "What does 'el equipaje' mean?",
       "options": [
-        "Lo siento.",
-        "Perdón.",
-        "Disculpe, lo siento mucho."
+        "the gate",
+        "the flight",
+        "luggage"
       ],
-      "answer": "Perdón.",
-      "takeaway": "Perdón to get past. Lo siento when you mean it."
+      "answerIndex": 2,
+      "answer": "luggage",
+      "why": "El equipaje means luggage."
     },
     {
       "order": 94,
-      "slug": "responder-a-gracias",
-      "url": "https://edsa.tech/gaby/quizzes/responder-a-gracias/",
-      "topic": "Answering thanks",
-      "place": "after helping a neighbour",
-      "question": "Someone thanks you. Which reply is most common in Spain?",
+      "geogainId": "fff1a831-c971-48cc-87c3-37868f0d78e7",
+      "slug": "spanish-filler-words",
+      "url": "https://edsa.tech/gaby/quizzes/spanish-filler-words/",
+      "topic": "Spanish Filler Words",
+      "question": "What does 'o sea' mean?",
       "options": [
-        "De nada.",
-        "Bienvenido.",
-        "Por favor."
+        "Well",
+        "So",
+        "I mean"
       ],
-      "answer": "De nada.",
-      "takeaway": "De nada. Never bienvenido."
+      "answerIndex": 2,
+      "answer": "I mean",
+      "why": "'O sea' means 'I mean' to clarify or rephrase."
     },
     {
       "order": 95,
-      "slug": "no-te-entiendo",
-      "url": "https://edsa.tech/gaby/quizzes/no-te-entiendo/",
-      "topic": "Saying you did not catch it",
-      "place": "a conversation moving too fast",
-      "question": "You did not catch what someone said. The most useful phrase is:",
+      "geogainId": "1b421f0d-669b-4e58-aac3-9c84196c6504",
+      "slug": "mi-trabajo",
+      "url": "https://edsa.tech/gaby/quizzes/mi-trabajo/",
+      "topic": "Mi Trabajo",
+      "question": "How do you say: I am a teacher?",
       "options": [
-        "¿Perdón?",
-        "No hablo español.",
-        "¿Puedes repetir más despacio, por favor?"
+        "Soy un maestra",
+        "Soy maestra",
+        "Yo soy maestra"
       ],
-      "answer": "¿Puedes repetir más despacio, por favor?",
-      "takeaway": "Ask for slower, not for English. It is the whole difference."
+      "answerIndex": 1,
+      "answer": "Soy maestra",
+      "why": "For professions, you don't use 'un' or 'una' in Spanish."
     },
     {
       "order": 96,
-      "slug": "pedir-una-palabra",
-      "url": "https://edsa.tech/gaby/quizzes/pedir-una-palabra/",
-      "topic": "Asking for a word",
-      "place": "mid-sentence, stuck",
-      "question": "You need a word you do not know. Which?",
+      "geogainId": "28a9f910-b62c-4297-9f52-7d56b1d2c274",
+      "slug": "react-like-a-native",
+      "url": "https://edsa.tech/gaby/quizzes/react-like-a-native/",
+      "topic": "React Like a Native",
+      "question": "Which phrase expresses sympathy?",
       "options": [
-        "¿Cómo se dice “screwdriver” en español?",
-        "¿Qué es “screwdriver” español?",
-        "¿Cómo dice “screwdriver”?"
+        "¡Qué bien!",
+        "¡Qué pena!",
+        "¡Claro!"
       ],
-      "answer": "¿Cómo se dice “screwdriver” en español?",
-      "takeaway": "¿Cómo se dice…? and ¿Qué significa…? Two phrases, endless vocabulary."
+      "answerIndex": 1,
+      "answer": "¡Qué pena!",
+      "why": "¡Qué pena! means 'What a shame!' for sympathy."
     },
     {
       "order": 97,
-      "slug": "responder-que-tal",
-      "url": "https://edsa.tech/gaby/quizzes/responder-que-tal/",
-      "topic": "Answering honestly",
-      "place": "someone asks how your Spanish is",
-      "question": "Someone asks how your Spanish is going. A natural modest answer:",
+      "geogainId": "74977ffa-0ef5-4ba9-9bbe-b67767ba9f65",
+      "slug": "habitacion-en-espanol",
+      "url": "https://edsa.tech/gaby/quizzes/habitacion-en-espanol/",
+      "topic": "Habitación en Español",
+      "question": "Where do you cook?",
       "options": [
-        "Más o menos.",
-        "Mucho bien.",
-        "Un poco bien."
+        "En el dormitorio",
+        "En la cocina",
+        "En el baño"
       ],
-      "answer": "Más o menos.",
-      "takeaway": "Más o menos for honest. Muy bien, never mucho bien."
+      "answerIndex": 1,
+      "answer": "En la cocina",
+      "why": "You cook in 'la cocina', the kitchen!"
     },
     {
       "order": 98,
-      "slug": "el-tuteo-telefono",
-      "url": "https://edsa.tech/gaby/quizzes/el-tuteo-telefono/",
-      "topic": "On the phone",
-      "place": "a call you have been putting off",
-      "question": "You answer the phone in Spain. What do you say?",
+      "geogainId": "98233dad-6909-4a25-8e6f-b8aa2c6753b0",
+      "slug": "soften-your-spanish",
+      "url": "https://edsa.tech/gaby/quizzes/soften-your-spanish/",
+      "topic": "Soften Your Spanish",
+      "question": "What does 'más o menos' mean?",
       "options": [
-        "¿Hola?",
-        "¿Dígame?",
-        "¿Quién es?"
+        "a little",
+        "more or less",
+        "I think"
       ],
-      "answer": "¿Dígame?",
-      "takeaway": "¿Dígame? to answer. And phone Spanish is hard for everyone."
+      "answerIndex": 1,
+      "answer": "more or less",
+      "why": "It means 'more or less'."
     },
     {
       "order": 99,
-      "slug": "quedar-bien",
-      "url": "https://edsa.tech/gaby/quizzes/quedar-bien/",
-      "topic": "Clothes that fit",
-      "place": "a changing room",
-      "question": "The shirt fits you well. Which?",
+      "geogainId": "bb523285-b5e8-467b-8f7d-c4f3d1a388de",
+      "slug": "order-food-in-spanish",
+      "url": "https://edsa.tech/gaby/quizzes/order-food-in-spanish/",
+      "topic": "Order Food in Spanish",
+      "question": "Which of these means 'fish'?",
       "options": [
-        "Me queda bien.",
-        "Me quedo bien.",
-        "Está bien quedado."
+        "el pollo",
+        "el pescado",
+        "la ensalada"
       ],
-      "answer": "Me queda bien.",
-      "takeaway": "Me queda bien = it suits me. Me quedo = I stay."
+      "answerIndex": 1,
+      "answer": "el pescado",
+      "why": "El pescado means fish."
     },
     {
       "order": 100,
-      "slug": "ya-esta",
-      "url": "https://edsa.tech/gaby/quizzes/ya-esta/",
-      "topic": "Finishing anything",
-      "place": "the end of almost any transaction",
-      "question": "The assistant finishes and says \"ya está\". What do they mean?",
+      "geogainId": "e9cfafb6-04f7-4975-a532-b050455bd9f9",
+      "slug": "talk-hobbies-keep-talking",
+      "url": "https://edsa.tech/gaby/quizzes/talk-hobbies-keep-talking/",
+      "topic": "Talk Hobbies & Keep Talking",
+      "question": "How do you hand the question back in a Spanish conversation?",
       "options": [
-        "It is already there",
-        "That is it, we are done",
-        "It is still in progress"
+        "¿Qué tal?",
+        "¿Y tú?",
+        "¿Cómo estás?"
       ],
-      "answer": "That is it, we are done",
-      "takeaway": "Ya está = done. You will hear it ten times a day."
+      "answerIndex": 1,
+      "answer": "¿Y tú?",
+      "why": "`¿Y tú?` means \"And you?\" and keeps the conversation going."
     }
   ]
 }

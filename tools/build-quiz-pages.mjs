@@ -14,6 +14,7 @@ const OUT  = new URL('../public/gaby/quizzes/', import.meta.url);
 const MANIFEST = new URL('./quiz-manifest.json', import.meta.url);
 const STORE = 'https://apps.apple.com/app/id6790808283';
 const GC    = 'https://edsa.goatcounter.com/count';
+const YT    = 'xzgKFO4RYO4';   // the promo Short embedded on every answer page
 
 const esc = (s) => String(s).replace(/&(?![a-z#]+;)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 // `why` is authored HTML (<b>/<i>) so it is intentionally not escaped.
@@ -23,21 +24,23 @@ const head = (q) => `<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${esc(q.situationEn)} — Gaby quiz</title>
-<meta name="description" content="${esc(q.question)} The answer, and why — from Gaby, the offline Spanish app for people moving to Spain.">
+<title>${esc(q.topic)} — Gaby quiz</title>
+<meta name="description" content="${esc(q.question)} The answer, and why — from Gaby, the offline iPhone app for people moving to Spain.">
 <link rel="canonical" href="https://edsa.tech/gaby/quizzes/${q.slug}/">
 <meta name="theme-color" content="#c1440e">
 <link rel="icon" type="image/svg+xml" href="/gaby/icon.svg">
 <link rel="stylesheet" href="/gaby/gaby.css">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://edsa.tech/gaby/quizzes/${q.slug}/">
-<meta property="og:title" content="${esc(q.situationEn)} — the answer">
+<meta property="og:title" content="${esc(q.topic)} — the answer">
 <meta property="og:description" content="${esc(q.question)}">
 <meta name="twitter:card" content="summary_large_image">
 <script data-goatcounter="${GC}"
         async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>`;
+
+const apple = `<svg class="btn__apple" width="22" height="22" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>`;
 
 const header = `
 <header class="site-head">
@@ -97,7 +100,7 @@ const page = (q) => `${head(q)}${header}
 
   <section class="s s--night s--tight">
     <div class="wrap wrap--narrow">
-      <span class="eyebrow">${esc(q.situationEn)}</span>
+      <span class="eyebrow">${esc(q.topic)}</span>
       <h1 class="quiz__q">${esc(q.question)}</h1>
       <ol class="quiz__options">
 ${q.options.map((o) => `        <li>${esc(o)}</li>`).join('\n')}
@@ -113,10 +116,23 @@ ${q.options.map((o) => `        <li>${esc(o)}</li>`).join('\n')}
           <p class="mono quiz__label">The answer</p>
           <p class="quiz__a">${esc(q.answer)}</p>
           <p class="mono quiz__label">Why</p>
-          <p>${q.why}</p>
-          <p class="quiz__takeaway">${esc(q.takeaway)}</p>
+          <p>${esc(q.why)}</p>
         </div>
       </details>
+    </div>
+  </section>
+
+  <section class="s s--night s--tight">
+    <div class="wrap wrap--narrow vid">
+      <span class="eyebrow">Sixty seconds of Spanish</span>
+      <h2 class="vid__title">See it said out loud</h2>
+      <div class="vid__frame">
+        <button class="vid__play" type="button" data-yt="${YT}" aria-label="Play the video">
+          <span class="vid__tri" aria-hidden="true"></span>
+          <span class="vid__hint mono">Tap to play · loads YouTube</span>
+        </button>
+      </div>
+      <p class="vid__note">Nothing loads from YouTube until you press play.</p>
     </div>
   </section>
 
@@ -127,39 +143,47 @@ ${q.options.map((o) => `        <li>${esc(o)}</li>`).join('\n')}
       <p class="lede">You say your part out loud, and it tells you what you got wrong —
       through the situations you will actually meet after moving to Spain. Written by a
       person, works with no connection, $14.99 once.</p>
-      <a class="btn btn--lg" href="${STORE}">
-        <svg class="btn__apple" width="22" height="22" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-        Download on the App Store
-      </a>
+      <a class="btn btn--lg" href="${STORE}">${apple}Download on the App Store</a>
       <p class="mono final__fine">$14.99 one-time · iPhone · no subscription</p>
       <p class="quiz__more"><a href="/gaby/">See what else is in the app →</a></p>
     </div>
   </section>
-
 </main>${footer}
+<script>
+// Click-to-load: no request reaches Google until the visitor asks for the video.
+document.querySelector('.vid__play').addEventListener('click', function () {
+  var f = document.createElement('iframe');
+  f.src = 'https://www.youtube-nocookie.com/embed/' + this.dataset.yt + '?autoplay=1&rel=0';
+  f.title = 'Gaby — Spanish in sixty seconds';
+  f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+  f.allowFullscreen = true;
+  this.parentNode.replaceChild(f, this);
+});
+</script>
+</body>
+</html>
 `;
 
 const { quizzes } = JSON.parse(await readFile(SRC, 'utf8'));
-const REQUIRED = ['day','slug','situation','situationEn','place','question','options','answer','why','takeaway'];
+const REQUIRED = ['order','id','slug','topic','question','options','answerIndex','answer','why'];
 const slugify = (t) => String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-');
 const seen = new Set();
 for (const q of quizzes) {
   for (const k of REQUIRED) {
-    if (q[k] === undefined || q[k] === '') throw new Error(`day ${q.day}: missing "${k}"`);
+    if (q[k] === undefined || q[k] === '') throw new Error(`${q.slug || q.id}: missing "${k}"`);
   }
-  if (!Array.isArray(q.options) || q.options.length < 2) throw new Error(`day ${q.day}: needs at least 2 options`);
-  if (!/^[a-z0-9-]+$/.test(q.slug)) throw new Error(`day ${q.day}: slug must be lowercase a-z, 0-9 and hyphens — no accents, they percent-encode into noise when pasted into a comment`);
-  if (seen.has(q.slug)) throw new Error(`day ${q.day}: duplicate slug "${q.slug}" — slugs are permanent public URLs`);
+  if (!Array.isArray(q.options) || q.options.length < 2) throw new Error(`${q.slug}: needs at least 2 options`);
+  if (q.options[q.answerIndex] !== q.answer) throw new Error(`${q.slug}: answer does not match options[answerIndex] — the import is stale`);
+  if (!/^[a-z0-9-]+$/.test(q.slug)) throw new Error(`${q.slug}: slug must be a-z, 0-9 and hyphens — accents percent-encode into noise when pasted into a comment`);
+  if (seen.has(q.slug)) throw new Error(`duplicate slug "${q.slug}" — a slug is a permanent public URL`);
   seen.add(q.slug);
 
   // A slug spoils only if it points at the answer and NOT at the other options.
-  // "constipado" is fine when every option contains it; "para-llevar" was not.
   const inAnswer = slugify(q.answer).includes(q.slug);
-  const inOthers = q.options.some((o) => !slugify(q.answer).includes(slugify(o)) && slugify(o).includes(q.slug));
-  if (inAnswer && !inOthers) {
-    throw new Error(`day ${q.day}: slug "${q.slug}" gives the answer away — name the choice, not the winner`);
-  }
+  const inOthers = q.options.some((o, i) => i !== q.answerIndex && slugify(o).includes(q.slug));
+  if (inAnswer && !inOthers) throw new Error(`${q.slug}: slug gives the answer away`);
 }
+
 if (existsSync(OUT)) await rm(OUT, { recursive: true });
 for (const q of quizzes) {
   const dir = new URL(`${q.slug}/`, OUT);
@@ -172,15 +196,16 @@ await writeFile(MANIFEST, JSON.stringify({
   base: 'https://edsa.tech/gaby/quizzes/',
   count: quizzes.length,
   quizzes: quizzes.map((q) => ({
-    order: q.day,
+    order: q.order,
+    geogainId: q.id,
     slug: q.slug,
     url: `https://edsa.tech/gaby/quizzes/${q.slug}/`,
-    topic: q.situationEn,
-    place: q.place,
+    topic: q.topic,
     question: q.question,
     options: q.options,
+    answerIndex: q.answerIndex,
     answer: q.answer,
-    takeaway: q.takeaway,
+    why: q.why,
   })),
 }, null, 2) + '\n');
 

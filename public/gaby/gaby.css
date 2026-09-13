@@ -724,3 +724,47 @@ p  { margin: 0 0 1rem; }
   font-weight: 700; color: var(--ink);
 }
 .quiz__more { margin: 1.6rem 0 0; font-weight: 700; }
+
+/* ------------------------------------------------------------- video band
+   The promo Short on every answer page. Click-to-load on purpose: the poster
+   is drawn in CSS, so NOTHING is requested from Google until the visitor
+   presses play. That keeps the "one third-party request" promise these pages
+   make, and section 11 of /gaby/privacy/ says so.                           */
+.vid { text-align: center; }
+.vid__title { font-size: clamp(1.6rem, 3.6vw, 2.4rem); margin: 1.1rem 0 1.6rem; }
+.vid__frame {
+  position: relative;
+  width: min(300px, 78vw);
+  aspect-ratio: 9 / 16;
+  margin: 0 auto;
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  background: #000;
+}
+.vid__frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+.vid__play {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.1rem; cursor: pointer; border: 0; font: inherit; color: var(--paper);
+  background:
+    radial-gradient(120% 80% at 50% 40%, rgba(193,68,14,.5), transparent 70%),
+    linear-gradient(160deg, #1d3b47, #0d1f27);
+}
+.vid__play:hover .vid__tri { transform: scale(1.08); background: var(--sun); }
+.vid__tri {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--paper-2); border: 3px solid var(--ink);
+  box-shadow: var(--shadow-sm);
+  display: grid; place-items: center;
+  transition: transform .14s ease, background .14s ease;
+}
+.vid__tri::after {
+  content: ""; margin-left: 5px;
+  border-left: 22px solid var(--ink);
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+}
+.vid__hint { font-size: .64rem; color: rgba(247,239,224,.8); }
+.vid__note { margin: 1.1rem 0 0; font-size: .85rem; color: rgba(247,239,224,.6); }
