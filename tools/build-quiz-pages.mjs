@@ -16,6 +16,15 @@ const STORE = 'https://apps.apple.com/app/id6790808283';
 const GC    = 'https://edsa.goatcounter.com/count';
 const YT    = 'xzgKFO4RYO4';   // the promo Short embedded on every answer page
 
+/* Where the video sits relative to the answer.
+   false (default) — answer first, video after. The link promised an answer, so it
+     is delivered before anything is sold, and the moment right after the payoff is
+     when a reader is most receptive to the app.
+   true — video above the reveal. More impressions, at the cost of delaying what
+     the visitor actually clicked for.
+   Flip it and re-run `npm run quiz:build`. Nothing else changes.             */
+const VIDEO_FIRST = false;
+
 const esc = (s) => String(s).replace(/&(?![a-z#]+;)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 // `why` is authored HTML (<b>/<i>) so it is intentionally not escaped.
 
@@ -64,6 +73,7 @@ const footer = `
       <div class="site-foot__brand">
         <p class="site-foot__word">Gaby</p>
         <p class="site-foot__tag">Rehearse it before you live it.</p>
+        <p class="mono site-foot__handle">Follow <b>@gabyspeaksspanish</b></p>
         <ul class="site-foot__social">
           <li><a href="https://www.instagram.com/gabyspeaksspanish/" aria-label="Gaby on Instagram" title="Instagram"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM17.8 6a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></a></li>
           <li><a href="https://www.tiktok.com/@gabyspeaksspanish" aria-label="Gaby on TikTok" title="TikTok"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .77-5.06V9.7a5.67 5.67 0 0 0-.77-.05A5.7 5.7 0 1 0 15.54 15.4V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.24-1.48z"/></svg></a></li>
@@ -95,6 +105,34 @@ const footer = `
 </body>
 </html>`;
 
+const revealBand = (q) => `  <section class="s s--sun">
+    <div class="wrap wrap--narrow">
+      <details class="quiz__reveal">
+        <summary>Tap to reveal the answer</summary>
+        <div class="quiz__answer">
+          <p class="mono quiz__label">The answer</p>
+          <p class="quiz__a">${esc(q.answer)}</p>
+          <p class="mono quiz__label">Why</p>
+          <p>${esc(q.why)}</p>
+        </div>
+      </details>
+    </div>
+  </section>`;
+
+const videoBand = `  <section class="s s--night s--tight">
+    <div class="wrap wrap--narrow vid">
+      <span class="eyebrow">Sixty seconds of Spanish</span>
+      <h2 class="vid__title">See it said out loud</h2>
+      <div class="vid__frame">
+        <button class="vid__play" type="button" data-yt="${YT}" aria-label="Play the video">
+          <span class="vid__tri" aria-hidden="true"></span>
+          <span class="vid__hint mono">Tap to play · loads YouTube</span>
+        </button>
+      </div>
+      <p class="vid__note">Nothing loads from YouTube until you press play.</p>
+    </div>
+  </section>`;
+
 const page = (q) => `${head(q)}${header}
 <main>
 
@@ -108,33 +146,8 @@ ${q.options.map((o) => `        <li>${esc(o)}</li>`).join('\n')}
     </div>
   </section>
 
-  <section class="s s--sun">
-    <div class="wrap wrap--narrow">
-      <details class="quiz__reveal">
-        <summary>Tap to reveal the answer</summary>
-        <div class="quiz__answer">
-          <p class="mono quiz__label">The answer</p>
-          <p class="quiz__a">${esc(q.answer)}</p>
-          <p class="mono quiz__label">Why</p>
-          <p>${esc(q.why)}</p>
-        </div>
-      </details>
-    </div>
-  </section>
-
-  <section class="s s--night s--tight">
-    <div class="wrap wrap--narrow vid">
-      <span class="eyebrow">Sixty seconds of Spanish</span>
-      <h2 class="vid__title">See it said out loud</h2>
-      <div class="vid__frame">
-        <button class="vid__play" type="button" data-yt="${YT}" aria-label="Play the video">
-          <span class="vid__tri" aria-hidden="true"></span>
-          <span class="vid__hint mono">Tap to play · loads YouTube</span>
-        </button>
-      </div>
-      <p class="vid__note">Nothing loads from YouTube until you press play.</p>
-    </div>
-  </section>
+${VIDEO_FIRST ? videoBand : revealBand(q)}
+${VIDEO_FIRST ? revealBand(q) : videoBand}
 
   <section class="s s--cream">
     <div class="wrap wrap--narrow final__inner">

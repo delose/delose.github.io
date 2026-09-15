@@ -56,6 +56,22 @@ import metaImage from "../assets/PFMS-architectural-diagram.jpg";
 
 				<hr />
 
+				<!-- Gaby -->
+				<section class="also-building">
+					<div class="also-building__text">
+						<span class="also-building__kicker">Also building</span>
+						<h2>Gaby — a Spanish app for people moving to Spain</h2>
+						<p>
+							An offline iPhone app that has you rehearse the conversations you'll actually
+							have — the pharmacy, the NIE appointment, the menú del día. No subscription,
+							no account, no network requests.
+						</p>
+					</div>
+					<a href="/gaby/" class="btn btn-primary also-building__cta">See Gaby →</a>
+				</section>
+
+				<hr />
+
 				<!-- Value Proposition -->
 				<section class="value-prop">
 					<h2>What You'll Learn Here 💡</h2>
@@ -363,43 +379,52 @@ cd pfms
 				margin: 4rem 0;
 			}
 
-			/* Gaby App Announcement */
-			.app-announcement {
-				text-align: center;
+			/* Gaby — the only internal link to /gaby/, so keep it */
+			.also-building {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 2rem;
+				flex-wrap: wrap;
 				background: linear-gradient(135deg, #c1440e 0%, #e07a5f 100%);
 				color: white;
-				padding: 3rem 2rem;
+				padding: 2rem 2.25rem;
 				border-radius: 16px;
 			}
 
-			.app-announcement h2 {
+			.also-building__kicker {
+				display: block;
+				font-size: 0.75rem;
+				font-weight: 700;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				opacity: 0.85;
+				margin-bottom: 0.4rem;
+			}
+
+			.also-building h2 {
 				color: white;
-				margin-top: 1rem;
+				font-size: 1.6rem;
+				margin: 0 0 0.6rem;
 			}
 
-			.app-announcement p {
-				max-width: 640px;
-				margin: 0 auto 2rem;
-				font-size: 1.125rem;
-				line-height: 1.6;
+			.also-building p {
+				margin: 0;
+				max-width: 54ch;
+				line-height: 1.55;
+				opacity: 0.95;
 			}
 
-			.announcement-badge {
-				display: inline-block;
-				padding: 0.35rem 0.9rem;
-				background: rgba(255, 255, 255, 0.2);
-				border-radius: 999px;
-				font-size: 0.875rem;
-				font-weight: 600;
-			}
-
-			.app-announcement .btn-primary {
+			.also-building .also-building__cta {
+				flex: none;
 				background: white;
 				color: #c1440e;
 			}
 
-			.app-announcement .btn-primary:hover {
+			.also-building .also-building__cta:hover {
 				background: #fff5f2;
+				color: #a5390b;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 			}
 
 			/* Hero Section */
