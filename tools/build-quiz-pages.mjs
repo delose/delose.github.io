@@ -14,7 +14,7 @@ const OUT  = new URL('../public/gaby/quizzes/', import.meta.url);
 const MANIFEST = new URL('./quiz-manifest.json', import.meta.url);
 const STORE = 'https://apps.apple.com/app/id6790808283';
 const GC    = 'https://edsa.goatcounter.com/count';
-const YT    = 'xzgKFO4RYO4';   // the promo Short embedded on every answer page
+const YT    = 'dj8YVoJ1lKU';   // promo Short on every answer page — the ID from https://youtube.com/shorts/<ID>
 
 /* Where the video sits relative to the answer.
    false (default) — answer first, video after. The link promised an answer, so it

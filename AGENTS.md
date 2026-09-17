@@ -159,8 +159,9 @@ row `id`, which is the join key the posting pipeline uses.
   `pedir-con-cortesia` via `SLUG_OVERRIDES` in the importer, keyed by GeoGain id.
 - The answer sits behind a native `<details>`, so an accidental visitor still guesses.
 
-**The video band.** Every answer page embeds one promotional YouTube Short
-(`xzgKFO4RYO4`), placed **after** the answer rather than before it. The link promised
+**The video band.** Every answer page embeds one promotional YouTube Short — the id
+is the `YT` constant in `tools/build-quiz-pages.mjs`, taken from the
+`youtube.com/shorts/<id>` URL. It is placed **after** the answer rather than before it. The link promised
 an answer, so the answer comes first — a gate the visitor can scroll past is friction
 without benefit, and the moment right after the payoff is when they are most receptive
 to the app. It is **click-to-load**: the poster is drawn in CSS and nothing is
