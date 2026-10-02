@@ -144,7 +144,7 @@ const videoBand = `  <section class="s s--night s--tight">
   </section>`;
 
 const stickyBar = `<div class="sticky-cta">
-  <span class="sticky-cta__text"><b>Gaby</b> · free to download, $14.99 unlocks it all</span>
+  <span class="sticky-cta__text"><b>Gaby</b> · free to download · one $14.99 purchase</span>
   <a class="btn btn--sm" href="${STORE}">Get it on the App Store</a>
 </div>
 `;
@@ -173,7 +173,7 @@ ${VIDEO_FIRST ? revealBand(q) : videoBand}
       through the situations you will actually meet after moving to Spain. Written by a
       person, works with no connection, free to download.</p>
       <a class="btn btn--lg" href="${STORE}">${apple}Download on the App Store</a>
-      <p class="mono final__fine">Free to download · $14.99 unlocks everything · no subscription</p>
+      <p class="mono final__fine">Free to download · $14.99 for the full app · no subscription</p>
       <p class="quiz__more"><a href="/gaby/">See what else is in the app →</a></p>
     </div>
   </section>

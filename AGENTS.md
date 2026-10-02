@@ -218,8 +218,12 @@ the App Store listing and the app itself:**
 - **Free to download**; a single **$14.99** in-app purchase unlocks everything. **No
   subscription.** iPhone, 4+, Education. Changed from paid-upfront on 2026-10-02 — the
   phrase "no in-app purchases" was true before that and is now false, so never
-  reintroduce it. Pricing copy is scattered: grep `14.99`, `in-app`, `once`, `unlock`
-  across `public/gaby/` and `tools/build-quiz-pages.mjs` before changing any of it.
+  reintroduce it. Pricing copy is scattered: grep `14.99`, `in-app`, `once`,
+  `purchase` across `public/gaby/` and `tools/build-quiz-pages.mjs` before changing
+  any of it. **Terminology rule:** money is always a "purchase", progression is
+  always "earned". "Unlock" belongs to the collection only, so pricing copy must
+  never use it — otherwise "$14.99 unlocks everything" sits beside "earned by
+  finishing situations" and the two appear to contradict.
 - 24 situations · 3 levels each (Guided / Practice / Real) · 100 lessons ·
   124-piece collection of Spanish paintings and places · UI in 12 languages.
 - Fully offline: **makes no network requests at all.** No account, no ads, no streaks.
