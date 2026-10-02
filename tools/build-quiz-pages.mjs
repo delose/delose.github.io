@@ -26,7 +26,7 @@ const YT    = 'dj8YVoJ1lKU';   // promo Short on every answer page — the ID fr
 const VIDEO_FIRST = false;
 
 /* A slim fixed CTA at the bottom of the viewport. This is deliberately NOT an
-   entry modal: /gaby/ sells the app on "no ads, no upsell screen", and a forced
+   entry modal: /gaby/ sells the app on "no subscription, no ads, no streaks", and a forced
    interstitial on the way to a free answer contradicts that on the same domain.
    Google also demotes intrusive mobile interstitials. A sticky bar is reachable
    at every scroll position, including the moment the answer lands.           */
@@ -144,7 +144,7 @@ const videoBand = `  <section class="s s--night s--tight">
   </section>`;
 
 const stickyBar = `<div class="sticky-cta">
-  <span class="sticky-cta__text"><b>Gaby</b> · $14.99 once, no subscription</span>
+  <span class="sticky-cta__text"><b>Gaby</b> · free to download, $14.99 unlocks it all</span>
   <a class="btn btn--sm" href="${STORE}">Get it on the App Store</a>
 </div>
 `;
@@ -171,9 +171,9 @@ ${VIDEO_FIRST ? revealBand(q) : videoBand}
       <h2 class="sec-title sec-title--center">Gaby does this 24 times over</h2>
       <p class="lede">You say your part out loud, and it tells you what you got wrong —
       through the situations you will actually meet after moving to Spain. Written by a
-      person, works with no connection, $14.99 once.</p>
+      person, works with no connection, free to download.</p>
       <a class="btn btn--lg" href="${STORE}">${apple}Download on the App Store</a>
-      <p class="mono final__fine">$14.99 one-time · iPhone · no subscription</p>
+      <p class="mono final__fine">Free to download · $14.99 unlocks everything · no subscription</p>
       <p class="quiz__more"><a href="/gaby/">See what else is in the app →</a></p>
     </div>
   </section>

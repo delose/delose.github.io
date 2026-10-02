@@ -172,9 +172,9 @@ documents both it and GoatCounter.
 **Conversion on the answer pages.** Two non-blocking CTAs: one inside the
 `<details>` reveal, where the payoff lands and the reader is most receptive, and a
 sticky bottom bar (`STICKY_CTA`, on). **There is deliberately no entry modal.**
-`/gaby/` sells the app on "no ads, no upsell screen, no second paywall", so a forced
-interstitial on the way to a free answer would contradict that copy on the same
-domain — and Google demotes intrusive mobile interstitials. If one is ever added,
+`/gaby/` sells the app on "no subscription, no ads, no streaks, no second paywall",
+so a forced interstitial on the way to a free answer would contradict that copy on
+the same domain — and Google demotes intrusive mobile interstitials. If one is ever added,
 change that landing-page copy in the same commit or the claim becomes false.
 
 **`tools/quiz-manifest.json`** is written by the same build and is **not deployed**,
@@ -215,7 +215,11 @@ the App Store listing and the app itself:**
 
 - Name on the App Store: **Gaby: Speak Spanish**. Subtitle: *Rehearse it before you live it*.
 - App Store ID `6790808283` → `https://apps.apple.com/app/id6790808283`
-- **$14.99 one-time**, iPhone, no subscription, no in-app purchases, 4+, Education.
+- **Free to download**; a single **$14.99** in-app purchase unlocks everything. **No
+  subscription.** iPhone, 4+, Education. Changed from paid-upfront on 2026-10-02 — the
+  phrase "no in-app purchases" was true before that and is now false, so never
+  reintroduce it. Pricing copy is scattered: grep `14.99`, `in-app`, `once`, `unlock`
+  across `public/gaby/` and `tools/build-quiz-pages.mjs` before changing any of it.
 - 24 situations · 3 levels each (Guided / Practice / Real) · 100 lessons ·
   124-piece collection of Spanish paintings and places · UI in 12 languages.
 - Fully offline: **makes no network requests at all.** No account, no ads, no streaks.

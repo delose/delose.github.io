@@ -776,7 +776,7 @@ p  { margin: 0 0 1rem; }
 
 /* ---------------------------------------------------- quiz-page conversion
    Two non-blocking CTAs. There is deliberately no entry modal: these pages
-   sell an app whose pitch is "no ads, no upsell screen", and a forced
+   sell an app whose pitch is "no subscription, no ads, no streaks", and a forced
    interstitial would contradict that on the same domain.                    */
 .quiz__inline-cta {
   display: inline-block;
