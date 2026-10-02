@@ -773,3 +773,44 @@ p  { margin: 0 0 1rem; }
 }
 .vid__hint { font-size: .64rem; color: rgba(247,239,224,.8); }
 .vid__note { margin: 1.1rem 0 0; font-size: .85rem; color: rgba(247,239,224,.6); }
+
+/* ---------------------------------------------------- quiz-page conversion
+   Two non-blocking CTAs. There is deliberately no entry modal: these pages
+   sell an app whose pitch is "no ads, no upsell screen", and a forced
+   interstitial would contradict that on the same domain.                    */
+.quiz__inline-cta {
+  display: inline-block;
+  margin-top: 1.4rem;
+  padding: .7rem 1.1rem;
+  font-weight: 800;
+  text-decoration: none;
+  color: var(--paper-2);
+  background: var(--terracotta);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.quiz__inline-cta:hover {
+  color: var(--paper-2); background: var(--terracotta-d);
+  transform: translate(-2px, -2px); box-shadow: var(--shadow);
+}
+
+.sticky-cta {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: center;
+  gap: 1rem; flex-wrap: wrap;
+  padding: .7rem clamp(1rem, 4vw, 2rem);
+  background: var(--paper-2);
+  border-top: var(--border);
+}
+.sticky-cta__text { font-size: .92rem; color: var(--ink-2); }
+.sticky-cta__text b { color: var(--ink); }
+/* keep the footer clear of the bar */
+body:has(.sticky-cta) .site-foot { padding-bottom: 7rem; }
+@media (max-width: 560px) {
+  .sticky-cta { gap: .5rem; padding: .6rem 1rem; }
+  .sticky-cta__text { font-size: .8rem; width: 100%; text-align: center; }
+  .sticky-cta .btn--sm { width: 100%; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) { .quiz__inline-cta { transition: none; } }

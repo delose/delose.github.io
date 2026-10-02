@@ -169,6 +169,14 @@ requested from Google until the visitor presses play, which is the only reason t
 pages can still claim one third-party request on load. Section 11 of `/gaby/privacy/`
 documents both it and GoatCounter.
 
+**Conversion on the answer pages.** Two non-blocking CTAs: one inside the
+`<details>` reveal, where the payoff lands and the reader is most receptive, and a
+sticky bottom bar (`STICKY_CTA`, on). **There is deliberately no entry modal.**
+`/gaby/` sells the app on "no ads, no upsell screen, no second paywall", so a forced
+interstitial on the way to a free answer would contradict that copy on the same
+domain — and Google demotes intrusive mobile interstitials. If one is ever added,
+change that landing-page copy in the same commit or the claim becomes false.
+
 **`tools/quiz-manifest.json`** is written by the same build and is **not deployed**,
 because it contains every answer. It exists for the GeoGain posting pipeline — see
 `docs/geogain-gaby-handover.md`.

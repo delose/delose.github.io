@@ -25,6 +25,13 @@ const YT    = 'dj8YVoJ1lKU';   // promo Short on every answer page — the ID fr
    Flip it and re-run `npm run quiz:build`. Nothing else changes.             */
 const VIDEO_FIRST = false;
 
+/* A slim fixed CTA at the bottom of the viewport. This is deliberately NOT an
+   entry modal: /gaby/ sells the app on "no ads, no upsell screen", and a forced
+   interstitial on the way to a free answer contradicts that on the same domain.
+   Google also demotes intrusive mobile interstitials. A sticky bar is reachable
+   at every scroll position, including the moment the answer lands.           */
+const STICKY_CTA = true;
+
 const esc = (s) => String(s).replace(/&(?![a-z#]+;)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 // `why` is authored HTML (<b>/<i>) so it is intentionally not escaped.
 
@@ -114,6 +121,9 @@ const revealBand = (q) => `  <section class="s s--sun">
           <p class="quiz__a">${esc(q.answer)}</p>
           <p class="mono quiz__label">Why</p>
           <p>${esc(q.why)}</p>
+          <a class="quiz__inline-cta" href="${STORE}">
+            Gaby drills 24 conversations like this →
+          </a>
         </div>
       </details>
     </div>
@@ -132,6 +142,12 @@ const videoBand = `  <section class="s s--night s--tight">
       <p class="vid__note">Nothing loads from YouTube until you press play.</p>
     </div>
   </section>`;
+
+const stickyBar = `<div class="sticky-cta">
+  <span class="sticky-cta__text"><b>Gaby</b> · $14.99 once, no subscription</span>
+  <a class="btn btn--sm" href="${STORE}">Get it on the App Store</a>
+</div>
+`;
 
 const page = (q) => `${head(q)}${header}
 <main>
@@ -161,7 +177,8 @@ ${VIDEO_FIRST ? revealBand(q) : videoBand}
       <p class="quiz__more"><a href="/gaby/">See what else is in the app →</a></p>
     </div>
   </section>
-</main>${footer}
+</main>
+${STICKY_CTA ? stickyBar : ''}${footer}
 <script>
 // Click-to-load: no request reaches Google until the visitor asks for the video.
 document.querySelector('.vid__play').addEventListener('click', function () {
