@@ -814,3 +814,77 @@ body:has(.sticky-cta) .site-foot { padding-bottom: 7rem; }
   .sticky-cta .btn--sm { width: 100%; justify-content: center; }
 }
 @media (prefers-reduced-motion: reduce) { .quiz__inline-cta { transition: none; } }
+
+/* ------------------------------------------------------------- UGC modal
+   Quiz pages only. Hidden in the markup and revealed by script, so a no-JS
+   visitor gets the answer with nothing in the way. Escape, the backdrop, the
+   X and "Skip to answer" all dismiss it.                                    */
+.ugc { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 1rem; }
+.ugc[hidden] { display: none; }
+.ugc__backdrop { position: absolute; inset: 0; background: rgba(10, 20, 26, .82); }
+
+.ugc__panel {
+  position: relative;
+  width: min(380px, 100%);
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: .9rem;
+  padding: 1.5rem 1.3rem 1.3rem;
+  background: var(--paper-2);
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  animation: ugc-in .18s ease-out;
+}
+@keyframes ugc-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .ugc__panel { animation: none; } }
+
+.ugc__x {
+  position: absolute; top: .55rem; right: .55rem;
+  width: 34px; height: 34px; line-height: 1;
+  font-size: 1.4rem; font-weight: 700;
+  color: var(--ink); background: var(--paper);
+  border: 2px solid var(--ink); border-radius: 9px;
+  cursor: pointer;
+}
+.ugc__x:hover { background: var(--sun); }
+
+.ugc__kicker { color: var(--ink-3); margin: 0; }
+.ugc__title { font-size: 1.3rem; margin: 0; letter-spacing: -.02em; }
+
+.ugc__video { position: relative; width: 100%; }
+.ugc__video video {
+  display: block; width: 100%; aspect-ratio: 9 / 16;
+  /* cap the height so the CTA is never pushed below the fold on a short phone */
+  max-height: 52dvh;
+  object-fit: cover; background: var(--ink);
+  border: 2px solid var(--ink); border-radius: 12px;
+}
+/* Silent UGC is useless, so unmuting is one obvious tap. */
+.ugc__sound {
+  position: absolute; left: 50%; bottom: .7rem; transform: translateX(-50%);
+  font: 700 .78rem/1 var(--sans);
+  padding: .55rem .9rem;
+  color: var(--ink); background: var(--sun);
+  border: 2px solid var(--ink); border-radius: 999px;
+  box-shadow: var(--shadow-sm); cursor: pointer; white-space: nowrap;
+}
+.ugc__sound[hidden] { display: none; }
+
+.ugc__cta { width: 100%; justify-content: center; }
+.ugc__skip {
+  font: 700 .92rem/1 var(--sans);
+  color: var(--ink-3); background: none; border: 0;
+  padding: .35rem .5rem; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.ugc__skip:hover { color: var(--ink); }
+
+@media (max-height: 700px) {
+  .ugc__panel { gap: .6rem; padding: 1.1rem 1rem 1rem; }
+  .ugc__title { font-size: 1.1rem; }
+}

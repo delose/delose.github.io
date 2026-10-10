@@ -169,13 +169,35 @@ requested from Google until the visitor presses play, which is the only reason t
 pages can still claim one third-party request on load. Section 11 of `/gaby/privacy/`
 documents both it and GoatCounter.
 
-**Conversion on the answer pages.** Two non-blocking CTAs: one inside the
-`<details>` reveal, where the payoff lands and the reader is most receptive, and a
-sticky bottom bar (`STICKY_CTA`, on). **There is deliberately no entry modal.**
-`/gaby/` sells the app on "no subscription, no ads, no streaks, no second paywall",
-so a forced interstitial on the way to a free answer would contradict that copy on
-the same domain — and Google demotes intrusive mobile interstitials. If one is ever added,
-change that landing-page copy in the same commit or the claim becomes false.
+**Conversion on the answer pages.** Three CTAs: a UGC interstitial on load, one
+inside the `<details>` reveal where the payoff lands, and a sticky bottom bar
+(`STICKY_CTA`).
+
+**The UGC modal** (`ugcModal` / `ugcScript`, added 2026-10-10) shows one of three
+self-hosted clips in `public/gaby/ugc/`, picked at random per load.
+- **Self-hosted, not YouTube, on purpose.** These pages make exactly one
+  third-party request (GoatCounter). A YouTube embed in a modal that opens on load
+  would add Google to every single page view, put YouTube chrome and related-video
+  suggestions inside a conversion surface, and hand a slower first frame. The clips
+  are ~2.3 MB each at 480p, which keeps the burned-in captions readable — the
+  cellular preset was 455 KB but turned the captions to mush, and captions are the
+  whole point of UGC.
+- **Only the chosen clip gets a `src`**, so one video downloads, not three.
+  Dismissing clears the `src` to stop an in-flight download.
+- Hidden in the markup and revealed by script, so a no-JS visitor gets the answer
+  with nothing in the way and nobody sees it flash.
+- Escape, the backdrop, the X and "Skip to answer" all dismiss. Focus moves into
+  the dialog and is trapped; scroll is locked while open.
+- Autoplay is muted (browsers allow no other kind) with a "Tap for sound" button,
+  because silent UGC is worthless.
+- Video height is capped at `52dvh` so the CTA is never pushed below the fold on a
+  short phone — verified at 375x667.
+
+This replaces an earlier decision not to ship an interstitial. What changed: the
+app is now free, so the ask is "download" rather than "$14.99", and the modal has
+an explicit "Skip to answer". The old objection that it would contradict the
+landing page's "no ads, no upsell screen" was also overstated — that copy
+describes the app, not the website.
 
 **`tools/quiz-manifest.json`** is written by the same build and is **not deployed**,
 because it contains every answer. It exists for the GeoGain posting pipeline — see

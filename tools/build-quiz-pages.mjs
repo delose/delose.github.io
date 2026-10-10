@@ -32,6 +32,12 @@ const VIDEO_FIRST = false;
    at every scroll position, including the moment the answer lands.           */
 const STICKY_CTA = true;
 
+/* UGC interstitial. Shows on every page load, picking one of three clips at
+   random. Hidden in the markup and revealed by script, so a no-JS visitor gets
+   the answer unobstructed and nobody sees it flash before it is ready.
+   Only the chosen clip is given a src, so one video downloads, not three.    */
+const UGC_CLIPS = 3;
+
 const esc = (s) => String(s).replace(/&(?![a-z#]+;)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 // `why` is authored HTML (<b>/<i>) so it is intentionally not escaped.
 
@@ -149,6 +155,75 @@ const stickyBar = `<div class="sticky-cta">
 </div>
 `;
 
+const ugcModal = `<div class="ugc" id="ugc" hidden>
+  <div class="ugc__backdrop" data-ugc-close></div>
+  <div class="ugc__panel" role="dialog" aria-modal="true" aria-labelledby="ugc-title">
+    <button class="ugc__x" type="button" data-ugc-close aria-label="Close">&times;</button>
+    <p class="mono ugc__kicker">Why people use it</p>
+    <h2 class="ugc__title" id="ugc-title">Gaby, in someone else&rsquo;s words</h2>
+    <div class="ugc__video">
+      <video id="ugc-video" playsinline muted autoplay loop preload="none"></video>
+      <button class="ugc__sound" type="button" id="ugc-sound">Tap for sound</button>
+    </div>
+    <a class="btn btn--lg ugc__cta" href="${STORE}">Download Gaby &mdash; free</a>
+    <button class="ugc__skip" type="button" data-ugc-close>Skip to answer</button>
+  </div>
+</div>
+`;
+
+const ugcScript = `<script>
+(function () {
+  var box = document.getElementById('ugc');
+  if (!box) return;
+  var vid = document.getElementById('ugc-video');
+  var snd = document.getElementById('ugc-sound');
+  var n   = Math.floor(Math.random() * ${UGC_CLIPS}) + 1;
+
+  vid.poster = '/gaby/ugc/ugc-' + n + '.jpg';
+  vid.src    = '/gaby/ugc/ugc-' + n + '.mp4';
+  vid.preload = 'auto';
+
+  var lastFocus = document.activeElement;
+  box.hidden = false;
+  document.documentElement.style.overflow = 'hidden';
+  vid.play().catch(function () {});           // muted autoplay; ignore refusals
+  (box.querySelector('.ugc__skip') || box).focus();
+
+  // Muted autoplay is the only kind browsers allow, and silent UGC is useless,
+  // so make unmuting a single obvious tap.
+  function unmute() {
+    vid.muted = false; vid.volume = 1;
+    vid.play().catch(function () {});
+    snd.hidden = true;
+  }
+  snd.addEventListener('click', unmute);
+  vid.addEventListener('click', function () { if (vid.muted) unmute(); });
+
+  function close() {
+    box.hidden = true;
+    document.documentElement.style.overflow = '';
+    vid.pause();
+    vid.removeAttribute('src');               // stop the download on dismiss
+    vid.load();
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  Array.prototype.forEach.call(box.querySelectorAll('[data-ugc-close]'), function (el) {
+    el.addEventListener('click', close);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (box.hidden) return;
+    if (e.key === 'Escape') { close(); return; }
+    if (e.key !== 'Tab') return;
+    var f = box.querySelectorAll('button, a[href], video');
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+})();
+</script>
+`;
+
 const page = (q) => `${head(q)}${header}
 <main>
 
@@ -179,6 +254,7 @@ ${VIDEO_FIRST ? revealBand(q) : videoBand}
   </section>
 </main>
 ${STICKY_CTA ? stickyBar : ''}${footer}
+${ugcModal}${ugcScript}
 <script>
 // Click-to-load: no request reaches Google until the visitor asks for the video.
 document.querySelector('.vid__play').addEventListener('click', function () {
