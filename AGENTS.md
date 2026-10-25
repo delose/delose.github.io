@@ -2,7 +2,7 @@
 
 Guide for AI agents working in this repository. Read this before touching anything.
 
-This repo hosts **two independent products** that happen to deploy from the same
+This repo hosts **three independent products** that happen to deploy from the same
 GitHub Pages site at `edsa.tech`. They have different stacks, different audiences
 and different design languages. **Do not bleed one into the other.**
 
@@ -10,6 +10,7 @@ and different design languages. **Do not bleed one into the other.**
 |---|-------|----------|-------|-----|----------|
 | 1 | **EDSA — fintech/engineering portfolio + blog** | `src/` | Astro 5 (Bear Blog starter) | `https://edsa.tech/` | Engineers, recruiters, readers |
 | 2 | **Gaby — iOS app marketing microsite** | `public/gaby/` | Hand-written static HTML + CSS, zero build step | `https://edsa.tech/gaby/` | Consumers / App Store visitors |
+| 3 | **Nope — support and privacy pages** | `public/nope/` | Hand-written static HTML + CSS, zero build step | `https://edsa.tech/nope/support/` | Nope users / App Store visitors |
 
 ---
 
@@ -261,6 +262,38 @@ version. Do not add a subscription, trial, newsletter or waitlist. If a number i
 copy needs to change, change it in *every* place listed above.
 
 ---
+
+## 3. Nope pages (static HTML)
+
+```
+public/nope/
+├── nope.css             the design for both pages (the extension's own green and off-white, light and dark)
+├── icon.svg             the app icon as SVG — favicon + header logo
+├── support/index.html   Support + FAQ   (App Store Connect "Support URL")
+└── privacy/index.html   Privacy Policy  (App Store Connect "Privacy Policy URL")
+```
+
+Nope is a Safari extension with a small app for iPhone and Mac. Its code lives in
+`prototype/antidoomscroll`, which is the source of truth for these pages:
+`PRIVACY.md` there must say the same as `/nope/privacy/`, and `APP_STORE_LISTING.md`
+holds the store listing.
+
+- Same rules as the Gaby pages: no JavaScript of our own (the FAQ uses native
+  `<details>`), no web fonts, no CDN, system font stack only, links absolute from
+  the root, and Gaby's brand never appears here.
+- **No third-party request at all, not even GoatCounter.** Nope's pitch is that it
+  never sends anything anywhere, and these pages say they load nothing from other sites.
+- **Never rename or remove `/nope/privacy/` or `/nope/support/`** once they are
+  registered in App Store Connect.
+- There is no `/nope/` landing page and no App Store button yet; add the button once
+  the app has an App Store ID.
+
+**Product facts — keep these identical here, in the store listings and in the extension:**
+
+- Store title: **Nope – Pause Distracting Sites**. Free. Safari on iPhone and Mac.
+- Makes no network requests; everything it keeps stays on the device; no account,
+  no analytics, no ads.
+- Support email: `support@edsa.tech`. Developer: Eugene Sergio Castro De Los Santos.
 
 ## Conventions
 
