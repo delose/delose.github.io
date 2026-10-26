@@ -292,6 +292,8 @@ holds the store listing.
   to the App Store" until the app has an App Store ID; then swap that line for the App
   Store button. Its screenshots in `screens/` are the iPhone App Store set from
   `npm run screenshots` in `prototype/antidoomscroll`, resized to 414×900 JPEGs.
+  It links to the launch post on X as a plain link, never an embed: X's embed script
+  would be a third-party request.
 
 **Product facts — keep these identical here, in the store listings and in the extension:**
 

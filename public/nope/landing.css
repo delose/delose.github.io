@@ -26,6 +26,11 @@
   margin: 20px 0 0;
 }
 
+.launch-post {
+  margin: 8px 0 0;
+  font-size: 0.95rem;
+}
+
 .screens {
   margin-top: 40px;
 }
