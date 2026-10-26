@@ -267,8 +267,10 @@ copy needs to change, change it in *every* place listed above.
 
 ```
 public/nope/
-├── nope.css             the design for both pages (the extension's own green and off-white, light and dark)
+├── nope.css             the design for all three pages (the extension's own green and off-white, light and dark)
 ├── icon.svg             the app icon as SVG — favicon + header logo
+├── index.html           landing page            (App Store Connect "Marketing URL")
+├── screens/             iPhone screenshots for the landing page
 ├── support/index.html   Support + FAQ   (App Store Connect "Support URL")
 └── privacy/index.html   Privacy Policy  (App Store Connect "Privacy Policy URL")
 ```
@@ -285,8 +287,10 @@ holds the store listing.
   never sends anything anywhere, and these pages say they load nothing from other sites.
 - **Never rename or remove `/nope/privacy/` or `/nope/support/`** once they are
   registered in App Store Connect.
-- There is no `/nope/` landing page and no App Store button yet; add the button once
-  the app has an App Store ID.
+- `/nope/` is the landing page (App Store Connect "Marketing URL"). It says "Coming soon
+  to the App Store" until the app has an App Store ID; then swap that line for the App
+  Store button. Its screenshots in `screens/` are the iPhone App Store set from
+  `npm run screenshots` in `prototype/antidoomscroll`, resized to 414×900 JPEGs.
 
 **Product facts — keep these identical here, in the store listings and in the extension:**
 
