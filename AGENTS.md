@@ -270,6 +270,7 @@ public/nope/
 ├── nope.css             the design for all three pages (the extension's own green and off-white, light and dark)
 ├── icon.svg             the app icon as SVG — favicon + header logo
 ├── index.html           landing page            (App Store Connect "Marketing URL")
+├── landing.css          the landing page's own layout, in a separate file so a cached nope.css can't leave it unstyled
 ├── screens/             iPhone screenshots for the landing page
 ├── support/index.html   Support + FAQ   (App Store Connect "Support URL")
 └── privacy/index.html   Privacy Policy  (App Store Connect "Privacy Policy URL")
