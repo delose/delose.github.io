@@ -10,7 +10,7 @@ and different design languages. **Do not bleed one into the other.**
 |---|-------|----------|-------|-----|----------|
 | 1 | **EDSA — fintech/engineering portfolio + blog** | `src/` | Astro 5 (Bear Blog starter) | `https://edsa.tech/` | Engineers, recruiters, readers |
 | 2 | **Gaby — iOS app marketing microsite** | `public/gaby/` | Hand-written static HTML + CSS, zero build step | `https://edsa.tech/gaby/` | Consumers / App Store visitors |
-| 3 | **Nope — support and privacy pages** | `public/nope/` | Hand-written static HTML + CSS, zero build step | `https://edsa.tech/nope/support/` | Nope users / App Store visitors |
+| 3 | **Nope — support and privacy pages** | `public/nope/` | Hand-written static HTML + CSS, zero build step | `https://edsa.tech/nope/support/` | Nope users / App Store and Chrome Web Store visitors |
 
 ---
 
@@ -272,14 +272,15 @@ public/nope/
 ├── index.html           landing page            (App Store Connect "Marketing URL")
 ├── landing.css          the landing page's own layout, in a separate file so a cached nope.css can't leave it unstyled
 ├── screens/             iPhone screenshots for the landing page
-├── support/index.html   Support + FAQ   (App Store Connect "Support URL")
-└── privacy/index.html   Privacy Policy  (App Store Connect "Privacy Policy URL")
+├── support/index.html   Support + FAQ   (App Store Connect "Support URL"; Chrome Web Store support and homepage URL)
+└── privacy/index.html   Privacy Policy  (App Store Connect and Chrome Web Store "Privacy Policy URL")
 ```
 
-Nope is a Safari extension with a small app for iPhone and Mac. Its code lives in
-`prototype/antidoomscroll`, which is the source of truth for these pages:
-`PRIVACY.md` there must say the same as `/nope/privacy/`, and `APP_STORE_LISTING.md`
-holds the store listing.
+Nope is a browser extension for Safari, with a small app for iPhone and Mac, and for
+Chrome on a computer. Its code lives in `prototype/antidoomscroll`, which is the source
+of truth for these pages: `PRIVACY.md` there must say the same as `/nope/privacy/`,
+`APP_STORE_LISTING.md` holds the App Store listing, and `STORE_LISTING.md` the Chrome
+Web Store listing. The support and privacy pages cover both browsers.
 
 - Same rules as the Gaby pages: no JavaScript of our own (the FAQ uses native
   `<details>`), no web fonts, no CDN, system font stack only, links absolute from
@@ -287,7 +288,7 @@ holds the store listing.
 - **No third-party request at all, not even GoatCounter.** Nope's pitch is that it
   never sends anything anywhere, and these pages say they load nothing from other sites.
 - **Never rename or remove `/nope/privacy/` or `/nope/support/`** once they are
-  registered in App Store Connect.
+  registered in App Store Connect or the Chrome Web Store.
 - `/nope/` is the landing page (App Store Connect "Marketing URL"). It says "Coming soon
   to the App Store" until the app has an App Store ID; then swap that line for the App
   Store button. Its screenshots in `screens/` are the iPhone App Store set from
@@ -297,7 +298,8 @@ holds the store listing.
 
 **Product facts — keep these identical here, in the store listings and in the extension:**
 
-- Store title: **Nope – Pause Distracting Sites**. Free. Safari on iPhone and Mac.
+- Store title: **Nope – Pause Distracting Sites**. Free. Safari on iPhone and Mac, and
+  Chrome on a computer.
 - Makes no network requests; everything it keeps stays on the device; no account,
   no analytics, no ads.
 - Support email: `support@edsa.tech`. Developer: Eugene Sergio Castro De Los Santos.
