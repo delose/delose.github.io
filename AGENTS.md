@@ -20,9 +20,11 @@ and different design languages. **Do not bleed one into the other.**
 - **Custom domain:** `CNAME` → `edsa.tech`. Do not delete it.
 - **Deploy:** push to `master` → `.github/workflows/deploy.yml` runs `withastro/action@v3`
   (build + upload) then `actions/deploy-pages@v4`. No manual step.
-- **`astro.config.mjs` still sets `site: 'https://delose.github.io'`** even though the
-  live domain is `edsa.tech`. That affects canonical URLs, the sitemap and RSS.
-  Known wart — if you touch it, verify sitemap/RSS/canonicals across the whole site.
+- **`astro.config.mjs` sets `site: 'https://edsa.tech'`**, the live domain, so
+  canonicals, the sitemap and RSS all point there. It used to say `delose.github.io`,
+  and `index.astro` carried a second, hand-written canonical to paper over it; both
+  are gone (2026-10-30). If you change `site` again, verify sitemap/RSS/canonicals
+  across the whole site.
 - **Analytics:** GA4 `G-4HC3PKE1DJ`, injected in `src/components/BaseHead.astro`.
   It is **only on Astro pages**. The Gaby pages are deliberately analytics-free.
 
@@ -66,14 +68,25 @@ src/
   MDX with an image in frontmatter that must resolve to a file in `src/assets/`.
 - **Styling:** a global Bear Blog stylesheet (`src/styles/global.css`) plus large
   `<style>` blocks scoped inside `.astro` pages. `src/pages/index.astro` carries its
-  own ~400-line stylesheet. There is no Tailwind, no CSS framework, no design tokens
-  file. Match the local convention of whatever file you're in.
+  own stylesheet. There is no Tailwind, no CSS framework, no design tokens
+  file. Match the local convention of whatever file you're in. `global.css` does
+  **not** set `box-sizing: border-box`, so a page-scoped `width: 100%` plus side
+  padding overflows a phone viewport — set `box-sizing` yourself.
 - **Fonts:** self-hosted Atkinson Hyperlegible, preloaded in `BaseHead.astro`.
 - **Adding a post:** create `src/content/blog/<category>/<slug>.mdx`, add the hero
   image to `src/assets/`, and it routes automatically via `blog/[...slug].astro`.
-- **Known inconsistency:** `index.astro` links `/blog/fintech`, `/blog/microservices`
-  and `/blog/ai-agents` as category pages and quotes article counts, but no category
-  routes exist and the counts are hardcoded. Fix only if asked.
+- **The home page is the two products** (rebuilt 2026-10-30). It is a short lede,
+  a card each for Gaby and Nope with two real captures, and the writing as a quiet
+  list at the bottom, read from the collection so no count is ever hardcoded. The
+  PFMS/microservices marketing that used to fill it is gone: the blog still holds
+  the posts, and the home page links to them rather than selling them. Keep personal
+  and work history off it — `/about` is three short paragraphs on purpose, with no
+  employment history, tech-stack list or phone number. The old page linked
+  `/blog/fintech`, `/blog/microservices` and `/blog/ai-agents` as category pages with
+  hardcoded counts; no such routes exist, and those links are gone with it.
+- **Share card:** `src/assets/og-home.jpg` (1200x630) is generated, not drawn — a
+  small HTML card screenshotted with headless Chrome, using the two products' real
+  captures. Re-make it the same way if a product's look changes.
 
 ## 2. Gaby microsite (static HTML)
 
@@ -289,9 +302,12 @@ Web Store listing. The support and privacy pages cover both browsers.
   never sends anything anywhere, and these pages say they load nothing from other sites.
 - **Never rename or remove `/nope/privacy/` or `/nope/support/`** once they are
   registered in App Store Connect or the Chrome Web Store.
-- `/nope/` is the landing page (App Store Connect "Marketing URL"). It says "Coming soon
-  to the App Store" until the app has an App Store ID; then swap that line for the App
-  Store button. Its screenshots in `screens/` are the iPhone App Store set from
+- `/nope/` is the landing page (App Store Connect "Marketing URL"). It says "Coming
+  soon to the App Store and the Chrome Web Store" until each one is live; then swap in
+  the App Store button, and link the Chrome listing at
+  `https://chromewebstore.google.com/detail/langginbabbklialnaaiifkjhpekfjop`.
+  Do not say the site "never loads" a blocked site: in Safari, enforcement runs off
+  tab updates, so the page can flash first (antidoomscroll SF0/SF1). Its screenshots in `screens/` are the iPhone App Store set from
   `npm run screenshots` in `prototype/antidoomscroll`, resized to 414×900 JPEGs.
   It links to the launch post on X as a plain link, never an embed: X's embed script
   would be a third-party request.

@@ -64,10 +64,24 @@
   border-radius: 18px;
 }
 
+.steps__lede {
+  margin: 0 0 16px;
+  color: var(--muted);
+}
+
+/* Numbered from CSS so the three cards read as a sequence without the markup
+   pretending the pause page is a list item. */
 .steps {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 16px;
+  counter-reset: step;
+}
+
+.steps .card h3::before {
+  counter-increment: step;
+  content: counter(step) " · ";
+  color: var(--muted);
 }
 
 .steps .card {

@@ -6,6 +6,6 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://delose.github.io',
+	site: 'https://edsa.tech',
 	integrations: [mdx(), sitemap()],
 });
