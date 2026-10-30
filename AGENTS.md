@@ -85,7 +85,10 @@ src/
   they crop past it (`object-position: center 92%`). Nope's Get button goes to the Chrome
   Web Store; the meta line under its name carries availability
   (`Chrome · Safari coming soon`) so `Get` is never ambiguous. The writing is a quiet list at the bottom, read
-  from the collection so no count is ever hardcoded. The
+  from the collection so no count is ever hardcoded — and that list is the only way
+  into the blog from here: the header nav is **Gaby / Nope / About**, the Blog tab
+  having been removed 2026-10-30. `/blog` and every post still build and are still in
+  the sitemap; do not put the tab back without being asked. The
   PFMS/microservices marketing that used to fill it is gone: the blog still holds
   the posts, and the home page links to them rather than selling them. Keep personal
   and work history off it — `/about` is three short paragraphs on purpose, with no
