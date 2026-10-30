@@ -82,8 +82,9 @@ src/
   cards are sized to fit together in one 1440x900 screen — that is the point of the
   layout, so check it before growing a card. Gaby's captures are raw phone screens and
   crop from the top; Nope's are App Store cards with a headline above the device, so
-  they crop past it (`object-position: center 92%`). Nope's button is a grey `Soon`
-  span, not a link, until it ships. The writing is a quiet list at the bottom, read
+  they crop past it (`object-position: center 92%`). Nope's Get button goes to the Chrome
+  Web Store; the meta line under its name carries availability
+  (`Chrome · Safari coming soon`) so `Get` is never ambiguous. The writing is a quiet list at the bottom, read
   from the collection so no count is ever hardcoded. The
   PFMS/microservices marketing that used to fill it is gone: the blog still holds
   the posts, and the home page links to them rather than selling them. Keep personal
@@ -309,10 +310,14 @@ Web Store listing. The support and privacy pages cover both browsers.
   never sends anything anywhere, and these pages say they load nothing from other sites.
 - **Never rename or remove `/nope/privacy/` or `/nope/support/`** once they are
   registered in App Store Connect or the Chrome Web Store.
-- `/nope/` is the landing page (App Store Connect "Marketing URL"). It says "Coming
-  soon to the App Store and the Chrome Web Store" until each one is live; then swap in
-  the App Store button, and link the Chrome listing at
-  `https://chromewebstore.google.com/detail/langginbabbklialnaaiifkjhpekfjop`.
+- `/nope/` is the landing page (App Store Connect "Marketing URL"). **Chrome went
+  live 2026-10-30**, so the hero now carries an `Add to Chrome` button to
+  `https://chromewebstore.google.com/detail/langginbabbklialnaaiifkjhpekfjop`
+  (the bare-id form; Google redirects it to the slug URL) and the line under it says
+  Chrome is out and Safari is still coming to the App Store. The App Store review is
+  expedited but not through. When it lands, add the App Store button beside the Chrome
+  one and drop the "coming soon" half of that sentence — and update the home page's
+  Nope card with it (`src/pages/index.astro`: the `app__meta` line and the Get link).
   Do not say the site "never loads" a blocked site: in Safari, enforcement runs off
   tab updates, so the page can flash first (antidoomscroll SF0/SF1). Its screenshots in `screens/` are the iPhone App Store set from
   `npm run screenshots` in `prototype/antidoomscroll`, resized to 414×900 JPEGs.
