@@ -5,8 +5,9 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import ogImage from '../assets/og-home.jpg';
 
-// The page is the two products. Everything else on the site is secondary, so the
-// writing is a short list at the bottom and the counts are never hardcoded.
+// The page is the two products, laid out like a store listing so both fit in the
+// first screen. Everything else on the site is secondary, so the writing is a
+// short list at the bottom and the counts are never hardcoded.
 const posts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 3);
@@ -24,96 +25,139 @@ const description =
 	<body>
 		<Header />
 		<main>
-			<section class="intro">
-				<h1>Two small apps.</h1>
-				<p class="lede">
-					<strong>Gaby</strong> has you rehearse the Spanish you'll actually speak in Spain.
-					<strong>Nope</strong> puts a pause in front of the sites that eat your afternoon.
-					Neither one keeps an account, shows an ad, or sends anything anywhere.
-				</p>
-			</section>
+			<h1 class="page-title">
+				Two small apps. Both offline, no account, nothing sent anywhere.
+			</h1>
 
-			<!-- ===================================================== Gaby -->
-			<section class="product product--gaby" aria-labelledby="gaby-title">
-				<div class="product__text">
-					<p class="product__eyebrow">iPhone · on the App Store</p>
-					<h2 id="gaby-title">Gaby: Speak Spanish</h2>
-					<p class="product__tag">Rehearse it before you live it</p>
-					<p>
-						The pharmacy. The NIE appointment. The menú del día. Gaby puts you in the
-						conversation before you're standing in it — you say your part out loud, and it
-						tells you what you got wrong.
-					</p>
-					<ul class="product__facts">
-						<li>24 situations, 100 lessons, three levels each</li>
-						<li>Every sentence and correction written by a person</li>
-						<li>Speech checked on the device — it makes no network requests at all</li>
-						<li>Free to download, one $14.99 purchase, no subscription</li>
-					</ul>
-					<p class="product__links">
-						<a class="btn" href="/gaby/">See Gaby</a>
-						<a class="plain" href="https://apps.apple.com/app/id6790808283">
-							Download on the App Store →
-						</a>
-					</p>
-				</div>
-				<div class="product__shots">
-					<img
-						src="/gaby/screens/01-situations.jpg"
-						alt="Gaby on iPhone: the Situations list, scenes grouped by category"
-						width="415"
-						height="900"
-					/>
-					<img
-						src="/gaby/screens/03-correction.jpg"
-						alt="Gaby on iPhone: a correction naming the exact slip in what you just said"
-						width="415"
-						height="900"
-					/>
-				</div>
-			</section>
+			<div class="apps">
+				<!-- ================================================= Gaby -->
+				<section class="app app--gaby" aria-labelledby="gaby-title">
+					<header class="app__head">
+						<img class="app__icon" src="/gaby/icon.svg" alt="" width="68" height="68" />
+						<div class="app__id">
+							<h2 id="gaby-title">Gaby: Speak Spanish</h2>
+							<p class="app__tag">Rehearse it before you live it</p>
+							<p class="app__meta">iPhone · Education</p>
+						</div>
+						<a
+							class="app__get"
+							href="https://apps.apple.com/app/id6790808283"
+							aria-label="Get Gaby on the App Store">Get</a
+						>
+					</header>
 
-			<!-- ===================================================== Nope -->
-			<section class="product product--nope" aria-labelledby="nope-title">
-				<div class="product__text">
-					<p class="product__eyebrow">Safari and Chrome · coming soon</p>
-					<h2 id="nope-title">Nope: Pause Distracting Sites</h2>
-					<p class="product__tag">Pause before you scroll</p>
-					<p>
-						A calm pause page in front of the sites you block. Leaving takes one tap.
-						Opening a site means a short wait and a few minutes from a daily allowance, so
-						“just five minutes” can't turn into the whole afternoon.
-					</p>
-					<ul class="product__facts">
-						<li>Safari on iPhone and Mac, and Chrome on a computer</li>
-						<li>The pause page shows the first thing on your own to-do list</li>
-						<li>Loosening a rule waits out a cooldown; tightening applies at once</li>
-						<li>Free. Everything it keeps stays on the device</li>
-					</ul>
-					<p class="product__links">
-						<a class="btn" href="/nope/">See Nope</a>
-						<a class="plain" href="/nope/support/">Support and FAQ →</a>
-					</p>
-				</div>
-				<div class="product__shots">
-					<img
-						src="/nope/screens/01-pause-page.jpg"
-						alt="Nope on iPhone: the pause page for a blocked site, with Do this instead and Close tab"
-						width="414"
-						height="900"
-						loading="lazy"
-					/>
-					<img
-						src="/nope/screens/03-streaks.jpg"
-						alt="Nope on iPhone: streaks counting the days since each blocked site was last opened"
-						width="414"
-						height="900"
-						loading="lazy"
-					/>
-				</div>
-			</section>
+					<div class="app__shots">
+						<img
+							src="/gaby/screens/01-situations.jpg"
+							alt="Gaby: the Situations list, scenes grouped by category"
+							width="415"
+							height="900"
+						/>
+						<img
+							src="/gaby/screens/03-correction.jpg"
+							alt="Gaby: a correction naming the exact slip in what you just said"
+							width="415"
+							height="900"
+						/>
+						<img
+							src="/gaby/screens/05-collection.jpg"
+							alt="Gaby: the collection of Spanish paintings and places"
+							width="415"
+							height="900"
+						/>
+					</div>
 
-			<!-- ================================================== Writing -->
+					<p class="app__desc">
+						The pharmacy. The NIE appointment. The menú del día. You say your part out
+						loud and Gaby tells you what you got wrong — every sentence and every
+						correction written by a person.
+					</p>
+
+					<dl class="app__info">
+						<div>
+							<dt>Price</dt>
+							<dd>Free · one $14.99 purchase</dd>
+						</div>
+						<div>
+							<dt>Inside</dt>
+							<dd>24 situations · 100 lessons</dd>
+						</div>
+						<div>
+							<dt>Privacy</dt>
+							<dd>Makes no network requests</dd>
+						</div>
+					</dl>
+
+					<p class="app__links">
+						<a class="plain" href="/gaby/">More about Gaby →</a>
+					</p>
+				</section>
+
+				<!-- ================================================= Nope -->
+				<section class="app app--nope" aria-labelledby="nope-title">
+					<header class="app__head">
+						<img class="app__icon" src="/nope/icon.svg" alt="" width="68" height="68" />
+						<div class="app__id">
+							<h2 id="nope-title">Nope: Pause Distracting Sites</h2>
+							<p class="app__tag">Pause before you scroll</p>
+							<p class="app__meta">Safari &amp; Chrome · Productivity</p>
+						</div>
+						<span class="app__get app__get--soon">Soon</span>
+					</header>
+
+					<div class="app__shots">
+						<img
+							src="/nope/screens/01-pause-page.jpg"
+							alt="Nope: the pause page for a blocked site, with Do this instead and Close tab"
+							width="414"
+							height="900"
+							loading="lazy"
+						/>
+						<img
+							src="/nope/screens/02-block-sites.jpg"
+							alt="Nope: the list of sites you have chosen to block"
+							width="414"
+							height="900"
+							loading="lazy"
+						/>
+						<img
+							src="/nope/screens/03-streaks.jpg"
+							alt="Nope: streaks counting the days since each blocked site was last opened"
+							width="414"
+							height="900"
+							loading="lazy"
+						/>
+					</div>
+
+					<p class="app__desc">
+						A calm pause page in front of the sites you block, showing the first thing on
+						your own to-do list. Leaving takes one tap; opening the site costs a short
+						wait and a few minutes of a daily allowance.
+					</p>
+
+					<dl class="app__info">
+						<div>
+							<dt>Price</dt>
+							<dd>Free</dd>
+						</div>
+						<div>
+							<dt>Rules</dt>
+							<dd>Loosening one waits out a cooldown</dd>
+						</div>
+						<div>
+							<dt>Privacy</dt>
+							<dd>Nothing leaves the device</dd>
+						</div>
+					</dl>
+
+					<p class="app__links">
+						<a class="plain" href="/nope/">More about Nope →</a>
+						<a class="plain" href="/nope/support/">Support →</a>
+					</p>
+				</section>
+			</div>
+
+			<!-- ============================================== Writing -->
 			<section class="writing">
 				<h2>Writing</h2>
 				<p class="writing__lede">
@@ -145,181 +189,198 @@ const description =
 			main {
 				box-sizing: border-box;
 				width: 100%;
-				max-width: 1040px;
+				max-width: 1080px;
 				margin: auto;
-				padding: 2.5rem 1rem 1rem;
+				padding: 2rem 1rem 1rem;
 			}
 
-			.product,
-			.product__text,
-			.product__shots {
-				min-width: 0;
-			}
-
-			/* ---------------------------------------------------------- intro */
-			.intro {
-				margin-bottom: 4rem;
-			}
-
-			.intro h1 {
-				font-size: 3rem;
-				line-height: 1.1;
-				margin: 0 0 1rem;
-			}
-
-			.lede {
+			/* ------------------------------------------------------ lede */
+			/* One line, deliberately small: the two cards are the page, and
+			   they only both fit above the fold if nothing sits on top. */
+			.page-title {
+				max-width: 70ch;
+				margin: 0 0 1.75rem;
 				font-size: 1.25rem;
-				line-height: 1.6;
-				max-width: 46ch;
-				margin: 0;
+				font-weight: 600;
+				line-height: 1.5;
 				color: #4b5563;
 			}
 
-			.lede strong {
-				color: rgb(var(--black));
-			}
-
-			/* -------------------------------------------------------- products */
-			.product {
+			/* ------------------------------------------------- store grid */
+			.apps {
 				display: grid;
-				grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
-				gap: clamp(1.5rem, 4vw, 3.5rem);
-				align-items: center;
-				padding: clamp(1.75rem, 3vw, 2.75rem);
-				margin-bottom: 2.5rem;
-				border: 1px solid var(--edge);
-				border-left: 6px solid var(--mark);
-				border-radius: 16px;
-				background: var(--tint);
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 1.5rem;
 			}
 
-			.product--gaby {
+			.app {
+				display: flex;
+				flex-direction: column;
+				min-width: 0;
+				padding: 1.5rem;
+				border: 1px solid #e6e8ec;
+				border-radius: 18px;
+				background: #fff;
+				box-shadow:
+					0 1px 2px rgba(16, 24, 40, 0.04),
+					0 10px 28px rgba(16, 24, 40, 0.06);
+			}
+
+			.app--gaby {
 				--mark: #c1440e;
-				--tint: #fdf6f2;
-				--edge: #f0d9cd;
 			}
 
-			.product--nope {
+			.app--nope {
 				--mark: #2d5b4e;
-				--tint: #f4f7f5;
-				--edge: #d3e0da;
 			}
 
-			.product__eyebrow {
-				margin: 0 0 0.6rem;
-				font-size: 0.8rem;
+			.app__head {
+				display: grid;
+				grid-template-columns: auto minmax(0, 1fr) auto;
+				gap: 0 0.9rem;
+				align-items: center;
+			}
+
+			.app__icon {
+				display: block;
+				width: 68px;
+				height: 68px;
+				border-radius: 16px;
+				border: 1px solid #e6e8ec;
+				background: #fff;
+			}
+
+			.app__id {
+				min-width: 0;
+			}
+
+			.app h2 {
+				margin: 0;
+				font-size: 1.15rem;
+				line-height: 1.25;
+			}
+
+			.app__tag {
+				margin: 0.15rem 0 0;
+				font-size: 0.9rem;
+				color: #6b7280;
+			}
+
+			.app__meta {
+				margin: 0.3rem 0 0;
+				font-size: 0.7rem;
 				font-weight: 700;
-				letter-spacing: 0.1em;
+				letter-spacing: 0.08em;
 				text-transform: uppercase;
 				color: var(--mark);
 			}
 
-			.product h2 {
-				font-size: 2rem;
-				line-height: 1.15;
-				margin: 0;
-			}
-
-			.product__tag {
-				margin: 0.3rem 0 1rem;
-				font-size: 1.15rem;
-				font-style: italic;
-				color: var(--mark);
-			}
-
-			.product p {
-				line-height: 1.6;
-			}
-
-			.product__facts {
-				margin: 1.25rem 0 1.5rem;
-				padding: 0;
-				list-style: none;
-				font-size: 0.95rem;
-			}
-
-			.product__facts li {
-				position: relative;
-				margin-bottom: 0.5rem;
-				padding-left: 1.4rem;
-				line-height: 1.5;
-			}
-
-			.product__facts li::before {
-				content: "";
-				position: absolute;
-				top: 0.55em;
-				left: 0.15rem;
-				width: 0.5rem;
-				height: 0.5rem;
-				border-radius: 50%;
-				background: var(--mark);
-			}
-
-			.product__links {
-				display: flex;
-				flex-wrap: wrap;
-				align-items: center;
-				gap: 0.75rem 1.5rem;
-				margin: 0;
-			}
-
-			.btn {
+			.app__get {
 				display: inline-block;
-				padding: 0.7rem 1.4rem;
-				border-radius: 8px;
+				padding: 0.45rem 1.2rem;
+				border-radius: 999px;
 				background: var(--mark);
 				color: #fff;
+				font-size: 0.9rem;
 				font-weight: 700;
-				font-size: 1rem;
 				text-decoration: none;
+				white-space: nowrap;
 			}
 
-			.btn:hover {
+			.app__get:hover {
 				color: #fff;
 				filter: brightness(1.12);
 			}
 
-			.plain {
+			/* Nope is not on either store yet, so its button is not a link. */
+			.app__get--soon {
+				background: #eef0f3;
+				color: #6b7280;
+			}
+
+			/* Thumbnails, store-strip size. Gaby's are raw phone captures, so
+			   they crop from the top; Nope's are App Store cards with a
+			   headline above the device, so they crop past it. */
+			.app__shots {
+				display: flex;
+				gap: 0.6rem;
+				margin: 1.25rem 0 0;
+			}
+
+			.app__shots img {
+				flex: 1 1 0;
+				width: 0;
+				min-width: 0;
+				height: 210px;
+				object-fit: cover;
+				object-position: top center;
+				border-radius: 10px;
+				border: 1px solid #e6e8ec;
+				background: #fff;
+			}
+
+			.app--nope .app__shots img {
+				object-position: center 92%;
+			}
+
+			.app__desc {
+				margin: 1.1rem 0 0;
 				font-size: 0.95rem;
+				line-height: 1.6;
+			}
+
+			/* The strip a store puts under the screenshots. */
+			.app__info {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				margin: 1.25rem 0 0;
+				padding-top: 1rem;
+				border-top: 1px solid #eef0f3;
+			}
+
+			.app__info > div {
+				padding: 0 0.75rem;
+				border-left: 1px solid #eef0f3;
+			}
+
+			.app__info > div:first-child {
+				padding-left: 0;
+				border-left: 0;
+			}
+
+			.app__info dt {
+				font-size: 0.68rem;
+				font-weight: 700;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: #9aa1ab;
+			}
+
+			.app__info dd {
+				margin: 0.3rem 0 0;
+				font-size: 0.82rem;
+				line-height: 1.4;
+				color: #374151;
+			}
+
+			/* auto top margin: both cards' link rows sit on the same line. */
+			.app__links {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem 1.25rem;
+				margin: auto 0 0;
+				padding-top: 1.25rem;
+			}
+
+			.plain {
+				font-size: 0.9rem;
 				font-weight: 600;
 				color: var(--mark, var(--accent));
 			}
 
-			/* Two real captures per product — the only proof that matters here. They
-			   are 415x900, so a fixed height with a top crop keeps a pair of them
-			   beside the copy instead of towering over it (same reason as the Gaby
-			   page's own strip). */
-			.product__shots {
-				display: flex;
-				justify-content: center;
-				gap: 0.9rem;
-			}
-
-			.product__shots img {
-				width: 50%;
-				max-width: 190px;
-				height: 340px;
-				object-fit: cover;
-				object-position: top center;
-				border-radius: 14px;
-				border: 1px solid var(--edge);
-				box-shadow: 0 10px 24px rgba(15, 18, 25, 0.12);
-				background: #fff;
-			}
-
-			/* Nope's captures are App Store cards — a headline above the device — so
-			   a top crop would show the headline and nothing else. Let them keep
-			   their own aspect instead; the box then wraps them exactly. */
-			.product--nope .product__shots img {
-				width: auto;
-				max-width: none;
-				object-fit: fill;
-			}
-
-			/* --------------------------------------------------------- writing */
+			/* --------------------------------------------------- writing */
 			.writing {
-				margin: 4rem 0 0;
+				margin: 3.5rem 0 0;
 				padding-top: 2.5rem;
 				border-top: 1px solid #e5e7eb;
 			}
@@ -379,48 +440,55 @@ const description =
 				color: #6b7280;
 			}
 
-			/* ------------------------------------------------------ responsive */
-			@media (max-width: 820px) {
-				.product {
+			/* ------------------------------------------------ responsive */
+			@media (max-width: 900px) {
+				.apps {
 					grid-template-columns: 1fr;
-					align-items: start;
-				}
-
-				.product__shots {
-					order: -1;
-					justify-content: flex-start;
 				}
 			}
 
 			@media (max-width: 520px) {
 				main {
-					padding-top: 1.75rem;
+					padding-top: 1.5rem;
 				}
 
-				.intro h1 {
-					font-size: 2.25rem;
-				}
-
-				.lede {
+				.page-title {
 					font-size: 1.1rem;
+					margin-bottom: 1.5rem;
 				}
 
-				.product {
-					padding: 1.4rem;
-					border-left-width: 5px;
+				.app {
+					padding: 1.25rem;
 				}
 
-				.product h2 {
-					font-size: 1.6rem;
+				.app__head {
+					grid-template-columns: auto minmax(0, 1fr);
 				}
 
-				.product__shots img {
-					height: 260px;
+				.app__icon {
+					width: 56px;
+					height: 56px;
+					border-radius: 13px;
 				}
 
-				.btn {
-					width: 100%;
-					text-align: center;
+				.app__get {
+					grid-column: 1 / -1;
+					justify-self: start;
+					margin-top: 0.9rem;
+				}
+
+				.app__shots img {
+					height: 170px;
+				}
+
+				.app__info {
+					grid-template-columns: 1fr;
+					gap: 0.75rem;
+				}
+
+				.app__info > div {
+					padding: 0;
+					border-left: 0;
 				}
 			}
 		</style>

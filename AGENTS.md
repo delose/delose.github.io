@@ -75,9 +75,16 @@ src/
 - **Fonts:** self-hosted Atkinson Hyperlegible, preloaded in `BaseHead.astro`.
 - **Adding a post:** create `src/content/blog/<category>/<slug>.mdx`, add the hero
   image to `src/assets/`, and it routes automatically via `blog/[...slug].astro`.
-- **The home page is the two products** (rebuilt 2026-10-30). It is a short lede,
-  a card each for Gaby and Nope with two real captures, and the writing as a quiet
-  list at the bottom, read from the collection so no count is ever hardcoded. The
+- **The home page is the two products** (rebuilt 2026-10-30). It is laid out like a
+  store listing: a one-line lede, then the two apps side by side in a grid, each card
+  an icon + name + subtitle + Get button, a strip of three real captures, one short
+  paragraph and a three-cell info strip (price / what's inside / privacy). The two
+  cards are sized to fit together in one 1440x900 screen — that is the point of the
+  layout, so check it before growing a card. Gaby's captures are raw phone screens and
+  crop from the top; Nope's are App Store cards with a headline above the device, so
+  they crop past it (`object-position: center 92%`). Nope's button is a grey `Soon`
+  span, not a link, until it ships. The writing is a quiet list at the bottom, read
+  from the collection so no count is ever hardcoded. The
   PFMS/microservices marketing that used to fill it is gone: the blog still holds
   the posts, and the home page links to them rather than selling them. Keep personal
   and work history off it — `/about` is three short paragraphs on purpose, with no
