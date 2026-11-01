@@ -82,9 +82,11 @@ src/
   cards are sized to fit together in one 1440x900 screen — that is the point of the
   layout, so check it before growing a card. Gaby's captures are raw phone screens and
   crop from the top; Nope's are App Store cards with a headline above the device, so
-  they crop past it (`object-position: center 92%`). Nope's Get button goes to the Chrome
-  Web Store; the meta line under its name carries availability
-  (`Chrome · Safari coming soon`) so `Get` is never ambiguous. The writing is a quiet list at the bottom, read
+  they crop past it (`object-position: center 92%`). Nope's Get button goes to the App
+  Store and its second plain link goes to the Chrome Web Store; the meta line under
+  the name lists the platforms (`iPhone, Mac & Chrome · Productivity`). That card has
+  room for exactly two plain links on one line — a third wraps and pushes the cards
+  past the one-screen fit, which is why `Support →` gave way to `Add to Chrome →`. The writing is a quiet list at the bottom, read
   from the collection so no count is ever hardcoded — and that list is the only way
   into the blog from here: the header nav is **Gaby / Nope / About**, the Blog tab
   having been removed 2026-10-30. `/blog` and every post still build and are still in
@@ -313,14 +315,13 @@ Web Store listing. The support and privacy pages cover both browsers.
   never sends anything anywhere, and these pages say they load nothing from other sites.
 - **Never rename or remove `/nope/privacy/` or `/nope/support/`** once they are
   registered in App Store Connect or the Chrome Web Store.
-- `/nope/` is the landing page (App Store Connect "Marketing URL"). **Chrome went
-  live 2026-10-30**, so the hero now carries an `Add to Chrome` button to
-  `https://chromewebstore.google.com/detail/langginbabbklialnaaiifkjhpekfjop`
-  (the bare-id form; Google redirects it to the slug URL) and the line under it says
-  Chrome is out and Safari is still coming to the App Store. The App Store review is
-  expedited but not through. When it lands, add the App Store button beside the Chrome
-  one and drop the "coming soon" half of that sentence — and update the home page's
-  Nope card with it (`src/pages/index.astro`: the `app__meta` line and the Get link).
+- `/nope/` is the landing page (App Store Connect "Marketing URL"). **Both stores are
+  live** (Chrome 2026-10-30, App Store 2026-11-01), so the hero carries two buttons —
+  `Download on the App Store` (`.cta`) and `Add to Chrome` (`.cta--alt`, the outlined
+  one) — and the line under them names both stores. Nothing on the site says "coming
+  soon" any more; if you find such a line, it is stale. The `.cta` label colour is
+  `var(--background)`, not a fixed colour, so it stays readable when dark mode flips
+  `--accent` to the light mint.
   Do not say the site "never loads" a blocked site: in Safari, enforcement runs off
   tab updates, so the page can flash first (antidoomscroll SF0/SF1). Its screenshots in `screens/` are the iPhone App Store set from
   `npm run screenshots` in `prototype/antidoomscroll`, resized to 414×900 JPEGs.
@@ -329,8 +330,16 @@ Web Store listing. The support and privacy pages cover both browsers.
 
 **Product facts — keep these identical here, in the store listings and in the extension:**
 
-- Store title: **Nope – Pause Distracting Sites**. Free. Safari on iPhone and Mac, and
-  Chrome on a computer.
+- Store title: **Nope – Pause Distracting Sites**. Free. Safari on iPhone, iPad and
+  Mac, and Chrome on a computer.
+- App Store ID `6826816204` → `https://apps.apple.com/app/id6826816204` (approved
+  2026-11-01). Chrome Web Store:
+  `https://chromewebstore.google.com/detail/langginbabbklialnaaiifkjhpekfjop` (live
+  2026-10-30). Both are the bare-id forms; the stores redirect them to their slug
+  URLs, whose slugs change if a listing is renamed, so link these.
+- App Store genre Productivity · Utilities. The Mac build needs macOS 15 and Apple
+  silicon — the listing says so, the site does not, and it should stay that way
+  unless someone asks.
 - Makes no network requests; everything it keeps stays on the device; no account,
   no analytics, no ads.
 - Support email: `support@edsa.tech`. Developer: Eugene Sergio Castro De Los Santos.
