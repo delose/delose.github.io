@@ -12,6 +12,13 @@ and different design languages. **Do not bleed one into the other.**
 | 2 | **Gaby — iOS app marketing microsite** | `public/gaby/` | Hand-written static HTML + CSS, zero build step | `https://edsa.tech/gaby/` | Consumers / App Store visitors |
 | 3 | **Nope — support and privacy pages** | `public/nope/` | Hand-written static HTML + CSS, zero build step | `https://edsa.tech/nope/support/` | Nope users / App Store and Chrome Web Store visitors |
 
+**bubbleD is a fourth product but has no pages here.** It lives at `bubbled.me`, a
+separate site in its own repo, which owns its landing, support and privacy pages.
+All this repo holds is `public/bubbled/` — an `icon.svg` and three screens — so the
+home page can carry a card for it. Do not build `/bubbled/` pages here, and do not
+copy bubbled.me's copy into this repo beyond that card: bubbled.me is the source of
+truth, so re-read it rather than editing the card's facts from memory.
+
 ---
 
 ## Quick facts
@@ -75,16 +82,28 @@ src/
 - **Fonts:** self-hosted Atkinson Hyperlegible, preloaded in `BaseHead.astro`.
 - **Adding a post:** create `src/content/blog/<category>/<slug>.mdx`, add the hero
   image to `src/assets/`, and it routes automatically via `blog/[...slug].astro`.
-- **The home page is the two products** (rebuilt 2026-10-30). It is laid out like a
-  store listing: a one-line lede, then the two apps side by side in a grid, each card
+- **The home page is the three products** (rebuilt 2026-10-30, third card 2026-11-02).
+  It is laid out like a store listing: a one-line lede, then the apps side by side in a
+  three-column grid (two columns under 1140 px, one under 760 px), each card
   an icon + name + subtitle + Get button, a strip of three real captures, one short
   paragraph and a three-cell info strip (price / what's inside / privacy). The two
   cards are sized to fit together in one 1440x900 screen — that is the point of the
-  layout, so check it before growing a card. Gaby's captures are raw phone screens and
+  layout, so check it before growing a card or adding a fourth. Going from two cards to
+  three meant widening `main` to 1280 px and shrinking the card metrics (icon 60 px,
+  h2 1.05rem, shots 185 px, info `dd` 0.76rem); measured at 1440x900 the cards bottom
+  out at 796 px of 900, so the margin is ~100 px, not much. Measure rather than eyeball:
+  `document.querySelector('.apps').getBoundingClientRect().bottom` against
+  `window.innerHeight` in the dev server. Gaby's captures are raw phone screens and
   crop from the top; Nope's are App Store cards with a headline above the device, so
   they crop past it (`object-position: center 92%`). Nope's Get button goes to the App
   Store and its second plain link goes to the Chrome Web Store; the meta line under
-  the name lists the platforms (`iPhone, Mac & Chrome · Productivity`). That card has
+  the name lists the platforms (`iPhone, Mac & Chrome · Productivity`). bubbleD was
+  submitted for App Store review 2026-11-02 and is **not approved**, so its button is
+  a grey `Soon` span rather than a link and its meta line reads
+  `iPhone · in App Store review`; its two plain links go out to bubbled.me. When it is
+  approved, swap the span for a Get link to the listing and change that meta line —
+  the App Store category is not known here, so read it off the listing rather than
+  guessing (the other two cards use `platform · category`). That card has
   room for exactly two plain links on one line — a third wraps and pushes the cards
   past the one-screen fit, which is why `Support →` gave way to `Add to Chrome →`. The writing is a quiet list at the bottom, read
   from the collection so no count is ever hardcoded — and that list is the only way
@@ -98,8 +117,13 @@ src/
   `/blog/fintech`, `/blog/microservices` and `/blog/ai-agents` as category pages with
   hardcoded counts; no such routes exist, and those links are gone with it.
 - **Share card:** `src/assets/og-home.jpg` (1200x630) is generated, not drawn — a
-  small HTML card screenshotted with headless Chrome, using the two products' real
-  captures. Re-make it the same way if a product's look changes.
+  small HTML card screenshotted with headless Chrome, using the three products' icons
+  and one real capture each, with the headline `Three small apps.` **It names the
+  count, so it goes stale the moment a product is added** — re-make it the same way
+  then, and whenever a product's look changes.
+  Note: macOS has no `timeout` command. Wrapping the Chrome call in `timeout 100 …`
+  fails with "command not found" and silently leaves no screenshot, which reads exactly
+  like Chrome hanging. Call Chrome directly.
 
 ## 2. Gaby microsite (static HTML)
 

@@ -12,9 +12,9 @@ const posts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 3);
 
-const title = 'Gaby and Nope — two small, private apps';
+const title = 'Gaby, Nope and bubbleD — three small, private apps';
 const description =
-	"Gaby has you rehearse the Spanish you'll actually speak in Spain, offline. Nope puts a pause page in front of the sites that eat your afternoon. No account, no ads, nothing sent anywhere.";
+	"Gaby has you rehearse the Spanish you'll actually speak in Spain. Nope puts a pause page in front of the sites that eat your afternoon. bubbleD is a focus timer that keeps the timesheet for you. All offline, no account, nothing sent anywhere.";
 ---
 
 <!doctype html>
@@ -26,7 +26,7 @@ const description =
 		<Header />
 		<main>
 			<h1 class="page-title">
-				Two small apps. Both offline, no account, nothing sent anywhere.
+				Three small apps. All offline, no account, nothing sent anywhere.
 			</h1>
 
 			<div class="apps">
@@ -159,6 +159,70 @@ const description =
 						<a class="plain" href="https://chromewebstore.google.com/detail/langginbabbklialnaaiifkjhpekfjop">Add to Chrome →</a>
 					</p>
 				</section>
+
+				<!-- ============================================== bubbleD -->
+				<section class="app app--bubbled" aria-labelledby="bubbled-title">
+					<header class="app__head">
+						<img class="app__icon" src="/bubbled/icon.svg" alt="" width="60" height="60" />
+						<div class="app__id">
+							<h2 id="bubbled-title">bubbleD: Focus &amp; Timesheet</h2>
+							<p class="app__tag">Friday should not be a memory test</p>
+							<p class="app__meta">iPhone · in App Store review</p>
+						</div>
+						<span class="app__get app__get--pending">Soon</span>
+					</header>
+
+					<div class="app__shots">
+						<img
+							src="/bubbled/screens/01-focus.jpg"
+							alt="bubbleD: the focus screen, with a project picked and a 25-minute bubble ready to start"
+							width="414"
+							height="900"
+							loading="lazy"
+						/>
+						<img
+							src="/bubbled/screens/02-timesheet.jpg"
+							alt="bubbleD: the timesheet, a day adding up in blocks against each project"
+							width="414"
+							height="900"
+							loading="lazy"
+						/>
+						<img
+							src="/bubbled/screens/03-park.jpg"
+							alt="bubbleD: parking a stray thought mid-session so it waits for the bubble to pop"
+							width="414"
+							height="900"
+							loading="lazy"
+						/>
+					</div>
+
+					<p class="app__desc">
+						A Pomodoro timer with the timesheet attached. Pick a project and start a
+						bubble; when it pops, the time is already filed against that project, at the
+						hour you did it. The thought that arrives at minute four gets parked in one
+						tap and waits for you.
+					</p>
+
+					<dl class="app__info">
+						<div>
+							<dt>Price</dt>
+							<dd>Free · Pro monthly or yearly</dd>
+						</div>
+						<div>
+							<dt>Free tier</dt>
+							<dd>3 projects · last seven days</dd>
+						</div>
+						<div>
+							<dt>Privacy</dt>
+							<dd>No account, no server</dd>
+						</div>
+					</dl>
+
+					<p class="app__links">
+						<a class="plain" href="https://bubbled.me">bubbled.me →</a>
+						<a class="plain" href="https://bubbled.me/support/">Support →</a>
+					</p>
+				</section>
 			</div>
 
 			<!-- ============================================== Writing -->
@@ -193,7 +257,7 @@ const description =
 			main {
 				box-sizing: border-box;
 				width: 100%;
-				max-width: 1080px;
+				max-width: 1280px;
 				margin: auto;
 				padding: 2rem 1rem 1rem;
 			}
@@ -213,15 +277,15 @@ const description =
 			/* ------------------------------------------------- store grid */
 			.apps {
 				display: grid;
-				grid-template-columns: repeat(2, minmax(0, 1fr));
-				gap: 1.5rem;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 1.25rem;
 			}
 
 			.app {
 				display: flex;
 				flex-direction: column;
 				min-width: 0;
-				padding: 1.5rem;
+				padding: 1.25rem;
 				border: 1px solid #e6e8ec;
 				border-radius: 18px;
 				background: #fff;
@@ -238,6 +302,10 @@ const description =
 				--mark: #2d5b4e;
 			}
 
+			.app--bubbled {
+				--mark: #0b7d72;
+			}
+
 			.app__head {
 				display: grid;
 				grid-template-columns: auto minmax(0, 1fr) auto;
@@ -247,9 +315,9 @@ const description =
 
 			.app__icon {
 				display: block;
-				width: 68px;
-				height: 68px;
-				border-radius: 16px;
+				width: 60px;
+				height: 60px;
+				border-radius: 14px;
 				border: 1px solid #e6e8ec;
 				background: #fff;
 			}
@@ -260,13 +328,13 @@ const description =
 
 			.app h2 {
 				margin: 0;
-				font-size: 1.15rem;
+				font-size: 1.05rem;
 				line-height: 1.25;
 			}
 
 			.app__tag {
 				margin: 0.15rem 0 0;
-				font-size: 0.9rem;
+				font-size: 0.85rem;
 				color: #6b7280;
 			}
 
@@ -281,11 +349,11 @@ const description =
 
 			.app__get {
 				display: inline-block;
-				padding: 0.45rem 1.2rem;
+				padding: 0.4rem 1rem;
 				border-radius: 999px;
 				background: var(--mark);
 				color: #fff;
-				font-size: 0.9rem;
+				font-size: 0.82rem;
 				font-weight: 700;
 				text-decoration: none;
 				white-space: nowrap;
@@ -294,6 +362,12 @@ const description =
 			.app__get:hover {
 				color: #fff;
 				filter: brightness(1.12);
+			}
+
+			/* bubbleD is submitted but not approved, so its button is not a link. */
+			.app__get--pending {
+				background: #eef0f3;
+				color: #6b7280;
 			}
 
 			/* Thumbnails, store-strip size. Gaby's are raw phone captures, so
@@ -309,7 +383,7 @@ const description =
 				flex: 1 1 0;
 				width: 0;
 				min-width: 0;
-				height: 210px;
+				height: 185px;
 				object-fit: cover;
 				object-position: top center;
 				border-radius: 10px;
@@ -322,8 +396,8 @@ const description =
 			}
 
 			.app__desc {
-				margin: 1.1rem 0 0;
-				font-size: 0.95rem;
+				margin: 1rem 0 0;
+				font-size: 0.88rem;
 				line-height: 1.6;
 			}
 
@@ -337,7 +411,7 @@ const description =
 			}
 
 			.app__info > div {
-				padding: 0 0.75rem;
+				padding: 0 0.5rem;
 				border-left: 1px solid #eef0f3;
 			}
 
@@ -347,7 +421,7 @@ const description =
 			}
 
 			.app__info dt {
-				font-size: 0.68rem;
+				font-size: 0.64rem;
 				font-weight: 700;
 				letter-spacing: 0.08em;
 				text-transform: uppercase;
@@ -355,8 +429,8 @@ const description =
 			}
 
 			.app__info dd {
-				margin: 0.3rem 0 0;
-				font-size: 0.82rem;
+				margin: 0.25rem 0 0;
+				font-size: 0.76rem;
 				line-height: 1.4;
 				color: #374151;
 			}
@@ -371,7 +445,7 @@ const description =
 			}
 
 			.plain {
-				font-size: 0.9rem;
+				font-size: 0.85rem;
 				font-weight: 600;
 				color: var(--mark, var(--accent));
 			}
@@ -439,7 +513,13 @@ const description =
 			}
 
 			/* ------------------------------------------------ responsive */
-			@media (max-width: 900px) {
+			@media (max-width: 1140px) {
+				.apps {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+				}
+			}
+
+			@media (max-width: 760px) {
 				.apps {
 					grid-template-columns: 1fr;
 				}

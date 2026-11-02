@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="bubbleD">
+  <defs>
+    <radialGradient id="bubble" cx="36%" cy="32%" r="78%">
+      <stop offset="0" stop-color="#9ff0e4"/>
+      <stop offset="42%" stop-color="#2cc3b1"/>
+      <stop offset="100%" stop-color="#0b7d72"/>
+    </radialGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="#141419"/>
+  <circle cx="64" cy="64" r="39" fill="url(#bubble)" stroke="#0a5f58" stroke-width="4"/>
+  <rect x="45" y="42" width="15" height="15" rx="3" fill="#eafffb" opacity=".85"/>
+</svg>
