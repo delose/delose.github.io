@@ -98,12 +98,9 @@ src/
   they crop past it (`object-position: center 92%`). Nope's Get button goes to the App
   Store and its second plain link goes to the Chrome Web Store; the meta line under
   the name lists the platforms (`iPhone, Mac & Chrome · Productivity`). bubbleD was
-  submitted for App Store review 2026-11-02 and is **not approved**, so its button is
-  a grey `Soon` span rather than a link and its meta line reads
-  `iPhone · in App Store review`; its two plain links go out to bubbled.me. When it is
-  approved, swap the span for a Get link to the listing and change that meta line —
-  the App Store category is not known here, so read it off the listing rather than
-  guessing (the other two cards use `platform · category`). That card has
+  approved 2026-11-11, after a 3.1.2 rejection and an appeal, with App Store ID
+  `6829653144`, so its Get button links the listing like the other two and its meta
+  line reads `iPhone · Productivity`; its two plain links go out to bubbled.me. That card has
   room for exactly two plain links on one line — a third wraps and pushes the cards
   past the one-screen fit, which is why `Support →` gave way to `Add to Chrome →`. The writing is a quiet list at the bottom, read
   from the collection so no count is ever hardcoded — and that list is the only way
