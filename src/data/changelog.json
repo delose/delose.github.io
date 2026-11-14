@@ -1,0 +1,133 @@
+[
+	{
+		"id": "2026-11-10-bubbled-bubbled-rejected-by-app-review-appeal-fi",
+		"date": "2026-11-10",
+		"project": "bubbled",
+		"projectName": "bubbleD",
+		"kind": "rejected",
+		"title": "bubbleD rejected by App Review, appeal filed",
+		"detail": "Submitted 2 Nov. Spent eight days assuming it was going through. The red indicator in App Store Connect turned out to be a rejection, not a pending state, so the decision is now under appeal. The edsa.tech card still reads 'in App Store review'.",
+		"links": [],
+		"post": null
+	},
+	{
+		"id": "2026-11-10-nope-usenope-com-is-live",
+		"date": "2026-11-10",
+		"project": "nope",
+		"projectName": "Nope",
+		"kind": "shipped",
+		"title": "usenope.com is live",
+		"detail": "Nope's landing page moved to its own domain, usenope.com: static HTML and CSS on Cloudflare, with a Content-Security-Policy that blocks loading anything from other sites, same as the extension's no-network promise.",
+		"links": [],
+		"post": null
+	},
+	{
+		"id": "2026-11-10-edsa-tech-one-devlog-behind-every-session-the-twee",
+		"date": "2026-11-10",
+		"project": "edsa.tech",
+		"projectName": "edsa.tech",
+		"kind": "built",
+		"title": "One devlog behind every session, the tweets and the public changelog",
+		"detail": "Every Claude Code session on this machine now writes milestones to a single append-only log. The same log feeds the X post drafts and the public changelog at edsa.tech/log/, so what gets announced and what gets recorded can't drift apart.",
+		"links": [
+			"https://edsa.tech/log/"
+		],
+		"post": null
+	},
+	{
+		"id": "2026-11-07-other-an-80-charge-from-a-free-trial-i-forgot-",
+		"date": "2026-11-07",
+		"project": "other",
+		"projectName": "Other",
+		"kind": "learned",
+		"title": "An $80 charge from a free trial I forgot to cancel",
+		"detail": "Zeely, an AI ad and video tool, charged about $80 on the Growth plan. Chose not to chase a refund and to spend every credit marketing Nope instead, posting the numbers every Sunday. Nope is free, so the $80 only comes back through Pro — about 5 sales at $19.99 under Apple's Small Business Program.",
+		"links": [],
+		"post": null
+	},
+	{
+		"id": "2026-11-05-other-two-months-of-daily-video-across-five-pl",
+		"date": "2026-11-05",
+		"project": "other",
+		"projectName": "Other",
+		"kind": "metric",
+		"title": "Two months of daily video across five platforms",
+		"detail": "Posted a video every day for two months on Facebook, TikTok, YouTube, Instagram and Threads. Facebook ~250 followers, TikTok ~250, the other three under 10 each. Best reels hit 1K-3K likes. App sales from it: basically zero.",
+		"links": [],
+		"post": "https://x.com/eugenesergio/status/2118330743017316412"
+	},
+	{
+		"id": "2026-11-03-gaby-deleted-the-on-device-ai-model-from-gaby",
+		"date": "2026-11-03",
+		"project": "gaby",
+		"projectName": "Gaby",
+		"kind": "killed",
+		"title": "Deleted the on-device AI model from Gaby",
+		"detail": "Earlier versions downloaded a ~1.8 GB Hugging Face model on first launch. It invented wrong Spanish and froze a 3GB-RAM iPad during onboarding. Every Spanish sentence and every correction is now written by a person and fixed at release.",
+		"links": [],
+		"post": "https://x.com/eugenesergio/status/2117408162911310175"
+	},
+	{
+		"id": "2026-11-02-edsa-tech-edsa-tech-rebuilt-as-a-three-app-store-g",
+		"date": "2026-11-02",
+		"project": "edsa.tech",
+		"projectName": "edsa.tech",
+		"kind": "shipped",
+		"title": "edsa.tech rebuilt as a three-app store grid",
+		"detail": "The home page is now the three apps side by side, each with icon, real screenshots and a Get button, sized so all three fit one 1440x900 screen. The old microservices marketing is gone; the blog is a quiet list at the bottom.",
+		"links": [
+			"https://edsa.tech/"
+		],
+		"post": null
+	},
+	{
+		"id": "2026-11-02-bubbled-bubbled-submitted-for-app-store-review",
+		"date": "2026-11-02",
+		"project": "bubbled",
+		"projectName": "bubbleD",
+		"kind": "submitted",
+		"title": "bubbleD submitted for App Store review",
+		"detail": "A Pomodoro timer that writes the timesheet for you. Built over the Halloween weekend. Lives at bubbled.me; edsa.tech carries a card for it.",
+		"links": [
+			"https://bubbled.me"
+		],
+		"post": "https://x.com/eugenesergio/status/2118867628383154470"
+	},
+	{
+		"id": "2026-11-01-nope-nope-approved-on-the-app-store",
+		"date": "2026-11-01",
+		"project": "nope",
+		"projectName": "Nope",
+		"kind": "approved",
+		"title": "Nope approved on the App Store",
+		"detail": "Approved on Halloween US time. Safari on iPhone, iPad and Mac. Free, no account, and the build check fails if any extension file contains fetch(, XMLHttpRequest, WebSocket(, sendBeacon( or eval(.",
+		"links": [
+			"https://apps.apple.com/app/id6826816204"
+		],
+		"post": "https://x.com/eugenesergio/status/2117261949574545507"
+	},
+	{
+		"id": "2026-10-30-nope-nope-live-on-the-chrome-web-store",
+		"date": "2026-10-30",
+		"project": "nope",
+		"projectName": "Nope",
+		"kind": "shipped",
+		"title": "Nope live on the Chrome Web Store",
+		"detail": "First store listing for Nope. Free, and it makes no network requests at all.",
+		"links": [
+			"https://chromewebstore.google.com/detail/langginbabbklialnaaiifkjhpekfjop"
+		],
+		"post": null
+	},
+	{
+		"id": "2026-10-02-gaby-gaby-went-free-with-a-one-time-14-99-unl",
+		"date": "2026-10-02",
+		"project": "gaby",
+		"projectName": "Gaby",
+		"kind": "decided",
+		"title": "Gaby went free with a one-time $14.99 unlock",
+		"detail": "Changed from paid-upfront to a free download with a single $14.99 in-app purchase. No subscription. Every pricing line across the site and the quiz pages had to be corrected in the same pass.",
+		"links": [],
+		"post": null
+	}
+]

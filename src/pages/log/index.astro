@@ -1,0 +1,292 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import changelog from '../../data/changelog.json';
+
+// The entries are not written here. They come from the one devlog every Claude
+// session on this machine appends to, exported by `devlog publish`. The same log
+// feeds the posts on X, which is why an entry can link to the post that announced
+// it. Never hand-edit changelog.json — log the event, then re-run publish.
+
+type Entry = {
+	id: string;
+	date: string;
+	project: string;
+	projectName: string;
+	kind: string;
+	title: string;
+	detail: string | null;
+	links: string[];
+	post: string | null;
+};
+
+const entries = changelog as Entry[];
+
+// Group into months, newest first. The export is already sorted.
+const months: { label: string; entries: Entry[] }[] = [];
+for (const entry of entries) {
+	const label = new Date(entry.date + 'T00:00:00').toLocaleDateString('en-US', {
+		month: 'long',
+		year: 'numeric',
+	});
+	const last = months[months.length - 1];
+	if (last && last.label === label) last.entries.push(entry);
+	else months.push({ label, entries: [entry] });
+}
+
+const day = (date: string) =>
+	new Date(date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+const host = (url: string) => {
+	try {
+		return new URL(url).hostname.replace(/^www\./, '');
+	} catch {
+		return url;
+	}
+};
+
+const title = 'Log — what shipped, and when';
+const description =
+	'A running log of what actually shipped on Gaby, Nope, bubbleD and edsa.tech: releases, store approvals, real numbers and the things that got cut.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Log</h1>
+			<p class="lede">
+				What actually shipped, in order. Releases, store approvals, real numbers, and the
+				things that got cut. Entries marked <span class="x-sample">on X</span> link to the
+				post that announced them.
+			</p>
+
+			{
+				months.map((month) => (
+					<section class="month">
+						<h2 class="month__label">{month.label}</h2>
+						<ol class="entries">
+							{month.entries.map((entry) => (
+								<li class="entry" id={entry.id}>
+									<div class="entry__when">
+										<a class="entry__date" href={'/log/#' + entry.id}>
+											{day(entry.date)}
+										</a>
+									</div>
+									<div class="entry__body">
+										<p class="entry__meta">
+											<span class={'tag tag--' + entry.project.replace('.', '-')}>
+												{entry.projectName}
+											</span>
+											<span class="kind">{entry.kind}</span>
+										</p>
+										<h3 class="entry__title">{entry.title}</h3>
+										{entry.detail && <p class="entry__detail">{entry.detail}</p>}
+										{(entry.links.length > 0 || entry.post) && (
+											<p class="entry__links">
+												{entry.links.map((link) => (
+													<a href={link}>{host(link)} &rarr;</a>
+												))}
+												{entry.post && (
+													<a class="entry__post" href={entry.post}>
+														on X &rarr;
+													</a>
+												)}
+											</p>
+										)}
+									</div>
+								</li>
+							))}
+						</ol>
+					</section>
+				))
+			}
+
+			{entries.length === 0 && <p class="lede">Nothing logged yet.</p>}
+
+			<p class="foot">
+				Three apps, all offline: <a href="/gaby/">Gaby</a>, <a href="/nope/">Nope</a> and
+				<a href="https://bubbled.me">bubbleD</a>. More at
+				<a href="https://x.com/eugenesergio">@eugenesergio</a>.
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	* {
+		box-sizing: border-box;
+	}
+
+	main {
+		width: 760px;
+		max-width: calc(100% - 2em);
+		margin: auto;
+		padding: 3em 1em 4em;
+	}
+
+	h1 {
+		margin: 0 0 0.3em;
+		font-size: 2.2rem;
+	}
+
+	.lede {
+		margin: 0 0 3em;
+		color: rgb(var(--gray));
+		font-size: 1rem;
+		line-height: 1.6;
+		max-width: 34em;
+	}
+
+	.x-sample {
+		color: rgb(var(--gray-dark));
+		font-weight: 700;
+		white-space: nowrap;
+	}
+
+	.month {
+		margin: 0 0 2.6em;
+	}
+
+	.month__label {
+		margin: 0 0 1.1em;
+		padding-bottom: 0.5em;
+		border-bottom: 1px solid rgb(var(--gray-light));
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: rgb(var(--gray));
+	}
+
+	.entries {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.entry {
+		display: grid;
+		grid-template-columns: 5.5rem 1fr;
+		gap: 0 1.2rem;
+		padding: 0 0 1.9em;
+	}
+
+	.entry:target .entry__title {
+		background: rgba(var(--gray-light), 70%);
+		box-shadow: 0 0 0 0.3em rgba(var(--gray-light), 70%);
+		border-radius: 2px;
+	}
+
+	.entry__date {
+		display: block;
+		padding-top: 0.15em;
+		font-size: 0.8rem;
+		font-variant-numeric: tabular-nums;
+		color: rgb(var(--gray));
+		text-decoration: none;
+	}
+
+	.entry__date:hover {
+		color: var(--accent);
+	}
+
+	.entry__meta {
+		display: flex;
+		align-items: center;
+		gap: 0.6em;
+		margin: 0 0 0.25em;
+	}
+
+	.tag {
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.07em;
+		text-transform: uppercase;
+		color: #45506b;
+	}
+
+	.tag--gaby {
+		color: #c1440e;
+	}
+	.tag--nope {
+		color: #2d5b4e;
+	}
+	.tag--bubbled {
+		color: #0b7d72;
+	}
+
+	.kind {
+		font-size: 0.68rem;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: rgb(var(--gray));
+	}
+
+	.entry__title {
+		margin: 0 0 0.3em;
+		font-size: 1.08rem;
+		line-height: 1.35;
+	}
+
+	.entry__detail {
+		margin: 0;
+		font-size: 0.92rem;
+		line-height: 1.6;
+		color: rgb(var(--gray));
+	}
+
+	.entry__links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.3em 1.1em;
+		margin: 0.5em 0 0;
+		font-size: 0.82rem;
+	}
+
+	.entry__links a {
+		color: rgb(var(--gray));
+		text-decoration: none;
+		border-bottom: 1px solid rgb(var(--gray-light));
+	}
+
+	.entry__links a:hover {
+		color: var(--accent);
+		border-bottom-color: var(--accent);
+	}
+
+	.entry__post {
+		font-weight: 700;
+		color: rgb(var(--gray-dark)) !important;
+	}
+
+	.foot {
+		margin: 3em 0 0;
+		padding-top: 1.6em;
+		border-top: 1px solid rgb(var(--gray-light));
+		font-size: 0.9rem;
+		color: rgb(var(--gray));
+	}
+
+	@media (max-width: 560px) {
+		main {
+			padding: 2em 1em 3em;
+		}
+		h1 {
+			font-size: 1.8rem;
+		}
+		.entry {
+			grid-template-columns: 1fr;
+			gap: 0;
+		}
+		.entry__date {
+			padding: 0 0 0.15em;
+		}
+	}
+</style>
